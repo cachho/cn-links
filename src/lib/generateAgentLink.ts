@@ -71,8 +71,8 @@ export function generateAgentLink(
 
   // Cssbuy
   if (agent === 'cssbuy') {
-    // https://www.cssbuy.com/item-675330231400&promotionCode=Y2h3ZWJkZXZlbG9wbWVudA
-    // https://www.cssbuy.com/item-micro-4480454092&promotionCode=Y2h3ZWJkZXZlbG9wbWVudA
+    // https://www.cssbuy.com/item-675330231400?promotionCode=Y2h3ZWJkZXZlbG9wbWVudA
+    // https://www.cssbuy.com/item-micro-4480454092?promotionCode=Y2h3ZWJkZXZlbG9wbWVudA
     if (referral) {
       urlParams.set('promotionCode', referral);
     }

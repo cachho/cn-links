@@ -1,18 +1,25 @@
 import type { Marketplace } from '../models';
+import { detectMarketplace } from './detectMarketplace';
 
-export function extractId(marketplace: Marketplace, href: string) {
+export function extractId(href: string, marketplace?: Marketplace) {
+  const mp = marketplace ?? detectMarketplace(href);
+
+  if (!mp) {
+    return null;
+  }
+
   const url = new URL(href);
   const urlParams = new URLSearchParams(url.search ?? href);
 
   // For regular Taobao and Weidian Link
-  if (marketplace === 'weidian') {
+  if (mp === 'weidian') {
     if (urlParams.get('itemID')) {
       return urlParams.get('itemID');
     }
     if (urlParams.get('itemId')) {
       return urlParams.get('itemId');
     }
-  } else if (marketplace === 'taobao') {
+  } else if (mp === 'taobao') {
     if (href.indexOf('world.taobao.com') !== -1) {
       const id = href.split('item/')[1].split('.')[0];
       if (!Number.isNaN(Number(id))) {
@@ -22,7 +29,7 @@ export function extractId(marketplace: Marketplace, href: string) {
     if (urlParams.get('id')) {
       return urlParams.get('id');
     }
-  } else if (marketplace === '1688') {
+  } else if (mp === '1688') {
     // If it's still shortened at this point it can't be saved.
     if (href.indexOf('qr.1688.com') !== -1) {
       return null;
@@ -38,7 +45,7 @@ export function extractId(marketplace: Marketplace, href: string) {
         return id;
       }
     }
-  } else if (marketplace === 'tmall') {
+  } else if (mp === 'tmall') {
     if (urlParams.get('id')) {
       return urlParams.get('id');
     }

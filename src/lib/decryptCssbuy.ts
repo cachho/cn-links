@@ -1,7 +1,7 @@
 import { generateProperLink } from './generateProperLink';
 
-export function decryptCssbuy(link: string | URL): URL | null {
-  const url = typeof link === 'string' ? new URL(link) : link;
+export function decryptCssbuy(href: string | URL): URL | undefined {
+  const url = typeof href === 'string' ? new URL(href) : href;
 
   if (url.pathname.startsWith('/item-micro')) {
     const id = url.pathname.split('-')[2].split('.')[0];
@@ -21,5 +21,5 @@ export function decryptCssbuy(link: string | URL): URL | null {
       return new URL(generateProperLink('taobao', id));
     }
   }
-  return null;
+  return undefined;
 }

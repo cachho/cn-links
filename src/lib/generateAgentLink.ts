@@ -77,16 +77,18 @@ export function generateAgentLink(
       urlParams.set('promotionCode', referral);
     }
     if (marketplace === 'weidian') {
-      return new URL(
-        `https://www.cssbuy.com/item-micro-${id}?${urlParams.toString()}`
-      );
+      const url = `https://www.cssbuy.com/item-micro-${id}`;
+      const paramString = urlParams.toString();
+      return new URL(paramString ? `${url}?${paramString}` : url);
     }
     if (marketplace === '1688') {
-      return new URL(
-        `https://www.cssbuy.com/item-1688-${id}?${urlParams.toString()}`
-      );
+      const url = `https://www.cssbuy.com/item-1688-${id}`;
+      const paramString = urlParams.toString();
+      return new URL(paramString ? `${url}?${paramString}` : url);
     }
-    return new URL(`https://www.cssbuy.com/item-${id}?${urlParams.toString()}`);
+    const url = `https://www.cssbuy.com/item-${id}`;
+    const paramString = urlParams.toString();
+    return new URL(paramString ? `${url}?${paramString}` : url);
   }
 
   // Hagobuy

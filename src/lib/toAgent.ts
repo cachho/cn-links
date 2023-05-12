@@ -8,9 +8,14 @@ import { generateAgentLink } from './generateAgentLink';
  *
  * @param {string} href - The link to convert.
  * @param {AgentWithRaw} agent - The agent to convert the link to.
+ * @param {string} [referral] - The referral or affiliate code.
  * @returns {URL | undefined} The converted agent link as a URL object, or undefined if conversion failed.
  */
-export function toAgent(href: string, agent: AgentWithRaw): URL | undefined {
+export function toAgent(
+  href: string,
+  agent: AgentWithRaw,
+  referral?: string
+): URL | undefined {
   const marketplace = detectMarketplace(href);
   if (!marketplace) {
     return undefined;
@@ -20,7 +25,7 @@ export function toAgent(href: string, agent: AgentWithRaw): URL | undefined {
     return undefined;
   }
   try {
-    return generateAgentLink(agent, href, marketplace, id);
+    return generateAgentLink(agent, href, marketplace, id, referral);
   } catch (error) {
     return undefined;
   }

@@ -1,6 +1,12 @@
 import type { Marketplace } from '../models';
 import { getDomainFromHostname } from './getDomainFromHostname';
 
+/**
+ * Detects the marketplace based on the provided URL or hostname.
+ *
+ * @param {string | URL} href - The URL or hostname to detect the marketplace from.
+ * @returns {Marketplace | undefined} The detected marketplace, or undefined if no marketplace is detected.
+ */
 export function detectMarketplace(href: string | URL): Marketplace | undefined {
   const hostname = href instanceof URL ? href.hostname : new URL(href).hostname;
 

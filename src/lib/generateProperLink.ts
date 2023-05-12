@@ -1,5 +1,13 @@
 import type { Marketplace } from '../models';
 
+/**
+ * Generates the proper link for the specified marketplace and item ID.
+ *
+ * @param {Marketplace} marketplace - The marketplace for which to generate the link.
+ * @param {string} id - The item ID.
+ * @returns {URL} The generated proper link.
+ * @throws {Error} If the marketplace is unsupported.
+ */
 export function generateProperLink(marketplace: Marketplace, id: string): URL {
   if (marketplace === 'weidian') {
     const urlParams = new URLSearchParams();

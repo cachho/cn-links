@@ -2,14 +2,15 @@ import type { AgentWithRaw, Marketplace } from '../models';
 import { generateProperLink } from './generateProperLink';
 
 /**
- * Generates an agent item link, by  taking in an agent and the marketplace link (target) and putting them together.
+ * Generates an agent item link by taking in an agent, the marketplace link (target), and other parameters, and putting them together.
  * Can also add affiliate extensions.
- * @param agent { AgentWithRaw } the agent to generate a link for
- * @param rawLink { String } Inner Link to use in the generated link
- * @param marketplace { Marketplace } Some agents have different link structures for different marketplaces.
- * @param id { String } item id
- * @param refferal { Settings }
- * @returns { String } agent link. Empty string if no agent link could be generated.
+ * @param {AgentWithRaw} agent - The agent to generate a link for.
+ * @param {string} rawLink - The inner link to use in the generated link.
+ * @param {Marketplace} marketplace - The marketplace for which the link is generated.
+ * @param {string} id - The item ID.
+ * @param {string} [referral] - The referral or affiliate code.
+ * @returns {URL} The generated agent link.
+ * @throws {Error} If the agent is unsupported.
  */
 export function generateAgentLink(
   agent: AgentWithRaw,

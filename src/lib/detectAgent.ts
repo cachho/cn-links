@@ -1,5 +1,11 @@
 import type { Agent } from '../models/Agent';
 
+/**
+ * Detects the agent based on the provided URL.
+ *
+ * @param {string} href - The URL to detect the agent from.
+ * @returns {Agent | undefined} The detected agent, or undefined if no agent is detected.
+ */
 export function detectAgent(href: string): Agent | undefined {
   const link = new URL(href);
   const url = link.hostname;

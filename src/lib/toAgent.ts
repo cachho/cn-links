@@ -3,6 +3,13 @@ import { detectMarketplace } from './detectMarketplace';
 import { extractId } from './extractId';
 import { generateAgentLink } from './generateAgentLink';
 
+/**
+ * Converts the provided link to the specified agent link.
+ *
+ * @param {string} href - The link to convert.
+ * @param {AgentWithRaw} agent - The agent to convert the link to.
+ * @returns {URL | undefined} The converted agent link as a URL object, or undefined if conversion failed.
+ */
 export function toAgent(href: string, agent: AgentWithRaw): URL | undefined {
   const marketplace = detectMarketplace(href);
   if (!marketplace) {

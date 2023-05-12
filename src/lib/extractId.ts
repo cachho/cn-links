@@ -1,6 +1,13 @@
 import type { Marketplace } from '../models';
 import { detectMarketplace } from './detectMarketplace';
 
+/**
+ * Extracts the ID from the provided URL based on the specified or detected marketplace.
+ *
+ * @param {string} href - The URL from which to extract the ID.
+ * @param {Marketplace} [marketplace] - The marketplace to consider for ID extraction. If not provided, it will be automatically detected.
+ * @returns {string | undefined} The extracted ID, or undefined if no ID is found.
+ */
 export function extractId(href: string, marketplace?: Marketplace) {
   const mp = marketplace ?? detectMarketplace(href);
 

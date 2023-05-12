@@ -5,7 +5,7 @@ export function extractId(href: string, marketplace?: Marketplace) {
   const mp = marketplace ?? detectMarketplace(href);
 
   if (!mp) {
-    return null;
+    return undefined;
   }
 
   const url = new URL(href);
@@ -32,7 +32,7 @@ export function extractId(href: string, marketplace?: Marketplace) {
   } else if (mp === '1688') {
     // If it's still shortened at this point it can't be saved.
     if (href.indexOf('qr.1688.com') !== -1) {
-      return null;
+      return undefined;
     }
     // 1688 doesn't use urlParams
     if (href.indexOf('offer')) {
@@ -51,5 +51,5 @@ export function extractId(href: string, marketplace?: Marketplace) {
     }
   }
 
-  return null;
+  return undefined;
 }

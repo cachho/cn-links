@@ -5,7 +5,7 @@ import { generateProperLink } from './generateProperLink';
  * Generates an agent item link, by  taking in an agent and the marketplace link (target) and putting them together.
  * Can also add affiliate extensions.
  * @param agent { AgentWithRaw } the agent to generate a link for
- * @param innerLink { String } Inner Link to use in the generated link
+ * @param rawLink { String } Inner Link to use in the generated link
  * @param marketplace { Marketplace } Some agents have different link structures for different marketplaces.
  * @param id { String } item id
  * @param refferal { Settings }
@@ -13,7 +13,7 @@ import { generateProperLink } from './generateProperLink';
  */
 export function generateAgentLink(
   agent: AgentWithRaw,
-  innerLink: string,
+  rawLink: string,
   marketplace: Marketplace,
   id: string,
   referral?: string
@@ -24,7 +24,7 @@ export function generateAgentLink(
   if (agent === 'pandabuy') {
     // https://www.pandabuy.com/product?ra=500&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D2724693540&inviteCode=ZQWFRJZEB
     urlParams.set('ra', '1');
-    urlParams.set('url', innerLink);
+    urlParams.set('url', rawLink);
     if (referral) {
       urlParams.set('inviteCode', referral);
     }
@@ -35,7 +35,7 @@ export function generateAgentLink(
   if (agent === 'wegobuy') {
     // https://www.wegobuy.com/en/page/buy?from=search-input&url=https%3A%2F%2Fitem.taobao.com%2Fitem.html%3Fid%3D675330231400&partnercode=6t86Xk
     urlParams.set('from', 'search-input');
-    urlParams.set('url', innerLink);
+    urlParams.set('url', rawLink);
     if (referral) {
       urlParams.set('partnercode', referral);
     }
@@ -48,7 +48,7 @@ export function generateAgentLink(
   if (agent === 'superbuy') {
     // https://www.wegobuy.com/en/page/buy?from=search-input&url=https%3A%2F%2Fitem.taobao.com%2Fitem.html%3Fid%3D675330231400&partnercode=6t86Xk
     urlParams.set('from', 'search-input');
-    urlParams.set('url', innerLink);
+    urlParams.set('url', rawLink);
     if (referral) {
       urlParams.set('partnercode', referral);
     }
@@ -60,7 +60,7 @@ export function generateAgentLink(
   // Sugargoo
   if (agent === 'sugargoo') {
     // https://www.sugargoo.com/#/home/productDetail?productLink=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D{{ID}}&memberId=341947171345531121
-    urlParams.set('productLink', innerLink);
+    urlParams.set('productLink', rawLink);
     if (referral) {
       urlParams.set('memberId', referral);
     }
@@ -92,7 +92,7 @@ export function generateAgentLink(
   // Hagobuy
   if (agent === 'hagobuy') {
     // https://www.hagobuy.com/item/details?url=https%3A%2F%2Fdetail.1688.com%2Foffer%2F669572555511.html
-    urlParams.set('url', innerLink);
+    urlParams.set('url', rawLink);
     if (referral) {
       urlParams.set('affcode', referral);
     }

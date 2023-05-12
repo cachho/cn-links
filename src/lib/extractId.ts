@@ -1,9 +1,10 @@
 import type { Marketplace } from '../models';
 
-export function extractId(marketplace: Marketplace, link: string) {
-  const url = new URL(link);
-  const urlParams = new URLSearchParams(url.search ?? link);
-  // For regular Taobao and Weidian Links
+export function extractId(marketplace: Marketplace, href: string) {
+  const url = new URL(href);
+  const urlParams = new URLSearchParams(url.search ?? href);
+
+  // For regular Taobao and Weidian Link
   if (marketplace === 'weidian') {
     if (urlParams.get('itemID')) {
       return urlParams.get('itemID');
@@ -12,8 +13,8 @@ export function extractId(marketplace: Marketplace, link: string) {
       return urlParams.get('itemId');
     }
   } else if (marketplace === 'taobao') {
-    if (link.indexOf('world.taobao.com') !== -1) {
-      const id = link.split('item/')[1].split('.')[0];
+    if (href.indexOf('world.taobao.com') !== -1) {
+      const id = href.split('item/')[1].split('.')[0];
       if (!Number.isNaN(Number(id))) {
         return id;
       }
@@ -23,15 +24,15 @@ export function extractId(marketplace: Marketplace, link: string) {
     }
   } else if (marketplace === '1688') {
     // If it's still shortened at this point it can't be saved.
-    if (link.indexOf('qr.1688.com') !== -1) {
+    if (href.indexOf('qr.1688.com') !== -1) {
       return null;
     }
     // 1688 doesn't use urlParams
-    if (link.indexOf('offer')) {
+    if (href.indexOf('offer')) {
       const id =
-        link.indexOf('offer/') !== -1
-          ? link.split('offer/')[1].split('.')[0]
-          : link.split('offer%2F')[1].split('.')[0];
+        href.indexOf('offer/') !== -1
+          ? href.split('offer/')[1].split('.')[0]
+          : href.split('offer%2F')[1].split('.')[0];
       // Validate number
       if (!Number.isNaN(Number(id))) {
         return id;
@@ -42,5 +43,6 @@ export function extractId(marketplace: Marketplace, link: string) {
       return urlParams.get('id');
     }
   }
+
   return null;
 }

@@ -1,0 +1,32 @@
+{
+  "scripts": {
+    "dev": "webpack --config webpack.dev.js",
+    "watch": "webpack -w --config webpack.dev.js",
+    "build": "tsc",
+    "prepare": "husky install",
+    "check-types": "tsc --noEmit --pretty"
+  },
+  "dependencies": {
+    "@commitlint/cli": "^17.1.2",
+    "@commitlint/config-conventional": "^17.1.0",
+    "@commitlint/cz-commitlint": "^17.1.2",
+    "@typescript-eslint/eslint-plugin": "^5.41.0",
+    "@typescript-eslint/parser": "^5.41.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-simple-import-sort": "^8.0.0",
+    "eslint-plugin-testing-library": "^5.9.1",
+    "eslint-plugin-unused-imports": "^2.0.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.34.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "ts-loader": "^9.4.2",
+    "typescript": "^5.0.4"
+  }
+}

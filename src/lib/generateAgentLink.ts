@@ -1,4 +1,5 @@
 import type { AgentWithRaw, Marketplace } from '../models';
+import { detectMarketplace } from './detectMarketplace';
 import { generateProperLink } from './generateProperLink';
 
 /**
@@ -6,8 +7,8 @@ import { generateProperLink } from './generateProperLink';
  * Can also add affiliate extensions.
  * @param {AgentWithRaw} agent - The agent to generate a link for.
  * @param {string | URL} rawLink - The inner link to use in the generated link.
- * @param {Marketplace} marketplace - The marketplace for which the link is generated.
  * @param {string} id - The item ID.
+ * @param {Marketplace} [marketplace] - The marketplace for the source and target link. Few agents need this. Can be detected if not entered.
  * @param {string} [referral] - The referral or affiliate code.
  * @returns {URL} The generated agent link.
  * @throws {Error} If the agent is unsupported.
@@ -15,8 +16,8 @@ import { generateProperLink } from './generateProperLink';
 export function generateAgentLink(
   agent: AgentWithRaw,
   rawLink: URL | string,
-  marketplace: Marketplace,
   id: string,
+  marketplace: Marketplace,
   referral?: string
 ): URL {
   const urlParams = new URLSearchParams();
@@ -78,12 +79,13 @@ export function generateAgentLink(
     if (referral) {
       urlParams.set('promotionCode', referral);
     }
-    if (marketplace === 'weidian') {
+    const mp = marketplace ?? detectMarketplace(link);
+    if (mp === 'weidian') {
       const url = `https://www.cssbuy.com/item-micro-${id}`;
       const paramString = urlParams.toString();
       return new URL(paramString ? `${url}?${paramString}` : url);
     }
-    if (marketplace === '1688') {
+    if (mp === '1688') {
       const url = `https://www.cssbuy.com/item-1688-${id}`;
       const paramString = urlParams.toString();
       return new URL(paramString ? `${url}?${paramString}` : url);
@@ -108,7 +110,9 @@ export function generateAgentLink(
   // Raw Links
   if (agent === 'raw') {
     // https://detail.1688.com/offer/679865234523.html
-    return new URL(generateProperLink(marketplace, id).href);
+    return new URL(
+      generateProperLink(marketplace ?? detectMarketplace(link), id).href
+    );
   }
 
   throw new Error(`Unsupported agent: ${agent}`);

@@ -17,8 +17,8 @@ describe('generateAgentLink', () => {
     const result = generateAgentLink(
       agent,
       innerLink,
-      marketplace,
       id,
+      marketplace,
       referral
     );
 
@@ -36,8 +36,8 @@ describe('generateAgentLink', () => {
     const result = generateAgentLink(
       agent,
       innerLink,
-      marketplace,
       id,
+      marketplace,
       referral
     );
 
@@ -55,8 +55,8 @@ describe('generateAgentLink', () => {
     const result = generateAgentLink(
       agent,
       innerLink,
-      marketplace,
       id,
+      marketplace,
       referral
     );
 
@@ -74,8 +74,8 @@ describe('generateAgentLink', () => {
     const result = generateAgentLink(
       agent,
       innerLink,
-      marketplace,
       id,
+      marketplace,
       referral
     );
 
@@ -91,8 +91,8 @@ describe('generateAgentLink', () => {
     const result = generateAgentLink(
       agent,
       innerLink,
-      marketplace,
       id,
+      marketplace,
       referral
     );
 
@@ -110,8 +110,8 @@ describe('generateAgentLink', () => {
     const result = generateAgentLink(
       agent,
       innerLink,
-      marketplace,
       id,
+      marketplace,
       referral
     );
 
@@ -125,8 +125,8 @@ describe('generateAgentLink', () => {
     const result = generateAgentLink(
       agent,
       innerLink,
-      marketplace,
       id,
+      marketplace,
       referral
     );
 

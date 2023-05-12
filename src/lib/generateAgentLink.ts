@@ -17,7 +17,7 @@ export function generateAgentLink(
   marketplace: Marketplace,
   id: string,
   referral?: string
-): URL | undefined {
+): URL {
   const urlParams = new URLSearchParams();
 
   // Pandabuy
@@ -104,8 +104,8 @@ export function generateAgentLink(
   // Raw Links
   if (agent === 'raw') {
     // https://detail.1688.com/offer/679865234523.html
-    return new URL(generateProperLink(marketplace, id));
+    return new URL(generateProperLink(marketplace, id).href);
   }
 
-  return undefined;
+  throw new Error(`Unsupported agent: ${agent}`);
 }

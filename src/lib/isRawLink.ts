@@ -10,7 +10,7 @@ import { getDomainFromHostname } from './getDomainFromHostname';
  * @param {boolean} simpleDomainCheck - Skip checking for the ID parameter and only check the domain.
  * @returns {boolean} True if the link corresponds to a marketplace, false otherwise.
  */
-export function isMarketplaceLink(
+export function isRawLink(
   href: string | URL,
   simpleDomainCheck?: boolean
 ): boolean {
@@ -31,5 +31,5 @@ export function isMarketplaceLink(
   );
 }
 
-// ALIAS - This function could also be called isRawLink
-export { isMarketplaceLink as isRawLink };
+// ALIAS - This function used to be called isMarketplaceLink
+export { isRawLink as isMarketplaceLink };

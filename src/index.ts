@@ -4,7 +4,7 @@ import { extractId } from './lib/extractId';
 import { generateAgentLink } from './lib/generateAgentLink';
 import { generateRawLink } from './lib/generateRawLink';
 import { isAgentLink } from './lib/isAgentLink';
-import { isMarketplaceLink } from './lib/isMarketplaceLink';
+import { isRawLink } from './lib/isRawLink';
 import { toAgent } from './lib/toAgent';
 import { toRaw } from './lib/toRaw';
 
@@ -15,7 +15,7 @@ export {
   generateAgentLink,
   generateRawLink,
   isAgentLink,
-  isMarketplaceLink,
+  isRawLink,
   toAgent,
   toRaw,
 };

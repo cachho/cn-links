@@ -9,7 +9,7 @@ import { generateProperLink } from './generateProperLink';
  * @param {AgentWithRaw} agent - The agent to generate a link for.
  * @param {string | URL} rawLink - The inner link to use in the generated link. Has to be sanitized before, it is not sanitzed again.
  * @param {Marketplace} [marketplace] - The marketplace for the source and target link. Few agents need this. Can be detected if not entered.
- * @param {id} [string] - The id of the product. Can be detected if not entered.
+ * @param {string} [id] - The id of the product. Can be detected if not entered.
  * @param {string} [referral] - The referral or affiliate code.
  * @returns {URL} The generated agent link.
  * @throws {Error} If the agent is unsupported.

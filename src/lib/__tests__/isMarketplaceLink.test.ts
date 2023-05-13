@@ -58,4 +58,16 @@ describe('isMarketplace', () => {
     const result = isMarketplaceLink(href);
     expect(result).toBe(false);
   });
+
+  it('should return false for a non-URL input', () => {
+    const href = 'not-a-url';
+    const result = isMarketplaceLink(href);
+    expect(result).toBe(false);
+  });
+
+  it('should return false for an item link to the marketplace domain without an ID', () => {
+    const href = 'https://weidian.com/item.html';
+    const result = isMarketplaceLink(href);
+    expect(result).toBe(false);
+  });
 });

@@ -1,5 +1,6 @@
 import type { AgentWithRaw, Marketplace } from '../models';
 import { detectMarketplace } from './detectMarketplace';
+import { extractId } from './extractId';
 import { generateProperLink } from './generateProperLink';
 
 /**
@@ -7,7 +8,6 @@ import { generateProperLink } from './generateProperLink';
  * Can also add affiliate extensions.
  * @param {AgentWithRaw} agent - The agent to generate a link for.
  * @param {string | URL} rawLink - The inner link to use in the generated link. Has to be sanitized before, it is not sanitzed again.
- * @param {string} id - The item ID.
  * @param {Marketplace} [marketplace] - The marketplace for the source and target link. Few agents need this. Can be detected if not entered.
  * @param {string} [referral] - The referral or affiliate code.
  * @returns {URL} The generated agent link.
@@ -16,7 +16,6 @@ import { generateProperLink } from './generateProperLink';
 export function generateAgentLink(
   agent: AgentWithRaw,
   rawLink: URL | string,
-  id: string,
   marketplace: Marketplace,
   referral?: string
 ): URL {
@@ -80,6 +79,7 @@ export function generateAgentLink(
       urlParams.set('promotionCode', referral);
     }
     const mp = marketplace ?? detectMarketplace(link);
+    const id = extractId(link, mp);
     if (mp === 'weidian') {
       const url = `https://www.cssbuy.com/item-micro-${id}`;
       const paramString = urlParams.toString();
@@ -110,9 +110,15 @@ export function generateAgentLink(
   // Raw Links
   if (agent === 'raw') {
     // https://detail.1688.com/offer/679865234523.html
-    return new URL(
-      generateProperLink(marketplace ?? detectMarketplace(link), id).href
-    );
+    const mp = detectMarketplace(link);
+    if (!mp) {
+      throw new Error(`Marketplace could not be determined: ${link}`);
+    }
+    const id = extractId(link, mp);
+    if (!id) {
+      throw new Error(`Id could not be determined: ${link}`);
+    }
+    return new URL(generateProperLink(mp, id).href);
   }
 
   throw new Error(`Unsupported agent: ${agent}`);

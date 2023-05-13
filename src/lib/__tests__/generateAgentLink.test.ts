@@ -14,13 +14,7 @@ describe('generateAgentLink', () => {
       )}&inviteCode=${referral}`
     );
 
-    const result = generateAgentLink(
-      agent,
-      innerLink,
-      id,
-      marketplace,
-      referral
-    );
+    const result = generateAgentLink(agent, innerLink, marketplace, referral);
 
     expect(result).toEqual(expected);
   });
@@ -33,13 +27,7 @@ describe('generateAgentLink', () => {
       )}&partnercode=${referral}`
     );
 
-    const result = generateAgentLink(
-      agent,
-      innerLink,
-      id,
-      marketplace,
-      referral
-    );
+    const result = generateAgentLink(agent, innerLink, marketplace, referral);
 
     expect(result).toEqual(expected);
   });
@@ -52,13 +40,7 @@ describe('generateAgentLink', () => {
       )}&partnercode=${referral}`
     );
 
-    const result = generateAgentLink(
-      agent,
-      innerLink,
-      id,
-      marketplace,
-      referral
-    );
+    const result = generateAgentLink(agent, innerLink, marketplace, referral);
 
     expect(result).toEqual(expected);
   });
@@ -71,13 +53,7 @@ describe('generateAgentLink', () => {
       )}&memberId=${referral}`
     );
 
-    const result = generateAgentLink(
-      agent,
-      innerLink,
-      id,
-      marketplace,
-      referral
-    );
+    const result = generateAgentLink(agent, innerLink, marketplace, referral);
 
     expect(result).toEqual(expected);
   });
@@ -88,13 +64,7 @@ describe('generateAgentLink', () => {
       `https://www.cssbuy.com/item-micro-${id}?promotionCode=${referral}`
     );
 
-    const result = generateAgentLink(
-      agent,
-      innerLink,
-      id,
-      marketplace,
-      referral
-    );
+    const result = generateAgentLink(agent, innerLink, marketplace, referral);
 
     expect(result).toEqual(expected);
   });
@@ -107,13 +77,7 @@ describe('generateAgentLink', () => {
       )}&affcode=${referral}`
     );
 
-    const result = generateAgentLink(
-      agent,
-      innerLink,
-      id,
-      marketplace,
-      referral
-    );
+    const result = generateAgentLink(agent, innerLink, marketplace, referral);
 
     expect(result).toEqual(expected);
   });
@@ -129,7 +93,6 @@ describe('generateAgentLink', () => {
     const result = generateAgentLink(
       agent,
       `${innerLink}&spm=as8df7a87sdf78asdf`,
-      id,
       marketplace,
       referral
     );
@@ -141,13 +104,7 @@ describe('generateAgentLink', () => {
     const agent = 'raw';
     const expected = new URL(innerLink);
 
-    const result = generateAgentLink(
-      agent,
-      innerLink,
-      id,
-      marketplace,
-      referral
-    );
+    const result = generateAgentLink(agent, innerLink, marketplace, referral);
 
     expect(result).toEqual(expected);
   });

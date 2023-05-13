@@ -29,7 +29,6 @@ export function toAgent(
     return generateAgentLink(
       agent,
       generateProperLink(marketplace, id),
-      id,
       marketplace,
       referral
     );

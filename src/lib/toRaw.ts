@@ -2,6 +2,7 @@ import { detectMarketplace } from './detectMarketplace';
 import { extractId } from './extractId';
 import { extractRawLink } from './extractRawLink';
 import { generateProperLink } from './generateProperLink';
+import { isAgentLink } from './isAgentLink';
 
 /**
  * Converts a given URL (agent or raw) to its corresponding sanitized raw link.
@@ -12,10 +13,11 @@ import { generateProperLink } from './generateProperLink';
 export function toRaw(href: string | URL): URL | undefined {
   const link = href instanceof URL ? href : new URL(href);
 
-  const innerLink = extractRawLink(link);
-  if (innerLink) {
-    console.log('🚀 ~ file: toRaw.ts:17 ~ toRaw ~ innerLink:', innerLink);
-    return innerLink;
+  if (isAgentLink(link)) {
+    const innerLink = extractRawLink(link);
+    if (innerLink) {
+      return innerLink;
+    }
   }
 
   const marketplace = detectMarketplace(link);

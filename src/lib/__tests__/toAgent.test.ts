@@ -52,6 +52,14 @@ describe('toAgent', () => {
     );
   });
 
+  it('should return the clean agent link for Cssbuy (Weidian)', () => {
+    const agent: AgentWithRaw = 'cssbuy';
+    const result = toAgent(`${href}&spm=asudfausdf8asfu`, agent);
+    expect(result).toEqual(
+      new URL('https://www.cssbuy.com/item-micro-3053526244')
+    );
+  });
+
   it('should return the agent link for Hagobuy', () => {
     const agent: AgentWithRaw = 'hagobuy';
     const result = toAgent(href, agent);
@@ -62,9 +70,27 @@ describe('toAgent', () => {
     );
   });
 
+  it('should return the clean agent link for Hagobuy', () => {
+    const agent: AgentWithRaw = 'hagobuy';
+    const result = toAgent(`${href}&spm=asudfausdf8asfu`, agent);
+    expect(result).toEqual(
+      new URL(
+        'https://www.hagobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D3053526244'
+      )
+    );
+  });
+
   it('should return the raw link', () => {
     const agent: AgentWithRaw = 'raw';
     const result = toAgent(href, agent);
+    expect(result).toEqual(
+      new URL('https://weidian.com/item.html?itemID=3053526244')
+    );
+  });
+
+  it('should return a clean raw link', () => {
+    const agent: AgentWithRaw = 'raw';
+    const result = toAgent(`${href}&spm=asudfausdf8asfu`, agent);
     expect(result).toEqual(
       new URL('https://weidian.com/item.html?itemID=3053526244')
     );

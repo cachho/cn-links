@@ -118,6 +118,25 @@ describe('generateAgentLink', () => {
     expect(result).toEqual(expected);
   });
 
+  test('link is not cleaned (not equal is used on purpose)', () => {
+    const agent = 'hagobuy';
+    const expected = new URL(
+      `https://www.hagobuy.com/item/details?url=${encodeURIComponent(
+        innerLink
+      )}&affcode=${referral}`
+    );
+
+    const result = generateAgentLink(
+      agent,
+      `${innerLink}&spm=as8df7a87sdf78asdf`,
+      id,
+      marketplace,
+      referral
+    );
+
+    expect(result).not.toEqual(expected);
+  });
+
   test('generates raw link correctly', () => {
     const agent = 'raw';
     const expected = new URL(innerLink);

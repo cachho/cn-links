@@ -6,7 +6,7 @@ import { generateProperLink } from './generateProperLink';
  * Generates an agent item link by taking in an agent, the marketplace link (target), and other parameters, and putting them together.
  * Can also add affiliate extensions.
  * @param {AgentWithRaw} agent - The agent to generate a link for.
- * @param {string | URL} rawLink - The inner link to use in the generated link.
+ * @param {string | URL} rawLink - The inner link to use in the generated link. Has to be sanitized before, it is not sanitzed again.
  * @param {string} id - The item ID.
  * @param {Marketplace} [marketplace] - The marketplace for the source and target link. Few agents need this. Can be detected if not entered.
  * @param {string} [referral] - The referral or affiliate code.

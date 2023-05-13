@@ -2,7 +2,7 @@ import { decryptCssbuy } from './decryptCssbuy';
 import { detectAgent } from './detectAgent';
 
 /**
- * Extracts the raw link from the provided URL.
+ * Extracts the raw link from the search params of a provided (agent) URL.
  *
  * @param {string | URL} href - The URL from which to extract the raw link.
  * @param {boolean} [cantBeCssbuy] - Indicates whether the raw link cannot be from the 'cssbuy' agent. If this is true the call to detectAgent is skipped. Default is false.

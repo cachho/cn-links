@@ -6,6 +6,10 @@
   "types": "./dist/types/index.d.ts",
   "version": "0.1.4",
   "license": "MIT",
+  "files": [
+    "./dist",
+    "./types"
+  ],
   "scripts": {
     "build": "tsc",
     "prepare": "husky install",

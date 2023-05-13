@@ -8,7 +8,10 @@ import { detectMarketplace } from './detectMarketplace';
  * @param {Marketplace} [marketplace] - The marketplace to consider for ID extraction. If not provided, it will be automatically detected.
  * @returns {string | undefined} The extracted ID, or undefined if no ID is found.
  */
-export function extractId(href: string | URL, marketplace?: Marketplace) {
+export function extractId(
+  href: string | URL,
+  marketplace?: Marketplace
+): string | undefined {
   const link = href instanceof URL ? href : new URL(href);
   const mp = marketplace ?? detectMarketplace(href);
 
@@ -22,10 +25,10 @@ export function extractId(href: string | URL, marketplace?: Marketplace) {
   // For regular Taobao and Weidian Link
   if (mp === 'weidian') {
     if (urlParams.get('itemID')) {
-      return urlParams.get('itemID');
+      return urlParams.get('itemID') ?? undefined;
     }
     if (urlParams.get('itemId')) {
-      return urlParams.get('itemId');
+      return urlParams.get('itemId') ?? undefined;
     }
   } else if (mp === 'taobao') {
     if (link.hostname.indexOf('world.taobao.com') !== -1) {
@@ -35,7 +38,7 @@ export function extractId(href: string | URL, marketplace?: Marketplace) {
       }
     }
     if (urlParams.get('id')) {
-      return urlParams.get('id');
+      return urlParams.get('id') ?? undefined;
     }
   } else if (mp === '1688') {
     // If it's still shortened at this point it can't be saved.
@@ -55,7 +58,7 @@ export function extractId(href: string | URL, marketplace?: Marketplace) {
     }
   } else if (mp === 'tmall') {
     if (urlParams.get('id')) {
-      return urlParams.get('id');
+      return urlParams.get('id') ?? undefined;
     }
   }
 

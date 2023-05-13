@@ -30,3 +30,6 @@ export function isMarketplaceLink(
       marketplace.includes(domain) && (simpleDomainCheck || id !== undefined)
   );
 }
+
+// ALIAS - This function could also be called isRawLink
+export { isMarketplaceLink as isRawLink };

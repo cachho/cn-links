@@ -1,14 +1,14 @@
 {
   "name": "cn-links",
   "description": "This package implements functions to deal with links for agents and Chinese marketplaces",
-  "main": "./dist/index.js",
+  "main": "dist/index.js",
   "repository": "cachho/cn-links",
-  "types": "./dist/types/index.d.ts",
+  "types": "dist/types/index.d.ts",
   "version": "0.1.5",
   "license": "MIT",
   "files": [
-    "./dist",
-    "./types"
+    "dist",
+    "types"
   ],
   "scripts": {
     "build": "tsc",

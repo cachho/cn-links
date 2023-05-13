@@ -16,7 +16,17 @@ export function isAgentLink(
   href: string | URL,
   simpleDomainCheck?: boolean
 ): boolean {
-  const link = href instanceof URL ? href : new URL(href);
+  let link: URL;
+  try {
+    link = new URL(href);
+  } catch {
+    return false;
+  }
+
+  // Check if the URL protocol is valid
+  if (!['http:', 'https:'].includes(link.protocol)) {
+    return false;
+  }
 
   const domain = getDomainFromHostname(link.hostname);
   return agents.some(

@@ -24,4 +24,27 @@ describe('isAgentLink', () => {
       expect(isAgentLink(link)).toBe(false);
     });
   });
+
+  test('returns false for non-valid URL input', () => {
+    const invalidLinks = ['invalid-url', 'https://', 'ftp://example.com'];
+
+    invalidLinks.forEach((link) => {
+      expect(isAgentLink(link)).toBe(false);
+    });
+  });
+
+  test('returns false for inputs to domain root without item path', () => {
+    const rootLinks = [
+      'https://www.wegobuy.com/',
+      'https://www.pandabuy.com/',
+      'https://detail.tmall.com/',
+      'https://item.taobao.com/',
+      'https://detail.1688.com/',
+      'https://weidian.com/',
+    ];
+
+    rootLinks.forEach((link) => {
+      expect(isAgentLink(link)).toBe(false);
+    });
+  });
 });

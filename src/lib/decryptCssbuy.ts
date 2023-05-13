@@ -1,6 +1,7 @@
 import { generateProperLink } from './generateProperLink';
 
 /**
+ * @internal
  * Decrypts the CSSBUY link and returns the corresponding proper link.
  *
  * @param {string | URL} href - The CSSBUY link to decrypt.

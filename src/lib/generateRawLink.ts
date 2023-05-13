@@ -8,7 +8,7 @@ import type { Marketplace } from '../models';
  * @returns {URL} The generated proper link.
  * @throws {Error} If the marketplace is unsupported.
  */
-export function generateProperLink(marketplace: Marketplace, id: string): URL {
+export function generateRawLink(marketplace: Marketplace, id: string): URL {
   if (marketplace === 'weidian') {
     const urlParams = new URLSearchParams();
     urlParams.set('itemID', id);

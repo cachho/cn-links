@@ -1,7 +1,7 @@
 import { detectMarketplace } from './detectMarketplace';
 import { extractId } from './extractId';
 import { extractRawLink } from './extractRawLink';
-import { generateProperLink } from './generateProperLink';
+import { generateRawLink } from './generateRawLink';
 import { isAgentLink } from './isAgentLink';
 
 /**
@@ -28,5 +28,5 @@ export function toRaw(href: string | URL): URL | undefined {
   if (!id) {
     return undefined;
   }
-  return generateProperLink(marketplace, id);
+  return generateRawLink(marketplace, id);
 }

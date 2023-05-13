@@ -1,7 +1,7 @@
 import type { AgentWithRaw, Marketplace } from '../models';
 import { detectMarketplace } from './detectMarketplace';
 import { extractId } from './extractId';
-import { generateProperLink } from './generateProperLink';
+import { generateRawLink } from './generateRawLink';
 
 /**
  * Generates an agent item link by taking in an agent, the marketplace link (target), and other parameters, and putting them together.
@@ -120,7 +120,7 @@ export function generateAgentLink(
     if (!identifier) {
       throw new Error(`Id could not be determined: ${link}`);
     }
-    return new URL(generateProperLink(mp, identifier).href);
+    return new URL(generateRawLink(mp, identifier).href);
   }
 
   throw new Error(`Unsupported agent: ${agent}`);

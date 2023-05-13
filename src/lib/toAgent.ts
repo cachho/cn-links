@@ -2,7 +2,7 @@ import type { AgentWithRaw } from '../models';
 import { detectMarketplace } from './detectMarketplace';
 import { extractId } from './extractId';
 import { generateAgentLink } from './generateAgentLink';
-import { generateProperLink } from './generateProperLink';
+import { generateRawLink } from './generateRawLink';
 
 /**
  * The simples way to converts a provided link to a specified agent link with minimal input.
@@ -30,7 +30,7 @@ export function toAgent(
   try {
     return generateAgentLink(
       agent,
-      generateProperLink(marketplace, id),
+      generateRawLink(marketplace, id),
       marketplace,
       referral
     );

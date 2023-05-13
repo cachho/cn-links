@@ -2,25 +2,46 @@ import { toRaw } from '../toRaw';
 
 describe('toRaw', () => {
   test('should generate the proper link from raw links for supported marketplaces (circular)', () => {
-    // Supported marketplace: Taobao
-    const taobaoLink = 'https://item.taobao.com/item.html?id=67890';
-    const resultTaobao = toRaw(taobaoLink);
-    expect(resultTaobao).toEqual(new URL(taobaoLink));
+    const links = [
+      'https://weidian.com/item.html?itemID=5789470155',
+      'https://item.taobao.com/item.html?id=705339617848',
+      'https://item.taobao.com/item.html?id=67890',
+      'https://detail.1688.com/offer/625358402681.html',
+      'https://item.taobao.com/item.html?id=67890',
+      'https://detail.tmall.com/item_o.htm?id=12345', // Different ways to express tmall links, we have another test for that. Subject to change.
+      'https://weidian.com/item.html?itemID=54321',
+      'https://detail.1688.com/offer/98765.html',
+    ];
 
-    // Supported marketplace: Tmall
-    const tmallLink = 'https://detail.tmall.com/item_o.htm?id=12345';
-    const resultTmall = toRaw(tmallLink);
-    expect(resultTmall).toEqual(new URL(tmallLink));
+    links.forEach((link) => {
+      const result = toRaw(link);
+      expect(result).toEqual(new URL(link));
+    });
+  });
 
-    // Supported marketplace: Weidian
-    const weidianLink = 'https://weidian.com/item.html?itemID=54321';
-    const resultWeidian = toRaw(weidianLink);
-    expect(resultWeidian).toEqual(new URL(weidianLink));
+  test('circular processing should sanitize links', () => {
+    const links = [
+      // Taobao
+      'https://item.taobao.com/item.html?id=705339617848&size=L',
+      // Tmall
+      'https://detail.tmall.com/item_o.htm?id=12345&brand=Apple',
+      // Weidian
+      'https://weidian.com/item.html?itemID=5789470155&color=red',
+      // 1688
+      'https://detail.1688.com/offer/625358402681.html?language=en',
+    ];
 
-    // Supported marketplace: 1688
-    const marketplaceLink = 'https://detail.1688.com/offer/98765.html';
-    const resultMarketplace = toRaw(marketplaceLink);
-    expect(resultMarketplace).toEqual(new URL(marketplaceLink));
+    const expectedLinks = [
+      'https://item.taobao.com/item.html?id=705339617848',
+      'https://detail.tmall.com/item_o.htm?id=12345',
+      'https://weidian.com/item.html?itemID=5789470155',
+      'https://detail.1688.com/offer/625358402681.html',
+    ];
+
+    links.forEach((link, index) => {
+      const result = toRaw(link);
+      expect(result).toEqual(new URL(expectedLinks[index]));
+    });
   });
 
   test('should return undefined for unsupported marketplaces', () => {
@@ -55,6 +76,13 @@ describe('toRaw', () => {
       'https://www.wegobuy.com/en/page/buy?from=search-input&url=https%3A%2F%2Fdetail.1688.com%2Foffer%2F672137348.html&partnercode=6t86Xk';
     const rawResult1688 = 'https://detail.1688.com/offer/672137348.html';
     expect(toRaw(wegobuy1688Link)).toEqual(new URL(rawResult1688));
+
+    // Sugargoo agent with Taobao link
+    const sugargooTaobaoLink =
+      'https://sugargoo.com/index/item/index.html?tp=taobao&searchlang=en&url=https%3A%2F%2Fitem.taobao.com%2Fitem.html%3Fid%3D670244025731';
+    const rawResultSugargooTaobao =
+      'https://item.taobao.com/item.html?id=670244025731';
+    expect(toRaw(sugargooTaobaoLink)).toEqual(new URL(rawResultSugargooTaobao));
   });
 
   test('should return the a valid raw link from encrypted cssbuy links', () => {
@@ -72,5 +100,24 @@ describe('toRaw', () => {
     const innerLinkCssbuyTaobao = 'https://item.taobao.com/item.html?id=67890';
     const resultCssbuyTaobao = toRaw(`https://www.cssbuy.com/item-67890`);
     expect(resultCssbuyTaobao).toEqual(new URL(innerLinkCssbuyTaobao));
+  });
+
+  test('different tmall styles are converted to a standardized format', () => {
+    const links = [
+      'https://item.tmall.com/item.html?id=625358402681',
+      'https://detail.tmall.com/item_o.htm?id=625358402681',
+    ];
+
+    links.forEach((link) => {
+      const result = toRaw(link);
+      expect(result).toEqual(
+        new URL('https://detail.tmall.com/item_o.htm?id=625358402681')
+      );
+    });
+  });
+
+  test('pandabuy shortened links should not work, should return undefined', () => {
+    const result = toRaw('https://pandabuy.page.link/qzxaYnohPxUvDuin7');
+    expect(result).toBeUndefined();
   });
 });

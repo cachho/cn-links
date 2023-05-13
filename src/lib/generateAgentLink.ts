@@ -5,10 +5,11 @@ import { generateProperLink } from './generateProperLink';
 
 /**
  * Generates an agent item link by taking in an agent, the marketplace link (target), and other parameters, and putting them together.
- * Can also add affiliate extensions.
+ * Can also add affiliate extensions. Compared to the toAgent()  method, this method can work with as many inputs as possible, making it a more optimized starting point if you already have an id or marketplace for instance.
  * @param {AgentWithRaw} agent - The agent to generate a link for.
  * @param {string | URL} rawLink - The inner link to use in the generated link. Has to be sanitized before, it is not sanitzed again.
  * @param {Marketplace} [marketplace] - The marketplace for the source and target link. Few agents need this. Can be detected if not entered.
+ * @param {id} [string] - The id of the product. Can be detected if not entered.
  * @param {string} [referral] - The referral or affiliate code.
  * @returns {URL} The generated agent link.
  * @throws {Error} If the agent is unsupported.
@@ -16,7 +17,8 @@ import { generateProperLink } from './generateProperLink';
 export function generateAgentLink(
   agent: AgentWithRaw,
   rawLink: URL | string,
-  marketplace: Marketplace,
+  marketplace?: Marketplace,
+  id?: string,
   referral?: string
 ): URL {
   const urlParams = new URLSearchParams();
@@ -79,18 +81,18 @@ export function generateAgentLink(
       urlParams.set('promotionCode', referral);
     }
     const mp = marketplace ?? detectMarketplace(link);
-    const id = extractId(link, mp);
+    const identifier = id || extractId(link, mp);
     if (mp === 'weidian') {
-      const url = `https://www.cssbuy.com/item-micro-${id}`;
+      const url = `https://www.cssbuy.com/item-micro-${identifier}`;
       const paramString = urlParams.toString();
       return new URL(paramString ? `${url}?${paramString}` : url);
     }
     if (mp === '1688') {
-      const url = `https://www.cssbuy.com/item-1688-${id}`;
+      const url = `https://www.cssbuy.com/item-1688-${identifier}`;
       const paramString = urlParams.toString();
       return new URL(paramString ? `${url}?${paramString}` : url);
     }
-    const url = `https://www.cssbuy.com/item-${id}`;
+    const url = `https://www.cssbuy.com/item-${identifier}`;
     const paramString = urlParams.toString();
     return new URL(paramString ? `${url}?${paramString}` : url);
   }
@@ -114,11 +116,11 @@ export function generateAgentLink(
     if (!mp) {
       throw new Error(`Marketplace could not be determined: ${link}`);
     }
-    const id = extractId(link, mp);
-    if (!id) {
+    const identifier = id || extractId(link, mp);
+    if (!identifier) {
       throw new Error(`Id could not be determined: ${link}`);
     }
-    return new URL(generateProperLink(mp, id).href);
+    return new URL(generateProperLink(mp, identifier).href);
   }
 
   throw new Error(`Unsupported agent: ${agent}`);

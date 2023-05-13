@@ -14,7 +14,13 @@ describe('generateAgentLink', () => {
       )}&inviteCode=${referral}`
     );
 
-    const result = generateAgentLink(agent, innerLink, marketplace, referral);
+    const result = generateAgentLink(
+      agent,
+      innerLink,
+      marketplace,
+      undefined,
+      referral
+    );
 
     expect(result).toEqual(expected);
   });
@@ -27,7 +33,13 @@ describe('generateAgentLink', () => {
       )}&partnercode=${referral}`
     );
 
-    const result = generateAgentLink(agent, innerLink, marketplace, referral);
+    const result = generateAgentLink(
+      agent,
+      innerLink,
+      marketplace,
+      undefined,
+      referral
+    );
 
     expect(result).toEqual(expected);
   });
@@ -40,7 +52,26 @@ describe('generateAgentLink', () => {
       )}&partnercode=${referral}`
     );
 
-    const result = generateAgentLink(agent, innerLink, marketplace, referral);
+    const result = generateAgentLink(
+      agent,
+      innerLink,
+      marketplace,
+      undefined,
+      referral
+    );
+
+    expect(result).toEqual(expected);
+  });
+
+  test('generates superbuy link without referral correctly', () => {
+    const agent = 'superbuy';
+    const expected = new URL(
+      `https://www.superbuy.com/en/page/buy?from=search-input&url=${encodeURIComponent(
+        innerLink
+      )}`
+    );
+
+    const result = generateAgentLink(agent, innerLink, marketplace, undefined);
 
     expect(result).toEqual(expected);
   });
@@ -53,7 +84,13 @@ describe('generateAgentLink', () => {
       )}&memberId=${referral}`
     );
 
-    const result = generateAgentLink(agent, innerLink, marketplace, referral);
+    const result = generateAgentLink(
+      agent,
+      innerLink,
+      marketplace,
+      undefined,
+      referral
+    );
 
     expect(result).toEqual(expected);
   });
@@ -64,7 +101,13 @@ describe('generateAgentLink', () => {
       `https://www.cssbuy.com/item-micro-${id}?promotionCode=${referral}`
     );
 
-    const result = generateAgentLink(agent, innerLink, marketplace, referral);
+    const result = generateAgentLink(
+      agent,
+      innerLink,
+      marketplace,
+      undefined,
+      referral
+    );
 
     expect(result).toEqual(expected);
   });
@@ -77,7 +120,13 @@ describe('generateAgentLink', () => {
       )}&affcode=${referral}`
     );
 
-    const result = generateAgentLink(agent, innerLink, marketplace, referral);
+    const result = generateAgentLink(
+      agent,
+      innerLink,
+      marketplace,
+      undefined,
+      referral
+    );
 
     expect(result).toEqual(expected);
   });
@@ -94,6 +143,7 @@ describe('generateAgentLink', () => {
       agent,
       `${innerLink}&spm=as8df7a87sdf78asdf`,
       marketplace,
+      undefined,
       referral
     );
 
@@ -104,7 +154,13 @@ describe('generateAgentLink', () => {
     const agent = 'raw';
     const expected = new URL(innerLink);
 
-    const result = generateAgentLink(agent, innerLink, marketplace, referral);
+    const result = generateAgentLink(
+      agent,
+      innerLink,
+      marketplace,
+      undefined,
+      referral
+    );
 
     expect(result).toEqual(expected);
   });

@@ -32,3 +32,7 @@ export function generateRawLink(marketplace: Marketplace, id: string): URL {
 
   throw new Error(`Unsupported marketplace: ${marketplace}`);
 }
+
+// ALIAS
+export { generateRawLink as generateProperLink };
+export { generateRawLink as generateMarketplaceLink };

@@ -1,6 +1,7 @@
 import { detectAgent } from './lib/detectAgent';
 import { detectMarketplace } from './lib/detectMarketplace';
 import { extractId } from './lib/extractId';
+import { filterLinks } from './lib/filterLinks';
 import { generateAgentLink } from './lib/generateAgentLink';
 import { generateRawLink } from './lib/generateRawLink';
 import { isAgentLink } from './lib/isAgentLink';
@@ -12,6 +13,7 @@ export {
   detectAgent,
   detectMarketplace,
   extractId,
+  filterLinks,
   generateAgentLink,
   generateRawLink,
   isAgentLink,

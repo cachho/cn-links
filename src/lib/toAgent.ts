@@ -6,7 +6,8 @@ import { generateRawLink } from './generateRawLink';
 
 /**
  * The simples way to converts a provided link to a specified agent link with minimal input.
- * The idea of this function, compared to generateAgentLink, is that toAgent 'just works' and gets whatever is missing from minimal input.
+ * If it is an agent link already, it's sanitized.
+ * The idea of this function, compared to generateAgentLink, is that `toAgent` 'just works' and gets whatever is missing from minimal input.
  *
  * @param {string | URL} href - The link to convert.
  * @param {AgentWithRaw} agent - The agent to convert the link to.
@@ -32,6 +33,7 @@ export function toAgent(
       agent,
       generateRawLink(marketplace, id),
       marketplace,
+      id,
       referral
     );
   } catch (error) {

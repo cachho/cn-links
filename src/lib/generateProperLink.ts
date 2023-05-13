@@ -1,7 +1,7 @@
 import type { Marketplace } from '../models';
 
 /**
- * Generates the proper link for the specified marketplace and item ID.
+ * Generates the a proper sanitized link (raw link) for the specified marketplace and item ID.
  *
  * @param {Marketplace} marketplace - The marketplace for which to generate the link.
  * @param {string} id - The item ID.

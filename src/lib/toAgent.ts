@@ -5,11 +5,12 @@ import { generateAgentLink } from './generateAgentLink';
 import { generateProperLink } from './generateProperLink';
 
 /**
- * Converts the provided link to the specified agent link.
+ * The simples way to converts a provided link to a specified agent link with minimal input.
+ * The idea of this function, compared to generateAgentLink, is that toAgent 'just works' and gets whatever is missing from minimal input.
  *
  * @param {string | URL} href - The link to convert.
  * @param {AgentWithRaw} agent - The agent to convert the link to.
- * @param {string} [referral] - The referral or affiliate code.
+ * @param {string} [referral] - The optional referral or affiliate code.
  * @returns {URL | undefined} The converted agent link as a URL object, or undefined if conversion failed.
  */
 export function toAgent(

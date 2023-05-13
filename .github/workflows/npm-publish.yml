@@ -42,7 +42,6 @@ jobs:
           name: types
           path: types
       - run: npm ci
-      - run: ls -lah
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}

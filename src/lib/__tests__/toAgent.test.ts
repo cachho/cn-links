@@ -112,4 +112,14 @@ describe('toAgent', () => {
     const result = toAgent('https://not-a-valid-link.com', agent);
     expect(result).toBeUndefined();
   });
+
+  it('should return an affiliate code', () => {
+    const agent: AgentWithRaw = 'wegobuy';
+    const result = toAgent(href, agent, 'myC0d3');
+    expect(result).toEqual(
+      new URL(
+        'https://www.wegobuy.com/en/page/buy?from=search-input&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D3053526244&partnercode=myC0d3'
+      )
+    );
+  });
 });

@@ -7,21 +7,22 @@ import { generateProperLink } from './generateProperLink';
 /**
  * Converts the provided link to the specified agent link.
  *
- * @param {string} href - The link to convert.
+ * @param {string | URL} href - The link to convert.
  * @param {AgentWithRaw} agent - The agent to convert the link to.
  * @param {string} [referral] - The referral or affiliate code.
  * @returns {URL | undefined} The converted agent link as a URL object, or undefined if conversion failed.
  */
 export function toAgent(
-  href: string,
+  href: string | URL,
   agent: AgentWithRaw,
   referral?: string
 ): URL | undefined {
-  const marketplace = detectMarketplace(href);
+  const link = href instanceof URL ? href : new URL(href);
+  const marketplace = detectMarketplace(link);
   if (!marketplace) {
     return undefined;
   }
-  const id = extractId(href, marketplace);
+  const id = extractId(link, marketplace);
   if (!id) {
     return undefined;
   }

@@ -8,3 +8,28 @@ export const marketplacesWithTld = [
 
 export type Marketplace = (typeof marketplaces)[number];
 export type MarketplaceWithTld = (typeof marketplacesWithTld)[number];
+
+export const nonLinkMarketplaces = ['yupoo'] as const;
+export const nonLinkMarketplacesWithTld = ['yupoo.com'] as const;
+
+export type NonLinkMarketplace = (typeof nonLinkMarketplaces)[number];
+export type NonLinkMarketplaceWithTld =
+  (typeof nonLinkMarketplacesWithTld)[number];
+
+export const marketplacesWithNonLinkMarketplaces = [
+  ...marketplaces,
+  ...nonLinkMarketplaces,
+] as const;
+
+export const marketplacesWithNonLinkMarketplacesWithTld = [
+  ...marketplacesWithTld,
+  ...nonLinkMarketplacesWithTld,
+] as const;
+
+export type MarketplaceWithNonLinkMarketplace =
+  | Marketplace
+  | NonLinkMarketplace;
+
+export type MarketplaceWithNonLinkMarketplaceWithTld =
+  | MarketplaceWithTld
+  | NonLinkMarketplaceWithTld;

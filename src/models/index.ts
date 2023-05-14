@@ -1,4 +1,16 @@
 import { Agent, AgentWithRaw } from './Agent';
-import { Marketplace } from './Marketplace';
+import {
+  Marketplace,
+  MarketplaceWithTld,
+  NonLinkMarketplace,
+  NonLinkMarketplaceWithTld,
+} from './Marketplace';
 
-export { Agent, AgentWithRaw, Marketplace };
+export {
+  Agent,
+  AgentWithRaw,
+  Marketplace,
+  MarketplaceWithTld,
+  NonLinkMarketplace,
+  NonLinkMarketplaceWithTld,
+};

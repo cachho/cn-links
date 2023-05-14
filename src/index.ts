@@ -1,5 +1,6 @@
 import { detectAgent } from './lib/detectAgent';
 import { detectMarketplace } from './lib/detectMarketplace';
+import { detectNonLinkMarketplace } from './lib/detectNonLinkMarketplace';
 import { extractId } from './lib/extractId';
 import { extractIdFromAnyLink } from './lib/extractIdFromAnyLink';
 import { filterLinks } from './lib/filterLinks';
@@ -16,6 +17,7 @@ export * from './models';
 export {
   detectAgent,
   detectMarketplace,
+  detectNonLinkMarketplace,
   extractId,
   extractIdFromAnyLink,
   filterLinks,

@@ -5,9 +5,12 @@ import { filterLinks } from './lib/filterLinks';
 import { generateAgentLink } from './lib/generateAgentLink';
 import { generateRawLink } from './lib/generateRawLink';
 import { isAgentLink } from './lib/isAgentLink';
+import { isNonLinkMarketplace } from './lib/isNonLinkMarketplace';
 import { isRawLink } from './lib/isRawLink';
 import { toAgent } from './lib/toAgent';
 import { toRaw } from './lib/toRaw';
+
+export * from './models';
 
 export {
   detectAgent,
@@ -17,6 +20,7 @@ export {
   generateAgentLink,
   generateRawLink,
   isAgentLink,
+  isNonLinkMarketplace,
   isRawLink,
   toAgent,
   toRaw,

@@ -9,9 +9,10 @@ describe('filterLinks', () => {
     Some random text without a link.
     Another raw link: https://detail.1688.com/offer/610494659403.html
     Agent link without http prefix: www.wegobuy.com/en/page/buy?from=search-input&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D4906851107&partnercode=6t86Xk
-  `;
+    We also have yupoo, right here: account.x.yupoo.com, however that's not a hyperlink, here's the hyperlink: https://account.x.yupoo.com
+    `;
 
-  test('should filter and return the correct links', () => {
+  test('should filter and return the correct links (defaults)', () => {
     const result = filterLinks(sampleText, true, true);
 
     expect(result).toEqual([
@@ -19,6 +20,18 @@ describe('filterLinks', () => {
       'https://item.taobao.com/item.htm?id=673535501707&utm_source=pop&utm_medium=pdb&utm_campaign=normal',
       'https://www.pandabuy.com/product?url=https://item.taobao.com/item.htm?id=674029285425&utm_source=pop&utm_medium=pdb&utm_campaign=normal',
       'https://detail.1688.com/offer/610494659403.html',
+    ]);
+  });
+
+  test('should filter and return the correct links (all)', () => {
+    const result = filterLinks(sampleText, true, true, true);
+
+    expect(result).toEqual([
+      'https://www.wegobuy.com/en/page/buy?from=search-input&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D4906851107&partnercode=6t86Xk',
+      'https://item.taobao.com/item.htm?id=673535501707&utm_source=pop&utm_medium=pdb&utm_campaign=normal',
+      'https://www.pandabuy.com/product?url=https://item.taobao.com/item.htm?id=674029285425&utm_source=pop&utm_medium=pdb&utm_campaign=normal',
+      'https://detail.1688.com/offer/610494659403.html',
+      'https://account.x.yupoo.com',
     ]);
   });
 
@@ -40,6 +53,12 @@ describe('filterLinks', () => {
     ]);
   });
 
+  test('should filter and return only non-link marketplace links', () => {
+    const result = filterLinks(sampleText, false, false, true);
+
+    expect(result).toEqual(['https://account.x.yupoo.com']);
+  });
+
   test('should return an empty array if both agentLinks and rawLinks are false', () => {
     const result = filterLinks(sampleText, false, false);
 
@@ -53,7 +72,7 @@ describe('filterLinks', () => {
   });
 
   test('should limit the number of results', () => {
-    const result = filterLinks(sampleText, true, true, 2);
+    const result = filterLinks(sampleText, true, true, false, 2);
     expect(result).toEqual([
       'https://www.wegobuy.com/en/page/buy?from=search-input&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D4906851107&partnercode=6t86Xk',
       'https://item.taobao.com/item.htm?id=673535501707&utm_source=pop&utm_medium=pdb&utm_campaign=normal',

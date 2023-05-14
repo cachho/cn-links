@@ -39,6 +39,7 @@ I made a few controversial choices.
 - Marketplace: A shopping platfrom (taobao, weidian, 1688, tmall)
 - Raw Link: We call the link to a marketplace a raw link.
 - Marketplace Link, Proper Link, Sanizited links: aliases for raw links
+- Non-Link Marketplace: These are related marketplaces (such as Yupoo). I try to include them in typing, checks and filters, but the actual link transformation that this package promises does not work for them due to the nature of the link.
 
 ## Roadmap
 This is a very early release, that's just an export of functions used in the [RepArchive browser addon](https://github.com/cachho/reparchive-browser-extension).

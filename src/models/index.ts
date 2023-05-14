@@ -11,6 +11,8 @@ import {
   marketplacesWithNonLinkMarketplaces,
   marketplacesWithNonLinkMarketplacesWithTld,
   marketplacesWithTld,
+  MarketplaceWithNonLinkMarketplace,
+  MarketplaceWithNonLinkMarketplaceWithTld,
   nonLinkMarketplaces,
   nonLinkMarketplacesWithTld,
 } from './Marketplace';
@@ -24,6 +26,8 @@ export {
   marketplacesWithNonLinkMarketplaces,
   marketplacesWithNonLinkMarketplacesWithTld,
   marketplacesWithTld,
+  MarketplaceWithNonLinkMarketplace,
+  MarketplaceWithNonLinkMarketplaceWithTld,
   MarketplaceWithTld,
   NonLinkMarketplace,
   nonLinkMarketplaces,

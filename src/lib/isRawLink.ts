@@ -27,7 +27,7 @@ export function isRawLink(
 
   return marketplacesWithTld.some(
     (marketplace) =>
-      marketplace.includes(domain) && (simpleDomainCheck || id !== undefined)
+      marketplace === domain && (simpleDomainCheck || id !== undefined)
   );
 }
 

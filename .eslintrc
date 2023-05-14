@@ -16,7 +16,7 @@
     "overrides": [
       // Configuration for TypeScript files
       {
-        "files": ["**/*.ts"],
+        "files": ["**/*.ts", "**/__tests__/*.test.ts"],
         "plugins": [
           "@typescript-eslint",
           "unused-imports",

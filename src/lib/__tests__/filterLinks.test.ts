@@ -35,6 +35,36 @@ describe('filterLinks', () => {
     ]);
   });
 
+  test('should be able to handle markdown', () => {
+    const markdownText =
+      '[anchor](https://detail.1688.com/offer/610494659403.html) and [https://detail.1688.com/offer/610494659403.html](https://detail.1688.com/offer/610494659403.html)';
+    const result = filterLinks(markdownText, true, true, false);
+
+    expect(result).toEqual([
+      'https://detail.1688.com/offer/610494659403.html',
+      'https://detail.1688.com/offer/610494659403.html',
+      'https://detail.1688.com/offer/610494659403.html',
+    ]);
+  });
+
+  test('should be able to not handle markdown at will', () => {
+    const markdownText =
+      '[anchor](https://detail.1688.com/offer/610494659403.html) and [https://detail.1688.com/offer/610494659403.html](https://detail.1688.com/offer/610494659403.html)';
+    const result = filterLinks(
+      markdownText,
+      true,
+      true,
+      false,
+      undefined,
+      true
+    );
+
+    expect(result).toEqual([
+      'https://detail.1688.com/offer/610494659403.html)',
+      'https://detail.1688.com/offer/610494659403.html](https://detail.1688.com/offer/610494659403.html)',
+    ]);
+  });
+
   test('should filter and return only agent links', () => {
     const result = filterLinks(sampleText, true, false);
 

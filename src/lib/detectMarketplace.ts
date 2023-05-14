@@ -1,4 +1,4 @@
-import type { Marketplace } from '../models';
+import type { Marketplace, MarketplaceWithTld } from '../models';
 import { getDomainFromHostname } from './getDomainFromHostname';
 
 /**
@@ -10,7 +10,7 @@ import { getDomainFromHostname } from './getDomainFromHostname';
 export function detectMarketplace(href: string | URL): Marketplace | undefined {
   const hostname = href instanceof URL ? href.hostname : new URL(href).hostname;
 
-  const domain = getDomainFromHostname(hostname);
+  const domain = getDomainFromHostname(hostname) as MarketplaceWithTld;
 
   if (domain === 'weidian.com') {
     return 'weidian';

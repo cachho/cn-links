@@ -9,6 +9,8 @@ import { isRawLink } from './lib/isRawLink';
 import { toAgent } from './lib/toAgent';
 import { toRaw } from './lib/toRaw';
 
+export * from './models';
+
 export {
   detectAgent,
   detectMarketplace,

@@ -1,5 +1,14 @@
 import type { Agent, AgentWithRaw } from './Agent';
 import { agents } from './Agent';
+import { Id } from './Id';
+import {
+  AgentLink,
+  AgentURL,
+  NonLinkMarketplaceLink,
+  NonLinkMarketplaceURL,
+  RawLink,
+  RawURL,
+} from './LinkTypes';
 import type {
   Marketplace,
   MarketplaceWithTld,
@@ -16,22 +25,15 @@ import {
   nonLinkMarketplaces,
   nonLinkMarketplacesWithTld,
 } from './Marketplace';
-import { RawLink, RawURL, AgentLink, AgentURL, NonLinkMarketplaceLink, NonLinkMarketplaceURL } from './LinkTypes';
-import { Id } from './Id';
 import { Referral } from './Referral';
 
 export {
-  Id,
-  AgentLink,
-  NonLinkMarketplaceLink,
-  RawLink,
-  RawURL,
-  AgentURL,
-  NonLinkMarketplaceURL,
   Agent,
+  AgentLink,
   agents,
-  Referral,
+  AgentURL,
   AgentWithRaw,
+  Id,
   Marketplace,
   marketplaces,
   marketplacesWithNonLinkMarketplaces,
@@ -41,7 +43,12 @@ export {
   MarketplaceWithNonLinkMarketplaceWithTld,
   MarketplaceWithTld,
   NonLinkMarketplace,
+  NonLinkMarketplaceLink,
   nonLinkMarketplaces,
   nonLinkMarketplacesWithTld,
+  NonLinkMarketplaceURL,
   NonLinkMarketplaceWithTld,
+  RawLink,
+  RawURL,
+  Referral,
 };

@@ -1,4 +1,4 @@
-import { AgentURL, NonLinkMarketplaceURL, RawURL } from '../models';
+import type { AgentURL, NonLinkMarketplaceURL, RawURL } from '../models';
 import { isAgentLink } from './isAgentLink';
 import { isNonLinkMarketplace } from './isNonLinkMarketplace';
 import { isRawLink } from './isRawLink';
@@ -21,7 +21,11 @@ export function filterLinks(
   nonLinkMarketplaceLinks: boolean = false,
   limit?: number,
   linksOnlyTerminatedByWhitespace?: boolean
-): {agentUrls?: AgentURL[], rawUrls?: RawURL[], nonLinkMarketplaceUrls?: NonLinkMarketplaceURL[]} {
+): {
+  agentUrls?: AgentURL[];
+  rawUrls?: RawURL[];
+  nonLinkMarketplaceUrls?: NonLinkMarketplaceURL[];
+} {
   if (!agentLinks && !rawLinks && !nonLinkMarketplaceLinks) {
     return {};
   }
@@ -41,13 +45,29 @@ export function filterLinks(
     )
     .slice(0, limit);
 
-  const agentLinkArray = agentLinks ? filteredLinks.filter((link) => isAgentLink(link)).map((link) => new URL(link)) : undefined;
+  const agentLinkArray = agentLinks
+    ? filteredLinks
+        .filter((link) => isAgentLink(link))
+        .map((link) => new URL(link))
+    : undefined;
 
-  const rawLinkArray = rawLinks ? filteredLinks.filter((link) => isRawLink(link)).map((link) => new URL(link)) : undefined;
+  const rawLinkArray = rawLinks
+    ? filteredLinks
+        .filter((link) => isRawLink(link))
+        .map((link) => new URL(link))
+    : undefined;
 
-  const nonLinkMarketplaceArray = nonLinkMarketplaceLinks ? filteredLinks.filter((link) => isNonLinkMarketplace(link)).map((link) => new URL(link)) : undefined;
+  const nonLinkMarketplaceArray = nonLinkMarketplaceLinks
+    ? filteredLinks
+        .filter((link) => isNonLinkMarketplace(link))
+        .map((link) => new URL(link))
+    : undefined;
 
   // Todo: Refactor for better performance is definitely possible.
 
-  return {agentUrls: agentLinkArray, rawUrls: rawLinkArray, nonLinkMarketplaceUrls: nonLinkMarketplaceArray};
+  return {
+    agentUrls: agentLinkArray,
+    rawUrls: rawLinkArray,
+    nonLinkMarketplaceUrls: nonLinkMarketplaceArray,
+  };
 }

@@ -1,4 +1,4 @@
-import { AgentLink, RawURL } from '../models';
+import type { AgentLink, RawURL } from '../models';
 import { generateRawLink } from './generateRawLink';
 
 /**
@@ -9,7 +9,9 @@ import { generateRawLink } from './generateRawLink';
  * @param {AgentLink |  string | URL} href - The CSSBUY link to decrypt. Not necessarily strongly typed.
  * @returns {RawURL} The decrypted proper link as a URL object, or undefined if decryption failed.
  */
-export function decryptCssbuy(href: AgentLink | string | URL): RawURL | undefined {
+export function decryptCssbuy(
+  href: AgentLink | string | URL
+): RawURL | undefined {
   const url = typeof href === 'string' ? new URL(href) : href;
 
   if (url.pathname.startsWith('/item-micro')) {
@@ -30,5 +32,5 @@ export function decryptCssbuy(href: AgentLink | string | URL): RawURL | undefine
       return generateRawLink('taobao', id);
     }
   }
-  return undefined
+  return undefined;
 }

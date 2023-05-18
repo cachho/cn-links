@@ -1,5 +1,5 @@
 import type { Id, Marketplace } from '../models';
-import { RawLink } from '../models/LinkTypes';
+import type { RawLink } from '../models/LinkTypes';
 import { detectMarketplace } from './detectMarketplace';
 
 /**
@@ -9,10 +9,7 @@ import { detectMarketplace } from './detectMarketplace';
  * @param {Marketplace} [marketplace] - The marketplace to consider for ID extraction. If not provided, it will be automatically detected.
  * @returns {Id} The extracted ID, or undefined if no ID is found.
  */
-export function extractId(
-  href: RawLink,
-  marketplace?: Marketplace
-): Id {
+export function extractId(href: RawLink, marketplace?: Marketplace): Id {
   const link = href instanceof URL ? href : new URL(href);
   const mp = marketplace ?? detectMarketplace(href)!;
 

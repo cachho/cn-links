@@ -1,21 +1,21 @@
 /**
-* **URL object that points to a shopping agent.**
-* The target return type.
-* Can be used for `AgentLink` inputs.
-* Due to the `AgentWithRaw` type, it is possible that the agent link is
-* actually a raw link. This should only be used as a final output,
-* never assume that the agent link is a raw link. (might change in the future).
-* Background (not in code):
-* Comprised of the agent domain and an inner Marketplace link 
-* with a marketplace domain an id.
-*/
+ * **URL object that points to a shopping agent.**
+ * The target return type.
+ * Can be used for `AgentLink` inputs.
+ * Due to the `AgentWithRaw` type, it is possible that the agent link is
+ * actually a raw link. This should only be used as a final output,
+ * never assume that the agent link is a raw link. (might change in the future).
+ * Background (not in code):
+ * Comprised of the agent domain and an inner Marketplace link
+ * with a marketplace domain an id.
+ */
 export type AgentURL = URL;
 
 /**
  * **Link to a shopping agent.**
  * The most common input type.
  * Background (not in code):
- * Comprised of the agent domain and an inner Marketplace link 
+ * Comprised of the agent domain and an inner Marketplace link
  * with a marketplace domain an id.
  */
 export type AgentLink = string | URL | AgentURL;
@@ -23,7 +23,7 @@ export type AgentLink = string | URL | AgentURL;
 /**
  * **URL object that points to a marketplace with a raw link**
  * The target return type.
- * This could be Taobao, Weidian, 1688 or Tmall. 
+ * This could be Taobao, Weidian, 1688 or Tmall.
  */
 export type RawURL = URL;
 

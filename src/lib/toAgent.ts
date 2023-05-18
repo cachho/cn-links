@@ -1,4 +1,4 @@
-import type { AgentLink, AgentURL, AgentWithRaw, RawLink } from '../models';
+import type { AgentURL, AgentWithRaw } from '../models';
 import { detectMarketplace } from './detectMarketplace';
 import { extractId } from './extractId';
 import { generateAgentLink } from './generateAgentLink';

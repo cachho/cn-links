@@ -1,4 +1,4 @@
-import type { AgentURL, Id, Marketplace, RawURL } from '../models';
+import type { Id, Marketplace } from '../models';
 import { extractId } from './extractId';
 import { isRawLink } from './isRawLink';
 import { toRaw } from './toRaw';
@@ -18,11 +18,10 @@ export function extractIdFromAnyLink(
 
   if (isRawLink(link)) {
     return extractId(link, marketplace);
-  } else {
-    const rawLink = toRaw(link);
-    if (rawLink) {
-      return extractId(rawLink, marketplace);
-    }
-    throw new Error(`Id could not be extracted from string: ${link.href}`);
   }
+  const rawLink = toRaw(link);
+  if (rawLink) {
+    return extractId(rawLink, marketplace);
+  }
+  throw new Error(`Id could not be extracted from string: ${link.href}`);
 }

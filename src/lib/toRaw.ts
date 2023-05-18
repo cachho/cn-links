@@ -1,4 +1,4 @@
-import { RawURL } from '../models';
+import type { RawURL } from '../models';
 import { detectMarketplace } from './detectMarketplace';
 import { extractId } from './extractId';
 import { extractRawLink } from './extractRawLink';

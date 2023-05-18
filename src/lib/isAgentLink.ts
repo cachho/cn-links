@@ -1,9 +1,5 @@
-import { agents } from '../models/Agent';
 import { decryptCssbuy } from './decryptCssbuy';
 import { detectAgent } from './detectAgent';
-import { extractId } from './extractId';
-import { extractRawLink } from './extractRawLink';
-import { getDomainFromHostname } from './getDomainFromHostname';
 import { isRawLink } from './isRawLink';
 
 /**
@@ -14,9 +10,7 @@ import { isRawLink } from './isRawLink';
  * @param {string | URL} href - The URL or hostname to check.
  * @returns {boolean} True if the link corresponds to an agent, false otherwise.
  */
-export function isAgentLink(
-  href: string | URL,
-): boolean {
+export function isAgentLink(href: string | URL): boolean {
   let link: URL;
   try {
     link = new URL(href);
@@ -29,16 +23,16 @@ export function isAgentLink(
     return false;
   }
 
-  const agent = detectAgent(link)
+  const agent = detectAgent(link);
 
   if (!agent) return false;
 
   if (agent === 'cssbuy') {
-    return !!(decryptCssbuy(link))
+    return !!decryptCssbuy(link);
   }
 
-  const innerLink = link.searchParams.get('url')
-  
+  const innerLink = link.searchParams.get('url');
+
   if (!innerLink) return false;
 
   return isRawLink(innerLink);

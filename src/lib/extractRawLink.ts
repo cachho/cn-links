@@ -1,4 +1,4 @@
-import { AgentLink, AgentURL, RawLink, RawURL } from '../models/LinkTypes';
+import type { AgentURL, RawURL } from '../models/LinkTypes';
 import { decryptCssbuy } from './decryptCssbuy';
 import { detectAgent } from './detectAgent';
 
@@ -11,18 +11,25 @@ import { detectAgent } from './detectAgent';
  * @param {boolean} [cantBeCssbuy] - Indicates whether the raw link cannot be from the 'cssbuy' agent. If this is true the call to detectAgent is skipped. *Legacy functionality that makes little sense on a internal function.* Default is false.
  * @returns {RawURL} The extracted raw link as a URL object, or undefined if no raw link is found.
  */
-export function extractRawLink(
-  href: AgentURL,
-  cantBeCssbuy?: boolean
-): RawURL {
+export function extractRawLink(href: AgentURL, cantBeCssbuy?: boolean): RawURL {
   const link = href instanceof URL ? href : new URL(href);
 
   if (!cantBeCssbuy && detectAgent(link.href) === 'cssbuy') {
-    return decryptCssbuy(link)!; // Forced because it's assumed that agentUrl is valid.
+    const innerLink = decryptCssbuy(link);
+    if (!innerLink) {
+      throw new Error(
+        `Error extracting inner link, cssbuy link could not be decrypted: ${link.href}`
+      );
+    }
+    return innerLink; // Forced because it's assumed that agentUrl is valid.
   }
 
   const urlParams = new URLSearchParams(link.search ?? link);
   const innerParam = urlParams.get('url');
-
-  return new URL(innerParam!); // Forced because it's assumed that agentUrl is valid.
+  if (!innerParam) {
+    throw new Error(
+      `Error extracting inner link, 'url' query param not found: ${link.href}`
+    );
+  }
+  return new URL(innerParam); // Forced because it's assumed that agentUrl is valid.
 }

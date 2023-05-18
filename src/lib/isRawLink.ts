@@ -1,7 +1,4 @@
-import { marketplacesWithTld } from '../models/Marketplace';
 import { detectMarketplace } from './detectMarketplace';
-import { extractId } from './extractId';
-import { getDomainFromHostname } from './getDomainFromHostname';
 
 /**
  * Checks if the provided URL or hostname corresponds to a marketplace (is it a raw link?).
@@ -10,9 +7,7 @@ import { getDomainFromHostname } from './getDomainFromHostname';
  * @param {string | URL} href - The URL or hostname to check.
  * @returns {boolean} True if the link corresponds to a marketplace, false otherwise.
  */
-export function isRawLink(
-  href: string | URL,
-): boolean {
+export function isRawLink(href: string | URL): boolean {
   let link: URL;
   try {
     link = typeof href === 'string' ? new URL(href) : href;
@@ -25,7 +20,9 @@ export function isRawLink(
   if (!marketplace) return false;
 
   if (marketplace === 'weidian') {
-    return !!(link.searchParams.get('itemID') || link.searchParams.get('itemId'))
+    return !!(
+      link.searchParams.get('itemID') || link.searchParams.get('itemId')
+    );
   }
 
   if (marketplace === 'taobao') {
@@ -33,7 +30,7 @@ export function isRawLink(
       const id = link.href.split('item/')[1].split('.')[0];
       return !Number.isNaN(Number(id));
     }
-    return !!(link.searchParams.get('id'));
+    return !!link.searchParams.get('id');
   }
 
   if (marketplace === '1688') {
@@ -46,12 +43,12 @@ export function isRawLink(
           ? link.href.split('offer/')[1].split('.')[0]
           : link.href.split('offer%2F')[1].split('.')[0];
       // Validate number
-      return !Number.isNaN(Number(id))
+      return !Number.isNaN(Number(id));
     }
   }
 
   if (marketplace === 'tmall') {
-    return !!(link.searchParams.get('id'));
+    return !!link.searchParams.get('id');
   }
 
   return false;

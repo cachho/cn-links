@@ -1,5 +1,5 @@
-import { Agent } from "./Agent";
+import type { Agent } from './Agent';
 
 export type Referral = {
-    [agent in Agent]?: string;
-}
+  [agent in Agent]?: string;
+};

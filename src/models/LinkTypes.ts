@@ -2,6 +2,9 @@
 * **URL object that points to a shopping agent.**
 * The target return type.
 * Can be used for `AgentLink` inputs.
+* Due to the `AgentWithRaw` type, it is possible that the agent link is
+* actually a raw link. This should only be used as a final output,
+* never assume that the agent link is a raw link. (might change in the future).
 * Background (not in code):
 * Comprised of the agent domain and an inner Marketplace link 
 * with a marketplace domain an id.

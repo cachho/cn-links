@@ -1,13 +1,13 @@
-import type { Marketplace, MarketplaceWithTld } from '../models';
+import type { Marketplace, MarketplaceWithTld, RawLink } from '../models';
 import { getDomainFromHostname } from './getDomainFromHostname';
 
 /**
  * Detects the marketplace based on the provided URL or hostname.
  *
- * @param {string | URL} href - The URL or hostname to detect the marketplace from.
+ * @param {RawLink} href - The URL or hostname to detect the marketplace from. Must be in raw format, can't be agent link.
  * @returns {Marketplace | undefined} The detected marketplace, or undefined if no marketplace is detected.
  */
-export function detectMarketplace(href: string | URL): Marketplace | undefined {
+export function detectMarketplace(href: RawLink): Marketplace | undefined {
   const hostname = href instanceof URL ? href.hostname : new URL(href).hostname;
 
   const domain = getDomainFromHostname(hostname) as MarketplaceWithTld;

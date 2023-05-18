@@ -57,5 +57,5 @@ export function extractId(
       return urlParams.get('id')!;
     }
   }
-  return '';
+  throw new Error(`Id could not be extracted from string: ${link.href}`);
 }

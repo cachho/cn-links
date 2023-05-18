@@ -1,4 +1,4 @@
-import type { Marketplace } from '../models';
+import type { Id, Marketplace } from '../models';
 import { extractId } from './extractId';
 import { isRawLink } from './isRawLink';
 import { toRaw } from './toRaw';
@@ -8,12 +8,12 @@ import { toRaw } from './toRaw';
  *
  * @param {string | URL} href - The URL from which to extract the ID.
  * @param {Marketplace} [marketplace] - The marketplace to consider for ID extraction. If not provided, it will be automatically detected.
- * @returns {string | undefined} The extracted ID, or undefined if no ID is found.
+ * @returns {Id | undefined} The extracted ID, or undefined if no ID is found.
  */
 export function extractIdFromAnyLink(
   href: string | URL,
   marketplace?: Marketplace
-): string | undefined {
+): Id | undefined {
   const link = href instanceof URL ? href : new URL(href);
 
   if (isRawLink(link)) {

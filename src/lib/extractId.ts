@@ -1,17 +1,18 @@
-import type { Marketplace } from '../models';
+import type { Id, Marketplace } from '../models';
+import { RawLink } from '../models/LinkTypes';
 import { detectMarketplace } from './detectMarketplace';
 
 /**
  * Extracts the ID from the provided URL based on the specified or detected marketplace.
  *
- * @param {string | URL} href - The URL from which to extract the ID. Must be a raw link.
+ * @param {RawLink} href - The URL from which to extract the ID. Must be a raw link.
  * @param {Marketplace} [marketplace] - The marketplace to consider for ID extraction. If not provided, it will be automatically detected.
- * @returns {string | undefined} The extracted ID, or undefined if no ID is found.
+ * @returns {Id | undefined} The extracted ID, or undefined if no ID is found.
  */
 export function extractId(
-  href: string | URL,
+  href: RawLink,
   marketplace?: Marketplace
-): string | undefined {
+): Id | undefined {
   // TODO: It makes sense to restrict the input of this to raw links.
   // Users can convert to raw links before, but I expect performance to be more important on this function than other, so I don't want to add checks and conversions to this.
   // For this it should be stronger typed.

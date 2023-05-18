@@ -18,6 +18,11 @@ export class CnLink implements ICnLink {
   id: Id;
   referrals: Referral;
 
+  /**
+   * Construct object from link.
+   * @param {URL | string} href - Link to generate the object from
+   * @param {Referral} [referrals] - Object to use referral links from. Referrals can still be entered when using the `as` method. Optional. 
+   */
   constructor(href: URL | string, referrals: Referral) {
     const link = href instanceof URL ? href : new URL(href);
 
@@ -44,6 +49,12 @@ export class CnLink implements ICnLink {
   }
 
 
+  /**
+   * Convert to a URL object of any target type.
+   * @param {AgentWithRaw} target - Agent name to convert to, or `raw` to get a sanitized link for the orginal marketplace
+   * @param {string} referral - Referral code to use in this URL. If undefined, it will try to get the referral from the `referrals` attribute.
+   * @returns {AgentURL} - URL object that contains the target link. You can get the full link string with the `.href` attribute. 
+   */
   as(target: AgentWithRaw, referral?: string) {
     const getRefferal = () => {
       if (referral) return referral;

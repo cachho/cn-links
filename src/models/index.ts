@@ -16,14 +16,17 @@ import {
   nonLinkMarketplaces,
   nonLinkMarketplacesWithTld,
 } from './Marketplace';
-import { MarketplaceLink, AgentLink, NonLinkMarketplaceLink } from './LinkTypes';
+import { RawLink, RawURL, AgentLink, AgentURL, NonLinkMarketplaceLink, NonLinkMarketplaceURL } from './LinkTypes';
 import { Id } from './Id';
 
 export {
   Id,
   AgentLink,
   NonLinkMarketplaceLink,
-  MarketplaceLink,
+  RawLink,
+  RawURL,
+  AgentURL,
+  NonLinkMarketplaceURL,
   Agent,
   agents,
   AgentWithRaw,

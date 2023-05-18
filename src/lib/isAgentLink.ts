@@ -4,6 +4,7 @@ import { detectAgent } from './detectAgent';
 import { extractId } from './extractId';
 import { extractRawLink } from './extractRawLink';
 import { getDomainFromHostname } from './getDomainFromHostname';
+import { isRawLink } from './isRawLink';
 
 /**
  * Checks if the provided URL or hostname corresponds to an agent link.
@@ -36,5 +37,9 @@ export function isAgentLink(
     return !!(decryptCssbuy(link))
   }
 
-  return !!(link.searchParams.get('url'))
+  const innerLink = link.searchParams.get('url')
+  
+  if (!innerLink) return false;
+
+  return isRawLink(innerLink);
 }

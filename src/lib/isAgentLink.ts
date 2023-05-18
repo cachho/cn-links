@@ -1,4 +1,6 @@
 import { agents } from '../models/Agent';
+import { decryptCssbuy } from './decryptCssbuy';
+import { detectAgent } from './detectAgent';
 import { extractId } from './extractId';
 import { extractRawLink } from './extractRawLink';
 import { getDomainFromHostname } from './getDomainFromHostname';
@@ -9,12 +11,10 @@ import { getDomainFromHostname } from './getDomainFromHostname';
  * for this scenario you should just use the hostname, but you can also set simpleDomainCheck to true.
  *
  * @param {string | URL} href - The URL or hostname to check.
- * @param {boolean} simpleDomainCheck - Skip checking for inner link and id and just check the domain.
  * @returns {boolean} True if the link corresponds to an agent, false otherwise.
  */
 export function isAgentLink(
   href: string | URL,
-  simpleDomainCheck?: boolean
 ): boolean {
   let link: URL;
   try {
@@ -28,11 +28,13 @@ export function isAgentLink(
     return false;
   }
 
-  const domain = getDomainFromHostname(link.hostname);
-  return agents.some(
-    (agent) =>
-      domain.includes(agent) &&
-      (simpleDomainCheck ||
-        (extractRawLink(link.href) && extractId(extractRawLink(link.href)!)))
-  );
+  const agent = detectAgent(link)
+
+  if (!agent) return false;
+
+  if (agent === 'cssbuy') {
+    return !!(decryptCssbuy(link))
+  }
+
+  return !!(link.searchParams.get('url'))
 }

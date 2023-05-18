@@ -23,7 +23,7 @@ export type AgentLink = string | URL | AgentURL;
 /**
  * **URL object that points to a marketplace with a raw link**
  * The target return type.
- * This could be Taobao, Weidian, 1688 or Tmall.** 
+ * This could be Taobao, Weidian, 1688 or Tmall. 
  */
 export type RawURL = URL;
 

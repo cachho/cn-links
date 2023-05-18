@@ -14,6 +14,7 @@ import { isAgentLink } from './isAgentLink';
 export function toRaw(href: string | URL): RawURL | undefined {
   const link = href instanceof URL ? href : new URL(href);
 
+  // Todo: This is redundant if the Input is of AgentURL type.
   if (isAgentLink(link)) {
     const innerLink = extractRawLink(link);
     if (innerLink) {

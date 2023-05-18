@@ -120,7 +120,7 @@ export function generateAgentLink(
     if (!identifier) {
       throw new Error(`Id could not be determined: ${link}`);
     }
-    return new URL(generateRawLink(mp, identifier).href);
+    return generateRawLink(mp, identifier);
   }
 
   throw new Error(`Unsupported agent: ${agent}`);

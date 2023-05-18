@@ -7,9 +7,9 @@
 export type AgentLink = URL;
 
 /**
- * **Link to a marketplace. This could be Taobao, Weidian, 1688 or Tmall.** 
+ * **Raw link to a marketplace. This could be Taobao, Weidian, 1688 or Tmall.** 
  */
-export type MarketplaceLink = URL;
+export type RawLink = URL;
 
 /**
  * **Link to a non-link marketplace.**

@@ -10,7 +10,7 @@ import { isRawLink } from './isRawLink';
  * @param {boolean} rawLinks - Returns raw links if true. Default true.
  * @param {boolean} nonMarketplaceLinks - Returns non-link marketplace links if true. Default false.
  * @param {number} [limit] - The maximum number of results to return.
- * @param {boolean} [linksOnlyTerminatedByWhitespace] - If active, only whitespaces are used to find the end of a link. This can cause problems with markdown.
+ * @param {boolean} [linksOnlyTerminatedByWhitespace] - If true, only whitespaces are used to find the end of a link. This can cause problems with markdown.
  * @returns {string[]} An array of links that evaluate to true for either `isAgentLink` or `isRawLink` or `isNonLinkMarketplace`.
  */
 export function filterLinks(

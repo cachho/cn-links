@@ -4,11 +4,12 @@ import { generateRawLink } from './generateRawLink';
 /**
  * @internal
  * Decrypts the CSSBUY link and returns the corresponding proper link.
+ * This is an exception, as it does not infer strong inptu typing.
  *
- * @param {AgentLink} href - The CSSBUY link to decrypt.
+ * @param {AgentLink |  string | URL} href - The CSSBUY link to decrypt. Not necessarily strongly typed.
  * @returns {RawURL} The decrypted proper link as a URL object, or undefined if decryption failed.
  */
-export function decryptCssbuy(href: string | URL): URL | undefined {
+export function decryptCssbuy(href: AgentLink | string | URL): RawURL | undefined {
   const url = typeof href === 'string' ? new URL(href) : href;
 
   if (url.pathname.startsWith('/item-micro')) {
@@ -29,5 +30,5 @@ export function decryptCssbuy(href: string | URL): URL | undefined {
       return generateRawLink('taobao', id);
     }
   }
-  return undefined;
+  return undefined
 }

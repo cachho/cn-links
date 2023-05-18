@@ -3,28 +3,27 @@ import type { Agent } from '../models/Agent';
 /**
  * Detects the agent based on the provided URL.
  *
- * @param {string} href - The URL to detect the agent from.
+ * @param {URL | string} href - The URL to detect the agent from.
  * @returns {Agent | undefined} The detected agent, or undefined if no agent is detected.
  */
-export function detectAgent(href: string): Agent | undefined {
-  const link = new URL(href);
-  const url = link.hostname;
+export function detectAgent(href: URL | string): Agent | undefined {
+  const link = typeof href === 'string' ? new URL(href) : href;
 
   if (
-    url === 'www.wegobuy.com' ||
-    url === 'wegobuy.com' ||
-    url === 'login.wegobuy.com'
+    link.hostname === 'www.wegobuy.com' ||
+    link.hostname === 'wegobuy.com' ||
+    link.hostname === 'login.wegobuy.com'
   )
     return 'wegobuy';
-  if (url === 'www.pandabuy.com' || url === 'pandabuy.com') return 'pandabuy';
+  if (link.hostname === 'www.pandabuy.com' || link.hostname === 'pandabuy.com') return 'pandabuy';
   if (
-    url === 'www.superbuy.com' ||
-    url === 'superbuy.com' ||
-    url === 'login.superbuy.com'
+    link.hostname === 'www.superbuy.com' ||
+    link.hostname === 'superbuy.com' ||
+    link.hostname === 'login.superbuy.com'
   )
     return 'superbuy';
-  if (url === 'www.sugargoo.com' || url === 'sugargoo.com') return 'sugargoo';
-  if (url === 'www.cssbuy.com' || url === 'cssbuy.com') return 'cssbuy';
-  if (url === 'www.hagobuy.com' || url === 'hagobuy.com') return 'hagobuy';
+  if (link.hostname === 'www.sugargoo.com' || link.hostname === 'sugargoo.com') return 'sugargoo';
+  if (link.hostname === 'www.cssbuy.com' || link.hostname === 'cssbuy.com') return 'cssbuy';
+  if (link.hostname === 'www.hagobuy.com' || link.hostname === 'hagobuy.com') return 'hagobuy';
   return undefined;
 }

@@ -16,8 +16,12 @@ import {
   nonLinkMarketplaces,
   nonLinkMarketplacesWithTld,
 } from './Marketplace';
+import { MarketplaceLink, AgentLink, NonLinkMarketplaceLink } from './LinkTypes';
 
 export {
+  AgentLink,
+  NonLinkMarketplaceLink,
+  MarketplaceLink,
   Agent,
   agents,
   AgentWithRaw,

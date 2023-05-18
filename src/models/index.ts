@@ -18,6 +18,7 @@ import {
 } from './Marketplace';
 import { RawLink, RawURL, AgentLink, AgentURL, NonLinkMarketplaceLink, NonLinkMarketplaceURL } from './LinkTypes';
 import { Id } from './Id';
+import { Referral } from './Referral';
 
 export {
   Id,
@@ -29,6 +30,7 @@ export {
   NonLinkMarketplaceURL,
   Agent,
   agents,
+  Referral,
   AgentWithRaw,
   Marketplace,
   marketplaces,

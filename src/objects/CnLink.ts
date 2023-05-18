@@ -1,7 +1,7 @@
 import { detectMarketplace } from "../lib/detectMarketplace";
 import { isAgentLink } from "../lib/isAgentLink";
 import { extractRawLink } from "../lib/extractRawLink";
-import { Agent, AgentWithRaw, Id, Marketplace, marketplaces } from "../models";
+import { Agent, AgentWithRaw, Id, Marketplace, Referral, marketplaces } from "../models";
 import { extractId } from "../lib/extractId";
 import { isRawLink } from "../lib/isRawLink";
 import { ICnLink } from "../models/CnLink";
@@ -16,8 +16,9 @@ import { generateRawLink } from "../lib/generateRawLink";
 export class CnLink implements ICnLink {
   marketplace: Marketplace;
   id: Id;
+  referrals: Referral;
 
-  constructor(href: URL | string) {
+  constructor(href: URL | string, referrals: Referral) {
     const link = href instanceof URL ? href : new URL(href);
 
     const getInnerLink = () => {
@@ -32,15 +33,25 @@ export class CnLink implements ICnLink {
 
     const innerLink = getInnerLink();
     const marketplace = detectMarketplace(innerLink);
-    if (marketplace) {
-      this.marketplace = marketplace;
-      this.id = extractId(innerLink);
+    
+    if (!marketplace) {
+      throw new Error(`CnLink object could not be initialized. Marketplace could not be detected from inner link: ${innerLink.href}`);
     }
-    throw new Error(`CnLink object could not be initialized. Marketplace could not be detected from inner link: ${innerLink.href}`);
+
+    this.marketplace = marketplace;
+    this.id = extractId(innerLink);
+    this.referrals = referrals ?? undefined;
   }
 
+
   as(target: AgentWithRaw, referral?: string) {
+    const getRefferal = () => {
+      if (referral) return referral;
+      if (target === 'raw') return undefined;
+      this.referrals[target]
+    }
+
     const innerLink = generateRawLink(this.marketplace, this.id);
-    return generateAgentLink(target, innerLink, this.marketplace, this.id, referral)
+    return generateAgentLink(target, innerLink, this.marketplace, this.id, getRefferal());
   }
 }

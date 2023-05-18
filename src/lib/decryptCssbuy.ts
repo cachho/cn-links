@@ -13,19 +13,19 @@ export function decryptCssbuy(href: string | URL): URL | undefined {
   if (url.pathname.startsWith('/item-micro')) {
     const id = url.pathname.split('-')[2].split('.')[0];
     if (id) {
-      return new URL(generateRawLink('weidian', id));
+      return generateRawLink('weidian', id);
     }
   }
   if (url.pathname.startsWith('/item-1688')) {
     const id = url.pathname.split('-')[2].split('.')[0];
     if (id) {
-      return new URL(generateRawLink('1688', id));
+      return generateRawLink('1688', id);
     }
   }
   if (url.pathname.startsWith('/item')) {
     const id = url.pathname.split('-')[1].split('.')[0];
     if (id) {
-      return new URL(generateRawLink('taobao', id));
+      return generateRawLink('taobao', id);
     }
   }
   return undefined;

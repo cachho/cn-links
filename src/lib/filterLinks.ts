@@ -3,7 +3,7 @@ import { isNonLinkMarketplace } from './isNonLinkMarketplace';
 import { isRawLink } from './isRawLink';
 
 /**
- * Filters a given string for links and checks them using `isAgentLink` and `isRawLink`.
+ * Filters a given string for links and checks them using `isAgentLink`, `isRawLink` and optionally `isNonLinkMarketplace`.
  *
  * @param {string} text - The string to filter for links.
  * @param {boolean} agentLinks - Returns agent links if true. Default true.
@@ -11,7 +11,7 @@ import { isRawLink } from './isRawLink';
  * @param {boolean} nonMarketplaceLinks - Returns non-link marketplace links if true. Default false.
  * @param {number} [limit] - The maximum number of results to return.
  * @param {boolean} [linksOnlyTerminatedByWhitespace] - If active, only whitespaces are used to find the end of a link. This can cause problems with markdown.
- * @returns {string[]} An array of links that evaluate to true for either `isAgentLink` or `isRawLink`.
+ * @returns {string[]} An array of links that evaluate to true for either `isAgentLink` or `isRawLink` or `isNonLinkMarketplace`.
  */
 export function filterLinks(
   text: string,

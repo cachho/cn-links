@@ -12,8 +12,10 @@ describe('extractRawLink', () => {
 
   it('should return undefined for a link without the inner URL parameter', () => {
     const href = 'https://www.example.com/';
-    const rawLink = extractRawLink(new URL(href));
-    expect(rawLink).toBeUndefined();
+    const rawLink = new URL(href);
+    expect(() => extractRawLink(rawLink)).toThrowError(
+      "Error extracting inner link, 'url' query param not found: https://www.example.com/"
+    );
   });
 
   it('should accept a URL object as input', () => {
@@ -44,7 +46,8 @@ describe('extractRawLink', () => {
 
   it('should return undefined for an invalid cssbuy raw link', () => {
     const href = 'https://www.cssbuy.com';
-    const rawLink = extractRawLink(new URL(href));
-    expect(rawLink).toBeUndefined();
+    expect(() => extractRawLink(new URL(href))).toThrowError(
+      'Error extracting inner link, cssbuy link could not be decrypted: https://www.cssbuy.com/'
+    );
   });
 });

@@ -5,5 +5,5 @@ import type { Referral } from './Referral';
 export interface ICnLink {
   marketplace: Marketplace;
   id: Id;
-  referrals?: Referral;
+  referrals: Referral;
 }

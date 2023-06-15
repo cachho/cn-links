@@ -24,11 +24,10 @@ export function toRaw(href: string | URL): RawURL | undefined {
 
   const marketplace = detectMarketplace(link);
   if (!marketplace) {
-    return undefined;
+    throw new Error(
+      `Marketplace could not be detected, link cannot be converted to raw: ${link.href}`
+    );
   }
   const id = extractId(link, marketplace);
-  if (!id) {
-    return undefined;
-  }
   return generateRawLink(marketplace, id);
 }

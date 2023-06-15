@@ -131,13 +131,8 @@ describe('generateAgentLink', () => {
     expect(result).toEqual(expected);
   });
 
-  test('link is not cleaned (not equal is used on purpose)', () => {
+  test('link is not sanitized', () => {
     const agent = 'hagobuy';
-    const expected = new URL(
-      `https://www.hagobuy.com/item/details?url=${encodeURIComponent(
-        innerLink
-      )}&affcode=${referral}`
-    );
 
     const result = generateAgentLink(
       agent,
@@ -147,7 +142,13 @@ describe('generateAgentLink', () => {
       referral
     );
 
-    expect(result).not.toEqual(expected);
+    const expected = new URL(
+      `https://www.hagobuy.com/item/details?url=${encodeURIComponent(
+        `${innerLink}&spm=as8df7a87sdf78asdf`
+      )}&affcode=${referral}`
+    );
+
+    expect(result).toEqual(expected);
   });
 
   test('generates raw link correctly', () => {

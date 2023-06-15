@@ -101,10 +101,11 @@ describe('toAgent', () => {
     expect(result).toBeUndefined();
   });
 
-  it('should return undefined if marketplace is detected but ID is undefined', () => {
+  it('should throw error if marketplace is detected but ID is undefined', () => {
     const agent: AgentWithRaw = 'superbuy';
-    const result = toAgent('https://taobao.com', agent);
-    expect(result).toBeUndefined();
+    expect(() => toAgent('https://taobao.com', agent)).toThrowError(
+      'Id could not be extracted from string: https://taobao.com/'
+    );
   });
 
   it('should return undefined if marketplace is detected but agent link is undefined', () => {

@@ -41,10 +41,33 @@ I made a few controversial choices.
 - Marketplace Link, Proper Link, Sanizited links: aliases for raw links
 - Non-Link Marketplace: These are related marketplaces (such as Yupoo). I try to include them in typing, checks and filters, but the actual link transformation that this package promises does not work for them due to the nature of the link.
 
+## Usage / Examples
+Version 1.0 has the ambition to implement strong typing. The is-functions do the heavy lifting and can be used to typeguard `AgentURL`s and `RawURL`s. So a common design pattern you will see is.
+
+```
+const link = 'https://weidian.com/item.html?itemId=3053526244&vc_cps_track=1459920903_0_0';
+
+
+if (isRawLink(link)) {
+    const rawLink: RawURL = new URL(link);
+    // Now you have a strongly typed URL object
+
+    // This would be fine, and you can do everything with this object. Just when you use rawLink.href it will not be sanitized. To avoid this, it's recommended to instead use
+    const rawLink = toRaw(link)
+
+    // Possible continuation
+    const agent: Agent = 'wegobuy';
+    const agentLink = toAgent(rawLink, agent);
+}
+
+```
+
+
 ## Roadmap
 This is a very early release, that's just an export of functions used in the [RepArchive browser addon](https://github.com/cachho/reparchive-browser-extension).
 
 - `v0.1` functional approach
+- `v1.0` strong typing
 - `v1.0` object oriented approach
 
 Repository name is also subject to change.

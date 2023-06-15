@@ -31,10 +31,11 @@ describe('extractId', () => {
     expect(id).toBe('674029285425');
   });
 
-  test('should return null for unknown marketplace', () => {
-    const href = 'https://example.com';
-    const id = extractIdFromAnyLink(href);
-    expect(id).toBeUndefined();
+  test('should throw Error for unknown marketplace', () => {
+    const href = 'https://example.com/Jest';
+    expect(() => extractIdFromAnyLink(href)).toThrowError(
+      'Id could not be extracted from string: https://example.com/Jest'
+    );
   });
 
   test('should successfully detect the marketplace and extract the ID', () => {

@@ -1,4 +1,10 @@
-import type { AgentWithRaw, Marketplace } from '../models';
+import type {
+  AgentURL,
+  AgentWithRaw,
+  Id,
+  Marketplace,
+  RawLink,
+} from '../models';
 import { detectMarketplace } from './detectMarketplace';
 import { extractId } from './extractId';
 import { generateRawLink } from './generateRawLink';
@@ -7,20 +13,20 @@ import { generateRawLink } from './generateRawLink';
  * Generates an agent item link by taking in an agent, the marketplace link (target), and other parameters, and putting them together.
  * Can also add affiliate extensions. Compared to the toAgent()  method, this method can work with as many inputs as possible, making it a more optimized starting point if you already have an id or marketplace for instance.
  * @param {AgentWithRaw} agent - The agent to generate a link for.
- * @param {string | URL} rawLink - The inner link to use in the generated link. Has to be sanitized before, it is not sanitzed again.
+ * @param {RawLink} rawLink - The inner link to use in the generated link. Has to be sanitized before, it is not sanitzed again.
  * @param {Marketplace} [marketplace] - The marketplace for the source and target link. Few agents need this. Can be detected if not entered.
- * @param {string} [id] - The id of the product. Can be detected if not entered.
+ * @param {Id} [id] - The id of the product. Can be detected if not entered.
  * @param {string} [referral] - The referral or affiliate code.
- * @returns {URL} The generated agent link.
+ * @returns {AgentURL} The generated agent link.
  * @throws {Error} If the agent is unsupported.
  */
 export function generateAgentLink(
   agent: AgentWithRaw,
-  rawLink: URL | string,
+  rawLink: RawLink,
   marketplace?: Marketplace,
-  id?: string,
+  id?: Id,
   referral?: string
-): URL {
+): AgentURL {
   const urlParams = new URLSearchParams();
   const link = rawLink instanceof URL ? rawLink : new URL(rawLink);
 
@@ -120,7 +126,7 @@ export function generateAgentLink(
     if (!identifier) {
       throw new Error(`Id could not be determined: ${link}`);
     }
-    return new URL(generateRawLink(mp, identifier).href);
+    return generateRawLink(mp, identifier);
   }
 
   throw new Error(`Unsupported agent: ${agent}`);

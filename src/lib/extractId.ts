@@ -1,37 +1,31 @@
-import type { Marketplace } from '../models';
+import type { Id, Marketplace } from '../models';
+import type { RawLink } from '../models/LinkTypes';
 import { detectMarketplace } from './detectMarketplace';
 
 /**
  * Extracts the ID from the provided URL based on the specified or detected marketplace.
  *
- * @param {string | URL} href - The URL from which to extract the ID. Must be a raw link.
+ * @param {RawLink} href - The URL from which to extract the ID. Must be a raw link.
  * @param {Marketplace} [marketplace] - The marketplace to consider for ID extraction. If not provided, it will be automatically detected.
- * @returns {string | undefined} The extracted ID, or undefined if no ID is found.
+ * @returns {Id} The extracted ID, or undefined if no ID is found.
  */
-export function extractId(
-  href: string | URL,
-  marketplace?: Marketplace
-): string | undefined {
-  // TODO: It makes sense to restrict the input of this to raw links.
-  // Users can convert to raw links before, but I expect performance to be more important on this function than other, so I don't want to add checks and conversions to this.
-  // For this it should be stronger typed.
+export function extractId(href: RawLink, marketplace?: Marketplace): Id {
   const link = href instanceof URL ? href : new URL(href);
-  const mp = marketplace ?? detectMarketplace(href);
-
-  if (!mp) {
-    return undefined;
-  }
+  const mp = marketplace ?? detectMarketplace(href)!;
 
   const url = new URL(link);
   const urlParams = new URLSearchParams(url.search ?? link);
 
+  // It's assumed that these query parameters were typechecked before
+  // They have to match `isRawLink`
+
   // For regular Taobao and Weidian Link
   if (mp === 'weidian') {
     if (urlParams.get('itemID')) {
-      return urlParams.get('itemID') ?? undefined;
+      return urlParams.get('itemID')!;
     }
     if (urlParams.get('itemId')) {
-      return urlParams.get('itemId') ?? undefined;
+      return urlParams.get('itemId')!;
     }
   } else if (mp === 'taobao') {
     if (link.hostname.indexOf('world.taobao.com') !== -1) {
@@ -41,13 +35,9 @@ export function extractId(
       }
     }
     if (urlParams.get('id')) {
-      return urlParams.get('id') ?? undefined;
+      return urlParams.get('id')!;
     }
   } else if (mp === '1688') {
-    // If it's still shortened at this point it can't be saved.
-    if (link.hostname.indexOf('qr.1688.com') !== -1) {
-      return undefined;
-    }
     // 1688 doesn't use urlParams
     if (link.href.indexOf('offer')) {
       const id =
@@ -61,9 +51,8 @@ export function extractId(
     }
   } else if (mp === 'tmall') {
     if (urlParams.get('id')) {
-      return urlParams.get('id') ?? undefined;
+      return urlParams.get('id')!;
     }
   }
-
-  return undefined;
+  throw new Error(`Id could not be extracted from string: ${link.href}`);
 }

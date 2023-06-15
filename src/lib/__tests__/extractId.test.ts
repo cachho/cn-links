@@ -31,22 +31,16 @@ describe('extractId', () => {
     expect(id).toBe('674029285425');
   });
 
-  test('should return null for unknown marketplace', () => {
-    const href = 'https://example.com';
-    const id = extractId(href);
-    expect(id).toBeUndefined();
+  test('should throw Error for unknown marketplace', () => {
+    const href = 'https://example.com/Jest';
+    expect(() => extractId(href)).toThrowError(
+      'Id could not be extracted from string: https://example.com/Jest'
+    );
   });
 
   test('should successfully detect the marketplace and extract the ID', () => {
     const href = 'https://item.taobao.com/item.html?id=987654321';
     const id = extractId(href);
     expect(id).toBe('987654321');
-  });
-
-  test('agent link inputs should not work', () => {
-    const href =
-      'https://www.wegobuy.com/en/page/buy?from=search-input&url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D674029285425&partnercode=6t86Xk';
-    const id = extractId(href, 'taobao');
-    expect(id).toBeUndefined();
   });
 });

@@ -1,14 +1,14 @@
-import type { Marketplace } from '../models';
+import type { Id, Marketplace, RawURL } from '../models';
 
 /**
  * Generates the a proper sanitized link (raw link) for the specified marketplace and item ID.
  *
  * @param {Marketplace} marketplace - The marketplace for which to generate the link.
- * @param {string} id - The item ID.
- * @returns {URL} The generated proper link.
+ * @param {Id} id - The item ID.
+ * @returns {RawURL} The generated proper link.
  * @throws {Error} If the marketplace is unsupported.
  */
-export function generateRawLink(marketplace: Marketplace, id: string): URL {
+export function generateRawLink(marketplace: Marketplace, id: Id): RawURL {
   if (marketplace === 'weidian') {
     const urlParams = new URLSearchParams();
     urlParams.set('itemID', id);

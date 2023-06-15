@@ -1,3 +1,4 @@
+import type { AgentURL, RawURL } from '../models/LinkTypes';
 import { decryptCssbuy } from './decryptCssbuy';
 import { detectAgent } from './detectAgent';
 
@@ -6,26 +7,29 @@ import { detectAgent } from './detectAgent';
  * Extracts the raw link from the search params of a provided (agent) URL.
  * Is internal because end-users can use the `toRaw` or `generateRawLinks` to extract a raw link with more flexible inputs.
  *
- * @param {string | URL} href - The URL from which to extract the raw link.
+ * @param {AgentURL} href - The URL from which to extract the raw link. It's assumed that it's typeguarded.
  * @param {boolean} [cantBeCssbuy] - Indicates whether the raw link cannot be from the 'cssbuy' agent. If this is true the call to detectAgent is skipped. *Legacy functionality that makes little sense on a internal function.* Default is false.
- * @returns {URL | undefined} The extracted raw link as a URL object, or undefined if no raw link is found.
+ * @returns {RawURL} The extracted raw link as a URL object, or undefined if no raw link is found.
  */
-export function extractRawLink(
-  href: string | URL,
-  cantBeCssbuy?: boolean
-): URL | undefined {
+export function extractRawLink(href: AgentURL, cantBeCssbuy?: boolean): RawURL {
   const link = href instanceof URL ? href : new URL(href);
 
   if (!cantBeCssbuy && detectAgent(link.href) === 'cssbuy') {
-    return decryptCssbuy(link);
+    const innerLink = decryptCssbuy(link);
+    if (!innerLink) {
+      throw new Error(
+        `Error extracting inner link, cssbuy link could not be decrypted: ${link.href}`
+      );
+    }
+    return innerLink; // Forced because it's assumed that agentUrl is valid.
   }
 
   const urlParams = new URLSearchParams(link.search ?? link);
   const innerParam = urlParams.get('url');
-
   if (!innerParam) {
-    return undefined;
+    throw new Error(
+      `Error extracting inner link, 'url' query param not found: ${link.href}`
+    );
   }
-
-  return new URL(innerParam);
+  return new URL(innerParam); // Forced because it's assumed that agentUrl is valid.
 }

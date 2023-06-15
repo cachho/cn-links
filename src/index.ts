@@ -11,10 +11,12 @@ import { isNonLinkMarketplace } from './lib/isNonLinkMarketplace';
 import { isRawLink } from './lib/isRawLink';
 import { toAgent } from './lib/toAgent';
 import { toRaw } from './lib/toRaw';
+import { CnLink } from './objects';
 
 export * from './models';
 
 export {
+  CnLink,
   detectAgent,
   detectMarketplace,
   detectNonLinkMarketplace,

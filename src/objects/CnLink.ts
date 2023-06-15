@@ -24,7 +24,7 @@ export class CnLink implements ICnLink {
    * @param {URL | string} href - Link to generate the object from
    * @param {Referral} [referrals] - Object to use referral links from. Referrals can still be entered when using the `as` method. Optional.
    */
-  constructor(href: URL | string, referrals: Referral) {
+  constructor(href: URL | string, referrals: Referral = {}) {
     const link = href instanceof URL ? href : new URL(href);
 
     const getInnerLink = () => {

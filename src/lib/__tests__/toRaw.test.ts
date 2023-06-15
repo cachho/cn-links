@@ -47,15 +47,17 @@ describe('toRaw', () => {
   test('should return undefined for unsupported marketplaces', () => {
     // Unsupported marketplace
     const unsupportedLink = 'https://example.com';
-    const result = toRaw(unsupportedLink);
-    expect(result).toBeUndefined();
+    expect(() => toRaw(unsupportedLink)).toThrowError(
+      'Marketplace could not be detected, link cannot be converted to raw: https://example.com/'
+    );
   });
 
-  test('should return undefined when the marketplace is defined but no id is defined', () => {
+  test('should throw error when no id can be extracted and the link cannot be converted', () => {
     // Raw agent with a detected marketplace but undefined id
     const rawAgentLink = 'https://detail.1688.com/offer/undefined.html';
-    const result = toRaw(rawAgentLink);
-    expect(result).toBeUndefined();
+    expect(() => toRaw(rawAgentLink)).toThrowError(
+      'Id could not be extracted from string: https://detail.1688.com/offer/undefined.html'
+    );
   });
 
   test('should generate the proper link with agent input', () => {
@@ -117,7 +119,9 @@ describe('toRaw', () => {
   });
 
   test('pandabuy shortened links should not work, should return undefined', () => {
-    const result = toRaw('https://pandabuy.page.link/qzxaYnohPxUvDuin7');
-    expect(result).toBeUndefined();
+    const pandabuyLink = 'https://pandabuy.page.link/qzxaYnohPxUvDuin7';
+    expect(() => toRaw(pandabuyLink)).toThrowError(
+      'Marketplace could not be detected, link cannot be converted to raw: https://pandabuy.page.link/qzxaYnohPxUvDuin7'
+    );
   });
 });

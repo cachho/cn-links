@@ -9,8 +9,8 @@ import type { AgentWithRaw, Id, Marketplace, Referral } from '../models';
 import type { ICnLink } from '../models/CnLink';
 
 /**
- * An ambigous link object. Can be converted on the fly to a raw link or any agent with the `as` method.
- * If you have a marketplace and id already, you can use the library's `generateRawLink` function as an input.
+ * An ambigous link object. Can be converted on the fly to a raw link or any agent URL object using the `as` method.
+ * If you have a marketplace and id already, you can use the library's `generateRawLink` function with these parameters as an input.
  */
 export class CnLink implements ICnLink {
   marketplace: Marketplace;
@@ -21,7 +21,7 @@ export class CnLink implements ICnLink {
 
   /**
    * Construct object from link.
-   * @param {URL | string} href - Link to generate the object from
+   * @param {URL | string} href - Link to generate the object from. Can be a raw link or an agent link.
    * @param {Referral} [referrals] - Object to use referral links from. Referrals can still be entered when using the `as` method. Optional.
    */
   constructor(href: URL | string, referrals: Referral = {}) {

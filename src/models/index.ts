@@ -1,5 +1,5 @@
 import type { Agent, AgentWithRaw } from './Agent';
-import { agents } from './Agent';
+import { agents, agentsWithRaw } from './Agent';
 import { Id } from './Id';
 import {
   AgentLink,
@@ -31,6 +31,7 @@ export {
   Agent,
   AgentLink,
   agents,
+  agentsWithRaw,
   AgentURL,
   AgentWithRaw,
   Id,

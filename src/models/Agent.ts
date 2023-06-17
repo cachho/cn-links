@@ -10,3 +10,5 @@ export const agents = [
 export type Agent = (typeof agents)[number];
 
 export type AgentWithRaw = Agent | 'raw';
+
+export const agentsWithRaw: Readonly<AgentWithRaw[]> = [...agents, 'raw'];

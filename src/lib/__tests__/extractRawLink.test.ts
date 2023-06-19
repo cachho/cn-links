@@ -1,7 +1,7 @@
 import { extractRawLink } from '../extractRawLink';
 
 describe('extractRawLink', () => {
-  it('should extract the inner URL for a valid raw link', () => {
+  it('should extract the inner URL for a valid agent link', () => {
     const href =
       'https://www.wegobuy.com/en/page/buy?from=search-input&url=https%3A%2F%2Fitem.taobao.com%2Fitem.html%3Fid%3D675330231400&partnercode=6t86Xk';
     const rawLink = extractRawLink(new URL(href));

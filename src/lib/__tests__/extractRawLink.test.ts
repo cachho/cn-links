@@ -10,6 +10,15 @@ describe('extractRawLink', () => {
     );
   });
 
+  it('should extract the inner URL for a valid obscure agent link', () => {
+    const href =
+      'https://m.superbuy.com/en/goodsdetail/?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D705339617846';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink).toEqual(
+      new URL('https://item.taobao.com/item.htm?id=705339617846')
+    );
+  });
+
   it('should return undefined for a link without the inner URL parameter', () => {
     const href = 'https://www.example.com/';
     const rawLink = new URL(href);

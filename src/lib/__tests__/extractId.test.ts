@@ -7,6 +7,13 @@ describe('extractId', () => {
     expect(id).toBe('3053526244');
   });
 
+  test('should extract the correct ID for Weidian link with subdomain', () => {
+    const href =
+      'https://shop1622368742.v.weidian.com/item.html?itemID=5418645465';
+    const id = extractId(href, 'weidian');
+    expect(id).toBe('5418645465');
+  });
+
   test('should extract the correct ID for regular Taobao link', () => {
     const href = 'https://item.taobao.com/item.html?id=674029285425';
     const id = extractId(href, 'taobao');

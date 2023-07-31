@@ -19,6 +19,17 @@ describe('extractRawLink', () => {
     );
   });
 
+  it('should work with double encoded sugargoo links', () => {
+    const href =
+      'https://www.sugargoo.com/#/home/productDetail?productLink=https%253A%252F%252Fweidian.com%252Fitem.html%253FitemID%253D5418645467%2526spider_token%253D4572';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink).toEqual(
+      new URL(
+        'https://weidian.com/item.html?itemID=5418645467&spider_token=4572'
+      )
+    );
+  });
+
   it('should extract the inner URL for a valid obscure agent link', () => {
     const href =
       'https://m.superbuy.com/en/goodsdetail/?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D705339617846';

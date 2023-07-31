@@ -27,7 +27,11 @@ export function extractRawLink(href: AgentURL, cantBeCssbuy?: boolean): RawURL {
     const safeLink = new URL(link.href.replace('/#/', '/'));
     const innerParam = safeLink.searchParams.get('productLink');
     if (innerParam) {
-      return new URL(innerParam);
+      try {
+        return new URL(innerParam);
+      } catch {
+        return new URL(decodeURIComponent(innerParam));
+      }
     }
   }
 

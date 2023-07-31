@@ -70,12 +70,13 @@ export function generateAgentLink(
   // Sugargoo
   if (agent === 'sugargoo') {
     // https://www.sugargoo.com/#/home/productDetail?productLink=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D{{ID}}&memberId=341947171345531121
-    urlParams.set('productLink', link.href);
+    urlParams.set('productLink', encodeURIComponent(link.href));
     if (referral) {
       urlParams.set('memberId', referral);
     }
+    // Old Style: `https://www.sugargoo.com/index/item/index.html?${urlParams.toString()}`
     return new URL(
-      `https://www.sugargoo.com/index/item/index.html?${urlParams.toString()}`
+      `https://www.sugargoo.com/#/home/productDetail?${urlParams.toString()}`
     );
   }
 

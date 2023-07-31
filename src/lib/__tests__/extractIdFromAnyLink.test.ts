@@ -50,4 +50,11 @@ describe('extractId', () => {
     const id = extractIdFromAnyLink(href, 'taobao');
     expect(id).toBe('674029285425');
   });
+
+  test('should work with double encoded agent links', () => {
+    const href =
+      'https://www.sugargoo.com/#/home/productDetail?productLink=https%253A%252F%252Fweidian.com%252Fitem.html%253FitemID%253D5418645467%2526spider_token%253D4572';
+    const id = extractIdFromAnyLink(href, 'weidian');
+    expect(id).toBe('5418645467');
+  });
 });

@@ -78,9 +78,10 @@ describe('generateAgentLink', () => {
 
   test('generates sugargoo link correctly', () => {
     const agent = 'sugargoo';
+    // Sugargoo likes double encodings
     const expected = new URL(
-      `https://www.sugargoo.com/index/item/index.html?productLink=${encodeURIComponent(
-        innerLink
+      `https://www.sugargoo.com/#/home/productDetail?productLink=${encodeURIComponent(
+        encodeURIComponent(innerLink)
       )}&memberId=${referral}`
     );
 

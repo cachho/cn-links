@@ -39,7 +39,7 @@ describe('toAgent', () => {
     const result = toAgent(href, agent);
     expect(result).toEqual(
       new URL(
-        'https://www.sugargoo.com/index/item/index.html?productLink=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D3053526244'
+        'https://www.sugargoo.com/#/home/productDetail?productLink=https%253A%252F%252Fweidian.com%252Fitem.html%253FitemID%253D3053526244'
       )
     );
   });

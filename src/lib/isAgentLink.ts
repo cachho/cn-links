@@ -1,5 +1,6 @@
 import { decryptCssbuy } from './decryptCssbuy';
 import { detectAgent } from './detectAgent';
+import { extractRawLink } from './extractRawLink';
 import { isRawLink } from './isRawLink';
 
 /**
@@ -31,9 +32,10 @@ export function isAgentLink(href: string | URL): boolean {
     return !!decryptCssbuy(link);
   }
 
-  const innerLink = link.searchParams.get('url');
-
-  if (!innerLink) return false;
-
-  return isRawLink(innerLink);
+  try {
+    const rawLink = extractRawLink(link);
+    return isRawLink(rawLink);
+  } catch {
+    return false;
+  }
 }

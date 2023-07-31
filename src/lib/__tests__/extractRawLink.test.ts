@@ -10,6 +10,15 @@ describe('extractRawLink', () => {
     );
   });
 
+  it('should extract the inner URL from new sugargoo link', () => {
+    const href =
+      'https://www.sugargoo.com/#/home/productDetail?productLink=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fspm%3Da1z10.3%26id%3D695240235157&memberId=123';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink).toEqual(
+      new URL('https://item.taobao.com/item.htm?spm=a1z10.3&id=695240235157')
+    );
+  });
+
   it('should extract the inner URL for a valid obscure agent link', () => {
     const href =
       'https://m.superbuy.com/en/goodsdetail/?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D705339617846';

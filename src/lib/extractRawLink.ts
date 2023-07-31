@@ -23,8 +23,16 @@ export function extractRawLink(href: AgentURL, cantBeCssbuy?: boolean): RawURL {
     }
     return innerLink; // Forced because it's assumed that agentUrl is valid.
   }
+  if (detectAgent(link.href) === 'sugargoo') {
+    const safeLink = new URL(link.href.replace('/#/', '/'));
+    const innerParam = safeLink.searchParams.get('productLink');
+    if (innerParam) {
+      return new URL(innerParam);
+    }
+  }
 
-  const urlParams = new URLSearchParams(link.search ?? link);
+  const urlParams = link.searchParams;
+
   const innerParam = urlParams.get('url');
   if (!innerParam) {
     throw new Error(

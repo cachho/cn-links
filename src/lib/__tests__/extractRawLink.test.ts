@@ -10,6 +10,15 @@ describe('extractRawLink', () => {
     );
   });
 
+  it('should extract the inner URL from old sugargoo link', () => {
+    const href =
+      'https://sugargoo.com/index/item/index.html?tp=taobao&searchlang=en&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D5789470155';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink).toEqual(
+      new URL('https://weidian.com/item.html?itemID=5789470155')
+    );
+  });
+
   it('should extract the inner URL from new sugargoo link', () => {
     const href =
       'https://www.sugargoo.com/#/home/productDetail?productLink=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fspm%3Da1z10.3%26id%3D695240235157&memberId=123';

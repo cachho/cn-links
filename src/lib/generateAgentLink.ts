@@ -17,6 +17,7 @@ import { generateRawLink } from './generateRawLink';
  * @param {Marketplace} [marketplace] - The marketplace for the source and target link. Few agents need this. Can be detected if not entered.
  * @param {Id} [id] - The id of the product. Can be detected if not entered.
  * @param {string} [referral] - The referral or affiliate code.
+ * @param {string} [ra] - Set tracking parameters in the URL for internal tracking.
  * @returns {AgentURL} The generated agent link.
  * @throws {Error} If the agent is unsupported.
  */
@@ -25,7 +26,8 @@ export function generateAgentLink(
   rawLink: RawLink,
   marketplace?: Marketplace,
   id?: Id,
-  referral?: string
+  referral?: string,
+  ra?: string
 ): AgentURL {
   const urlParams = new URLSearchParams();
   const link = rawLink instanceof URL ? rawLink : new URL(rawLink);
@@ -33,7 +35,7 @@ export function generateAgentLink(
   // Pandabuy
   if (agent === 'pandabuy') {
     // https://www.pandabuy.com/product?ra=500&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D2724693540&inviteCode=ZQWFRJZEB
-    urlParams.set('ra', '1');
+    urlParams.set('ra', ra ?? '1');
     urlParams.set('url', link.href);
     if (referral) {
       urlParams.set('inviteCode', referral);

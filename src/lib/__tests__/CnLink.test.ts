@@ -60,4 +60,15 @@ describe('CnLink', () => {
       )
     );
   });
+
+  test('should be able to add affiliate link with an ra tracker', () => {
+    const href =
+      'https://www.superbuy.com/en/page/buy?from=search-input&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D3053526244';
+    const link = new CnLink(href);
+    expect(link.as('pandabuy', 'my-affiliate', '999')).toStrictEqual(
+      new URL(
+        'https://www.pandabuy.com/product?ra=999&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D3053526244&inviteCode=my-affiliate'
+      )
+    );
+  });
 });

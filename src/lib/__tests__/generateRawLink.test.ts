@@ -11,9 +11,7 @@ describe('generateProperLink', () => {
 
   it('should generate a proper Taobao link', () => {
     const link = generateRawLink('taobao', '789012');
-    expect(link).toEqual(
-      new URL('https://item.taobao.com/item.html?id=789012')
-    );
+    expect(link).toEqual(new URL('https://item.taobao.com/item.htm?id=789012'));
   });
 
   it('should generate a proper 1688 link', () => {

@@ -17,7 +17,7 @@ export function generateRawLink(marketplace: Marketplace, id: Id): RawURL {
   if (marketplace === 'taobao') {
     const urlParams = new URLSearchParams();
     urlParams.set('id', id);
-    return new URL(`https://item.taobao.com/item.html?${urlParams.toString()}`);
+    return new URL(`https://item.taobao.com/item.htm?${urlParams.toString()}`);
   }
   if (marketplace === '1688') {
     return new URL(`https://detail.1688.com/offer/${id}.html`);

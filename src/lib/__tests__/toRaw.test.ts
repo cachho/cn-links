@@ -4,10 +4,10 @@ describe('toRaw', () => {
   test('should generate the proper link from raw links for supported marketplaces (circular)', () => {
     const links = [
       'https://weidian.com/item.html?itemID=5789470155',
-      'https://item.taobao.com/item.html?id=705339617848',
-      'https://item.taobao.com/item.html?id=67890',
+      'https://item.taobao.com/item.htm?id=705339617848',
+      'https://item.taobao.com/item.htm?id=67890',
       'https://detail.1688.com/offer/625358402681.html',
-      'https://item.taobao.com/item.html?id=67890',
+      'https://item.taobao.com/item.htm?id=67890',
       'https://detail.tmall.com/item_o.htm?id=12345', // Different ways to express tmall links, we have another test for that. Subject to change.
       'https://weidian.com/item.html?itemID=54321',
       'https://detail.1688.com/offer/98765.html',
@@ -22,6 +22,8 @@ describe('toRaw', () => {
   test('circular processing should sanitize links', () => {
     const links = [
       // Taobao
+      'https://item.taobao.com/item.htm?id=705339617848&size=L',
+      // Taobao with HTML
       'https://item.taobao.com/item.html?id=705339617848&size=L',
       // Tmall
       'https://detail.tmall.com/item_o.htm?id=12345&brand=Apple',
@@ -32,7 +34,8 @@ describe('toRaw', () => {
     ];
 
     const expectedLinks = [
-      'https://item.taobao.com/item.html?id=705339617848',
+      'https://item.taobao.com/item.htm?id=705339617848',
+      'https://item.taobao.com/item.htm?id=705339617848',
       'https://detail.tmall.com/item_o.htm?id=12345',
       'https://weidian.com/item.html?itemID=5789470155',
       'https://detail.1688.com/offer/625358402681.html',
@@ -99,7 +102,7 @@ describe('toRaw', () => {
     expect(resultCssbuy1688).toEqual(new URL(innerLinkCssbuy1688));
 
     // Inner link for CSSBUY Taobao
-    const innerLinkCssbuyTaobao = 'https://item.taobao.com/item.html?id=67890';
+    const innerLinkCssbuyTaobao = 'https://item.taobao.com/item.htm?id=67890';
     const resultCssbuyTaobao = toRaw(`https://www.cssbuy.com/item-67890`);
     expect(resultCssbuyTaobao).toEqual(new URL(innerLinkCssbuyTaobao));
   });

@@ -25,6 +25,26 @@ describe('generateAgentLink', () => {
     expect(result).toEqual(expected);
   });
 
+  test('pandabuy link works with ra', () => {
+    const agent = 'pandabuy';
+    const expected = new URL(
+      `https://www.pandabuy.com/product?ra=999&url=${encodeURIComponent(
+        innerLink
+      )}&inviteCode=${referral}`
+    );
+
+    const result = generateAgentLink(
+      agent,
+      innerLink,
+      marketplace,
+      undefined,
+      referral,
+      '999'
+    );
+
+    expect(result).toEqual(expected);
+  });
+
   test('generates wegobuy link correctly', () => {
     const agent = 'wegobuy';
     const expected = new URL(

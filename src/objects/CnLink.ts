@@ -57,9 +57,10 @@ export class CnLink implements ICnLink {
    * Convert to a URL object of any target type.
    * @param {AgentWithRaw} target - Agent name to convert to, or `raw` to get a sanitized link for the orginal marketplace
    * @param {string} referral - Referral code to use in this URL. If undefined, it will try to get the referral from the `referrals` attribute.
+   * @param {string} [ra] - Set tracking parameters in the URL for internal tracking.
    * @returns {AgentURL} - URL object that contains the target link. You can get the full link string with the `.href` attribute.
    */
-  as(target: AgentWithRaw, referral?: string) {
+  as(target: AgentWithRaw, referral?: string, ra?: string) {
     const getRefferal = () => {
       if (referral) return referral;
       if (target === 'raw') return undefined;
@@ -72,7 +73,8 @@ export class CnLink implements ICnLink {
       innerLink,
       this.marketplace,
       this.id,
-      getRefferal()
+      getRefferal(),
+      ra
     );
   }
 }

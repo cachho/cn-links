@@ -12,12 +12,14 @@ import { generateRawLink } from './generateRawLink';
  * @param {RawLink | AgentLink} href - The link to convert.
  * @param {AgentWithRaw} agent - The agent to convert the link to.
  * @param {string} [referral] - The optional referral or affiliate code.
+ * @param {string} [ra] - Set tracking parameters in the URL for internal tracking.
  * @returns {AgentURL | undefined} The converted agent link as a URL object, or undefined if conversion failed.
  */
 export function toAgent(
   href: string | URL,
   agent: AgentWithRaw,
-  referral?: string
+  referral?: string,
+  ra?: string
 ): AgentURL | undefined {
   const link = href instanceof URL ? href : new URL(href);
   const marketplace = detectMarketplace(link);
@@ -34,7 +36,8 @@ export function toAgent(
       generateRawLink(marketplace, id),
       marketplace,
       id,
-      referral
+      referral,
+      ra
     );
   } catch (error) {
     return undefined;

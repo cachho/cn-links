@@ -70,7 +70,7 @@ describe('extractRawLink', () => {
       'https://www.cssbuy.com/item-675330231400?promotionCode=Y2h3ZWJkZXZlbG9wbWVudA';
     const rawLink = extractRawLink(new URL(href));
     expect(rawLink).toEqual(
-      new URL('https://item.taobao.com/item.html?id=675330231400')
+      new URL('https://item.taobao.com/item.htm?id=675330231400')
     );
   });
 
@@ -78,7 +78,7 @@ describe('extractRawLink', () => {
     const href = 'https://www.cssbuy.com/item-675330231400';
     const rawLink = extractRawLink(new URL(href));
     expect(rawLink).toEqual(
-      new URL('https://item.taobao.com/item.html?id=675330231400')
+      new URL('https://item.taobao.com/item.htm?id=675330231400')
     );
   });
 

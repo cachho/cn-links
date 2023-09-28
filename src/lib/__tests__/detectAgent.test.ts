@@ -46,6 +46,11 @@ describe('detectAgent', () => {
     expect(detectAgent(url)).toBe('kameymall');
   });
 
+  it('detects cnfans', () => {
+    const url = 'https://cnfans.com/product/?shop_type=taobao&id=61677060611';
+    expect(detectAgent(url)).toBe('cnfans');
+  });
+
   test('should work for all agents and marketplaces', () => {
     marketplaces.forEach((marketplace) => {
       agents.forEach((agent) => {

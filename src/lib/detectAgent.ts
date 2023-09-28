@@ -35,5 +35,8 @@ export function detectAgent(href: URL | string): Agent | undefined {
     link.hostname === 'kameymall.com'
   )
     return 'kameymall';
+  if (link.hostname === 'www.cnfans.com' || link.hostname === 'cnfans.com') {
+    return 'cnfans';
+  }
   return undefined;
 }

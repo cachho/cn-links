@@ -127,6 +127,33 @@ export function generateAgentLink(
     );
   }
 
+  // CnFans
+  if (agent === 'cnfans') {
+    // https://cnfans.com/product/?shop_type=weidian&id=6481396504
+    // https://cnfans.com/product/?shop_type=ali_1688&id=669590387983
+    // https://cnfans.com/product/?shop_type=taobao&id=616770606113
+    const mp = marketplace ?? detectMarketplace(link);
+    const identifier = id || extractId(link, mp);
+    if (mp === 'taobao' || mp === 'tmall') {
+      urlParams.set('shop_type', 'taobao');
+    } else if (mp === 'weidian') {
+      urlParams.set('shop_type', 'weidian');
+    } else if (mp === '1688') {
+      urlParams.set('shop_type', 'ali_1688');
+    } else {
+      throw new Error('Marketplace could not be detected for CnFans');
+    }
+    urlParams.set('id', identifier);
+
+    if (referral) {
+      urlParams.set('ref', referral);
+    }
+
+    const url = 'https://cnfans.com/product/';
+    const paramString = urlParams.toString();
+    return new URL(paramString ? `${url}?${paramString}` : url);
+  }
+
   // Raw Links
   if (agent === 'raw') {
     // https://detail.1688.com/offer/679865234523.html

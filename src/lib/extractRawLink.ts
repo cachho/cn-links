@@ -1,6 +1,8 @@
+import type { Marketplace } from '../models';
 import type { AgentURL, RawURL } from '../models/LinkTypes';
 import { decryptCssbuy } from './decryptCssbuy';
 import { detectAgent } from './detectAgent';
+import { generateRawLink } from './generateRawLink';
 
 /**
  * @Internal
@@ -23,7 +25,10 @@ export function extractRawLink(href: AgentURL, cantBeCssbuy?: boolean): RawURL {
     }
     return innerLink; // Forced because it's assumed that agentUrl is valid.
   }
-  if (detectAgent(link.href) === 'sugargoo') {
+
+  const agent = detectAgent(link.href);
+
+  if (agent === 'sugargoo') {
     const safeLink = new URL(link.href.replace('/#/', '/'));
     const innerParam = safeLink.searchParams.get('productLink');
     if (innerParam) {
@@ -33,6 +38,30 @@ export function extractRawLink(href: AgentURL, cantBeCssbuy?: boolean): RawURL {
         return new URL(decodeURIComponent(innerParam));
       }
     }
+  }
+
+  if (agent === 'cnfans') {
+    const getMarketplace = (): Marketplace | null => {
+      if (link.searchParams.get('shop_type') === 'weidian') {
+        return 'weidian';
+      }
+      if (link.searchParams.get('shop_type') === 'taobao') {
+        return 'taobao';
+      }
+      if (link.searchParams.get('shop_type') === 'ali_1688') {
+        return '1688';
+      }
+      return null;
+    };
+    const marketplace = getMarketplace();
+    if (!marketplace) {
+      throw new Error('CnFans shop type not supported.');
+    }
+    const id = link.searchParams.get('id');
+    if (!id) {
+      throw new Error('No id provided in CnFans link.');
+    }
+    return generateRawLink(marketplace, id);
   }
 
   const urlParams = link.searchParams;

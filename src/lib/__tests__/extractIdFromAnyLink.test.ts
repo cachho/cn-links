@@ -1,4 +1,7 @@
+import { agents, marketplaces } from '../../models';
 import { extractIdFromAnyLink } from '../extractIdFromAnyLink';
+import { generateAgentLink } from '../generateAgentLink';
+import { generateMarketplaceLink } from '../generateRawLink';
 
 describe('extractId', () => {
   test('should extract the correct ID for Weidian link', () => {
@@ -57,10 +60,16 @@ describe('extractId', () => {
     const id = extractIdFromAnyLink(href, 'weidian');
     expect(id).toBe('5418645467');
   });
-  test('should work with kameymall', () => {
-    const href =
-      'https://www.kameymall.com/purchases/search/item?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D6481396504';
-    const id = extractIdFromAnyLink(href, 'weidian');
-    expect(id).toBe('6481396504');
+
+  test('should work for all agents and marketplaces', () => {
+    const testId = '6481396504';
+    marketplaces.forEach((marketplace) => {
+      agents.forEach((agent) => {
+        const marketplaceLink = generateMarketplaceLink(marketplace, testId);
+        expect(extractIdFromAnyLink(marketplaceLink)).toBe(testId);
+        const rawLink = generateAgentLink(agent, marketplaceLink);
+        expect(extractIdFromAnyLink(rawLink)).toBe(testId);
+      });
+    });
   });
 });

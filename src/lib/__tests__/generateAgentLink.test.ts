@@ -188,6 +188,23 @@ describe('generateAgentLink', () => {
     expect(result).toEqual(expected);
   });
 
+  test('generates ezbuycn link correctly', () => {
+    const agent = 'ezbuycn';
+    const expected = new URL(
+      `https://ezbuycn.com/api/chaid.aspx?key=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D${id}`
+    );
+
+    const result = generateAgentLink(
+      agent,
+      innerLink,
+      marketplace,
+      undefined,
+      referral
+    );
+
+    expect(result).toEqual(expected);
+  });
+
   test('link is not sanitized', () => {
     const agent = 'hagobuy';
 

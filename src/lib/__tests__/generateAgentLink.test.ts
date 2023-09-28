@@ -171,6 +171,23 @@ describe('generateAgentLink', () => {
     expect(result).toEqual(expected);
   });
 
+  test('generates cnfans link correctly', () => {
+    const agent = 'cnfans';
+    const expected = new URL(
+      `https://cnfans.com/product/?shop_type=weidian&id=${id}&ref=${referral}`
+    );
+
+    const result = generateAgentLink(
+      agent,
+      innerLink,
+      marketplace,
+      undefined,
+      referral
+    );
+
+    expect(result).toEqual(expected);
+  });
+
   test('link is not sanitized', () => {
     const agent = 'hagobuy';
 

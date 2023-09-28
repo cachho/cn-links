@@ -154,6 +154,14 @@ export function generateAgentLink(
     return new URL(paramString ? `${url}?${paramString}` : url);
   }
 
+  if (agent === 'ezbuycn') {
+    // https://ezbuycn.com/api/chaid.aspx?key=https://weidian.com/item.html?itemID=6308093508&spider_token=4572
+    urlParams.set('key', link.href);
+    return new URL(
+      `https://ezbuycn.com/api/chaid.aspx?${urlParams.toString()}`
+    );
+  }
+
   // Raw Links
   if (agent === 'raw') {
     // https://detail.1688.com/offer/679865234523.html

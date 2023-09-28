@@ -64,9 +64,15 @@ export function extractRawLink(href: AgentURL, cantBeCssbuy?: boolean): RawURL {
     return generateRawLink(marketplace, id);
   }
 
-  const urlParams = link.searchParams;
+  let innerParam: string | null = null;
 
-  const innerParam = urlParams.get('url');
+  if (agent === 'ezbuycn') {
+    innerParam = link.searchParams.get('key');
+  }
+
+  if (!innerParam) {
+    innerParam = link.searchParams.get('url');
+  }
   if (!innerParam) {
     throw new Error(
       `Error extracting inner link, 'url' query param not found: ${link.href}`

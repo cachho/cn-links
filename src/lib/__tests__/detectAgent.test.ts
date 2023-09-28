@@ -51,6 +51,11 @@ describe('detectAgent', () => {
     expect(detectAgent(url)).toBe('cnfans');
   });
 
+  it('detects ezbuycn', () => {
+    const url = 'https://ezbuycn.com/jiexi.aspx?id=3062&ids=6308093508';
+    expect(detectAgent(url)).toBe('ezbuycn');
+  });
+
   test('should work for all agents and marketplaces', () => {
     marketplaces.forEach((marketplace) => {
       agents.forEach((agent) => {

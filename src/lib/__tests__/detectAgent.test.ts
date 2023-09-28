@@ -47,10 +47,9 @@ describe('detectAgent', () => {
   });
 
   test('should work for all agents and marketplaces', () => {
-    const testId = '6481396504';
     marketplaces.forEach((marketplace) => {
       agents.forEach((agent) => {
-        const marketplaceLink = generateMarketplaceLink(marketplace, testId);
+        const marketplaceLink = generateMarketplaceLink(marketplace, '0');
         const rawLink = generateAgentLink(agent, marketplaceLink);
         expect(detectAgent(rawLink)).toBe(agent);
       });

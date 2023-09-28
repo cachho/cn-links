@@ -31,9 +31,8 @@ describe('detectMarketplace', () => {
   });
 
   test('should work for all marketplaces', () => {
-    const testId = '6481396504';
     marketplaces.forEach((marketplace) => {
-      const marketplaceLink = generateMarketplaceLink(marketplace, testId);
+      const marketplaceLink = generateMarketplaceLink(marketplace, '0');
       expect(detectMarketplace(marketplaceLink)).toBe(marketplace);
     });
   });

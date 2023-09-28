@@ -80,6 +80,16 @@ describe('toAgent', () => {
     );
   });
 
+  it('should return the agent link for Kameymall', () => {
+    const agent: AgentWithRaw = 'kameymall';
+    const result = toAgent(href, agent);
+    expect(result).toEqual(
+      new URL(
+        'https://www.kameymall.com/purchases/search/item?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D3053526244'
+      )
+    );
+  });
+
   it('should return the raw link', () => {
     const agent: AgentWithRaw = 'raw';
     const result = toAgent(href, agent);

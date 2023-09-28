@@ -118,6 +118,15 @@ export function generateAgentLink(
     );
   }
 
+  // Kameymall
+  if (agent === 'kameymall') {
+    urlParams.set('url', link.href);
+    // Referral currently not supported / unknown
+    return new URL(
+      `https://www.kameymall.com/purchases/search/item?${urlParams.toString()}`
+    );
+  }
+
   // Raw Links
   if (agent === 'raw') {
     // https://detail.1688.com/offer/679865234523.html

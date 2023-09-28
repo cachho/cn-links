@@ -36,4 +36,10 @@ describe('detectAgent', () => {
       'https://www.hagobuy.com/item/details?url=https%3A%2F%2Fitem.taobao.com%2Fitem.html%3Fid%3D543109184027';
     expect(detectAgent(url)).toBe('hagobuy');
   });
+
+  it('detects kameymall', () => {
+    const url =
+      'https://www.kameymall.com/purchases/search/item?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D6481396504';
+    expect(detectAgent(url)).toBe('kameymall');
+  });
 });

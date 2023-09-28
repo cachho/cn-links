@@ -30,5 +30,10 @@ export function detectAgent(href: URL | string): Agent | undefined {
     return 'cssbuy';
   if (link.hostname === 'www.hagobuy.com' || link.hostname === 'hagobuy.com')
     return 'hagobuy';
+  if (
+    link.hostname === 'www.kameymall.com' ||
+    link.hostname === 'kameymall.com'
+  )
+    return 'kameymall';
   return undefined;
 }

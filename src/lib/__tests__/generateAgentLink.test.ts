@@ -152,6 +152,25 @@ describe('generateAgentLink', () => {
     expect(result).toEqual(expected);
   });
 
+  test('generates kameymall link correctly', () => {
+    const agent = 'kameymall';
+    const expected = new URL(
+      `https://www.kameymall.com/purchases/search/item?url=${encodeURIComponent(
+        innerLink
+      )}`
+    );
+
+    const result = generateAgentLink(
+      agent,
+      innerLink,
+      marketplace,
+      undefined,
+      referral
+    );
+
+    expect(result).toEqual(expected);
+  });
+
   test('link is not sanitized', () => {
     const agent = 'hagobuy';
 

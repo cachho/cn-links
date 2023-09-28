@@ -57,4 +57,10 @@ describe('extractId', () => {
     const id = extractIdFromAnyLink(href, 'weidian');
     expect(id).toBe('5418645467');
   });
+  test('should work with kameymall', () => {
+    const href =
+      'https://www.kameymall.com/purchases/search/item?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D6481396504';
+    const id = extractIdFromAnyLink(href, 'weidian');
+    expect(id).toBe('6481396504');
+  });
 });

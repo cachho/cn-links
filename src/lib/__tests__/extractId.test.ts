@@ -1,4 +1,6 @@
+import { marketplaces } from '../../models';
 import { extractId } from '../extractId';
+import { generateMarketplaceLink } from '../generateRawLink';
 
 describe('extractId', () => {
   test('should extract the correct ID for Weidian link', () => {
@@ -49,5 +51,14 @@ describe('extractId', () => {
     const href = 'https://item.taobao.com/item.html?id=987654321';
     const id = extractId(href);
     expect(id).toBe('987654321');
+  });
+
+  test('should work for all marketplaces', () => {
+    // Does not cover abstractions of marketplaces, such as world.taobao.com
+    const testId = '6481396504';
+    marketplaces.forEach((marketplace) => {
+      const rawLink = generateMarketplaceLink(marketplace, testId);
+      expect(extractId(rawLink)).toBe(testId);
+    });
   });
 });

@@ -1,4 +1,7 @@
+import { agents, marketplaces } from '../../models';
 import { detectAgent } from '../detectAgent'; // adjust the import path to match your project structure
+import { generateAgentLink } from '../generateAgentLink';
+import { generateMarketplaceLink } from '../generateRawLink';
 
 describe('detectAgent', () => {
   it('detects wegobuy', () => {
@@ -41,5 +44,16 @@ describe('detectAgent', () => {
     const url =
       'https://www.kameymall.com/purchases/search/item?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D6481396504';
     expect(detectAgent(url)).toBe('kameymall');
+  });
+
+  test('should work for all agents and marketplaces', () => {
+    const testId = '6481396504';
+    marketplaces.forEach((marketplace) => {
+      agents.forEach((agent) => {
+        const marketplaceLink = generateMarketplaceLink(marketplace, testId);
+        const rawLink = generateAgentLink(agent, marketplaceLink);
+        expect(detectAgent(rawLink)).toBe(agent);
+      });
+    });
   });
 });

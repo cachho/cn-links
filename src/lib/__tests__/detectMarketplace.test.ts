@@ -1,4 +1,6 @@
+import { marketplaces } from '../../models';
 import { detectMarketplace } from '../detectMarketplace';
+import { generateMarketplaceLink } from '../generateRawLink';
 
 describe('detectMarketplace', () => {
   it('detects weidian', () => {
@@ -26,5 +28,13 @@ describe('detectMarketplace', () => {
   it('returns undefined for unknown platforms', () => {
     const url = 'https://unknown.com/path';
     expect(detectMarketplace(url)).toBeUndefined();
+  });
+
+  test('should work for all marketplaces', () => {
+    const testId = '6481396504';
+    marketplaces.forEach((marketplace) => {
+      const marketplaceLink = generateMarketplaceLink(marketplace, testId);
+      expect(detectMarketplace(marketplaceLink)).toBe(marketplace);
+    });
   });
 });

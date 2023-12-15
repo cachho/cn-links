@@ -3,6 +3,7 @@ import type { AgentURL, RawURL } from '../models/LinkTypes';
 import { detectAgent } from './detectAgent';
 import { generateRawLink } from './generateRawLink';
 import { decryptCssbuy } from './specific/decryptCssbuy';
+import { decryptPandabuy } from './specific/decryptPandabuy';
 
 /**
  * @Internal
@@ -78,5 +79,11 @@ export function extractRawLink(href: AgentURL, cantBeCssbuy?: boolean): RawURL {
       `Error extracting inner link, 'url' query param not found: ${link.href}`
     );
   }
+
+  if (agent === 'pandabuy' && innerParam.startsWith('PJ')) {
+    const extracted = decryptPandabuy(innerParam);
+    return new URL(extracted);
+  }
+
   return new URL(innerParam); // Forced because it's assumed that agentUrl is valid.
 }

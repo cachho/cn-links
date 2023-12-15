@@ -1,5 +1,10 @@
 import CryptoJS from 'crypto-js';
 
+/**
+ * Decodes a Pandabuy string. Reverse operation of the encoding function on Pandabuy
+ * @param encodedString url parameter of pandabuy url
+ * @returns decoded string
+ */
 export function decryptPandabuy(encodedString: string): string {
   const d = 'PJ';
   const match = new RegExp(`^${d}(\\d)([a-zA-Z])(.*)`).exec(encodedString);

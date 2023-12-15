@@ -92,12 +92,14 @@ describe('extractRawLink', () => {
     );
   });
 
-  it('should be able to handle encrypted pandabuy links', () => {
+  it('should be able to handle encrypted taobao pandabuy links', () => {
     const href =
-      'https://www.pandabuy.com/product?url=PJ1ir3z2Oq2sti2Kh9b3mCBmutY4HCY%252BGHy0yjnE8%252B53zKiJxlBvT%252BycaN%252FceMPv8IUsNVxI560P6gwF&utm_source=url&utm_medium=pdb&utm_campaign=normal';
+      'https://www.pandabuy.com/product?url=PJ9emDFVd3v76X25eDSVqIb3mLH4Md7zsyLlOTWmhLylMKdL6gbFKJ94ysL%2FSI3tYF1YOL6lhXMdRWOn3qm5FSOGuAaHx4uHPsYpA1hNETE3aRnXLdfh3RnL5vyVxk2ezXnQ8DWAgYzbSSdI&utm_source=url&utm_medium=pdb&utm_campaign=normal';
     const rawLink = extractRawLink(new URL(href));
     expect(rawLink).toEqual(
-      new URL('https://detail.tmall.com/item.htm?id=637720840003')
+      new URL(
+        'https://www.taobao.com/list/item/674680652328.htm?spm=a21wu.10013406.taglist-content.10.1d9865ebWR4RYC'
+      )
     );
   });
 

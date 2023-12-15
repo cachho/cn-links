@@ -92,6 +92,15 @@ describe('extractRawLink', () => {
     );
   });
 
+  it('should be able to handle encrypted pandabuy links', () => {
+    const href =
+      'https://www.pandabuy.com/product?url=PJ1ir3z2Oq2sti2Kh9b3mCBmutY4HCY%252BGHy0yjnE8%252B53zKiJxlBvT%252BycaN%252FceMPv8IUsNVxI560P6gwF&utm_source=url&utm_medium=pdb&utm_campaign=normal';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink).toEqual(
+      new URL('https://detail.tmall.com/item.htm?id=637720840003')
+    );
+  });
+
   test('should work for all agents and marketplaces', () => {
     const testId = '6481396504';
     marketplaces.forEach((marketplace) => {

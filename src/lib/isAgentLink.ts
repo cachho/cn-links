@@ -1,7 +1,7 @@
-import { decryptCssbuy } from './decryptCssbuy';
 import { detectAgent } from './detectAgent';
 import { extractRawLink } from './extractRawLink';
 import { isRawLink } from './isRawLink';
+import { decryptCssbuy } from './specific/decryptCssbuy';
 
 /**
  * Checks if the provided URL or hostname corresponds to an agent link.

@@ -1,5 +1,5 @@
-import type { AgentLink, RawURL } from '../models';
-import { generateRawLink } from './generateRawLink';
+import type { AgentLink, RawURL } from '../../models';
+import { generateRawLink } from '../generateRawLink';
 
 /**
  * @internal

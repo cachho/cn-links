@@ -1,8 +1,8 @@
 import type { Marketplace } from '../models';
 import type { AgentURL, RawURL } from '../models/LinkTypes';
-import { decryptCssbuy } from './decryptCssbuy';
 import { detectAgent } from './detectAgent';
 import { generateRawLink } from './generateRawLink';
+import { decryptCssbuy } from './specific/decryptCssbuy';
 
 /**
  * @Internal

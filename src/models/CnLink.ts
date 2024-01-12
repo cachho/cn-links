@@ -7,3 +7,8 @@ export interface ICnLink {
   id: Id;
   referrals: Referral;
 }
+
+export type CnLinkSerial = {
+  marketplace: Marketplace;
+  id: Id;
+};

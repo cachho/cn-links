@@ -6,7 +6,7 @@ import { generateRawLink } from '../lib/generateRawLink';
 import { isAgentLink } from '../lib/isAgentLink';
 import { isRawLink } from '../lib/isRawLink';
 import type { AgentWithRaw, Id, Marketplace, Referral } from '../models';
-import type { ICnLink } from '../models/CnLink';
+import type { CnLinkSerial, ICnLink } from '../models/CnLink';
 
 /**
  * An ambigous link object. Can be converted on the fly to a raw link or any agent URL object using the `as` method.
@@ -82,7 +82,7 @@ export class CnLink implements ICnLink {
    * Serialize CnLink object
    * @returns serialized CnLink object
    */
-  serialize(): { marketplace: Marketplace; id: string } {
+  serialize(): CnLinkSerial {
     return {
       marketplace: this.marketplace,
       id: this.id,
@@ -95,13 +95,7 @@ export class CnLink implements ICnLink {
    * @param id
    * @returns new CnLinks instance
    */
-  static deserialize({
-    marketplace,
-    id,
-  }: {
-    marketplace: Marketplace;
-    id: string;
-  }) {
+  static deserialize({ marketplace, id }: CnLinkSerial) {
     const rawUrl = generateRawLink(marketplace, id);
     return new CnLink(rawUrl);
   }

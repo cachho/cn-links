@@ -77,4 +77,32 @@ export class CnLink implements ICnLink {
       ra
     );
   }
+
+  /**
+   * Serialize CnLink object
+   * @returns serialized CnLink object
+   */
+  serialize(): { marketplace: Marketplace; id: string } {
+    return {
+      marketplace: this.marketplace,
+      id: this.id,
+    };
+  }
+
+  /**
+   * Create CnLinks instance from serial
+   * @param marketplace
+   * @param id
+   * @returns new CnLinks instance
+   */
+  static deserialize({
+    marketplace,
+    id,
+  }: {
+    marketplace: Marketplace;
+    id: string;
+  }) {
+    const rawUrl = generateRawLink(marketplace, id);
+    return new CnLink(rawUrl);
+  }
 }

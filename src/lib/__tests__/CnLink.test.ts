@@ -1,3 +1,4 @@
+import type { Marketplace } from '../../models';
 import { CnLink } from '../../objects';
 
 describe('CnLink', () => {
@@ -70,5 +71,25 @@ describe('CnLink', () => {
         'https://www.pandabuy.com/product?ra=999&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D3053526244&inviteCode=my-affiliate'
       )
     );
+  });
+
+  test('should be able to serialize', () => {
+    const href =
+      'https://www.superbuy.com/en/page/buy?from=search-input&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D3053526244';
+    const link = new CnLink(href);
+    expect(link.serialize()).toEqual({
+      marketplace: 'weidian',
+      id: '3053526244',
+    });
+  });
+
+  test('should be able to deserialize', () => {
+    const serial = {
+      marketplace: 'weidian' as Marketplace,
+      id: '3053526244',
+    };
+    const cnlink = CnLink.deserialize(serial);
+    expect(cnlink.marketplace).toEqual(serial.marketplace);
+    expect(cnlink.id).toEqual(serial.id);
   });
 });

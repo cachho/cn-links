@@ -53,6 +53,13 @@ describe('extractId', () => {
     expect(id).toBe('987654321');
   });
 
+  test('should successfully detect the marketplace and extract the ID when there are params', () => {
+    const href =
+      'https://item.taobao.com/item.htm?spm=a1z10.3-c.w4002-13979990307.10.46c7707e2PW6oL&id=691541677564';
+    const id = extractId(href);
+    expect(id).toBe('691541677564');
+  });
+
   test('should work for all marketplaces', () => {
     // Does not cover abstractions of marketplaces, such as world.taobao.com
     const testId = '6481396504';

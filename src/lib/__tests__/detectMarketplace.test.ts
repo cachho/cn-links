@@ -30,6 +30,12 @@ describe('detectMarketplace', () => {
     expect(detectMarketplace(url)).toBeUndefined();
   });
 
+  it('detects agents when url search params are present', () => {
+    const url =
+      'https://item.taobao.com/item.htm?spm=a1z10.3-c.w4002-13979990307.10.46c7707e2PW6oL&id=691541677564';
+    expect(detectMarketplace(url)).toBe('taobao');
+  });
+
   test('should work for all marketplaces', () => {
     marketplaces.forEach((marketplace) => {
       const marketplaceLink = generateMarketplaceLink(marketplace, '0');

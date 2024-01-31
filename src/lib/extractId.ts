@@ -11,7 +11,13 @@ import { detectMarketplace } from './detectMarketplace';
  */
 export function extractId(href: RawLink, marketplace?: Marketplace): Id {
   const link = href instanceof URL ? href : new URL(href);
-  const mp = marketplace ?? detectMarketplace(href)!;
+  const mp = marketplace ?? detectMarketplace(href);
+
+  if (!mp) {
+    throw new Error(
+      `Tried to extract id, but could not determine marketplace from string: ${link.href}`
+    );
+  }
 
   const url = new URL(link);
   const urlParams = new URLSearchParams(url.search ?? link);

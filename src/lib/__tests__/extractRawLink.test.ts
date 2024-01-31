@@ -22,6 +22,17 @@ describe('extractRawLink', () => {
     );
   });
 
+  it('should extract the inner URL from esugargoo link', () => {
+    const href =
+      'https://www.esugargoo.com/#/home/productDetail?productLink=https%253A%252F%252Fitem.taobao.com%252Fitem.htm%253Fspm%253Da1z10.3-c.w4002-13979990307.10.46c7707e2PW6oL%2526id%253D691541677564&memberId=341948605864607954';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink).toEqual(
+      new URL(
+        'https://item.taobao.com/item.htm?spm=a1z10.3-c.w4002-13979990307.10.46c7707e2PW6oL&id=691541677564'
+      )
+    );
+  });
+
   it('should extract the inner URL from new sugargoo link', () => {
     const href =
       'https://www.sugargoo.com/#/home/productDetail?productLink=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fspm%3Da1z10.3%26id%3D695240235157&memberId=123';

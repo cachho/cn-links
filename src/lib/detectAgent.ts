@@ -24,7 +24,12 @@ export function detectAgent(href: URL | string): Agent | undefined {
     link.hostname === 'm.superbuy.com'
   )
     return 'superbuy';
-  if (link.hostname === 'www.sugargoo.com' || link.hostname === 'sugargoo.com')
+  if (
+    link.hostname === 'www.sugargoo.com' ||
+    link.hostname === 'sugargoo.com' ||
+    link.hostname === 'esugargoo.com' ||
+    link.hostname === 'www.esugargoo.com'
+  )
     return 'sugargoo';
   if (link.hostname === 'www.cssbuy.com' || link.hostname === 'cssbuy.com')
     return 'cssbuy';

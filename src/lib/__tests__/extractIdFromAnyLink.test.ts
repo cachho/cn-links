@@ -61,6 +61,13 @@ describe('extractId', () => {
     expect(id).toBe('5418645467');
   });
 
+  test('should work with esugargoo agent links', () => {
+    const href =
+      'https://www.esugargoo.com/#/home/productDetail?productLink=https%253A%252F%252Fitem.taobao.com%252Fitem.htm%253Fspm%253Da1z10.3-c.w4002-13979990307.10.46c7707e2PW6oL%2526id%253D691541677564&memberId=341948605864607954';
+    const id = extractIdFromAnyLink(href);
+    expect(id).toBe('691541677564');
+  });
+
   test('should work for all agents and marketplaces', () => {
     const testId = '6481396504';
     marketplaces.forEach((marketplace) => {

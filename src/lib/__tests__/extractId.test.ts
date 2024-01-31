@@ -43,7 +43,7 @@ describe('extractId', () => {
   test('should throw Error for unknown marketplace', () => {
     const href = 'https://example.com/Jest';
     expect(() => extractId(href)).toThrowError(
-      'Id could not be extracted from string: https://example.com/Jest'
+      'Tried to extract id, but could not determine marketplace from string: https://example.com/Jest'
     );
   });
 

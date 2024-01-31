@@ -17,6 +17,12 @@ describe('detectAgent', () => {
     expect(detectAgent(url)).toBe('pandabuy');
   });
 
+  it('detects pandabuy from encrypted link', () => {
+    const url =
+      'https://www.pandabuy.com/product?url=PJ5n5VO1l8LhW0N+0JJ6FnmueQmNAvK0/sCOR+w+P4aGk2+v/a9B540jQePW8hwSjLxRwv+6HT6Ru8pY&utm_source=cart&utm_medium=pdb&utm_campaign=normal';
+    expect(detectAgent(url)).toBe('pandabuy');
+  });
+
   it('detects superbuy', () => {
     const url =
       'https://www.superbuy.com/en/page/buy?from=search-input&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D3053526244';

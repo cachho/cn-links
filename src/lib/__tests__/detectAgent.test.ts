@@ -23,6 +23,12 @@ describe('detectAgent', () => {
     expect(detectAgent(url)).toBe('pandabuy');
   });
 
+  it('detects pandabuy from mobikle link', () => {
+    const url =
+      'https://m.pandabuy.com/product?url=https%3A%2F%2Fdetail.tmall.com%2Fitem.htm%3Fid%3D625144747417&inviteCode=84QGEFBNY';
+    expect(detectAgent(url)).toBe('pandabuy');
+  });
+
   it('detects superbuy', () => {
     const url =
       'https://www.superbuy.com/en/page/buy?from=search-input&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D3053526244';

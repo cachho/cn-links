@@ -15,7 +15,11 @@ export function detectAgent(href: URL | string): Agent | undefined {
     link.hostname === 'login.wegobuy.com'
   )
     return 'wegobuy';
-  if (link.hostname === 'www.pandabuy.com' || link.hostname === 'pandabuy.com')
+  if (
+    link.hostname === 'www.pandabuy.com' ||
+    link.hostname === 'pandabuy.com' ||
+    link.hostname === 'm.pandabuy.com'
+  )
     return 'pandabuy';
   if (
     link.hostname === 'www.superbuy.com' ||

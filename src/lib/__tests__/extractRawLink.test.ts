@@ -114,6 +114,15 @@ describe('extractRawLink', () => {
     );
   });
 
+  it('should be able to handle mobile pandabuy links', () => {
+    const href =
+      'https://m.pandabuy.com/product?url=https%3A%2F%2Fdetail.tmall.com%2Fitem.htm%3Fid%3D625144747417&inviteCode=84QGEFBNY';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink).toEqual(
+      new URL('https://detail.tmall.com/item.htm?id=625144747417')
+    );
+  });
+
   test('should work for all agents and marketplaces', () => {
     const testId = '6481396504';
     marketplaces.forEach((marketplace) => {

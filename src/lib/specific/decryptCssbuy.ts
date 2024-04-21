@@ -4,7 +4,7 @@ import { generateRawLink } from '../generateRawLink';
 /**
  * @internal
  * Decrypts the CSSBUY link and returns the corresponding proper link.
- * This is an exception, as it does not infer strong inptu typing.
+ * This is an exception, as it does not infer strong input typing.
  *
  * @param {AgentLink |  string | URL} href - The CSSBUY link to decrypt. Not necessarily strongly typed.
  * @returns {RawURL} The decrypted proper link as a URL object, or undefined if decryption failed.

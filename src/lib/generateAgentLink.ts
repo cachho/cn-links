@@ -165,8 +165,6 @@ export function generateAgentLink(
   if (agent === 'hoobuy') {
     // https://hoobuy.com/product/1/692787834585?utm_source=share&utm_medium=product_details&inviteCode=2X6A1vRD
     if (referral) {
-      urlParams.set('utm_source', 'share');
-      urlParams.set('utm_medium', 'product_details');
       urlParams.set('inviteCode', referral);
     }
     const mp = marketplace ?? detectMarketplace(link);

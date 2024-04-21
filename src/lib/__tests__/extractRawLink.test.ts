@@ -123,6 +123,15 @@ describe('extractRawLink', () => {
     );
   });
 
+  it('should be able to handle hoobuy links', () => {
+    const href =
+      'https://hoobuy.com/product/1/692787834585?utm_source=share&utm_medium=product_details';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink).toEqual(
+      new URL('https://item.taobao.com/item.htm?id=692787834585')
+    );
+  });
+
   test('should work for all agents and marketplaces', () => {
     const testId = '6481396504';
     marketplaces.forEach((marketplace) => {

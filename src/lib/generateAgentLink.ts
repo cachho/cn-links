@@ -162,6 +162,32 @@ export function generateAgentLink(
     );
   }
 
+  if (agent === 'hoobuy') {
+    // https://hoobuy.com/product/1/692787834585?utm_source=share&utm_medium=product_details&inviteCode=2X6A1vRD
+    if (referral) {
+      urlParams.set('utm_source', 'share');
+      urlParams.set('utm_medium', 'product_details');
+      urlParams.set('inviteCode', referral);
+    }
+    const mp = marketplace ?? detectMarketplace(link);
+    const identifier = id || extractId(link, mp);
+    if (mp === '1688') {
+      const url = `https://www.hoobuy.com/product/0/${identifier}`;
+      const paramString = urlParams.toString();
+      return new URL(paramString ? `${url}?${paramString}` : url);
+    }
+    if (mp === 'taobao' || mp === 'tmall') {
+      const url = `https://www.hoobuy.com/product/1/${identifier}`;
+      const paramString = urlParams.toString();
+      return new URL(paramString ? `${url}?${paramString}` : url);
+    }
+    if (mp === 'weidian') {
+      const url = `https://www.hoobuy.com/product/2/${identifier}`;
+      const paramString = urlParams.toString();
+      return new URL(paramString ? `${url}?${paramString}` : url);
+    }
+  }
+
   // Raw Links
   if (agent === 'raw') {
     // https://detail.1688.com/offer/679865234523.html

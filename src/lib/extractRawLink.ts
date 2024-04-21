@@ -3,6 +3,7 @@ import type { AgentURL, RawURL } from '../models/LinkTypes';
 import { detectAgent } from './detectAgent';
 import { generateRawLink } from './generateRawLink';
 import { decryptCssbuy } from './specific/decryptCssbuy';
+import { decryptHoobuy } from './specific/decryptHoobuy';
 import { decryptPandabuy } from './specific/decryptPandabuy';
 
 /**
@@ -63,6 +64,14 @@ export function extractRawLink(href: AgentURL, cantBeCssbuy?: boolean): RawURL {
       throw new Error('No id provided in CnFans link.');
     }
     return generateRawLink(marketplace, id);
+  }
+
+  if (agent === 'hoobuy') {
+    const innerLink = decryptHoobuy(link);
+    if (!innerLink) {
+      throw new Error(`Could not extract inner Hoobuy link from ${link.href}`);
+    }
+    return innerLink;
   }
 
   let innerParam: string | null = null;

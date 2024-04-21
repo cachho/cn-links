@@ -50,5 +50,8 @@ export function detectAgent(href: URL | string): Agent | undefined {
   if (link.hostname === 'www.ezbuycn.com' || link.hostname === 'ezbuycn.com') {
     return 'ezbuycn';
   }
+  if (link.hostname === 'www.hoobuy.com' || link.hostname === 'hoobuy.com') {
+    return 'hoobuy';
+  }
   return undefined;
 }

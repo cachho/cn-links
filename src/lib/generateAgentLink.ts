@@ -186,6 +186,18 @@ export function generateAgentLink(
     }
   }
 
+  // Wegobuy
+  if (agent === 'allchinabuy') {
+    urlParams.set('from', 'search-input');
+    urlParams.set('url', link.href);
+    if (referral) {
+      urlParams.set('partnercode', referral);
+    }
+    return new URL(
+      `https://www.allchinabuy.com/en/page/buy?${urlParams.toString()}`
+    );
+  }
+
   // Raw Links
   if (agent === 'raw') {
     // https://detail.1688.com/offer/679865234523.html

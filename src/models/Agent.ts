@@ -9,6 +9,7 @@ export const agents = [
   'cnfans',
   'ezbuycn',
   'hoobuy',
+  'allchinabuy',
 ] as const;
 
 export type Agent = (typeof agents)[number];

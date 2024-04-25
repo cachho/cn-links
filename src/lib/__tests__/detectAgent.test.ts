@@ -68,6 +68,12 @@ describe('detectAgent', () => {
     expect(detectAgent(url)).toBe('ezbuycn');
   });
 
+  it('detects allchinabuy', () => {
+    const url =
+      'https://www.allchinabuy.com/en/page/buy/?nTag=Home-search&from=search-input&_search=url&position=&url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D675330231300&partnercode=abc';
+    expect(detectAgent(url)).toBe('allchinabuy');
+  });
+
   test('should work for all agents and marketplaces', () => {
     marketplaces.forEach((marketplace) => {
       agents.forEach((agent) => {

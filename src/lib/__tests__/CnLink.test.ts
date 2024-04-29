@@ -92,4 +92,23 @@ describe('CnLink', () => {
     expect(cnlink.marketplace).toEqual(serial.marketplace);
     expect(cnlink.id).toEqual(serial.id);
   });
+
+  test('safe method should not throw error', () => {
+    const href = 'https://not-a-valid-url.net/';
+    const link = CnLink.safeInstantiate(href);
+    expect(link.success).toBe(false);
+    if (!link.success) {
+      expect(link.error).not.toBe('');
+    }
+  });
+
+  test('safe method should not return error if successful', () => {
+    const href =
+      'https://www.superbuy.com/en/page/buy?from=search-input&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D3053526244';
+    const link = CnLink.safeInstantiate(href);
+    expect(link.success).toBe(true);
+    if (link.success) {
+      expect(link.data).toBeInstanceOf(CnLink);
+    }
+  });
 });

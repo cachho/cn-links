@@ -1,6 +1,6 @@
 import type { Agent, AgentWithRaw } from './Agent';
 import { agents, agentsWithRaw } from './Agent';
-import type { CnLinkSerial } from './CnLink';
+import type { CnLinkSerial, SafeInstantiateResult } from './CnLink';
 import { Id } from './Id';
 import {
   AgentLink,
@@ -54,4 +54,5 @@ export {
   RawLink,
   RawURL,
   Referral,
+  SafeInstantiateResult,
 };

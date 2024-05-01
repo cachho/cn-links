@@ -132,6 +132,15 @@ describe('extractRawLink', () => {
     );
   });
 
+  it('should be able to handle hoobuy mobile links', () => {
+    const href =
+      'https://hoobuy.com/m/product/2/7234262753?utm_source=share&utm_medium=product_details';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink).toEqual(
+      new URL('https://weidian.com/item.html?itemID=7234262753')
+    );
+  });
+
   it('should be able to handle allchinabuy links', () => {
     const href =
       'https://www.allchinabuy.com/en/page/buy/?nTag=Home-search&from=search-input&_search=url&position=&url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D675330231300&partnercode=abc';

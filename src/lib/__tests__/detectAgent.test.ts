@@ -74,6 +74,12 @@ describe('detectAgent', () => {
     expect(detectAgent(url)).toBe('allchinabuy');
   });
 
+  it('detects hoobuy from mobile link', () => {
+    const url =
+      'https://hoobuy.com/m/product/2/7234262753?utm_source=share&utm_medium=product_details';
+    expect(detectAgent(url)).toBe('hoobuy');
+  });
+
   test('should work for all agents and marketplaces', () => {
     marketplaces.forEach((marketplace) => {
       agents.forEach((agent) => {

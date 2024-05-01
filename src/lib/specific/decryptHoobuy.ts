@@ -14,20 +14,30 @@ export function decryptHoobuy(
 ): RawURL | undefined {
   const url = typeof href === 'string' ? new URL(href) : href;
 
-  if (url.pathname.startsWith('/product/1/')) {
-    const id = url.pathname.split('/')[3];
+  let prefix = '/product/';
+  const isMobile = url.pathname.startsWith('/m/product/');
+  if (isMobile) {
+    prefix = '/m/product/';
+  } else if (!url.pathname.startsWith(prefix)) {
+    return undefined;
+  }
+
+  const slashIndex = isMobile ? 4 : 3;
+
+  if (url.pathname.startsWith(`${prefix}1/`)) {
+    const id = url.pathname.split('/')[slashIndex];
     if (id) {
       return generateRawLink('taobao', id);
     }
   }
-  if (url.pathname.startsWith('/product/0/')) {
-    const id = url.pathname.split('/')[3];
+  if (url.pathname.startsWith(`${prefix}0/`)) {
+    const id = url.pathname.split('/')[slashIndex];
     if (id) {
       return generateRawLink('1688', id);
     }
   }
-  if (url.pathname.startsWith('/product/2/')) {
-    const id = url.pathname.split('/')[3];
+  if (url.pathname.startsWith(`${prefix}2/`)) {
+    const id = url.pathname.split('/')[slashIndex];
     if (id) {
       return generateRawLink('weidian', id);
     }

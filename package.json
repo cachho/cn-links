@@ -1,5 +1,5 @@
 {
-  "version": "1.11.0",
+  "version": "1.12.0",
   "name": "cn-links",
   "description": "This package implements functions to deal with links for agents and Chinese marketplaces",
   "main": "dist/index.js",

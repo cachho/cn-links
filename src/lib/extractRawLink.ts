@@ -42,6 +42,12 @@ export function extractRawLink(href: AgentURL, cantBeCssbuy?: boolean): RawURL {
     }
   }
 
+  if (agent === 'superbuy' && link.hostname === 'm.superbuy.com') {
+    if (link.href.includes('/#/')) {
+      link.href = link.href.replace('/#/', '/');
+    }
+  }
+
   if (agent === 'cnfans') {
     const getMarketplace = (): Marketplace | null => {
       if (link.searchParams.get('shop_type') === 'weidian') {

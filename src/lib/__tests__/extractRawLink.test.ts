@@ -150,6 +150,15 @@ describe('extractRawLink', () => {
     );
   });
 
+  it('should be able to handle superbuy mobile links', () => {
+    const href =
+      'https://m.superbuy.com/home/#/goodsDetail?nTag=Home-search&from=search-input&_search=url&url=https://detail.tmall.com/item.htm?id=66608981238';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink).toEqual(
+      new URL('https://detail.tmall.com/item.htm?id=66608981238')
+    );
+  });
+
   test('should work for all agents and marketplaces', () => {
     const testId = '6481396504';
     marketplaces.forEach((marketplace) => {

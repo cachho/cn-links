@@ -35,6 +35,12 @@ describe('detectAgent', () => {
     expect(detectAgent(url)).toBe('superbuy');
   });
 
+  it('should detect superbuy mobile', () => {
+    const url =
+      'https://m.superbuy.com/home/#/goodsDetail?nTag=Home-search&from=search-input&_search=url&url=https://detail.tmall.com/item.htm?id=66608981238';
+    expect(detectAgent(url)).toBe('superbuy');
+  });
+
   it('detects cssbuy', () => {
     const url = 'https://www.cssbuy.com/item-micro-4472563293.html';
     expect(detectAgent(url)).toBe('cssbuy');

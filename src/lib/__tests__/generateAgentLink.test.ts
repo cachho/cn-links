@@ -1,4 +1,5 @@
 import { generateAgentLink } from '../generateAgentLink';
+import { generateMarketplaceLink } from '../generateRawLink';
 
 describe('generateAgentLink', () => {
   const innerLink = 'https://weidian.com/item.html?itemID=2724693540';
@@ -203,6 +204,19 @@ describe('generateAgentLink', () => {
     );
 
     expect(result).toEqual(expected);
+  });
+
+  test('generates basetao tmall link as taobao link', () => {
+    const agent = 'basetao';
+    const link = generateMarketplaceLink('tmall', '738528616020');
+    const expected = new URL(
+      'https://www.basetao.com/best-taobao-agent-service/products/agent/taobao/738528616020.html'
+    );
+
+    const result = generateAgentLink(agent, link, 'tmall', undefined, referral);
+
+    expect(result).toEqual(expected);
+    expect(result).not.toContain(referral); // Affiliate links are not supported
   });
 
   test('link is not sanitized', () => {

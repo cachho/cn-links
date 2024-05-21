@@ -5,6 +5,7 @@ export const agents = [
   'sugargoo',
   'cssbuy',
   'hagobuy',
+  'basetao',
   'kameymall',
   'cnfans',
   'ezbuycn',

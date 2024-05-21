@@ -1,4 +1,4 @@
-import type { Agent } from '../models/Agent';
+import { type Agent } from '../models/Agent';
 
 /**
  * Detects the agent based on the provided URL.
@@ -58,6 +58,14 @@ export function detectAgent(href: URL | string): Agent | undefined {
     link.hostname === 'allchinabuy.com'
   ) {
     return 'allchinabuy';
+  }
+  if (
+    link.hostname === 'basetao.com' ||
+    link.hostname === 'www.basetao.com' ||
+    link.hostname === 'basetao.net' ||
+    link.hostname === 'www.basetao.net'
+  ) {
+    return 'basetao';
   }
   return undefined;
 }

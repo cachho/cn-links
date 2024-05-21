@@ -204,7 +204,7 @@ describe('generateAgentLink', () => {
     );
 
     expect(result).toEqual(expected);
-    expect(result).not.toContain(referral); // Affiliate links are not supported
+    expect(result.href).not.toContain(referral); // Affiliate links are not supported
   });
 
   test('generates basetao tmall link as taobao link', () => {
@@ -217,7 +217,7 @@ describe('generateAgentLink', () => {
     const result = generateAgentLink(agent, link, 'tmall', undefined, referral);
 
     expect(result).toEqual(expected);
-    expect(result).not.toContain(referral); // Affiliate links are not supported
+    expect(result.href).not.toContain(referral); // Affiliate links are not supported
   });
 
   test('link is not sanitized', () => {

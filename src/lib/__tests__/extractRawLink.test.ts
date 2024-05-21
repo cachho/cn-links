@@ -177,6 +177,15 @@ describe('extractRawLink', () => {
     );
   });
 
+  it('should be able to handle basetao links (1688)', () => {
+    const href =
+      'https://www.basetao.com/best-taobao-agent-service/products/agent/1688/641649880094.html';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink).toEqual(
+      new URL('https://detail.1688.com/offer/641649880094.html')
+    );
+  });
+
   test('should work for all agents and marketplaces', () => {
     const testId = '6481396504';
     marketplaces.forEach((marketplace) => {

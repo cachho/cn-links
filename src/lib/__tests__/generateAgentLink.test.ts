@@ -216,6 +216,7 @@ describe('generateAgentLink', () => {
     const result = generateAgentLink(agent, link, 'tmall', undefined, referral);
 
     expect(result).toEqual(expected);
+    expect(result).not.toContain(referral); // Affiliate links are not supported
   });
 
   test('link is not sanitized', () => {

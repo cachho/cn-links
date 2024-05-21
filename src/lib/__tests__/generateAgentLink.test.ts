@@ -170,6 +170,7 @@ describe('generateAgentLink', () => {
     );
 
     expect(result).toEqual(expected);
+    expect(result).not.toContain(referral); // Affiliate links are not supported
   });
 
   test('generates cnfans link correctly', () => {
@@ -204,6 +205,7 @@ describe('generateAgentLink', () => {
     );
 
     expect(result).toEqual(expected);
+    expect(result).not.toContain(referral); // Affiliate links are not supported
   });
 
   test('generates basetao tmall link as taobao link', () => {

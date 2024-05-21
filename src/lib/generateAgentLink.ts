@@ -186,7 +186,7 @@ export function generateAgentLink(
     }
   }
 
-  // Wegobuy
+  // AllChinaBuy
   if (agent === 'allchinabuy') {
     urlParams.set('from', 'search-input');
     urlParams.set('url', link.href);
@@ -196,6 +196,16 @@ export function generateAgentLink(
     return new URL(
       `https://www.allchinabuy.com/en/page/buy?${urlParams.toString()}`
     );
+  }
+
+  // Basetao
+  if (agent === 'basetao') {
+    // https://www.basetao.com/best-taobao-agent-service/products/agent/taobao/655259799823.html
+    const mp = detectMarketplace(link);
+    const identifier = id || extractId(link, mp);
+    const url = `https://www.basetao.com/best-taobao-agent-service/products/agent/${mp}/${identifier}.html`;
+    const paramString = urlParams.toString();
+    return new URL(paramString ? `${url}?${paramString}` : url);
   }
 
   // Raw Links

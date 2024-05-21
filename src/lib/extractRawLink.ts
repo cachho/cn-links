@@ -1,4 +1,4 @@
-import type { Marketplace } from '../models';
+import { type Marketplace, marketplaces } from '../models';
 import type { AgentURL, RawURL } from '../models/LinkTypes';
 import { detectAgent } from './detectAgent';
 import { generateRawLink } from './generateRawLink';
@@ -78,6 +78,29 @@ export function extractRawLink(href: AgentURL, cantBeCssbuy?: boolean): RawURL {
       throw new Error(`Could not extract inner Hoobuy link from ${link.href}`);
     }
     return innerLink;
+  }
+
+  if (agent === 'basetao') {
+    const segments = link.pathname.split('/');
+    if (!segments.includes('products')) {
+      throw new Error(
+        `This type of basetao link is not a compatible product link: ${link.href}`
+      );
+    }
+    const getMarketplace = (): Marketplace | null => {
+      return (
+        marketplaces.find((marketplace) => segments.includes(marketplace)) ??
+        null
+      );
+    };
+    const marketplace = getMarketplace();
+    if (!marketplace) {
+      throw new Error(`No marketplace detected in Basetao link ${link.href}`);
+    }
+    // Get following segment
+    const idSegment = segments[segments.indexOf(marketplace) + 1];
+    const id = idSegment.split('.')[0];
+    return generateRawLink(marketplace, id);
   }
 
   let innerParam: string | null = null;

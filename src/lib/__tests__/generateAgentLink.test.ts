@@ -158,7 +158,7 @@ describe('generateAgentLink', () => {
     const expected = new URL(
       `https://www.kameymall.com/purchases/search/item?url=${encodeURIComponent(
         innerLink
-      )}`
+      )}&code=${referral}`
     );
 
     const result = generateAgentLink(
@@ -170,7 +170,6 @@ describe('generateAgentLink', () => {
     );
 
     expect(result).toEqual(expected);
-    expect(result).not.toContain(referral); // Affiliate links are not supported
   });
 
   test('generates cnfans link correctly', () => {

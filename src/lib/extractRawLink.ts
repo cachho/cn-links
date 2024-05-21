@@ -103,6 +103,18 @@ export function extractRawLink(href: AgentURL, cantBeCssbuy?: boolean): RawURL {
     return generateRawLink(marketplace, id);
   }
 
+  if (agent === 'kameymall') {
+    if (link.pathname.startsWith('/purchases')) {
+      // Check that the second part of the pathname is purely numerical
+      const segments = link.pathname.split('/');
+      if (segments[2] && /^\d+$/.test(segments[2])) {
+        throw new Error(
+          'Kameymall link is a purchase history link. This type of link cannot be decoded.'
+        );
+      }
+    }
+  }
+
   let innerParam: string | null = null;
 
   if (agent === 'ezbuycn') {

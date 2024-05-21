@@ -121,6 +121,9 @@ export function generateAgentLink(
   // Kameymall
   if (agent === 'kameymall') {
     urlParams.set('url', link.href);
+    if (referral) {
+      urlParams.set('code', referral);
+    }
     // Referral currently not supported / unknown
     return new URL(
       `https://www.kameymall.com/purchases/search/item?${urlParams.toString()}`

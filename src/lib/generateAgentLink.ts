@@ -203,9 +203,9 @@ export function generateAgentLink(
     // https://www.basetao.com/best-taobao-agent-service/products/agent/taobao/655259799823.html
     const mp = detectMarketplace(link);
     const identifier = id || extractId(link, mp);
-    const url = `https://www.basetao.com/best-taobao-agent-service/products/agent/${mp}/${identifier}.html`;
-    const paramString = urlParams.toString();
-    return new URL(paramString ? `${url}?${paramString}` : url);
+    const correctedMarketplace = mp !== 'tmall' ? mp : 'taobao';
+    const url = `https://www.basetao.com/best-taobao-agent-service/products/agent/${correctedMarketplace}/${identifier}.html`;
+    return new URL(url);
   }
 
   // Raw Links

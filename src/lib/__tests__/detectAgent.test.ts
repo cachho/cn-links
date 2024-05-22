@@ -95,4 +95,16 @@ describe('detectAgent', () => {
       });
     });
   });
+
+  it('should detect pandabuy from a store link', () => {
+    const url =
+      'https://www.pandabuy.com/shopdetail?ra=21&t=wd&id=1625671124&o=weidian.com';
+    expect(detectAgent(url)).toBe('pandabuy');
+  });
+
+  it('should detect cnfans from a store link', () => {
+    const url =
+      'https://cnfans.com/shops/?shop_type=taobao&num=1&sort=default&shop_id=277184856';
+    expect(detectAgent(url)).toBe('cnfans');
+  });
 });

@@ -1,4 +1,4 @@
-import { filterLinks } from '../item/filterLinks';
+import { filterLinks } from '../filterLinks';
 
 describe('filterLinks', () => {
   const sampleText = `

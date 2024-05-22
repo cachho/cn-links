@@ -1,4 +1,4 @@
-import { detectMarketplace } from './detectMarketplace';
+import { detectMarketplace } from '../lib/detectMarketplace';
 
 /**
  * Checks if the provided URL or hostname corresponds to a marketplace (is it a raw link?).

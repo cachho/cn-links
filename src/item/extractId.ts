@@ -1,6 +1,6 @@
+import { detectMarketplace } from '../lib/detectMarketplace';
 import type { Id, Marketplace } from '../models';
 import type { RawLink } from '../models/LinkTypes';
-import { detectMarketplace } from './detectMarketplace';
 
 /**
  * Extracts the ID from the provided URL based on the specified or detected marketplace.

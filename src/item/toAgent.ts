@@ -1,5 +1,5 @@
+import { detectMarketplace } from '../lib/detectMarketplace';
 import type { AgentURL, AgentWithRaw } from '../models';
-import { detectMarketplace } from './detectMarketplace';
 import { extractId } from './extractId';
 import { generateAgentLink } from './generateAgentLink';
 import { generateRawLink } from './generateRawLink';

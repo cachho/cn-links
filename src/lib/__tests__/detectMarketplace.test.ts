@@ -1,6 +1,6 @@
+import { generateMarketplaceLink } from '../../item/generateRawLink';
 import { marketplaces } from '../../models';
 import { detectMarketplace } from '../detectMarketplace';
-import { generateMarketplaceLink } from '../generateRawLink';
 
 describe('detectMarketplace', () => {
   it('detects weidian', () => {
@@ -39,6 +39,22 @@ describe('detectMarketplace', () => {
     const url =
       'https://item.taobao.com/item.htm?spm=a1z10.3-c.w4002-13979990307.10.46c7707e2PW6oL&id=691541677564';
     expect(detectMarketplace(url)).toBe('taobao');
+  });
+
+  it('should detect weidian from a store link', () => {
+    const url = 'https://weidian.com/?userid=1625671124';
+    expect(detectMarketplace(url)).toBe('weidian');
+  });
+
+  it('should detect taobao from a store link', () => {
+    const url =
+      'https://shop249029897.taobao.com/?spm=pc_detail.27183998.shop_block.dshopinfo.7fab7dd6JG7E0d';
+    expect(detectMarketplace(url)).toBe('taobao');
+  });
+
+  it('should detect 1688 from a store link', () => {
+    const url = 'https://m.1688.com/winport/b2b-22108725372987d9fa.html';
+    expect(detectMarketplace(url)).toBe('1688');
   });
 
   test('should work for all marketplaces', () => {

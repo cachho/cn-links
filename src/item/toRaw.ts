@@ -1,5 +1,5 @@
+import { detectMarketplace } from '../lib/detectMarketplace';
 import type { RawURL } from '../models';
-import { detectMarketplace } from './detectMarketplace';
 import { extractId } from './extractId';
 import { extractRawLink } from './extractRawLink';
 import { generateRawLink } from './generateRawLink';

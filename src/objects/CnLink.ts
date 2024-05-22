@@ -1,10 +1,10 @@
-import { detectMarketplace } from '../item/detectMarketplace';
 import { extractId } from '../item/extractId';
 import { extractRawLink } from '../item/extractRawLink';
 import { generateAgentLink } from '../item/generateAgentLink';
 import { generateRawLink } from '../item/generateRawLink';
 import { isAgentLink } from '../item/isAgentLink';
 import { isRawLink } from '../item/isRawLink';
+import { detectMarketplace } from '../lib/detectMarketplace';
 import type {
   AgentWithRaw,
   Id,

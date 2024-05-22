@@ -1,3 +1,4 @@
+import { detectMarketplace } from '../lib/detectMarketplace';
 import type {
   AgentURL,
   AgentWithRaw,
@@ -5,7 +6,6 @@ import type {
   Marketplace,
   RawLink,
 } from '../models';
-import { detectMarketplace } from './detectMarketplace';
 import { extractId } from './extractId';
 import { generateRawLink } from './generateRawLink';
 

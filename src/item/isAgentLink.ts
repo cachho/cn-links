@@ -1,4 +1,4 @@
-import { detectAgent } from './detectAgent';
+import { detectAgent } from '../lib/detectAgent';
 import { extractRawLink } from './extractRawLink';
 import { isRawLink } from './isRawLink';
 

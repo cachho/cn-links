@@ -1,4 +1,3 @@
-import { detectAgent } from './item/detectAgent';
 import { detectNonLinkMarketplace } from './item/detectNonLinkMarketplace';
 import { extractId } from './item/extractId';
 import { extractIdFromAnyLink } from './item/extractIdFromAnyLink';
@@ -10,6 +9,7 @@ import { isNonLinkMarketplace } from './item/isNonLinkMarketplace';
 import { isRawLink } from './item/isRawLink';
 import { toAgent } from './item/toAgent';
 import { toRaw } from './item/toRaw';
+import { detectAgent } from './lib/detectAgent';
 import { detectMarketplace } from './lib/detectMarketplace';
 import { CnLink } from './objects';
 

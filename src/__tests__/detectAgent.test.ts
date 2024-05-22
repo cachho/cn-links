@@ -1,7 +1,7 @@
-import { agents, marketplaces } from '../../models';
-import { detectAgent } from '../detectAgent'; // adjust the import path to match your project structure
-import { generateAgentLink } from '../generateAgentLink';
-import { generateMarketplaceLink } from '../generateRawLink';
+import { detectAgent } from '../item/detectAgent'; // adjust the import path to match your project structure
+import { generateAgentLink } from '../item/generateAgentLink';
+import { generateMarketplaceLink } from '../item/generateRawLink';
+import { agents, marketplaces } from '../models';
 
 describe('detectAgent', () => {
   it('detects wegobuy', () => {

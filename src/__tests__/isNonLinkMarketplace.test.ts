@@ -1,4 +1,4 @@
-import { isNonLinkMarketplace } from '../isNonLinkMarketplace';
+import { isNonLinkMarketplace } from '../item/isNonLinkMarketplace';
 
 describe('isMarketplace', () => {
   it('should return true for a valid non link marketplace', () => {

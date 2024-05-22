@@ -1,7 +1,7 @@
+import { decodeCssbuy } from './decode/decodeCssbuy';
 import { detectAgent } from './detectAgent';
 import { extractRawLink } from './extractRawLink';
 import { isRawLink } from './isRawLink';
-import { decryptCssbuy } from './specific/decryptCssbuy';
 
 /**
  * Checks if the provided URL or hostname corresponds to an agent link.
@@ -29,7 +29,7 @@ export function isAgentLink(href: string | URL): boolean {
   if (!agent) return false;
 
   if (agent === 'cssbuy') {
-    return !!decryptCssbuy(link);
+    return !!decodeCssbuy(link);
   }
 
   try {

@@ -1,5 +1,5 @@
-import type { Marketplace } from '../../models';
-import { generateRawLink } from '../generateRawLink';
+import { generateRawLink } from '../item/generateRawLink';
+import type { Marketplace } from '../models';
 
 describe('generateProperLink', () => {
   it('should generate a proper Weidian link', () => {

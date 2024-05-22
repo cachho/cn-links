@@ -1,7 +1,7 @@
-import { agents, marketplaces } from '../../models';
-import { extractRawLink } from '../extractRawLink';
-import { generateAgentLink } from '../generateAgentLink';
-import { generateMarketplaceLink } from '../generateRawLink';
+import { extractRawLink } from '../item/extractRawLink';
+import { generateAgentLink } from '../item/generateAgentLink';
+import { generateMarketplaceLink } from '../item/generateRawLink';
+import { agents, marketplaces } from '../models';
 
 describe('extractRawLink', () => {
   it('should extract the inner URL for a valid agent link', () => {

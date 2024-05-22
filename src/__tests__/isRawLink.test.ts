@@ -1,4 +1,4 @@
-import { isRawLink } from '../isRawLink';
+import { isRawLink } from '../item/isRawLink';
 
 describe('isMarketplace', () => {
   it('should return true for a valid Weidian link', () => {

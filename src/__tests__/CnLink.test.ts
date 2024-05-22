@@ -1,5 +1,5 @@
-import type { Marketplace } from '../../models';
-import { CnLink } from '../../objects';
+import type { Marketplace } from '../models';
+import { CnLink } from '../objects';
 
 describe('CnLink', () => {
   test('should be able to return a raw link from a raw link', () => {

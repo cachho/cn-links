@@ -1,4 +1,4 @@
-import { isAgentLink } from '../isAgentLink';
+import { isAgentLink } from '../item/isAgentLink';
 
 describe('isAgentLink', () => {
   test('returns true for agent links', () => {

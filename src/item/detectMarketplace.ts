@@ -1,5 +1,5 @@
+import { getDomainFromHostname } from '../lib/getDomainFromHostname';
 import type { Marketplace, MarketplaceWithTld, RawLink } from '../models';
-import { getDomainFromHostname } from './getDomainFromHostname';
 
 /**
  * Detects the marketplace based on the provided URL or string.

@@ -1,5 +1,5 @@
-import type { AgentWithRaw } from '../../models';
-import { toAgent } from '../toAgent';
+import { toAgent } from '../item/toAgent';
+import type { AgentWithRaw } from '../models';
 
 describe('toAgent', () => {
   const href = 'https://weidian.com/item.html?itemID=3053526244';

@@ -9,7 +9,7 @@ import { generateRawLink } from '../generateRawLink';
  * @param {AgentLink |  string | URL} href - The CSSBUY link to decrypt. Not necessarily strongly typed.
  * @returns {RawURL} The decrypted proper link as a URL object, or undefined if decryption failed.
  */
-export function decryptHoobuy(
+export function decodeHoobuy(
   href: AgentLink | string | URL
 ): RawURL | undefined {
   const url = typeof href === 'string' ? new URL(href) : href;

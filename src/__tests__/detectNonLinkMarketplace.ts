@@ -1,4 +1,4 @@
-import { detectNonLinkMarketplace } from '../detectNonLinkMarketplace';
+import { detectNonLinkMarketplace } from '../item/detectNonLinkMarketplace';
 
 describe('detectMarketplace', () => {
   it('detects weidian', () => {

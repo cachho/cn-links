@@ -1,10 +1,10 @@
-import { type Marketplace, marketplaces } from '../models';
 import type { AgentURL, RawURL } from '../models/LinkTypes';
+import { decodeBasetao } from './decode/decodeBasetao';
+import { decodeCnFans } from './decode/decodeCnFans';
+import { decodeCssbuy } from './decode/decodeCssbuy';
+import { decodeHoobuy } from './decode/decodeHoobuy';
+import { decryptPandabuy } from './decrypt/decryptPandabuy';
 import { detectAgent } from './detectAgent';
-import { generateRawLink } from './generateRawLink';
-import { decryptCssbuy } from './specific/decryptCssbuy';
-import { decryptHoobuy } from './specific/decryptHoobuy';
-import { decryptPandabuy } from './specific/decryptPandabuy';
 
 /**
  * @Internal
@@ -19,7 +19,7 @@ export function extractRawLink(href: AgentURL, cantBeCssbuy?: boolean): RawURL {
   const link = href instanceof URL ? href : new URL(href);
 
   if (!cantBeCssbuy && detectAgent(link.href) === 'cssbuy') {
-    const innerLink = decryptCssbuy(link);
+    const innerLink = decodeCssbuy(link);
     if (!innerLink) {
       throw new Error(
         `Error extracting inner link, cssbuy link could not be decrypted: ${link.href}`
@@ -49,31 +49,11 @@ export function extractRawLink(href: AgentURL, cantBeCssbuy?: boolean): RawURL {
   }
 
   if (agent === 'cnfans') {
-    const getMarketplace = (): Marketplace | null => {
-      if (link.searchParams.get('shop_type') === 'weidian') {
-        return 'weidian';
-      }
-      if (link.searchParams.get('shop_type') === 'taobao') {
-        return 'taobao';
-      }
-      if (link.searchParams.get('shop_type') === 'ali_1688') {
-        return '1688';
-      }
-      return null;
-    };
-    const marketplace = getMarketplace();
-    if (!marketplace) {
-      throw new Error('CnFans shop type not supported.');
-    }
-    const id = link.searchParams.get('id');
-    if (!id) {
-      throw new Error('No id provided in CnFans link.');
-    }
-    return generateRawLink(marketplace, id);
+    return decodeCnFans(link);
   }
 
   if (agent === 'hoobuy') {
-    const innerLink = decryptHoobuy(link);
+    const innerLink = decodeHoobuy(link);
     if (!innerLink) {
       throw new Error(`Could not extract inner Hoobuy link from ${link.href}`);
     }
@@ -81,26 +61,7 @@ export function extractRawLink(href: AgentURL, cantBeCssbuy?: boolean): RawURL {
   }
 
   if (agent === 'basetao') {
-    const segments = link.pathname.split('/');
-    if (!segments.includes('products')) {
-      throw new Error(
-        `This type of basetao link is not a compatible product link: ${link.href}`
-      );
-    }
-    const getMarketplace = (): Marketplace | null => {
-      return (
-        marketplaces.find((marketplace) => segments.includes(marketplace)) ??
-        null
-      );
-    };
-    const marketplace = getMarketplace();
-    if (!marketplace) {
-      throw new Error(`No marketplace detected in Basetao link ${link.href}`);
-    }
-    // Get following segment
-    const idSegment = segments[segments.indexOf(marketplace) + 1];
-    const id = idSegment.split('.')[0];
-    return generateRawLink(marketplace, id);
+    return decodeBasetao(link);
   }
 
   if (agent === 'kameymall') {
@@ -112,6 +73,7 @@ export function extractRawLink(href: AgentURL, cantBeCssbuy?: boolean): RawURL {
           'Kameymall link is a purchase history link. This type of link cannot be decoded.'
         );
       }
+      // Regular Kameymall links have a `url` search parameter
     }
   }
 

@@ -1,10 +1,10 @@
+import { decryptPandabuy } from '../lib/decryptPandabuy';
 import { detectAgent } from '../lib/detectAgent';
 import type { AgentURL, RawURL } from '../models/LinkTypes';
 import { decodeBasetao } from './decode/decodeBasetao';
 import { decodeCnFans } from './decode/decodeCnFans';
 import { decodeCssbuy } from './decode/decodeCssbuy';
 import { decodeHoobuy } from './decode/decodeHoobuy';
-import { decryptPandabuy } from './decrypt/decryptPandabuy';
 
 /**
  * @Internal

@@ -73,6 +73,7 @@ export function extractRawLink(href: AgentURL, cantBeCssbuy?: boolean): RawURL {
           'Kameymall link is a purchase history link. This type of link cannot be decoded.'
         );
       }
+      // Regular Kameymall links have a `url` search parameter
     }
   }
 

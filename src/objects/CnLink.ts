@@ -5,12 +5,14 @@ import { generateAgentLink } from '../item/generateAgentLink';
 import { generateRawLink } from '../item/generateRawLink';
 import { isAgentLink } from '../item/isAgentLink';
 import { isRawLink } from '../item/isRawLink';
-import type { AgentWithRaw, Id, Marketplace, Referral } from '../models';
 import type {
-  CnLinkSerial,
-  ICnLink,
+  AgentWithRaw,
+  Id,
+  Marketplace,
+  Referral,
   SafeInstantiateResult,
-} from '../models/CnLink';
+} from '../models';
+import type { CnLinkSerial, ICnLink } from '../models/CnLink';
 
 /**
  * An ambigous link object. Can be converted on the fly to a raw link or any agent URL object using the `as` method.

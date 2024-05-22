@@ -1,6 +1,6 @@
-import { detectMarketplace } from '../item/detectMarketplace';
-import { generateMarketplaceLink } from '../item/generateRawLink';
-import { marketplaces } from '../models';
+import { marketplaces } from '../../models';
+import { detectMarketplace } from '../detectMarketplace';
+import { generateMarketplaceLink } from '../generateRawLink';
 
 describe('detectMarketplace', () => {
   it('detects weidian', () => {

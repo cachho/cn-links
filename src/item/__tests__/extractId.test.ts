@@ -1,6 +1,6 @@
-import { extractId } from '../item/extractId';
-import { generateMarketplaceLink } from '../item/generateRawLink';
-import { marketplaces } from '../models';
+import { marketplaces } from '../../models';
+import { extractId } from '../extractId';
+import { generateMarketplaceLink } from '../generateRawLink';
 
 describe('extractId', () => {
   test('should extract the correct ID for Weidian link', () => {

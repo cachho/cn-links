@@ -20,6 +20,11 @@ describe('detectMarketplace', () => {
     expect(detectMarketplace(url)).toBe('taobao');
   });
 
+  it('should detect taobao from a mobile link', () => {
+    const url = 'https://m.intl.taobao.com/detail/detail.html?id=763706333392';
+    expect(detectMarketplace(url)).toBe('taobao');
+  });
+
   it('detects 1688', () => {
     const url = 'https://detail.1688.com/offer/610494659403.html';
     expect(detectMarketplace(url)).toBe('1688');

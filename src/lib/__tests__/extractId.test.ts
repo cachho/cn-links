@@ -28,6 +28,12 @@ describe('extractId', () => {
     expect(id).toBe('674029285425');
   });
 
+  it('should be able to extract the id from a mobile taobao link', () => {
+    const href = 'https://m.intl.taobao.com/detail/detail.html?id=763706333392';
+    const id = extractId(href, 'taobao');
+    expect(id).toBe('763706333392');
+  });
+
   test('should extract the correct ID for 1688 link', () => {
     const href = 'https://detail.1688.com/offer/610494659403.html';
     const id = extractId(href, '1688');

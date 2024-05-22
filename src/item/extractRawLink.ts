@@ -1,10 +1,10 @@
 import { type Marketplace, marketplaces } from '../models';
 import type { AgentURL, RawURL } from '../models/LinkTypes';
+import { decodeCssbuy } from './decode/decodeCssbuy';
+import { decodeHoobuy } from './decode/decodeHoobuy';
+import { decryptPandabuy } from './decrypt/decryptPandabuy';
 import { detectAgent } from './detectAgent';
 import { generateRawLink } from './generateRawLink';
-import { decryptCssbuy } from './specific/decryptCssbuy';
-import { decryptHoobuy } from './specific/decryptHoobuy';
-import { decryptPandabuy } from './specific/decryptPandabuy';
 
 /**
  * @Internal
@@ -19,7 +19,7 @@ export function extractRawLink(href: AgentURL, cantBeCssbuy?: boolean): RawURL {
   const link = href instanceof URL ? href : new URL(href);
 
   if (!cantBeCssbuy && detectAgent(link.href) === 'cssbuy') {
-    const innerLink = decryptCssbuy(link);
+    const innerLink = decodeCssbuy(link);
     if (!innerLink) {
       throw new Error(
         `Error extracting inner link, cssbuy link could not be decrypted: ${link.href}`
@@ -73,7 +73,7 @@ export function extractRawLink(href: AgentURL, cantBeCssbuy?: boolean): RawURL {
   }
 
   if (agent === 'hoobuy') {
-    const innerLink = decryptHoobuy(link);
+    const innerLink = decodeHoobuy(link);
     if (!innerLink) {
       throw new Error(`Could not extract inner Hoobuy link from ${link.href}`);
     }

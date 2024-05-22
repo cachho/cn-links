@@ -36,7 +36,7 @@ export class CnLink implements ICnLink {
         return link;
       }
       if (isAgentLink(link)) {
-        return extractRawLink(link, false);
+        return extractRawLink(link);
       }
       throw new Error(
         `CnLink object could not be initialized. Neither agent nor raw link could be detected from: ${link.href}`

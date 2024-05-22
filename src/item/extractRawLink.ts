@@ -1,5 +1,6 @@
 import { type Marketplace, marketplaces } from '../models';
 import type { AgentURL, RawURL } from '../models/LinkTypes';
+import { decodeCnFans } from './decode/decodeCnFans';
 import { decodeCssbuy } from './decode/decodeCssbuy';
 import { decodeHoobuy } from './decode/decodeHoobuy';
 import { decryptPandabuy } from './decrypt/decryptPandabuy';
@@ -49,27 +50,7 @@ export function extractRawLink(href: AgentURL, cantBeCssbuy?: boolean): RawURL {
   }
 
   if (agent === 'cnfans') {
-    const getMarketplace = (): Marketplace | null => {
-      if (link.searchParams.get('shop_type') === 'weidian') {
-        return 'weidian';
-      }
-      if (link.searchParams.get('shop_type') === 'taobao') {
-        return 'taobao';
-      }
-      if (link.searchParams.get('shop_type') === 'ali_1688') {
-        return '1688';
-      }
-      return null;
-    };
-    const marketplace = getMarketplace();
-    if (!marketplace) {
-      throw new Error('CnFans shop type not supported.');
-    }
-    const id = link.searchParams.get('id');
-    if (!id) {
-      throw new Error('No id provided in CnFans link.');
-    }
-    return generateRawLink(marketplace, id);
+    return decodeCnFans(link);
   }
 
   if (agent === 'hoobuy') {

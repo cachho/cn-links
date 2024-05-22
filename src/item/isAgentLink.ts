@@ -1,4 +1,3 @@
-import { decodeCssbuy } from './decode/decodeCssbuy';
 import { detectAgent } from './detectAgent';
 import { extractRawLink } from './extractRawLink';
 import { isRawLink } from './isRawLink';
@@ -27,10 +26,6 @@ export function isAgentLink(href: string | URL): boolean {
   const agent = detectAgent(link);
 
   if (!agent) return false;
-
-  if (agent === 'cssbuy') {
-    return !!decodeCssbuy(link);
-  }
 
   try {
     const rawLink = extractRawLink(link);

@@ -1,6 +1,6 @@
+import { getDomainFromHostname } from '../lib/getDomainFromHostname';
 import type { NonLinkMarketplaceWithTld } from '../models/Marketplace';
 import { nonLinkMarketplacesWithTld } from '../models/Marketplace';
-import { getDomainFromHostname } from './getDomainFromHostname';
 
 /**
  * Checks if a given URL corresponds to a non-link marketplace. A non-link marketplace is a related marketplace,

@@ -1,5 +1,5 @@
-import { generateAgentLink } from '../generateAgentLink';
-import { generateMarketplaceLink } from '../generateRawLink';
+import { generateAgentLink } from '../item/generateAgentLink';
+import { generateMarketplaceLink } from '../item/generateRawLink';
 
 describe('generateAgentLink', () => {
   const innerLink = 'https://weidian.com/item.html?itemID=2724693540';

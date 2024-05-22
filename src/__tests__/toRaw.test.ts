@@ -1,4 +1,4 @@
-import { toRaw } from '../toRaw';
+import { toRaw } from '../item/toRaw';
 
 describe('toRaw', () => {
   test('should generate the proper link from raw links for supported marketplaces (circular)', () => {

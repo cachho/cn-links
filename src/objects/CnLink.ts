@@ -1,10 +1,10 @@
-import { detectMarketplace } from '../lib/detectMarketplace';
-import { extractId } from '../lib/extractId';
-import { extractRawLink } from '../lib/extractRawLink';
-import { generateAgentLink } from '../lib/generateAgentLink';
-import { generateRawLink } from '../lib/generateRawLink';
-import { isAgentLink } from '../lib/isAgentLink';
-import { isRawLink } from '../lib/isRawLink';
+import { detectMarketplace } from '../item/detectMarketplace';
+import { extractId } from '../item/extractId';
+import { extractRawLink } from '../item/extractRawLink';
+import { generateAgentLink } from '../item/generateAgentLink';
+import { generateRawLink } from '../item/generateRawLink';
+import { isAgentLink } from '../item/isAgentLink';
+import { isRawLink } from '../item/isRawLink';
 import type { AgentWithRaw, Id, Marketplace, Referral } from '../models';
 import type {
   CnLinkSerial,

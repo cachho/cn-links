@@ -93,18 +93,26 @@ describe('toRaw', () => {
   test('should return the a valid raw link from encrypted cssbuy links', () => {
     // Inner link for CSSBUY
     const innerLinkCssbuy = 'https://weidian.com/item.html?itemID=12345';
-    const resultCssbuy = toRaw(`https://www.cssbuy.com/item-micro-12345`);
+    const resultCssbuy = toRaw(`https://www.cssbuy.com/item-micro-12345.html`);
     expect(resultCssbuy).toEqual(new URL(innerLinkCssbuy));
 
     // Inner link for CSSBUY 1688
     const innerLinkCssbuy1688 = 'https://detail.1688.com/offer/98765.html';
-    const resultCssbuy1688 = toRaw(`https://www.cssbuy.com/item-1688-98765`);
+    const resultCssbuy1688 = toRaw(
+      `https://www.cssbuy.com/item-1688-98765.html`
+    );
     expect(resultCssbuy1688).toEqual(new URL(innerLinkCssbuy1688));
 
     // Inner link for CSSBUY Taobao
     const innerLinkCssbuyTaobao = 'https://item.taobao.com/item.htm?id=67890';
-    const resultCssbuyTaobao = toRaw(`https://www.cssbuy.com/item-67890`);
+    const resultCssbuyTaobao = toRaw(`https://www.cssbuy.com/item-67890.html`);
     expect(resultCssbuyTaobao).toEqual(new URL(innerLinkCssbuyTaobao));
+  });
+
+  it('should still work with old cssbuy links', () => {
+    const innerLinkCssbuy = 'https://weidian.com/item.html?itemID=12345';
+    const resultCssbuy = toRaw(`https://www.cssbuy.com/item-micro-12345`);
+    expect(resultCssbuy).toEqual(new URL(innerLinkCssbuy));
   });
 
   test('different tmall styles are converted to a standardized format', () => {

@@ -120,7 +120,7 @@ describe('generateAgentLink', () => {
   test('generates cssbuy link correctly', () => {
     const agent = 'cssbuy';
     const expected = new URL(
-      `https://www.cssbuy.com/item-micro-${id}?promotionCode=${referral}`
+      `https://www.cssbuy.com/item-micro-${id}.html?promotionCode=${referral}`
     );
 
     const result = generateAgentLink(

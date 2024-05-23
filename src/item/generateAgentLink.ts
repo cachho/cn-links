@@ -84,24 +84,24 @@ export function generateAgentLink(
 
   // Cssbuy
   if (agent === 'cssbuy') {
-    // https://www.cssbuy.com/item-675330231400?promotionCode=Y2h3ZWJkZXZlbG9wbWVudA
-    // https://www.cssbuy.com/item-micro-4480454092?promotionCode=Y2h3ZWJkZXZlbG9wbWVudA
+    // https://www.cssbuy.com/item-675330231400.html?promotionCode=Y2h3ZWJkZXZlbG9wbWVudA
+    // https://www.cssbuy.com/item-micro-4480454092.html?promotionCode=Y2h3ZWJkZXZlbG9wbWVudA
     if (referral) {
       urlParams.set('promotionCode', referral);
     }
     const mp = marketplace ?? detectMarketplace(link);
     const identifier = id || extractId(link, mp);
     if (mp === 'weidian') {
-      const url = `https://www.cssbuy.com/item-micro-${identifier}`;
+      const url = `https://www.cssbuy.com/item-micro-${identifier}.html`;
       const paramString = urlParams.toString();
       return new URL(paramString ? `${url}?${paramString}` : url);
     }
     if (mp === '1688') {
-      const url = `https://www.cssbuy.com/item-1688-${identifier}`;
+      const url = `https://www.cssbuy.com/item-1688-${identifier}.html`;
       const paramString = urlParams.toString();
       return new URL(paramString ? `${url}?${paramString}` : url);
     }
-    const url = `https://www.cssbuy.com/item-${identifier}`;
+    const url = `https://www.cssbuy.com/item-${identifier}.html`;
     const paramString = urlParams.toString();
     return new URL(paramString ? `${url}?${paramString}` : url);
   }

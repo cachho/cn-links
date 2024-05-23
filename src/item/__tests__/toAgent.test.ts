@@ -48,7 +48,7 @@ describe('toAgent', () => {
     const agent: AgentWithRaw = 'cssbuy';
     const result = toAgent(href, agent);
     expect(result).toEqual(
-      new URL('https://www.cssbuy.com/item-micro-3053526244')
+      new URL('https://www.cssbuy.com/item-micro-3053526244.html')
     );
   });
 
@@ -56,7 +56,7 @@ describe('toAgent', () => {
     const agent: AgentWithRaw = 'cssbuy';
     const result = toAgent(`${href}&spm=asudfausdf8asfu`, agent);
     expect(result).toEqual(
-      new URL('https://www.cssbuy.com/item-micro-3053526244')
+      new URL('https://www.cssbuy.com/item-micro-3053526244.html')
     );
   });
 

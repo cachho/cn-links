@@ -70,4 +70,11 @@ describe('isMarketplace', () => {
     const result = isRawLink(href);
     expect(result).toBe(false);
   });
+
+  it('should work for weidian store links', () => {
+    const href =
+      'https://shop1622368742.v.weidian.com/item.html?itemID=5418645465';
+    const result = isRawLink(href);
+    expect(result).toBe(true);
+  });
 });

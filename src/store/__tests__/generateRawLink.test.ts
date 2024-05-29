@@ -11,8 +11,13 @@ describe('generateRawLink', () => {
     expect(link).toEqual(new URL('https://weidian.com/?userid=16256711243'));
   });
 
-  it('should be able to generate a 1688 link', () => {
-    const link = generateRawLink('1688', '22108725372987d9fa');
+  it('should be able to generate 1688 desktop links', () => {
+    const link = generateRawLink('1688', '1434560114962');
+    expect(link.href).toEqual('https://shop1434560114962.1688.com/');
+  });
+
+  it('should notgenerate a 1688 mobile link', () => {
+    const link = generateRawLink('1688', 'b2b-22108725372987d9fa');
     expect(link).toEqual(
       new URL('https://m.1688.com/winport/b2b-22108725372987d9fa.html')
     );

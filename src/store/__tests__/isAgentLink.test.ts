@@ -49,10 +49,8 @@ describe('isAgentLink', () => {
   });
 
   it('should return false if the link is not a valid cn-link', () => {
-    it('should return true for pandabuy store link', () => {
-      const href =
-        'https://www.pandabuy.com/NOTshopdetail?ra=21&t=wd&id=1625671124&o=weidian.com';
-      expect(isAgentLink(href)).toBe(true);
-    });
+    const href =
+      'https://www.pandabuy.com/NOTshopdetail?ra=21&t=wd&id=1625671124&o=weidian.com';
+    expect(isAgentLink(href)).toBe(false);
   });
 });

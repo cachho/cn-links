@@ -1,5 +1,5 @@
-import { extractRawLink } from '../item/extractRawLink';
 import { detectAgent } from '../lib/detectAgent';
+import { extractRawLink } from './extractRawLink';
 import { isRawLink } from './isRawLink';
 
 /**
@@ -27,10 +27,17 @@ export function isAgentLink(href: string | URL): boolean {
 
   if (!agent) return false;
 
+  if (agent === 'pandabuy') {
+    if (!link.pathname.startsWith('/shopdetail')) {
+      return false;
+    }
+  }
+
   try {
     const rawLink = extractRawLink(link);
     return isRawLink(rawLink);
-  } catch {
+  } catch (error) {
+    console.error('Error extracting raw link:', error);
     return false;
   }
 }

@@ -31,17 +31,28 @@ export function isRawLink(href: string | URL): boolean {
     if (segments.some((segment) => segment.startsWith('shop'))) {
       return true;
     }
+    if (
+      segments.length === 3 &&
+      segments[1] === 'taobao' &&
+      segments[2] === 'com'
+    ) {
+      return true;
+    }
     return false;
   }
 
   if (marketplace === '1688') {
-    const segments = link.pathname.split('/');
-    const b2bSegment = segments.find((segment) => segment.startsWith('b2b-'));
-    // Check that the segment ends with .html
-    if (b2bSegment && b2bSegment.endsWith('.html')) {
-      return true;
+    const hostSegments = link.hostname.split('.');
+    if (hostSegments[0] === 'm') {
+      const segments = link.pathname.split('/');
+      const b2bSegment = segments.find((segment) => segment.startsWith('b2b-'));
+      // Check that the segment ends with .html
+      if (b2bSegment && b2bSegment.endsWith('.html')) {
+        return true;
+      }
+      return false;
     }
-    return false;
+    return hostSegments[0].startsWith('shop');
   }
 
   if (marketplace === 'tmall') {

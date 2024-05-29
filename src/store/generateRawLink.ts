@@ -18,7 +18,11 @@ export function generateRawLink(marketplace: Marketplace, id: Id): RawURL {
     return new URL(`https://shop${id}.taobao.com/`);
   }
   if (marketplace === '1688') {
-    return new URL(`https://m.1688.com/winport/b2b-${id}.html`);
+    if (id.startsWith('b2b-')) {
+      return new URL(`https://m.1688.com/winport/${id}.html`);
+    }
+    // NOTE: We'll be using desktop links as the default for now. See readme.
+    return new URL(`https://shop${id}.1688.com/`);
   }
 
   throw new Error(`Unsupported marketplace: ${marketplace}`);

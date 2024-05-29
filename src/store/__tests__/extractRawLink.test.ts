@@ -110,12 +110,13 @@ describe('extractRawLink', () => {
           return;
         }
 
-        // Note this test is expected to fail for 1688 with cssbuy, because generating a cssbuy 1688 link loses info on whether it's a mobile link or not.
-        if (marketplace === '1688' && agent === 'cssbuy') {
-          return;
-        }
         const agentLink = generateAgentLink(agent, marketplace, testId);
         const rawLink = extractRawLink(agentLink);
+        // Note this test is expected to fail for 1688 with cssbuy, because generating a cssbuy 1688 link loses info on whether it's a mobile link or not.
+        if (marketplace === '1688' && agent === 'cssbuy') {
+          expect(rawLink.href).not.toBe(marketplaceLink.href);
+          return;
+        }
         expect(rawLink.href).toBe(marketplaceLink.href);
       });
     });

@@ -11,7 +11,7 @@ export function decodeKameymall(link: URL): {
   const marketplace = kameymallStringsMarketplaces.get(marketplaceId);
 
   if (!marketplace) {
-    throw new Error('Unsupported marketplace');
+    throw new Error(`Unsupported marketplace. URL: ${link.href}`);
   }
 
   return { marketplace, id };

@@ -9,7 +9,7 @@ export function decodeAllChinaBuy(link: URL): {
   // https://www.allchinabuy.com/en/page/shop/shop/?shopid=1866344120&platform=WD
   const id = link.searchParams.get('shopid');
   if (!id) {
-    throw new Error('Missing ID parameter');
+    throw new Error(`Missing ID parameter from link: ${link.href}`);
   }
   const marketplaceParam = link.searchParams.get('platform');
   if (!marketplaceParam) {

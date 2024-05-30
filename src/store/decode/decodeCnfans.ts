@@ -8,7 +8,7 @@ export function decodeCnFans(link: URL): {
   // https://cnfans.com/shops/?shop_type=taobao&num=1&sort=default&shop_id=277184856
   const id = link.searchParams.get('shop_id');
   if (!id) {
-    throw new Error('Missing ID parameter');
+    throw new Error(`Missing ID parameter from link: ${link.href}`);
   }
   const marketplace = link.searchParams.get('shop_type');
   if (!marketplace) {

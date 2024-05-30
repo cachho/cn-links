@@ -1,5 +1,6 @@
 import type { Agent } from '../../models';
 import { agents, marketplaces } from '../../models';
+import { extractRawLink } from '../extractRawLink';
 import { generateAgentLink } from '../generateAgentLink';
 
 describe('generateAgentLink', () => {
@@ -86,6 +87,34 @@ describe('generateAgentLink', () => {
     const expected = 'https://hoobuy.com/shop/1/676198570';
     const result = generateAgentLink(agent, 'taobao', '676198570');
     expect(result.href).toEqual(expected);
+  });
+
+  it('should work both ways, if a link can be decoded for an agent, it should also be able to be generated it', () => {
+    const agentsThatSupportExtraction = agents.filter((agent) => {
+      try {
+        extractRawLink(new URL(`https://${agent}.com/`));
+        return true;
+      } catch (error) {
+        if (error instanceof Error) {
+          return !error.message.startsWith(
+            `Agent ${agent} is not supported for extracting raw links.`
+          );
+        }
+        return false;
+      }
+    });
+    agentsThatSupportExtraction.forEach((agent) => {
+      try {
+        generateAgentLink(agent, 'taobao', '123456');
+      } catch {
+        throw new Error(
+          `Agent ${agent} supports raw link extraction but no agent link generation.`
+        );
+      }
+      const link = generateAgentLink(agent, 'taobao', '123456');
+      const rawLink = extractRawLink(link);
+      expect(rawLink).toBeDefined();
+    });
   });
 
   it('should be able to generate a link for all agents', () => {

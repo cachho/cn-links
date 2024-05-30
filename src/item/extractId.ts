@@ -40,6 +40,13 @@ export function extractId(href: RawLink, marketplace?: Marketplace): Id {
         return id;
       }
     }
+    if (url.pathname.startsWith('/list/item')) {
+      const segments = url.pathname.split('/');
+      const lastSegment = segments[segments.length - 1];
+      if (lastSegment.endsWith('.htm')) {
+        return lastSegment.split('.')[0];
+      }
+    }
     if (urlParams.get('id')) {
       return urlParams.get('id')!;
     }

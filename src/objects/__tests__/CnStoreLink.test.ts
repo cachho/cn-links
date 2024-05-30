@@ -67,7 +67,8 @@ describe('CnStoreLink', () => {
         try {
           const rawItemLink = generateItemAgentLink(
             agent,
-            generateRawItemLink(marketplace, '123456')
+            marketplace,
+            '123456'
           );
           const response = CnStoreLink.safeInstantiate(rawItemLink);
           expect(response.success).toBe(false);

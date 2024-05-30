@@ -73,10 +73,8 @@ export class CnLink implements ICnLink {
       return this.referrals[target];
     };
 
-    const innerLink = generateRawLink(this.marketplace, this.id);
     return generateAgentLink(
       target,
-      innerLink,
       this.marketplace,
       this.id,
       getRefferal(),

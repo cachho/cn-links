@@ -1,5 +1,4 @@
 import { generateAgentLink } from '../../item/generateAgentLink';
-import { generateMarketplaceLink } from '../../item/generateRawLink';
 import { agents, marketplaces } from '../../models';
 import { detectAgent } from '../detectAgent'; // adjust the import path to match your project structure
 
@@ -89,8 +88,7 @@ describe('detectAgent', () => {
   test('should work for all agents and marketplaces', () => {
     marketplaces.forEach((marketplace) => {
       agents.forEach((agent) => {
-        const marketplaceLink = generateMarketplaceLink(marketplace, '0');
-        const rawLink = generateAgentLink(agent, marketplaceLink);
+        const rawLink = generateAgentLink(agent, marketplace, '0');
         expect(detectAgent(rawLink)).toBe(agent);
       });
     });

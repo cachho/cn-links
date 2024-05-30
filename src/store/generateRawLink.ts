@@ -15,6 +15,11 @@ export function generateRawLink(marketplace: Marketplace, id: Id): RawURL {
     return new URL(`https://weidian.com/?${urlParams.toString()}`);
   }
   if (marketplace === 'taobao' || marketplace === 'tmall') {
+    // Test if id is numeric
+    const idNumber = parseInt(id, 10);
+    if (Number.isNaN(idNumber)) {
+      return new URL(`https://${id}.taobao.com/`);
+    }
     return new URL(`https://shop${id}.taobao.com/`);
   }
   if (marketplace === '1688') {

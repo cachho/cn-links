@@ -6,6 +6,11 @@ describe('generateRawLink', () => {
     expect(link).toEqual(new URL('https://shop314120750.taobao.com/'));
   });
 
+  it('should be able to generate a vanity taobao link', () => {
+    const link = generateRawLink('taobao', 'lyb2528');
+    expect(link).toEqual(new URL('https://lyb2528.taobao.com/'));
+  });
+
   it('should be able to generate a weidian link', () => {
     const link = generateRawLink('weidian', '16256711243');
     expect(link).toEqual(new URL('https://weidian.com/?userid=16256711243'));

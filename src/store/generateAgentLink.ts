@@ -57,6 +57,12 @@ export function generateAgentLink(
     return url;
   }
 
+  if (agent === 'hagobuy') {
+    const url = new URL('https://www.hagobuy.com/item/store');
+    url.searchParams.set('url', generateRawLink(marketplace, id).href);
+    return url;
+  }
+
   if (agent === 'cnfans') {
     // https://cnfans.com/shops/?shop_type=weidian&shop_id=1866344120&num=1&sort=default
     const url = new URL('https://cnfans.com/shops/');

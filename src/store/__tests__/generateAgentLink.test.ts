@@ -89,6 +89,14 @@ describe('generateAgentLink', () => {
     expect(result.href).toEqual(expected);
   });
 
+  it('should generate hagobuy links', () => {
+    const agent: Agent = 'hagobuy';
+    const expected =
+      'https://www.hagobuy.com/item/store?url=https%3A%2F%2Fshop106592833.taobao.com%2F';
+    const result = generateAgentLink(agent, 'taobao', '106592833');
+    expect(result.href).toEqual(expected);
+  });
+
   it('should work both ways, if a link can be decoded for an agent, it should also be able to be generated it', () => {
     const agentsThatSupportExtraction = agents.filter((agent) => {
       try {

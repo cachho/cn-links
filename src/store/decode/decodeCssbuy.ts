@@ -7,7 +7,7 @@ export function decodeCssbuy(link: URL): {
 } {
   const marketplaceParam = link.searchParams.get('t');
   if (!marketplaceParam) {
-    throw new Error('Missing marketplace parameter');
+    throw new Error(`Missing marketplace parameter from link: ${link.href}`);
   }
   const marketplace = cssbuyStringsMarketplaces.get(marketplaceParam);
   if (!marketplace) {

@@ -43,6 +43,22 @@ export function isAgentLink(href: string | URL): boolean {
     if (!link.pathname.includes('/shop')) {
       return false;
     }
+  } else if (agent === 'kameymall') {
+    if (!link.pathname.startsWith('/store')) {
+      return false;
+    }
+  } else if (agent === 'cnfans') {
+    if (!link.pathname.startsWith('/shops')) {
+      return false;
+    }
+  } else if (agent === 'hagobuy') {
+    if (!link.pathname.startsWith('/item/store')) {
+      return false;
+    }
+  } else if (agent === 'cssbuy') {
+    if (link.pathname.startsWith('/item')) {
+      return false;
+    }
   }
 
   try {

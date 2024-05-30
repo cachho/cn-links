@@ -7,9 +7,6 @@ export function decodeHagobuy(link: URL): {
   marketplace: Marketplace;
   id: string;
 } {
-  if (!link.pathname.startsWith('/item/store')) {
-    throw new Error('Link is not a store link');
-  }
   const innerUrl = new URL(link.searchParams.get('url') || '');
 
   if (!isRawLink(innerUrl)) {

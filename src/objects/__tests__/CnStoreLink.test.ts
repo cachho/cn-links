@@ -103,6 +103,14 @@ describe('CnStoreLink', () => {
     expect(() => CnStoreLink.deserialize(serial)).toThrow();
   });
 
+  it('should be able to convert vanity links', () => {
+    const href = 'https://lyb2528.taobao.com/index.htm';
+    const cnLink = new CnStoreLink(href);
+    expect(cnLink.as('pandabuy')).toStrictEqual(
+      new URL('https://www.pandabuy.com/shopdetail?ra=1&t=taobao&id=lyb2528')
+    );
+  });
+
   it('should not work with agent store links', () => {
     marketplaces.forEach((marketplace) => {
       agents.forEach((agent) => {

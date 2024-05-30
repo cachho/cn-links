@@ -19,8 +19,7 @@ export function extractId(href: RawLink, marketplace?: Marketplace): Id {
     );
   }
 
-  const url = new URL(link);
-  const urlParams = new URLSearchParams(url.search ?? link);
+  const urlParams = link.searchParams;
 
   // It's assumed that these query parameters were typechecked before
   // They have to match `isRawLink`
@@ -40,8 +39,8 @@ export function extractId(href: RawLink, marketplace?: Marketplace): Id {
         return id;
       }
     }
-    if (url.pathname.startsWith('/list/item')) {
-      const segments = url.pathname.split('/');
+    if (link.pathname.startsWith('/list/item')) {
+      const segments = link.pathname.split('/');
       const lastSegment = segments[segments.length - 1];
       if (lastSegment.endsWith('.htm')) {
         return lastSegment.split('.')[0];

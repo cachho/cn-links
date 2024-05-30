@@ -14,23 +14,19 @@ describe('Test All', () => {
   it('should work for all item links', () => {
     marketplaces.forEach((marketplace) => {
       agentsWithRaw.forEach((agent) => {
-        try {
-          const rawItemLink = generateItemAgentLink(agent, marketplace, id);
-          const response = CnLink.safeInstantiate(rawItemLink);
-          if (!response.success) {
-            throw new Error(response.error);
-          }
-          expect(response.data).toBeInstanceOf(CnLink);
-          expect(response.data.marketplace).toBe(marketplace);
-          expect(response.data.id).toBe(id);
-          expect(response.data.type).toBe('item');
-          expect(response.data.instance).toBeInstanceOf(CnItemLink);
-          agentsWithRaw.forEach((a) => {
-            response.data.as(a);
-          });
-        } catch (error) {
-          console.log('Error: ', error);
+        const rawItemLink = generateItemAgentLink(agent, marketplace, id);
+        const response = CnLink.safeInstantiate(rawItemLink);
+        if (!response.success) {
+          throw new Error(response.error);
         }
+        expect(response.data).toBeInstanceOf(CnLink);
+        expect(response.data.marketplace).toBe(marketplace);
+        expect(response.data.id).toBe(id);
+        expect(response.data.type).toBe('item');
+        expect(response.data.instance).toBeInstanceOf(CnItemLink);
+        agentsWithRaw.forEach((a) => {
+          response.data.as(a);
+        });
       });
     });
   });
@@ -38,23 +34,19 @@ describe('Test All', () => {
   it('should work for all store links', () => {
     marketplaces.forEach((marketplace) => {
       agentsWithRaw.forEach((agent) => {
-        try {
-          const rawItemLink = generateStoreAgentLink(agent, marketplace, id);
-          const response = CnLink.safeInstantiate(rawItemLink);
-          if (!response.success) {
-            throw new Error(response.error);
-          }
-          expect(response.data).toBeInstanceOf(CnLink);
-          expect(response.data.marketplace).toBe(marketplace);
-          expect(response.data.id).toBe(id);
-          expect(response.data.type).toBe('store');
-          expect(response.data.instance).toBeInstanceOf(CnStoreLink);
-          agentsWithRaw.forEach((a) => {
-            response.data.as(a);
-          });
-        } catch (error) {
-          console.log('Error: ', error);
+        const rawItemLink = generateStoreAgentLink(agent, marketplace, id);
+        const response = CnLink.safeInstantiate(rawItemLink);
+        if (!response.success) {
+          throw new Error(response.error);
         }
+        expect(response.data).toBeInstanceOf(CnLink);
+        expect(response.data.marketplace).toBe(marketplace);
+        expect(response.data.id).toBe(id);
+        expect(response.data.type).toBe('store');
+        expect(response.data.instance).toBeInstanceOf(CnStoreLink);
+        agentsWithRaw.forEach((a) => {
+          response.data.as(a);
+        });
       });
     });
   });

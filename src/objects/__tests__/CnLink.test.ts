@@ -1,6 +1,64 @@
-import { type Marketplace, agents, marketplaces } from '../../models';
-import { generateAgentLink as generateAgentStoreLink } from '../../store/generateAgentLink';
-import { CnLink } from '..';
+import { generateAgentLink as generateItemAgentLink } from '../../item/generateAgentLink';
+import {
+  type Marketplace,
+  agents,
+  agentsWithRaw,
+  marketplaces,
+} from '../../models';
+import { generateAgentLink as generateStoreAgentLink } from '../../store/generateAgentLink';
+import { CnItemLink, CnLink, CnStoreLink } from '..';
+
+describe('Test All', () => {
+  const id = '123456';
+
+  it('should work for all item links', () => {
+    marketplaces.forEach((marketplace) => {
+      agentsWithRaw.forEach((agent) => {
+        try {
+          const rawItemLink = generateItemAgentLink(agent, marketplace, id);
+          const response = CnLink.safeInstantiate(rawItemLink);
+          if (!response.success) {
+            throw new Error(response.error);
+          }
+          expect(response.data).toBeInstanceOf(CnLink);
+          expect(response.data.marketplace).toBe(marketplace);
+          expect(response.data.id).toBe(id);
+          expect(response.data.type).toBe('item');
+          expect(response.data.instance).toBeInstanceOf(CnItemLink);
+          agentsWithRaw.forEach((a) => {
+            response.data.as(a);
+          });
+        } catch (error) {
+          console.log('Error: ', error);
+        }
+      });
+    });
+  });
+
+  it('should work for all store links', () => {
+    marketplaces.forEach((marketplace) => {
+      agentsWithRaw.forEach((agent) => {
+        try {
+          const rawItemLink = generateStoreAgentLink(agent, marketplace, id);
+          const response = CnLink.safeInstantiate(rawItemLink);
+          if (!response.success) {
+            throw new Error(response.error);
+          }
+          expect(response.data).toBeInstanceOf(CnLink);
+          expect(response.data.marketplace).toBe(marketplace);
+          expect(response.data.id).toBe(id);
+          expect(response.data.type).toBe('store');
+          expect(response.data.instance).toBeInstanceOf(CnStoreLink);
+          agentsWithRaw.forEach((a) => {
+            response.data.as(a);
+          });
+        } catch (error) {
+          console.log('Error: ', error);
+        }
+      });
+    });
+  });
+});
 
 describe('CnLink', () => {
   test('should be able to return a raw link from a raw link', () => {
@@ -126,7 +184,7 @@ describe('CnLink', () => {
     marketplaces.forEach((marketplace) => {
       agents.forEach((agent) => {
         try {
-          const rawStoreLink = generateAgentStoreLink(
+          const rawStoreLink = generateStoreAgentLink(
             agent,
             marketplace,
             '123456'

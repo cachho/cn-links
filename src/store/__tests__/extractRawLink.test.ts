@@ -64,6 +64,12 @@ describe('extractRawLink', () => {
     expect(rawLink).toEqual(new URL('https://shop106592833.taobao.com'));
   });
 
+  it('should work for hoobuy links', () => {
+    const href = 'https://hoobuy.com/shop/1/676198570';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink).toEqual(new URL('https://shop676198570.taobao.com'));
+  });
+
   it('should return undefined for a link without the inner URL parameter', () => {
     const href = 'https://www.example.com/';
     const rawLink = new URL(href);

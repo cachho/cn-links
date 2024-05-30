@@ -35,6 +35,10 @@ export function isAgentLink(href: string | URL): boolean {
     if (!link.pathname.includes('/shop/shop')) {
       return false;
     }
+  } else if (agent === 'hoobuy') {
+    if (!link.pathname.includes('/shop/')) {
+      return false;
+    }
   }
 
   try {

@@ -81,6 +81,13 @@ describe('generateAgentLink', () => {
     expect(result.href).toEqual(expected);
   });
 
+  it('should generate hoobuy links', () => {
+    const agent: Agent = 'hoobuy';
+    const expected = 'https://hoobuy.com/shop/1/676198570';
+    const result = generateAgentLink(agent, 'taobao', '676198570');
+    expect(result.href).toEqual(expected);
+  });
+
   it('should be able to generate a link for all agents', () => {
     agents.forEach((agent) => {
       marketplaces.forEach((mp) => {

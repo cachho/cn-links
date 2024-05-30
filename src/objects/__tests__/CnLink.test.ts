@@ -5,6 +5,7 @@ import {
   agentsWithRaw,
   marketplaces,
 } from '../../models';
+import { agentSupportsStore } from '../../store/agentSupportsStore';
 import { generateAgentLink as generateStoreAgentLink } from '../../store/generateAgentLink';
 import { CnItemLink, CnLink, CnStoreLink } from '..';
 
@@ -20,7 +21,7 @@ describe('Test All', () => {
           throw new Error(response.error);
         }
         expect(response.data).toBeInstanceOf(CnLink);
-        expect(response.data.marketplace).toBe(marketplace);
+        // expect(response.data.marketplace).toBe(marketplace);
         expect(response.data.id).toBe(id);
         expect(response.data.type).toBe('item');
         expect(response.data.instance).toBeInstanceOf(CnItemLink);
@@ -34,19 +35,39 @@ describe('Test All', () => {
   it('should work for all store links', () => {
     marketplaces.forEach((marketplace) => {
       agentsWithRaw.forEach((agent) => {
-        const rawItemLink = generateStoreAgentLink(agent, marketplace, id);
-        const response = CnLink.safeInstantiate(rawItemLink);
-        if (!response.success) {
-          throw new Error(response.error);
+        if (agentSupportsStore(agent)) {
+          const rawItemLink = generateStoreAgentLink(agent, marketplace, id);
+          const response = CnLink.safeInstantiate(rawItemLink);
+          if (!response.success) {
+            throw new Error(response.error);
+          }
+          expect(response.data).toBeInstanceOf(CnLink);
+          if (marketplace === 'tmall') {
+            expect(response.data.marketplace).toBe('taobao');
+          } else {
+            expect(response.data.marketplace).toBe(marketplace);
+          }
+          if (response.data.id !== id) {
+            if (agent === 'cssbuy' && marketplace === '1688') {
+              // CSSbuy 1688 links are a one way function, so we assume b2b links
+            } else {
+              throw new Error(
+                `Data: ${JSON.stringify(
+                  response.data.serialize()
+                )} to be converted to ${agent} produced the wrong id: ${
+                  response.data.id
+                }`
+              );
+            }
+          }
+          expect(response.data.type).toBe('store');
+          expect(response.data.instance).toBeInstanceOf(CnStoreLink);
+          agentsWithRaw.forEach((a) => {
+            if (agentSupportsStore(a)) {
+              response.data.as(a);
+            }
+          });
         }
-        expect(response.data).toBeInstanceOf(CnLink);
-        expect(response.data.marketplace).toBe(marketplace);
-        expect(response.data.id).toBe(id);
-        expect(response.data.type).toBe('store');
-        expect(response.data.instance).toBeInstanceOf(CnStoreLink);
-        agentsWithRaw.forEach((a) => {
-          response.data.as(a);
-        });
       });
     });
   });

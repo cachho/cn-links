@@ -111,7 +111,7 @@ describe('CnStoreLink', () => {
     );
   });
 
-  it('should not work with agent store links', () => {
+  it('should not work with agent item links', () => {
     marketplaces.forEach((marketplace) => {
       agents.forEach((agent) => {
         try {

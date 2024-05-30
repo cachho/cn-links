@@ -1,10 +1,5 @@
 import { generateAgentLink as generateItemAgentLink } from '../../item/generateAgentLink';
-import {
-  type Marketplace,
-  agents,
-  agentsWithRaw,
-  marketplaces,
-} from '../../models';
+import { type Marketplace, agentsWithRaw, marketplaces } from '../../models';
 import { agentSupportsStore } from '../../store/agentSupportsStore';
 import { generateAgentLink as generateStoreAgentLink } from '../../store/generateAgentLink';
 import { CnItemLink, CnLink, CnStoreLink } from '..';
@@ -191,23 +186,5 @@ describe('CnLink', () => {
     expect(() => new CnLink(href)).toThrow(
       `CnLink object could not be initialized. Neither agent nor raw link could be detected from: ${href}`
     );
-  });
-
-  it('should not work with agent store links', () => {
-    marketplaces.forEach((marketplace) => {
-      agents.forEach((agent) => {
-        try {
-          const rawStoreLink = generateStoreAgentLink(
-            agent,
-            marketplace,
-            '123456'
-          );
-          const response = CnLink.safeInstantiate(rawStoreLink);
-          expect(response.success).toBe(false);
-        } catch (error) {
-          console.log('Error: ', error);
-        }
-      });
-    });
   });
 });

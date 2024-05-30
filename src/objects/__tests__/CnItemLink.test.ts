@@ -1,5 +1,6 @@
 import type { Marketplace, Type } from '../../models';
 import { agents, marketplaces } from '../../models';
+import { agentSupportsStore } from '../../store/agentSupportsStore';
 import { generateAgentLink as generateAgentStoreLink } from '../../store/generateAgentLink';
 import { generateRawLink as generateRawStoreLink } from '../../store/generateRawLink';
 import { CnItemLink } from '..';
@@ -155,7 +156,7 @@ describe('CnLink', () => {
   it('should not work with agent store links', () => {
     marketplaces.forEach((marketplace) => {
       agents.forEach((agent) => {
-        try {
+        if (agentSupportsStore(agent)) {
           const rawStoreLink = generateAgentStoreLink(
             agent,
             marketplace,
@@ -163,8 +164,6 @@ describe('CnLink', () => {
           );
           const response = CnItemLink.safeInstantiate(rawStoreLink);
           expect(response.success).toBe(false);
-        } catch (error) {
-          console.log('Error: ', error);
         }
       });
     });

@@ -114,17 +114,9 @@ describe('CnStoreLink', () => {
   it('should not work with agent item links', () => {
     marketplaces.forEach((marketplace) => {
       agents.forEach((agent) => {
-        try {
-          const rawItemLink = generateItemAgentLink(
-            agent,
-            marketplace,
-            '123456'
-          );
-          const response = CnStoreLink.safeInstantiate(rawItemLink);
-          expect(response.success).toBe(false);
-        } catch (error) {
-          console.log('Error: ', error);
-        }
+        const rawItemLink = generateItemAgentLink(agent, marketplace, '123456');
+        const response = CnStoreLink.safeInstantiate(rawItemLink);
+        expect(response.success).toBe(false);
       });
     });
   });

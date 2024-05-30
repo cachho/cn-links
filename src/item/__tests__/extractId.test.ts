@@ -34,6 +34,13 @@ describe('extractId', () => {
     expect(id).toBe('763706333392');
   });
 
+  it('should be able to extract a link from taobao lists', () => {
+    const href =
+      'https://www.taobao.com/list/item/758067992163.htm?spm=a21wu.10013406-cat.taglist-content.1.56e938a4vsEyTK';
+    const id = extractId(href, 'taobao');
+    expect(id).toBe('758067992163');
+  });
+
   test('should extract the correct ID for 1688 link', () => {
     const href = 'https://detail.1688.com/offer/610494659403.html';
     const id = extractId(href, '1688');

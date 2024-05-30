@@ -25,6 +25,12 @@ describe('detectMarketplace', () => {
     expect(detectMarketplace(url)).toBe('taobao');
   });
 
+  it('should detect taobao from a list link', () => {
+    const url =
+      'https://www.taobao.com/list/item/758067992163.htm?spm=a21wu.10013406-cat.taglist-content.1.56e938a4vsEyTK';
+    expect(detectMarketplace(url)).toBe('taobao');
+  });
+
   it('detects 1688', () => {
     const url = 'https://detail.1688.com/offer/610494659403.html';
     expect(detectMarketplace(url)).toBe('1688');

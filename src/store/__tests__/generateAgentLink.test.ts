@@ -1,3 +1,4 @@
+import type { Agent } from '../../models';
 import { agents, marketplaces } from '../../models';
 import { generateAgentLink } from '../generateAgentLink';
 
@@ -54,6 +55,30 @@ describe('generateAgentLink', () => {
     const result = generateAgentLink(agent, marketplace, id, referral);
 
     expect(result.href).toEqual(expected.href);
+  });
+
+  it('should generate allchinabuy taobao links correctly', () => {
+    const agent: Agent = 'allchinabuy';
+    const expected =
+      'https://www.allchinabuy.com/en/page/shop/shop/?shopid=57303596&platform=TB';
+    const result = generateAgentLink(agent, 'taobao', '57303596');
+    expect(result.href).toEqual(expected);
+  });
+
+  it('should generate allchinabuy 1688 links correctly', () => {
+    const agent: Agent = 'allchinabuy';
+    const expected =
+      'https://www.allchinabuy.com/en/page/shop/shop/?shopid=b2b-334868973433e6d&platform=ALIBABA';
+    const result = generateAgentLink(agent, '1688', 'b2b-334868973433e6d');
+    expect(result.href).toEqual(expected);
+  });
+
+  it('should generate allchinabuy weidian links correctly', () => {
+    const agent: Agent = 'allchinabuy';
+    const expected =
+      'https://www.allchinabuy.com/en/page/shop/shop/?shopid=1866344120&platform=WD';
+    const result = generateAgentLink(agent, 'weidian', '1866344120');
+    expect(result.href).toEqual(expected);
   });
 
   it('should be able to generate a link for all agents', () => {

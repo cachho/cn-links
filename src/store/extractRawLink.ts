@@ -1,5 +1,6 @@
 import { detectAgent } from '../lib/detectAgent';
 import type { AgentURL, RawURL } from '../models/LinkTypes';
+import { decodeAllChinaBuy } from './decode/decodeAllChinaBuy';
 import { decodeCnFans } from './decode/decodeCnfans';
 import { decodeCssbuy } from './decode/decodeCssbuy';
 import { decodeHagobuy } from './decode/decodeHagobuy';
@@ -50,6 +51,11 @@ export function extractRawLink(href: AgentURL): RawURL {
 
   if (agent === 'hagobuy') {
     const { marketplace, id } = decodeHagobuy(link);
+    return generateRawLink(marketplace, id);
+  }
+
+  if (agent === 'allchinabuy') {
+    const { marketplace, id } = decodeAllChinaBuy(link);
     return generateRawLink(marketplace, id);
   }
 

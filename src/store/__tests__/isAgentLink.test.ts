@@ -25,6 +25,12 @@ describe('isAgentLink', () => {
     });
   });
 
+  test('should return true for allchinabuy link', () => {
+    const href =
+      'https://www.allchinabuy.com/en/page/shop/shop/?shopid=1866344120&platform=WD';
+    expect(isAgentLink(href)).toBe(true);
+  });
+
   test('returns false for non-valid URL input', () => {
     const invalidLinks = ['invalid-url', 'https://', 'ftp://example.com'];
 

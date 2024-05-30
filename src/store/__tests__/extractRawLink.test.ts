@@ -97,6 +97,22 @@ describe('extractRawLink', () => {
     expect(rawLink.href).toEqual('https://shop1434560114962.1688.com/');
   });
 
+  it('should work both ways, if a link can be generated for an agent, it should also be able to decode it', () => {
+    const agentsThatSupportGeneration = agents.filter((agent) => {
+      try {
+        generateAgentLink(agent, 'taobao', '123456');
+        return true;
+      } catch {
+        return false;
+      }
+    });
+    agentsThatSupportGeneration.forEach((agent) => {
+      const link = generateAgentLink(agent, 'taobao', '123456');
+      const rawLink = extractRawLink(link);
+      expect(rawLink).toBeDefined();
+    });
+  });
+
   test('should work for all agents and marketplaces', () => {
     const testId = '6481396504';
     marketplaces.forEach((marketplace) => {

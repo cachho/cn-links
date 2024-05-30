@@ -31,6 +31,10 @@ export function isAgentLink(href: string | URL): boolean {
     if (!link.pathname.startsWith('/shopdetail')) {
       return false;
     }
+  } else if (agent === 'allchinabuy') {
+    if (!link.pathname.includes('/shop/shop')) {
+      return false;
+    }
   }
 
   try {

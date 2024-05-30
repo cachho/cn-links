@@ -1,3 +1,9 @@
+import { extractId } from '../item/extractId';
+import { extractRawLink } from '../item/extractRawLink';
+import { generateAgentLink } from '../item/generateAgentLink';
+import { generateRawLink } from '../item/generateRawLink';
+import { isAgentLink } from '../item/isAgentLink';
+import { isRawLink } from '../item/isRawLink';
 import type {
   AgentURL,
   AgentWithRaw,
@@ -9,19 +15,13 @@ import type {
   CnLinkSerialInput,
   ICnItemLink,
 } from '../models/CnLink';
-import { extractId } from '../store/extractId';
-import { extractRawLink } from '../store/extractRawLink';
-import { generateAgentLink } from '../store/generateAgentLink';
-import { generateRawLink } from '../store/generateRawLink';
-import { isAgentLink } from '../store/isAgentLink';
-import { isRawLink } from '../store/isRawLink';
 import { Base } from './Base';
 
 /**
  * An ambigous link object. Can be converted on the fly to a raw link or any agent URL object using the `as` method.
  * If you have a marketplace and id already, you can use the library's `generateRawLink` function with these parameters as an input.
  */
-export class CnStoreLink extends Base implements ICnItemLink {
+export class CnItemLink extends Base implements ICnItemLink {
   /**
    * Construct object from link.
    * @param {URL | string} href - Link to generate the object from. Can be a raw link or an agent link.
@@ -59,7 +59,7 @@ export class CnStoreLink extends Base implements ICnItemLink {
     return {
       marketplace: this.marketplace,
       id: this.id,
-      type: 'store',
+      type: 'item',
     };
   }
 
@@ -74,16 +74,16 @@ export class CnStoreLink extends Base implements ICnItemLink {
     const rawUrl = this.baseDeserialize(
       { generateRawLink },
       { marketplace, id, type },
-      'store'
+      'item'
     );
-    return new CnStoreLink(rawUrl);
+    return new CnItemLink(rawUrl);
   }
 
   /**
    * Method to safely instantiate CnLink object without throwing an error. Inspired by `zod.safeParse`
    * @param {URL | string} href - Link to generate the object from. Can be a raw link or an agent link.
    * @param {Referral} [referrals] - Object to use referral links from. Referrals can still be entered when using the `as` method. Optional.
-   * @returns {SafeInstantiateResult<CnStoreLink>} - Object that contains the result of the instantiation. If successful, it will contain the CnLink object. If failed, it will contain the error message.
+   * @returns {SafeInstantiateResult<CnItemLink>} - Object that contains the result of the instantiation. If successful, it will contain the CnLink object. If failed, it will contain the error message.
    * @example
    * const response = CnLink.safeInstantiate(link);
    * if (response.success) {
@@ -95,7 +95,7 @@ export class CnStoreLink extends Base implements ICnItemLink {
   static safeInstantiate(
     href: URL | string,
     referrals: Referral = {}
-  ): SafeInstantiateResult<CnStoreLink> {
-    return Base.baseSafeInstantiate<CnStoreLink>(CnStoreLink, href, referrals);
+  ): SafeInstantiateResult<CnItemLink> {
+    return Base.baseSafeInstantiate<CnItemLink>(CnItemLink, href, referrals);
   }
 }

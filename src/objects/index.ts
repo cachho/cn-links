@@ -1,4 +1,5 @@
+import { CnItemLink } from './CnItemLink';
 import { CnLink } from './CnLink';
 import { CnStoreLink } from './CnStoreLink';
 
-export { CnLink, CnStoreLink };
+export { CnItemLink, CnLink, CnStoreLink };

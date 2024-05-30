@@ -8,12 +8,14 @@ import { isRawLink } from './item/isRawLink';
 import { detectAgent } from './lib/detectAgent';
 import { detectMarketplace } from './lib/detectMarketplace';
 import { detectNonLinkMarketplace } from './lib/detectNonLinkMarketplace';
-import { CnLink } from './objects';
+import { CnItemLink, CnLink, CnStoreLink } from './objects';
 
 export * from './models';
 
 export {
+  CnItemLink,
   CnLink,
+  CnStoreLink,
   detectAgent,
   detectMarketplace,
   detectNonLinkMarketplace,

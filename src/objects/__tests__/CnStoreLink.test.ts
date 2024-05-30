@@ -1,5 +1,6 @@
 import { generateAgentLink as generateItemAgentLink } from '../../item/generateAgentLink';
 import { generateRawLink as generateRawItemLink } from '../../item/generateRawLink';
+import type { Marketplace, Type } from '../../models';
 import { agents, marketplaces } from '../../models';
 import { CnStoreLink } from '..';
 
@@ -59,6 +60,47 @@ describe('CnStoreLink', () => {
       }
       expect(response.success).toBe(false);
     });
+  });
+
+  test('should be able to serialize', () => {
+    const href =
+      'https://shop1866344120.v.weidian.com/?userid=1866344120&spider_token=751c';
+    const link = new CnStoreLink(href);
+    expect(link.serialize()).toEqual({
+      marketplace: 'weidian',
+      id: '1866344120',
+      type: 'store',
+    });
+  });
+
+  test('should be able to deserialize', () => {
+    const serial = {
+      marketplace: 'weidian' as Marketplace,
+      id: '3053526244',
+    };
+    const cnlink = CnStoreLink.deserialize(serial);
+    expect(cnlink.marketplace).toEqual(serial.marketplace);
+    expect(cnlink.id).toEqual(serial.id);
+  });
+
+  test('should be able to deserialize with type', () => {
+    const serial = {
+      marketplace: 'weidian' as Marketplace,
+      id: '3053526244',
+      type: 'store' as Type,
+    };
+    const cnlink = CnStoreLink.deserialize(serial);
+    expect(cnlink.marketplace).toEqual(serial.marketplace);
+    expect(cnlink.id).toEqual(serial.id);
+  });
+
+  test('should throw when trying to deserialize an item', () => {
+    const serial = {
+      marketplace: 'weidian' as Marketplace,
+      id: '123456',
+      type: 'item' as Type,
+    };
+    expect(() => CnStoreLink.deserialize(serial)).toThrow();
   });
 
   it('should not work with agent store links', () => {

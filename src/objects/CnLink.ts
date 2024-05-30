@@ -1,10 +1,4 @@
-import { extractId } from '../item/extractId';
-import { extractRawLink } from '../item/extractRawLink';
-import { generateAgentLink } from '../item/generateAgentLink';
-import { generateRawLink } from '../item/generateRawLink';
-import { isAgentLink } from '../item/isAgentLink';
-import { isRawLink } from '../item/isRawLink';
-import { detectMarketplace } from '../lib/detectMarketplace';
+import { generateRawLink as generateRawItemLink } from '../item/generateRawLink';
 import type {
   AgentWithRaw,
   Id,
@@ -12,7 +6,11 @@ import type {
   Referral,
   SafeInstantiateResult,
 } from '../models';
-import type { CnLinkSerial, ICnLink } from '../models/CnLink';
+import type { CnLinkSerialInput, ICnLink, Type } from '../models/CnLink';
+import { generateRawLink as generateRawStoreLink } from '../store/generateRawLink';
+import type { Base } from './Base';
+import { CnItemLink } from './CnItemLink';
+import { CnStoreLink } from './CnStoreLink';
 
 /**
  * An ambigous link object. Can be converted on the fly to a raw link or any agent URL object using the `as` method.
@@ -25,38 +23,26 @@ export class CnLink implements ICnLink {
 
   referrals: Referral;
 
+  type: Type;
+
+  instance: CnStoreLink | CnItemLink;
+
   /**
    * Construct object from link.
    * @param {URL | string} href - Link to generate the object from. Can be a raw link or an agent link.
    * @param {Referral} [referrals] - Object to use referral links from. Referrals can still be entered when using the `as` method. Optional.
    */
   constructor(href: URL | string, referrals: Referral = {}) {
-    const link = href instanceof URL ? href : new URL(href);
-
-    const getInnerLink = () => {
-      if (isRawLink(link)) {
-        return link;
-      }
-      if (isAgentLink(link)) {
-        return extractRawLink(link);
-      }
-      throw new Error(
-        `CnLink object could not be initialized. Neither agent nor raw link could be detected from: ${link.href}`
-      );
-    };
-
-    const innerLink = getInnerLink();
-    const marketplace = detectMarketplace(innerLink);
-
-    if (!marketplace) {
-      throw new Error(
-        `CnLink object could not be initialized. Marketplace could not be detected from inner link: ${innerLink.href}`
-      );
+    try {
+      this.instance = new CnItemLink(href, referrals);
+      this.type = 'item';
+    } catch {
+      this.instance = new CnStoreLink(href, referrals);
+      this.type = 'store';
     }
-
-    this.marketplace = marketplace;
-    this.id = extractId(innerLink);
-    this.referrals = referrals ?? undefined;
+    this.marketplace = this.instance.marketplace;
+    this.id = this.instance.id;
+    this.referrals = this.instance.referrals;
   }
 
   /**
@@ -67,29 +53,18 @@ export class CnLink implements ICnLink {
    * @returns {AgentURL} - URL object that contains the target link. You can get the full link string with the `.href` attribute.
    */
   as(target: AgentWithRaw, referral?: string, ra?: string) {
-    const getRefferal = () => {
-      if (referral) return referral;
-      if (target === 'raw') return undefined;
-      return this.referrals[target];
-    };
-
-    return generateAgentLink(
-      target,
-      this.marketplace,
-      this.id,
-      getRefferal(),
-      ra
-    );
+    return this.instance.as(target, referral, ra);
   }
 
   /**
    * Serialize CnLink object
    * @returns serialized CnLink object
    */
-  serialize(): CnLinkSerial {
+  serialize(): ReturnType<typeof Base.prototype.serialize> {
     return {
       marketplace: this.marketplace,
       id: this.id,
+      type: this.type,
     };
   }
 
@@ -99,9 +74,11 @@ export class CnLink implements ICnLink {
    * @param id
    * @returns new CnLinks instance
    */
-  static deserialize({ marketplace, id }: CnLinkSerial) {
-    const rawUrl = generateRawLink(marketplace, id);
-    return new CnLink(rawUrl);
+  static deserialize({ marketplace, id, type }: CnLinkSerialInput) {
+    if (type === 'store') {
+      return new CnLink(generateRawStoreLink(marketplace, id));
+    }
+    return new CnLink(generateRawItemLink(marketplace, id));
   }
 
   /**

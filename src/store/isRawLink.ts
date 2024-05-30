@@ -33,12 +33,12 @@ export function isRawLink(href: string | URL): boolean {
     }
     if (
       segments.length === 3 &&
+      segments[0] !== 'item' &&
       segments[1] === 'taobao' &&
       segments[2] === 'com'
     ) {
       return true;
     }
-    return false;
   }
 
   if (marketplace === '1688') {

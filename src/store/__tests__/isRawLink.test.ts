@@ -43,6 +43,12 @@ describe('isRawLink', () => {
     expect(result).toBe(true);
   });
 
+  it('should return false for raw taobao links', () => {
+    const href = 'https://item.taobao.com/item.htm?id=123456';
+    const result = isRawLink(href);
+    expect(result).toBe(false);
+  });
+
   it('should work for all generated agent links', () => {
     agents.forEach((agent) => {
       marketplaces.forEach((marketplace) => {

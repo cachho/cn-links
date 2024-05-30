@@ -1,3 +1,6 @@
+import { generateAgentLink as generateItemAgentLink } from '../../item/generateAgentLink';
+import { generateRawLink as generateRawItemLink } from '../../item/generateRawLink';
+import { agents, marketplaces } from '../../models';
 import { CnStoreLink } from '..';
 
 describe('CnStoreLink', () => {
@@ -43,5 +46,35 @@ describe('CnStoreLink', () => {
       new URL('https://cnfans.com/shops/?shop_type=weidian&shop_id=1625671124')
         .href
     );
+  });
+
+  it('should not work with raw store links', () => {
+    marketplaces.forEach((marketplace) => {
+      const rawItemLink = generateRawItemLink(marketplace, '123456');
+      const response = CnStoreLink.safeInstantiate(rawItemLink);
+      if (response.success) {
+        throw new Error(
+          `Item Link '${rawItemLink}' should not work as a store link`
+        );
+      }
+      expect(response.success).toBe(false);
+    });
+  });
+
+  it('should not work with agent store links', () => {
+    marketplaces.forEach((marketplace) => {
+      agents.forEach((agent) => {
+        try {
+          const rawItemLink = generateItemAgentLink(
+            agent,
+            generateRawItemLink(marketplace, '123456')
+          );
+          const response = CnStoreLink.safeInstantiate(rawItemLink);
+          expect(response.success).toBe(false);
+        } catch (error) {
+          console.log('Error: ', error);
+        }
+      });
+    });
   });
 });

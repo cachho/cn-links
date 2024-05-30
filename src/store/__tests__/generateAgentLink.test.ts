@@ -105,6 +105,20 @@ describe('generateAgentLink', () => {
     expect(result.href).toEqual(expected);
   });
 
+  it('should work for kameymall taobao links', () => {
+    const agent: Agent = 'kameymall';
+    const expected = 'https://www.kameymall.com/store/106592833_1';
+    const result = generateAgentLink(agent, 'taobao', '106592833');
+    expect(result.href).toEqual(expected);
+  });
+
+  it('should work for kameymall 1688 links', () => {
+    const agent: Agent = 'kameymall';
+    const expected = 'https://www.kameymall.com/store/b2b-2546450021uezz8_4';
+    const result = generateAgentLink(agent, '1688', 'b2b-2546450021uezz8');
+    expect(result.href).toEqual(expected);
+  });
+
   it('should work both ways, if a link can be decoded for an agent, it should also be able to be generated it', () => {
     const agentsThatSupportExtraction = agents.filter((agent) => {
       try {

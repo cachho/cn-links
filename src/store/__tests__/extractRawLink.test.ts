@@ -110,6 +110,12 @@ describe('extractRawLink', () => {
     expect(rawLink.href).toEqual('https://shop106592833.taobao.com/');
   });
 
+  it('should work for kameymall', () => {
+    const href = 'https://www.kameymall.com/store/123456_7';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual('https://weidian.com/?userid=123456');
+  });
+
   it('should work both ways, if a link can be generated for an agent, it should also be able to decode it', () => {
     const agentsThatSupportGeneration = agents.filter((agent) => {
       try {

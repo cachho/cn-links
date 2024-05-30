@@ -2,6 +2,7 @@ import type { AgentURL, AgentWithRaw, Id, Marketplace } from '../models';
 import { allchinabuyMarketplaceStrings } from './data/allchinabuy';
 import { cssbuyMarketplaceStrings } from './data/cssbuy';
 import { hoobuyMarketplaceStrings } from './data/hoobuy';
+import { kameymallMarketplaceStrings } from './data/kameymall';
 import { pandabuyMarketplaceStrings } from './data/pandabuy';
 import { generateRawLink } from './generateRawLink';
 
@@ -99,6 +100,14 @@ export function generateAgentLink(
     url.searchParams.set('shopid', id);
     url.searchParams.set('platform', mp);
     return url;
+  }
+
+  if (agent === 'kameymall') {
+    const mp = kameymallMarketplaceStrings.get(marketplace);
+    if (!mp) {
+      throw new Error('Unsupported marketplace for kameymall');
+    }
+    return new URL(`https://www.kameymall.com/store/${id}_${mp}`);
   }
 
   // Raw Links

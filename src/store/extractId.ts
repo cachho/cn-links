@@ -45,7 +45,10 @@ export function extractId(href: RawLink, marketplace?: Marketplace): Id {
       .split('.')
       .filter((segment) => segment !== 'taobao' && segment !== 'com');
     if (segments.length === 1) {
-      return segments[0].slice(4);
+      if (segments[0].startsWith('shop')) {
+        return segments[0].slice(4);
+      }
+      return segments[0];
     }
     if (segments.find((segment) => segment.startsWith('shop'))) {
       const segment = segments.find((s) => s.startsWith('shop'));

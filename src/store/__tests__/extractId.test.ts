@@ -22,6 +22,13 @@ describe('extractId', () => {
     expect(id).toBe('106592833');
   });
 
+  it('should be able to extract an id from vanity taobao links', () => {
+    const href =
+      'https://lyb2528.taobao.com/index.htm?spm=a1z10.1-c-s.w5002-17123004230.2.39b27e1bkofvpK';
+    const id = extractId(href, 'taobao');
+    expect(id).toBe('lyb2528');
+  });
+
   test('should extract the correct ID for 1688 link', () => {
     const href =
       'https://shop1434560114962.1688.com/page/index.html?spm=0.0.wp_pc_common_header_companyName_undefined.0';

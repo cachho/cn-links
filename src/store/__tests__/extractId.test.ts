@@ -29,6 +29,12 @@ describe('extractId', () => {
     expect(id).toBe('lyb2528');
   });
 
+  it('should be able to extract an id from taobao world links', () => {
+    const href = 'https://shop57074988.world.taobao.com/';
+    const id = extractId(href, 'taobao');
+    expect(id).toBe('57074988');
+  });
+
   test('should extract the correct ID for 1688 link', () => {
     const href =
       'https://shop1434560114962.1688.com/page/index.html?spm=0.0.wp_pc_common_header_companyName_undefined.0';

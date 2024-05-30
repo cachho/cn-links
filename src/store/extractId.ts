@@ -56,6 +56,8 @@ export function extractId(href: RawLink, marketplace?: Marketplace): Id {
         return segment.slice(4);
       }
     }
+    // As a last effort we just return the first segment. This might come into effect for vanity taobao world links.
+    return segments[0];
   } else if (mp === '1688') {
     const segments = link.hostname.split('.');
     if (segments.length !== 3) {

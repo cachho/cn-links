@@ -90,6 +90,17 @@ export function generateAgentLink(
     return new URL(`https://hoobuy.com/shop/${mp}/${id}`);
   }
 
+  if (agent === 'superbuy') {
+    const url = new URL('https://www.superbuy.com/en/page/rebates/shop/');
+    const mp = allchinabuyMarketplaceStrings.get(marketplace);
+    if (!mp) {
+      throw new Error('Unsupported marketplace for superbuy');
+    }
+    url.searchParams.set('shopid', id);
+    url.searchParams.set('platform', mp);
+    return url;
+  }
+
   // Raw Links
   if (agent === 'raw') {
     return generateRawLink(marketplace, id);

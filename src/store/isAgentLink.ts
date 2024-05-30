@@ -39,6 +39,10 @@ export function isAgentLink(href: string | URL): boolean {
     if (!link.pathname.includes('/shop/')) {
       return false;
     }
+  } else if (agent === 'superbuy') {
+    if (!link.hostname.includes('/shop')) {
+      return false;
+    }
   }
 
   try {

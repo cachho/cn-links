@@ -103,6 +103,13 @@ describe('extractRawLink', () => {
     expect(rawLink.href).toEqual('https://shop1434560114962.1688.com/');
   });
 
+  it('should work for superbuy', () => {
+    const href =
+      'https://www.superbuy.com/en/page/rebates/shop/?shopid=106592833&platform=TB';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual('https://shop106592833.taobao.com/');
+  });
+
   it('should work both ways, if a link can be generated for an agent, it should also be able to decode it', () => {
     const agentsThatSupportGeneration = agents.filter((agent) => {
       try {

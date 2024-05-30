@@ -40,7 +40,7 @@ export function isAgentLink(href: string | URL): boolean {
       return false;
     }
   } else if (agent === 'superbuy') {
-    if (!link.hostname.includes('/shop')) {
+    if (!link.pathname.includes('/shop')) {
       return false;
     }
   }

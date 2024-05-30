@@ -13,6 +13,12 @@ describe('isAgentLink', () => {
     expect(isAgentLink(href)).toBe(true);
   });
 
+  it('should return true for superbuy links', () => {
+    const href =
+      'https://www.superbuy.com/en/page/rebates/shop/?shopid=123456&platform=WD';
+    expect(isAgentLink(href)).toBe(true);
+  });
+
   test('returns false for non-agent links', () => {
     const nonAgentLinks = [
       'https://m.1688.com/winport/b2b-22108725372987d9fa.html',

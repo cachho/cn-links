@@ -9,10 +9,12 @@ import { detectAgent } from './lib/detectAgent';
 import { detectMarketplace } from './lib/detectMarketplace';
 import { detectNonLinkMarketplace } from './lib/detectNonLinkMarketplace';
 import { CnItemLink, CnLink, CnStoreLink } from './objects';
+import { agentSupportsStore } from './store/agentSupportsStore';
 
 export * from './models';
 
 export {
+  agentSupportsStore,
   CnItemLink,
   CnLink,
   CnStoreLink,

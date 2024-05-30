@@ -1,33 +1,31 @@
-import { detectAgent } from './item/detectAgent';
-import { detectMarketplace } from './item/detectMarketplace';
-import { detectNonLinkMarketplace } from './item/detectNonLinkMarketplace';
 import { extractId } from './item/extractId';
-import { extractIdFromAnyLink } from './item/extractIdFromAnyLink';
 import { filterLinks } from './item/filterLinks';
 import { generateAgentLink } from './item/generateAgentLink';
 import { generateRawLink } from './item/generateRawLink';
 import { isAgentLink } from './item/isAgentLink';
 import { isNonLinkMarketplace } from './item/isNonLinkMarketplace';
 import { isRawLink } from './item/isRawLink';
-import { toAgent } from './item/toAgent';
-import { toRaw } from './item/toRaw';
-import { CnLink } from './objects';
+import { detectAgent } from './lib/detectAgent';
+import { detectMarketplace } from './lib/detectMarketplace';
+import { detectNonLinkMarketplace } from './lib/detectNonLinkMarketplace';
+import { CnItemLink, CnLink, CnStoreLink } from './objects';
+import { agentSupportsStore } from './store/agentSupportsStore';
 
 export * from './models';
 
 export {
+  agentSupportsStore,
+  CnItemLink,
   CnLink,
+  CnStoreLink,
   detectAgent,
   detectMarketplace,
   detectNonLinkMarketplace,
   extractId,
-  extractIdFromAnyLink,
   filterLinks,
   generateAgentLink,
   generateRawLink,
   isAgentLink,
   isNonLinkMarketplace,
   isRawLink,
-  toAgent,
-  toRaw,
 };

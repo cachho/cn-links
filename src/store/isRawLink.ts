@@ -20,35 +20,43 @@ export function isRawLink(href: string | URL): boolean {
   if (!marketplace) return false;
 
   if (marketplace === 'weidian') {
-    return !!(
-      link.searchParams.get('itemID') || link.searchParams.get('itemId')
-    );
+    if (link.searchParams.get('userid') || link.searchParams.get('userId')) {
+      return true;
+    }
+    return false;
   }
 
   if (marketplace === 'taobao') {
-    if (link.hostname.includes('world.taobao.com')) {
-      const id = link.href.split('item/')[1].split('.')[0];
-      return !Number.isNaN(Number(id));
+    const segments = link.hostname.split('.');
+    if (segments.some((segment) => segment.startsWith('shop'))) {
+      return true;
     }
-    return !!link.searchParams.get('id');
+    if (
+      segments.length === 3 &&
+      segments[0] !== 'item' &&
+      segments[1] === 'taobao' &&
+      segments[2] === 'com'
+    ) {
+      return true;
+    }
   }
 
   if (marketplace === '1688') {
-    // Shortened links are not just encoded. They have to be encrypted first.
-    if (link.hostname.includes('qr.1688.com')) return false;
-
-    if (link.href.indexOf('offer')) {
-      const id =
-        link.href.indexOf('offer/') !== -1
-          ? link.href.split('offer/')[1].split('.')[0]
-          : link.href.split('offer%2F')[1].split('.')[0];
-      // Validate number
-      return !Number.isNaN(Number(id));
+    const hostSegments = link.hostname.split('.');
+    if (hostSegments[0] === 'm') {
+      const segments = link.pathname.split('/');
+      const b2bSegment = segments.find((segment) => segment.startsWith('b2b-'));
+      // Check that the segment ends with .html
+      if (b2bSegment && b2bSegment.endsWith('.html')) {
+        return true;
+      }
+      return false;
     }
+    return hostSegments[0].startsWith('shop');
   }
 
   if (marketplace === 'tmall') {
-    return !!link.searchParams.get('id');
+    throw new Error('Tmall links are not supported yet.');
   }
 
   return false;

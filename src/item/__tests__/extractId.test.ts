@@ -74,4 +74,11 @@ describe('extractId', () => {
       expect(extractId(rawLink)).toBe(testId);
     });
   });
+
+  test('should work with weidian store item link', () => {
+    const href =
+      'https://shop1622368742.v.weidian.com/item.html?itemID=5418645465';
+    const id = extractId(href, 'weidian');
+    expect(id).toBe('5418645465');
+  });
 });

@@ -1,7 +1,7 @@
 import { agents, marketplaces } from '../../models';
 import { extractRawLink } from '../extractRawLink';
 import { generateAgentLink } from '../generateAgentLink';
-import { generateMarketplaceLink } from '../generateRawLink';
+import { generateMarketplaceLink, generateRawLink } from '../generateRawLink';
 
 describe('extractRawLink', () => {
   it('should extract the inner URL for a valid agent link', () => {
@@ -207,16 +207,17 @@ describe('extractRawLink', () => {
     const testId = '6481396504';
     marketplaces.forEach((marketplace) => {
       agents.forEach((agent) => {
-        const marketplaceLink = generateMarketplaceLink(marketplace, testId);
-        const agentLink = generateAgentLink(agent, marketplaceLink);
+        const agentLink = generateAgentLink(agent, marketplace, testId);
         if (marketplace === 'tmall') {
           // Sometimes, tmall can't be reversed and it's a taobao link.
           expect([
-            marketplaceLink.href,
+            generateRawLink(marketplace, testId).href,
             generateMarketplaceLink('taobao', testId).href,
           ]).toContain(extractRawLink(agentLink).href);
         } else {
-          expect(extractRawLink(agentLink).href).toBe(marketplaceLink.href);
+          expect(extractRawLink(agentLink).href).toBe(
+            generateRawLink(marketplace, testId).href
+          );
         }
       });
     });

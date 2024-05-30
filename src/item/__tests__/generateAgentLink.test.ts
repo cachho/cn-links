@@ -1,5 +1,4 @@
 import { generateAgentLink } from '../generateAgentLink';
-import { generateMarketplaceLink } from '../generateRawLink';
 
 describe('generateAgentLink', () => {
   const innerLink = 'https://weidian.com/item.html?itemID=2724693540';
@@ -15,13 +14,7 @@ describe('generateAgentLink', () => {
       )}&inviteCode=${referral}`
     );
 
-    const result = generateAgentLink(
-      agent,
-      innerLink,
-      marketplace,
-      undefined,
-      referral
-    );
+    const result = generateAgentLink(agent, marketplace, id, referral);
 
     expect(result).toEqual(expected);
   });
@@ -34,14 +27,7 @@ describe('generateAgentLink', () => {
       )}&inviteCode=${referral}`
     );
 
-    const result = generateAgentLink(
-      agent,
-      innerLink,
-      marketplace,
-      undefined,
-      referral,
-      '999'
-    );
+    const result = generateAgentLink(agent, marketplace, id, referral, '999');
 
     expect(result).toEqual(expected);
   });
@@ -54,13 +40,7 @@ describe('generateAgentLink', () => {
       )}&partnercode=${referral}`
     );
 
-    const result = generateAgentLink(
-      agent,
-      innerLink,
-      marketplace,
-      undefined,
-      referral
-    );
+    const result = generateAgentLink(agent, marketplace, id, referral);
 
     expect(result).toEqual(expected);
   });
@@ -73,13 +53,7 @@ describe('generateAgentLink', () => {
       )}&partnercode=${referral}`
     );
 
-    const result = generateAgentLink(
-      agent,
-      innerLink,
-      marketplace,
-      undefined,
-      referral
-    );
+    const result = generateAgentLink(agent, marketplace, id, referral);
 
     expect(result).toEqual(expected);
   });
@@ -92,7 +66,7 @@ describe('generateAgentLink', () => {
       )}`
     );
 
-    const result = generateAgentLink(agent, innerLink, marketplace, undefined);
+    const result = generateAgentLink(agent, marketplace, id);
 
     expect(result).toEqual(expected);
   });
@@ -106,13 +80,7 @@ describe('generateAgentLink', () => {
       )}&memberId=${referral}`
     );
 
-    const result = generateAgentLink(
-      agent,
-      innerLink,
-      marketplace,
-      undefined,
-      referral
-    );
+    const result = generateAgentLink(agent, marketplace, id, referral);
 
     expect(result).toEqual(expected);
   });
@@ -123,13 +91,7 @@ describe('generateAgentLink', () => {
       `https://www.cssbuy.com/item-micro-${id}.html?promotionCode=${referral}`
     );
 
-    const result = generateAgentLink(
-      agent,
-      innerLink,
-      marketplace,
-      undefined,
-      referral
-    );
+    const result = generateAgentLink(agent, marketplace, id, referral);
 
     expect(result).toEqual(expected);
   });
@@ -142,13 +104,7 @@ describe('generateAgentLink', () => {
       )}&affcode=${referral}`
     );
 
-    const result = generateAgentLink(
-      agent,
-      innerLink,
-      marketplace,
-      undefined,
-      referral
-    );
+    const result = generateAgentLink(agent, marketplace, id, referral);
 
     expect(result).toEqual(expected);
   });
@@ -161,13 +117,7 @@ describe('generateAgentLink', () => {
       )}&code=${referral}`
     );
 
-    const result = generateAgentLink(
-      agent,
-      innerLink,
-      marketplace,
-      undefined,
-      referral
-    );
+    const result = generateAgentLink(agent, marketplace, id, referral);
 
     expect(result).toEqual(expected);
   });
@@ -178,13 +128,7 @@ describe('generateAgentLink', () => {
       `https://cnfans.com/product/?shop_type=weidian&id=${id}&ref=${referral}`
     );
 
-    const result = generateAgentLink(
-      agent,
-      innerLink,
-      marketplace,
-      undefined,
-      referral
-    );
+    const result = generateAgentLink(agent, marketplace, id, referral);
 
     expect(result).toEqual(expected);
   });
@@ -195,13 +139,7 @@ describe('generateAgentLink', () => {
       `https://ezbuycn.com/api/chaid.aspx?key=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D${id}`
     );
 
-    const result = generateAgentLink(
-      agent,
-      innerLink,
-      marketplace,
-      undefined,
-      referral
-    );
+    const result = generateAgentLink(agent, marketplace, id, referral);
 
     expect(result).toEqual(expected);
     expect(result.href).not.toContain(referral); // Affiliate links are not supported
@@ -209,27 +147,20 @@ describe('generateAgentLink', () => {
 
   test('generates basetao tmall link as taobao link', () => {
     const agent = 'basetao';
-    const link = generateMarketplaceLink('tmall', '738528616020');
     const expected = new URL(
       'https://www.basetao.com/best-taobao-agent-service/products/agent/taobao/738528616020.html'
     );
 
-    const result = generateAgentLink(agent, link, 'tmall', undefined, referral);
+    const result = generateAgentLink(agent, 'tmall', '738528616020', referral);
 
     expect(result).toEqual(expected);
     expect(result.href).not.toContain(referral); // Affiliate links are not supported
   });
 
-  test('link is not sanitized', () => {
+  it('should not include unsanitized parts', () => {
     const agent = 'hagobuy';
 
-    const result = generateAgentLink(
-      agent,
-      `${innerLink}&spm=as8df7a87sdf78asdf`,
-      marketplace,
-      undefined,
-      referral
-    );
+    const result = generateAgentLink(agent, marketplace, id, referral);
 
     const expected = new URL(
       `https://www.hagobuy.com/item/details?url=${encodeURIComponent(
@@ -237,20 +168,14 @@ describe('generateAgentLink', () => {
       )}&affcode=${referral}`
     );
 
-    expect(result).toEqual(expected);
+    expect(result).not.toEqual(expected);
   });
 
   test('generates raw link correctly', () => {
     const agent = 'raw';
     const expected = new URL(innerLink);
 
-    const result = generateAgentLink(
-      agent,
-      innerLink,
-      marketplace,
-      undefined,
-      referral
-    );
+    const result = generateAgentLink(agent, marketplace, id, referral);
 
     expect(result).toEqual(expected);
   });

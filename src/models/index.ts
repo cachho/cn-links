@@ -1,6 +1,6 @@
 import type { Agent, AgentWithRaw } from './Agent';
 import { agents, agentsWithRaw } from './Agent';
-import type { CnLinkSerial, SafeInstantiateResult } from './CnLink';
+import type { CnLinkSerial, CnLinkSerialInput, Type } from './CnLink';
 import { Id } from './Id';
 import {
   AgentLink,
@@ -27,6 +27,7 @@ import {
   nonLinkMarketplacesWithTld,
 } from './Marketplace';
 import { Referral } from './Referral';
+import { SafeInstantiateResult } from './SafeInstantiate';
 
 export {
   Agent,
@@ -36,6 +37,7 @@ export {
   AgentURL,
   AgentWithRaw,
   CnLinkSerial,
+  CnLinkSerialInput,
   Id,
   Marketplace,
   marketplaces,
@@ -55,4 +57,5 @@ export {
   RawURL,
   Referral,
   SafeInstantiateResult,
+  Type,
 };

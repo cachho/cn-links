@@ -27,10 +27,29 @@ export function isAgentLink(href: string | URL): boolean {
 
   if (!agent) return false;
 
+  if (agent === 'pandabuy') {
+    if (!link.pathname.startsWith('/shopdetail')) {
+      return false;
+    }
+  } else if (agent === 'allchinabuy') {
+    if (!link.pathname.includes('/shop/shop')) {
+      return false;
+    }
+  } else if (agent === 'hoobuy') {
+    if (!link.pathname.includes('/shop/')) {
+      return false;
+    }
+  } else if (agent === 'superbuy') {
+    if (!link.pathname.includes('/shop')) {
+      return false;
+    }
+  }
+
   try {
     const rawLink = extractRawLink(link);
     return isRawLink(rawLink);
-  } catch {
+  } catch (error) {
+    console.error('Error extracting raw link:', error);
     return false;
   }
 }

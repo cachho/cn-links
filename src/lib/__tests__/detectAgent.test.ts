@@ -1,7 +1,6 @@
+import { generateAgentLink } from '../../item/generateAgentLink';
 import { agents, marketplaces } from '../../models';
 import { detectAgent } from '../detectAgent'; // adjust the import path to match your project structure
-import { generateAgentLink } from '../generateAgentLink';
-import { generateMarketplaceLink } from '../generateRawLink';
 
 describe('detectAgent', () => {
   it('detects wegobuy', () => {
@@ -89,10 +88,21 @@ describe('detectAgent', () => {
   test('should work for all agents and marketplaces', () => {
     marketplaces.forEach((marketplace) => {
       agents.forEach((agent) => {
-        const marketplaceLink = generateMarketplaceLink(marketplace, '0');
-        const rawLink = generateAgentLink(agent, marketplaceLink);
+        const rawLink = generateAgentLink(agent, marketplace, '0');
         expect(detectAgent(rawLink)).toBe(agent);
       });
     });
+  });
+
+  it('should detect pandabuy from a store link', () => {
+    const url =
+      'https://www.pandabuy.com/shopdetail?ra=21&t=wd&id=1625671124&o=weidian.com';
+    expect(detectAgent(url)).toBe('pandabuy');
+  });
+
+  it('should detect cnfans from a store link', () => {
+    const url =
+      'https://cnfans.com/shops/?shop_type=taobao&num=1&sort=default&shop_id=277184856';
+    expect(detectAgent(url)).toBe('cnfans');
   });
 });

@@ -2,21 +2,30 @@ import type { Id } from './Id';
 import type { Marketplace } from './Marketplace';
 import type { Referral } from './Referral';
 
-export interface ICnLink {
+export interface ICnLinkBase {
   marketplace: Marketplace;
   id: Id;
   referrals: Referral;
 }
 
-export type CnLinkSerial = {
+export type ICnItemLink = ICnLinkBase;
+
+export type ICnStoreLink = ICnLinkBase;
+
+export interface ICnLink extends ICnItemLink {
+  instance: ICnItemLink | ICnStoreLink;
+}
+
+export type Type = 'item' | 'store';
+
+export interface CnLinkSerial {
   marketplace: Marketplace;
   id: Id;
-};
+  type: Type;
+}
 
-type SafeInstatiateSuccess<T> = { success: true; data: T };
-
-type SafeInstatiateFail = { success: false; error: string };
-
-export type SafeInstantiateResult<T> =
-  | SafeInstatiateSuccess<T>
-  | SafeInstatiateFail;
+export interface CnLinkSerialInput {
+  marketplace: Marketplace;
+  id: Id;
+  type?: Type;
+}

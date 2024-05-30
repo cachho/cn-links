@@ -13,7 +13,7 @@ export function decodeHoobuy(link: URL): {
   }
   const id = segments[2];
   if (!id) {
-    throw new Error('Missing ID parameter');
+    throw new Error(`Missing ID parameter from link: ${link.href}`);
   }
   const marketplaceSegment = segments[1];
   if (!marketplaceSegment) {

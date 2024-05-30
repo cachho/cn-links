@@ -9,7 +9,7 @@ export function decodeSuperbuy(link: URL): {
   // https://www.superbuy.com/en/page/rebates/shop/?shopid=106592833&platform=TB
   const id = link.searchParams.get('shopid');
   if (!id) {
-    throw new Error('Missing ID parameter');
+    throw new Error(`Missing ID parameter from link: ${link.href}`);
   }
   const marketplaceParam = link.searchParams.get('platform');
   if (!marketplaceParam) {

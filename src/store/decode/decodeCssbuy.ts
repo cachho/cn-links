@@ -15,7 +15,7 @@ export function decodeCssbuy(link: URL): {
   }
   const id = link.searchParams.get('shop');
   if (!id) {
-    throw new Error('Missing ID parameter');
+    throw new Error(`Missing ID parameter from link: ${link.href}`);
   }
 
   if (marketplace === '1688') {

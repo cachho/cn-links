@@ -25,7 +25,7 @@ export function decodePandabuy(link: URL): {
 
   const id = link.searchParams.get('id');
   if (!id) {
-    throw new Error('Missing ID parameter');
+    throw new Error(`Missing ID parameter from link: ${link.href}`);
   }
 
   if (marketplace === 'weidian') {

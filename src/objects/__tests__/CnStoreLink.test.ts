@@ -17,8 +17,9 @@ describe('CnStoreLink', () => {
   it('should be able to return an agent link from a raw link', () => {
     const href = 'https://weidian.com/?userid=1625671124';
     const link = new CnStoreLink(href);
-    expect(link.as('pandabuy')).toStrictEqual(
+    expect(link.as('pandabuy').href).toStrictEqual(
       new URL('https://www.pandabuy.com/shopdetail?ra=1&t=wd&id=1625671124')
+        .href
     );
   });
 
@@ -34,8 +35,8 @@ describe('CnStoreLink', () => {
   it('should be able to return a taobao link from a cnfans agent link', () => {
     const href = 'https://shop232138271.v.weidian.com/?userid=232138271';
     const link = new CnStoreLink(href);
-    expect(link.as('pandabuy')).toStrictEqual(
-      new URL('https://www.pandabuy.com/shopdetail?ra=1&t=wd&id=232138271')
+    expect(link.as('pandabuy').href).toStrictEqual(
+      new URL('https://www.pandabuy.com/shopdetail?ra=1&t=wd&id=232138271').href
     );
   });
 
@@ -106,8 +107,9 @@ describe('CnStoreLink', () => {
   it('should be able to convert vanity links', () => {
     const href = 'https://lyb2528.taobao.com/index.htm';
     const cnLink = new CnStoreLink(href);
-    expect(cnLink.as('pandabuy')).toStrictEqual(
+    expect(cnLink.as('pandabuy').href).toStrictEqual(
       new URL('https://www.pandabuy.com/shopdetail?ra=1&t=taobao&id=lyb2528')
+        .href
     );
   });
 

@@ -24,24 +24,21 @@ export function generateAgentLink(
   referral?: string,
   ra?: string
 ): AgentURL {
-  const urlParams = new URLSearchParams();
-
   // Pandabuy
   if (agent === 'pandabuy') {
+    const url = new URL(`https://www.pandabuy.com/shopdetail`);
     // https://www.pandabuy.com/shopdetail?ra=1&t=wd&id=1625671124
-    urlParams.set('ra', ra ?? '1');
+    url.searchParams.set('ra', ra ?? '1');
     if (pandabuyMarketplaceStrings.has(marketplace)) {
-      urlParams.set('t', pandabuyMarketplaceStrings.get(marketplace)!);
+      url.searchParams.set('t', pandabuyMarketplaceStrings.get(marketplace)!);
     } else {
       throw new Error('Unsupported marketplace');
     }
-    urlParams.set('id', id);
+    url.searchParams.set('id', id);
     if (referral) {
-      urlParams.set('inviteCode', referral);
+      url.searchParams.set('inviteCode', referral);
     }
-    return new URL(
-      `https://www.pandabuy.com/shopdetail?${urlParams.toString()}`
-    );
+    return url;
   }
 
   if (agent === 'cssbuy') {
@@ -55,12 +52,18 @@ export function generateAgentLink(
     url.searchParams.set('shop', id);
     // TODO: Its unkown what shop1 actually does, and since no working links found right now we have to update this later
     url.searchParams.set('shop1', '676198570');
+    if (referral) {
+      url.searchParams.set('promotionCode', referral);
+    }
     return url;
   }
 
   if (agent === 'hagobuy') {
     const url = new URL('https://www.hagobuy.com/item/store');
     url.searchParams.set('url', generateRawLink(marketplace, id).href);
+    if (referral) {
+      url.searchParams.set('affcode', referral);
+    }
     return url;
   }
 
@@ -69,6 +72,9 @@ export function generateAgentLink(
     const url = new URL('https://cnfans.com/shops/');
     url.searchParams.set('shop_type', marketplace);
     url.searchParams.set('shop_id', id);
+    if (referral) {
+      url.searchParams.set('ref', referral);
+    }
     return url;
   }
 
@@ -80,6 +86,9 @@ export function generateAgentLink(
     }
     url.searchParams.set('shopid', id);
     url.searchParams.set('platform', mp);
+    if (referral) {
+      url.searchParams.set('partnercode', referral);
+    }
     return url;
   }
 
@@ -88,7 +97,11 @@ export function generateAgentLink(
     if (!mp) {
       throw new Error('Unsupported marketplace for hoobuy');
     }
-    return new URL(`https://hoobuy.com/shop/${mp}/${id}`);
+    const url = new URL(`https://hoobuy.com/shop/${mp}/${id}`);
+    if (referral) {
+      url.searchParams.set('inviteCode', referral);
+    }
+    return url;
   }
 
   if (agent === 'superbuy') {
@@ -99,6 +112,9 @@ export function generateAgentLink(
     }
     url.searchParams.set('shopid', id);
     url.searchParams.set('platform', mp);
+    if (referral) {
+      url.searchParams.set('partnercode', referral);
+    }
     return url;
   }
 
@@ -107,7 +123,11 @@ export function generateAgentLink(
     if (!mp) {
       throw new Error('Unsupported marketplace for kameymall');
     }
-    return new URL(`https://www.kameymall.com/store/${id}_${mp}`);
+    const url = new URL(`https://www.kameymall.com/store/${id}_${mp}`);
+    if (referral) {
+      url.searchParams.set('code', referral);
+    }
+    return url;
   }
 
   // Raw Links

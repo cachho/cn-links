@@ -16,7 +16,7 @@ describe('generateAgentLink', () => {
 
     const result = generateAgentLink(agent, marketplace, id, referral);
 
-    expect(result).toEqual(expected);
+    expect(result.href).toEqual(expected.href);
   });
 
   test('generates pandabuy link correctly with ra', () => {
@@ -27,22 +27,16 @@ describe('generateAgentLink', () => {
 
     const result = generateAgentLink(agent, marketplace, id, referral, '3');
 
-    expect(result).toEqual(expected);
+    expect(result.href).toEqual(expected.href);
   });
 
   test('generates cssbuy link correctly', () => {
     const agent = 'cssbuy';
     const expected = new URL(
-      `https://cssbuy.com/productlist?t=micro&shop=${id}&shop1=676198570`
+      `https://cssbuy.com/productlist?t=micro&shop=${id}&shop1=676198570&promotionCode=myC0d3`
     );
 
-    const result = generateAgentLink(
-      agent,
-      marketplace,
-      id,
-      referral,
-      undefined
-    );
+    const result = generateAgentLink(agent, marketplace, id, referral);
 
     expect(result.href).toEqual(expected.href);
   });
@@ -50,7 +44,7 @@ describe('generateAgentLink', () => {
   it('generates cnfans link correctly', () => {
     const agent = 'cnfans';
     const expected = new URL(
-      `https://cnfans.com/shops/?shop_type=${marketplace}&shop_id=${id}`
+      `https://cnfans.com/shops/?shop_type=${marketplace}&shop_id=${id}&ref=myC0d3`
     );
 
     const result = generateAgentLink(agent, marketplace, id, referral);
@@ -61,8 +55,8 @@ describe('generateAgentLink', () => {
   it('should generate allchinabuy taobao links correctly', () => {
     const agent: Agent = 'allchinabuy';
     const expected =
-      'https://www.allchinabuy.com/en/page/shop/shop/?shopid=57303596&platform=TB';
-    const result = generateAgentLink(agent, 'taobao', '57303596');
+      'https://www.allchinabuy.com/en/page/shop/shop/?shopid=57303596&platform=TB&partnercode=myC0d3';
+    const result = generateAgentLink(agent, 'taobao', '57303596', referral);
     expect(result.href).toEqual(expected);
   });
 
@@ -151,7 +145,8 @@ describe('generateAgentLink', () => {
     agents.forEach((agent) => {
       marketplaces.forEach((mp) => {
         try {
-          generateAgentLink(agent, mp, '1234567');
+          const agentLink = generateAgentLink(agent, mp, '1234567', referral);
+          expect(agentLink.href).toContain(referral);
         } catch (error) {
           // Ignore errors for unsupported agents
           if (error instanceof Error) {

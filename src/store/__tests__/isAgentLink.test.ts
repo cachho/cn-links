@@ -1,3 +1,5 @@
+import { generateAgentLink as generateAgentItemLink } from '../../item/generateAgentLink';
+import { agents } from '../../models';
 import { isAgentLink } from '../isAgentLink';
 
 describe('isAgentLink', () => {
@@ -64,5 +66,22 @@ describe('isAgentLink', () => {
     const href =
       'https://www.pandabuy.com/NOTshopdetail?ra=21&t=wd&id=1625671124&o=weidian.com';
     expect(isAgentLink(href)).toBe(false);
+  });
+});
+
+describe('Test item links', () => {
+  jest.mock('../isRawLink', () => ({
+    isRawLink: jest.fn().mockReturnValue(true),
+  }));
+
+  jest.mock('../extractRawLink', () => ({
+    extractRawLink: jest.fn().mockReturnValue(new URL('https://example.com')),
+  }));
+
+  it('should return false early for all item links', () => {
+    agents.forEach((agent) => {
+      const agentLink = generateAgentItemLink(agent, 'taobao', '123456');
+      expect(isAgentLink(agentLink.href)).toBe(false);
+    });
   });
 });

@@ -1,5 +1,6 @@
 import { agents } from '../../models';
 import { generateAgentLink as generateAgentStoreLink } from '../../store/generateAgentLink';
+import { generateAgentLink } from '../generateAgentLink';
 import { isAgentLink } from '../isAgentLink';
 
 jest.mock('../isRawLink', () => ({
@@ -23,8 +24,9 @@ describe('Test store links', () => {
       const result = isAgentLink(agentLink.href);
       // We mock it so that it returns true if it isn't early set to false
       if (result) {
+        const itemAgentLink = generateAgentLink(agent, 'taobao', '123456');
         throw new Error(
-          `Failed for agent ${agent} with link: ${agentLink.href}`
+          `Failed for agent ${agent} with link: ${agentLink.href}, it should only work for ${itemAgentLink}`
         );
       }
     });

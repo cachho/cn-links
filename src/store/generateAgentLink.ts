@@ -78,6 +78,17 @@ export function generateAgentLink(
     return url;
   }
 
+  if (agent === 'mulebuy') {
+    // https://mulebuy.com/shops/?shop_type=taobao&shop_id=106592833&num=1&sort=default
+    const url = new URL('https://mulebuy.com/shops/');
+    url.searchParams.set('shop_type', marketplace);
+    url.searchParams.set('shop_id', id);
+    if (referral) {
+      url.searchParams.set('ref', referral);
+    }
+    return url;
+  }
+
   if (agent === 'allchinabuy') {
     const url = new URL('https://www.allchinabuy.com/en/page/shop/shop/');
     const mp = allchinabuyMarketplaceStrings.get(marketplace);

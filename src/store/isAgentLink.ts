@@ -27,6 +27,12 @@ export function isAgentLink(href: string | URL): boolean {
 
   if (!agent) return false;
 
+  // Return false for unsupported agent links
+  if (agent === 'wegobuy') return false;
+  if (agent === 'ezbuycn') return false;
+  if (agent === 'basetao') return false;
+  if (agent === 'sugargoo') return false;
+
   if (agent === 'pandabuy') {
     if (!link.pathname.startsWith('/shopdetail')) {
       return false;

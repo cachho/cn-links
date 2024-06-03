@@ -27,6 +27,43 @@ export function isAgentLink(href: string | URL): boolean {
 
   if (!agent) return false;
 
+  if (agent === 'superbuy' && link.pathname.includes('/shop')) {
+    return false;
+  }
+  if (agent === 'pandabuy' && link.pathname.startsWith('/shopdetail')) {
+    return false;
+  }
+  if (agent === 'cssbuy' && !link.pathname.startsWith('/item')) {
+    return false;
+  }
+  if (agent === 'hagobuy' && link.pathname.startsWith('/item/store')) {
+    return false;
+  }
+  if (agent === 'kameymall' && !link.pathname.includes('/item')) {
+    return false;
+  }
+  if (agent === 'cnfans' && !link.pathname.startsWith('/product')) {
+    return false;
+  }
+  if (agent === 'hoobuy' && !link.pathname.includes('/product')) {
+    return false;
+  }
+  if (agent === 'allchinabuy' && link.pathname.includes('/shop')) {
+    return false;
+  }
+  // if (agent === 'wegobuy' && link.pathname.includes('/shop')) {
+  //   return false;
+  // }
+  // if (agent === 'ezbuycn' && link.pathname.includes('/shop')) {
+  //   return false;
+  // }
+  if (agent === 'sugargoo' && !link.href.includes('/productDetail')) {
+    return false;
+  }
+  if (agent === 'basetao' && !link.pathname.includes('/products')) {
+    return false;
+  }
+
   try {
     const rawLink = extractRawLink(link);
     return isRawLink(rawLink);

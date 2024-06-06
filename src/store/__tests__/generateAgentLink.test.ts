@@ -113,6 +113,13 @@ describe('generateAgentLink', () => {
     expect(result.href).toEqual(expected);
   });
 
+  it('should work for mulebuy links', () => {
+    const agent: Agent = 'mulebuy';
+    const expected = `https://mulebuy.com/shops/?shop_type=taobao&shop_id=249029897&ref=${referral}`;
+    const result = generateAgentLink(agent, 'taobao', '249029897', referral);
+    expect(result.href).toEqual(expected);
+  });
+
   it('should work both ways, if a link can be decoded for an agent, it should also be able to be generated it', () => {
     const agentsThatSupportExtraction = agents.filter((agent) => {
       try {

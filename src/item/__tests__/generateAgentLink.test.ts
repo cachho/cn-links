@@ -133,6 +133,17 @@ describe('generateAgentLink', () => {
     expect(result).toEqual(expected);
   });
 
+  test('generates mulebuy link correctly', () => {
+    const agent = 'mulebuy';
+    const expected = new URL(
+      `https://mulebuy.com/product/?shop_type=${marketplace}&id=${id}&ref=${referral}`
+    );
+
+    const result = generateAgentLink(agent, marketplace, id, referral);
+
+    expect(result.href).toEqual(expected.href);
+  });
+
   test('generates ezbuycn link correctly', () => {
     const agent = 'ezbuycn';
     const expected = new URL(

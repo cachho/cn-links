@@ -147,8 +147,8 @@ export function generateAgentLink(
 
   // CnFans
   if (agent === 'mulebuy') {
-    // https://mulebuy.com/product-test/product/?shop_type=taobao&id=781807828902
-    const url = new URL('https://mulebuy.com/product-test/product/');
+    // https://mulebuy.com/product/?shop_type=taobao&id=781807828902
+    const url = new URL('https://mulebuy.com/product/');
     if (marketplace === 'taobao' || marketplace === 'tmall') {
       url.searchParams.set('shop_type', 'taobao');
     } else if (marketplace === 'weidian') {

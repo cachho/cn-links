@@ -57,6 +57,10 @@ export function isAgentLink(href: string | URL): boolean {
     if (!link.pathname.startsWith('/shops')) {
       return false;
     }
+  } else if (agent === 'mulebuy') {
+    if (!link.pathname.startsWith('/shops')) {
+      return false;
+    }
   } else if (agent === 'hagobuy') {
     if (!link.pathname.startsWith('/item/store')) {
       return false;

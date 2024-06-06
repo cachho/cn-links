@@ -6,6 +6,7 @@ import { decodeCssbuy } from './decode/decodeCssbuy';
 import { decodeHagobuy } from './decode/decodeHagobuy';
 import { decodeHoobuy } from './decode/decodeHoobuy';
 import { decodeKameymall } from './decode/decodeKameymall';
+import { decodeMulebuy } from './decode/decodeMulebuy';
 import { decodePandabuy } from './decode/decodePandabuy';
 import { decodeSuperbuy } from './decode/decodeSuperbuy';
 import { generateRawLink } from './generateRawLink';
@@ -29,6 +30,11 @@ export function extractRawLink(href: AgentURL): RawURL {
 
   if (agent === 'cnfans') {
     const { marketplace, id } = decodeCnFans(link);
+    return generateRawLink(marketplace, id);
+  }
+
+  if (agent === 'mulebuy') {
+    const { marketplace, id } = decodeMulebuy(link);
     return generateRawLink(marketplace, id);
   }
 

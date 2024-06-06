@@ -145,6 +145,27 @@ export function generateAgentLink(
     return new URL(paramString ? `${url}?${paramString}` : url);
   }
 
+  // CnFans
+  if (agent === 'mulebuy') {
+    // https://mulebuy.com/product/?shop_type=taobao&id=781807828902
+    const url = new URL('https://mulebuy.com/product/');
+    if (marketplace === 'taobao' || marketplace === 'tmall') {
+      url.searchParams.set('shop_type', 'taobao');
+    } else if (marketplace === 'weidian') {
+      url.searchParams.set('shop_type', 'weidian');
+    } else if (marketplace === '1688') {
+      url.searchParams.set('shop_type', 'ali_1688');
+    } else {
+      throw new Error('Marketplace could not be detected for CnFans');
+    }
+    url.searchParams.set('id', id);
+
+    if (referral) {
+      url.searchParams.set('ref', referral);
+    }
+    return url;
+  }
+
   if (agent === 'ezbuycn') {
     // https://ezbuycn.com/api/chaid.aspx?key=https://weidian.com/item.html?itemID=6308093508&spider_token=4572
     urlParams.set('key', generateRawLink(marketplace, id).href);

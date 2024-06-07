@@ -10,6 +10,8 @@ import { detectMarketplace } from './lib/detectMarketplace';
 import { detectNonLinkMarketplace } from './lib/detectNonLinkMarketplace';
 import { CnItemLink, CnLink, CnStoreLink } from './objects';
 import { agentSupportsStore } from './store/agentSupportsStore';
+import { generateAgentLink as generateAgentStoreLink } from './store/generateAgentLink';
+import { generateRawLink as generateRawStoreLink } from './store/generateRawLink';
 
 export * from './models';
 
@@ -24,7 +26,9 @@ export {
   extractId,
   filterLinks,
   generateAgentLink,
+  generateAgentStoreLink,
   generateRawLink,
+  generateRawStoreLink,
   isAgentLink,
   isNonLinkMarketplace,
   isRawLink,

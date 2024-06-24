@@ -70,5 +70,11 @@ export function detectAgent(href: URL | string): Agent | undefined {
   ) {
     return 'basetao';
   }
+  if (
+    link.hostname === 'www.eastmallbuy.com' ||
+    link.hostname === 'eastmallbuy.com'
+  ) {
+    return 'eastmallbuy';
+  }
   return undefined;
 }

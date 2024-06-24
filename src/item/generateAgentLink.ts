@@ -217,6 +217,16 @@ export function generateAgentLink(
     return new URL(url);
   }
 
+  if (agent === 'eastmallbuy') {
+    const url = new URL('https://eastmallbuy.com/index/item/index.html');
+    url.searchParams.set('searchlang', 'en');
+    url.searchParams.set('url', generateRawLink(marketplace, id).href);
+    if (referral) {
+      url.searchParams.set('inviter', referral);
+    }
+    return url;
+  }
+
   // Raw Links
   if (agent === 'raw') {
     // https://detail.1688.com/offer/679865234523.html

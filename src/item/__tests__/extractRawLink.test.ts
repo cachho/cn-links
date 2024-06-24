@@ -204,6 +204,15 @@ describe('extractRawLink', () => {
     );
   });
 
+  it('should be able to handle eastmallbuy links', () => {
+    const href =
+      'https://eastmallbuy.com/index/item/index.html?searchlang=en&url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D781807828903';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink).toEqual(
+      new URL('https://item.taobao.com/item.htm?id=781807828903')
+    );
+  });
+
   it('should throw an error for kameymall purchase history links', () => {
     const href =
       'https://www.kameymall.com/purchases/1730295605736697858/%E3%80%90%E6%9C%80%E9%AB%98%E7%89%88%E6%9C%AC%E3%80%91%E7%99%BE%E6%90%ADchrome-hearts%E5%85%8B%E7%BD%97%E5%BF%83%E9%A1%B9%E9%93%BE-%E5%85%8B%E7%BD%97%E5%BF%83%E5%8F%8C%E5%8D%81%E5%AD%97%E6%9E%B6%E6%83%85%E4%BE%A3%E9%A1%B9%E9%93%BE-%E6%BD%AE%E6%B5%81%E7%94%B7%E5%A3%AB%E5%A5%B3%E5%A3%AB%E5%8D%81%E5%AD%97%E6%9E%B6%E9%A1%B9%E9%93%BE%E5%A5%97%E9%93%BE';

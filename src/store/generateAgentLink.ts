@@ -141,6 +141,16 @@ export function generateAgentLink(
     return url;
   }
 
+  if (agent === 'joyabuy') {
+    const url = new URL('https://joyabuy.com/shops/');
+    url.searchParams.set('shop_type', marketplace);
+    url.searchParams.set('shop_id', id);
+    if (referral) {
+      url.searchParams.set('ref', referral);
+    }
+    return url;
+  }
+
   // Raw Links
   if (agent === 'raw') {
     return generateRawLink(marketplace, id);

@@ -66,6 +66,9 @@ export function isAgentLink(href: string | URL): boolean {
   if (agent === 'mulebuy' && !link.pathname.startsWith('/product')) {
     return false;
   }
+  if (agent === 'joyabuy' && !link.pathname.includes('/product')) {
+    return false;
+  }
 
   try {
     const rawLink = extractRawLink(link);

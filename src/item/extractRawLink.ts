@@ -5,6 +5,7 @@ import { decodeBasetao } from './decode/decodeBasetao';
 import { decodeCnFans } from './decode/decodeCnFans';
 import { decodeCssbuy } from './decode/decodeCssbuy';
 import { decodeHoobuy } from './decode/decodeHoobuy';
+import { decodeJoyabuy } from './decode/decodeJoyabuy';
 import { decodeMulebuy } from './decode/decodeMulebuy';
 
 /**
@@ -54,6 +55,10 @@ export function extractRawLink(href: AgentURL): RawURL {
 
   if (agent === 'mulebuy') {
     return decodeMulebuy(link);
+  }
+
+  if (agent === 'joyabuy') {
+    return decodeJoyabuy(link);
   }
 
   if (agent === 'hoobuy') {

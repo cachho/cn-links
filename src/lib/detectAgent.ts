@@ -82,5 +82,8 @@ export function detectAgent(href: URL | string): Agent | undefined {
   ) {
     return 'hubbuycn';
   }
+  if (link.hostname === 'www.joyabuy.com' || link.hostname === 'joyabuy.com') {
+    return 'joyabuy';
+  }
   return undefined;
 }

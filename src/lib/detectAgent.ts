@@ -76,5 +76,11 @@ export function detectAgent(href: URL | string): Agent | undefined {
   ) {
     return 'eastmallbuy';
   }
+  if (
+    link.hostname === 'www.hubbuycn.com' ||
+    link.hostname === 'hubbuycn.com'
+  ) {
+    return 'hubbuycn';
+  }
   return undefined;
 }

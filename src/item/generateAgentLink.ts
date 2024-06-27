@@ -227,6 +227,16 @@ export function generateAgentLink(
     return url;
   }
 
+  if (agent === 'hubbuycn') {
+    const url = new URL('https://www.hubbuycn.com/index/item/index.html');
+    url.searchParams.set('searchlang', 'en');
+    url.searchParams.set('url', generateRawLink(marketplace, id).href);
+    if (referral) {
+      url.searchParams.set('inviter', referral);
+    }
+    return url;
+  }
+
   // Raw Links
   if (agent === 'raw') {
     // https://detail.1688.com/offer/679865234523.html

@@ -151,6 +151,16 @@ export function generateAgentLink(
     return url;
   }
 
+  if (agent === 'orientdig') {
+    const url = new URL('https://orientdig.com/shops/');
+    url.searchParams.set('shop_type', marketplace);
+    url.searchParams.set('shop_id', id);
+    if (referral) {
+      url.searchParams.set('ref', referral);
+    }
+    return url;
+  }
+
   // Raw Links
   if (agent === 'raw') {
     return generateRawLink(marketplace, id);

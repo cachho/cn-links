@@ -85,5 +85,11 @@ export function detectAgent(href: URL | string): Agent | undefined {
   if (link.hostname === 'www.joyabuy.com' || link.hostname === 'joyabuy.com') {
     return 'joyabuy';
   }
+  if (
+    link.hostname === 'www.orientdig.com' ||
+    link.hostname === 'orientdig.com'
+  ) {
+    return 'orientdig';
+  }
   return undefined;
 }

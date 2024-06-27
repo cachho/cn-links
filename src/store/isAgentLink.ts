@@ -75,6 +75,10 @@ export function isAgentLink(href: string | URL): boolean {
     if (!link.pathname.startsWith('/shops')) {
       return false;
     }
+  } else if (agent === 'orientdig') {
+    if (!link.pathname.startsWith('/shops')) {
+      return false;
+    }
   }
 
   try {

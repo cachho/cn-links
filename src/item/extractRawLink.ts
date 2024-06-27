@@ -7,6 +7,7 @@ import { decodeCssbuy } from './decode/decodeCssbuy';
 import { decodeHoobuy } from './decode/decodeHoobuy';
 import { decodeJoyabuy } from './decode/decodeJoyabuy';
 import { decodeMulebuy } from './decode/decodeMulebuy';
+import { decodeOrientdig } from './decode/decodeOrientdig';
 
 /**
  * @Internal
@@ -59,6 +60,10 @@ export function extractRawLink(href: AgentURL): RawURL {
 
   if (agent === 'joyabuy') {
     return decodeJoyabuy(link);
+  }
+
+  if (agent === 'orientdig') {
+    return decodeOrientdig(link);
   }
 
   if (agent === 'hoobuy') {

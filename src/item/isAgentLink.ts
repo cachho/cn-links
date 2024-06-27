@@ -69,6 +69,9 @@ export function isAgentLink(href: string | URL): boolean {
   if (agent === 'joyabuy' && !link.pathname.includes('/product')) {
     return false;
   }
+  if (agent === 'orientdig' && !link.pathname.includes('/product')) {
+    return false;
+  }
 
   try {
     const rawLink = extractRawLink(link);

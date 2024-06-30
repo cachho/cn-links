@@ -5,6 +5,7 @@ import { decodeBasetao } from './decode/decodeBasetao';
 import { decodeCnFans } from './decode/decodeCnFans';
 import { decodeCssbuy } from './decode/decodeCssbuy';
 import { decodeHoobuy } from './decode/decodeHoobuy';
+import { decodeHubbuyCn } from './decode/decodeHubbuyCn';
 import { decodeJoyabuy } from './decode/decodeJoyabuy';
 import { decodeMulebuy } from './decode/decodeMulebuy';
 import { decodeOrientdig } from './decode/decodeOrientdig';
@@ -76,6 +77,14 @@ export function extractRawLink(href: AgentURL): RawURL {
 
   if (agent === 'basetao') {
     return decodeBasetao(link);
+  }
+
+  if (agent === 'hubbuycn') {
+    const innerLink = decodeHubbuyCn(link);
+    if (!innerLink) {
+      throw new Error(`Could not extract inner Hubbuy link from ${link.href}`);
+    }
+    return innerLink;
   }
 
   if (agent === 'kameymall') {

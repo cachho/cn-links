@@ -58,7 +58,9 @@ export function detectAgent(href: URL | string): Agent | undefined {
   }
   if (
     link.hostname === 'www.allchinabuy.com' ||
-    link.hostname === 'allchinabuy.com'
+    link.hostname === 'allchinabuy.com' ||
+    link.hostname === 'www.acbuy.com' ||
+    link.hostname === 'acbuy.com'
   ) {
     return 'allchinabuy';
   }

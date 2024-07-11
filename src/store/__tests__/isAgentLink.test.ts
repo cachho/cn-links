@@ -65,4 +65,10 @@ describe('isAgentLink', () => {
       'https://www.pandabuy.com/NOTshopdetail?ra=21&t=wd&id=1625671124&o=weidian.com';
     expect(isAgentLink(href)).toBe(false);
   });
+
+  it('should detect agent link from shortened allchinabuy domain', () => {
+    const href =
+      'https://www.acbuy.com/en/page/shop/shop/?shopid=1797960313&platform=WD';
+    expect(isAgentLink(href)).toBe(true);
+  });
 });

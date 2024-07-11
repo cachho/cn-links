@@ -248,6 +248,15 @@ describe('extractRawLink', () => {
     );
   });
 
+  it('should work with allchinabuy shortened domain', () => {
+    const href =
+      'https://www.acbuy.com/en/page/buy/?nTag=Home-search&from=search-input&_search=url&position=&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D5726306637';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink).toEqual(
+      new URL('https://weidian.com/item.html?itemID=5726306637')
+    );
+  });
+
   test('should work for all agents and marketplaces', () => {
     const testId = '6481396504';
     marketplaces.forEach((marketplace) => {

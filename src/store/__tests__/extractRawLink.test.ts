@@ -116,6 +116,13 @@ describe('extractRawLink', () => {
     expect(rawLink.href).toEqual('https://weidian.com/?userid=123456');
   });
 
+  it('should work for shortened allchinabuy domain', () => {
+    const href =
+      'https://www.acbuy.com/en/page/shop/shop/?shopid=1866344120&platform=WD';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual('https://weidian.com/?userid=1866344120');
+  });
+
   it('should work both ways, if a link can be generated for an agent, it should also be able to decode it', () => {
     const agentsThatSupportGeneration = agents.filter((agent) => {
       try {

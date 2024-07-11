@@ -105,4 +105,10 @@ describe('detectAgent', () => {
       'https://cnfans.com/shops/?shop_type=taobao&num=1&sort=default&shop_id=277184856';
     expect(detectAgent(url)).toBe('cnfans');
   });
+
+  it('should detect allchinabuy from shortened domain', () => {
+    const url =
+      'https://www.acbuy.com/en/page/buy/?nTag=Home-search&from=search-input&_search=url&position=&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D5726306637';
+    expect(detectAgent(url)).toBe('allchinabuy');
+  });
 });

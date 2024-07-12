@@ -74,10 +74,18 @@ export function isAgentLink(href: string | URL): boolean {
   ) {
     return false;
   }
-  if (agent === 'joyabuy' && !link.pathname.includes('/product')) {
+  if (
+    agent === 'joyabuy' &&
+    !link.pathname.includes('/product') &&
+    !link.pathname.slice(3).startsWith('/product')
+  ) {
     return false;
   }
-  if (agent === 'orientdig' && !link.pathname.includes('/product')) {
+  if (
+    agent === 'orientdig' &&
+    !link.pathname.includes('/product') &&
+    !link.pathname.slice(3).startsWith('/product')
+  ) {
     return false;
   }
 

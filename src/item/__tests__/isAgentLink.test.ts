@@ -10,6 +10,7 @@ describe('isAgentLink', () => {
       'https://eastmallbuy.com/index/item/index.html?searchlang=en&url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D781807828904',
       'https://cnfans.com/fr/product/?shop_type=taobao&id=726145768645',
       'https://mulebuy.com/zh/product/?shop_type=taobao&id=726526607194',
+      'https://joyabuy.com/es/product/?shop_type=taobao&id=726526607194',
     ];
 
     agentLinks.forEach((link) => {

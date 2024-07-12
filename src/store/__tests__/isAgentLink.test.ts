@@ -71,4 +71,16 @@ describe('isAgentLink', () => {
       'https://www.acbuy.com/en/page/shop/shop/?shopid=1797960313&platform=WD';
     expect(isAgentLink(href)).toBe(true);
   });
+
+  it('should work for other languages of cnfans', () => {
+    const href =
+      'https://cnfans.com/de/shops/?shop_type=taobao&num=1&sort=default&shop_id=277184856';
+    expect(isAgentLink(href)).toBe(true);
+  });
+
+  it('should work for other languages of mulebuy', () => {
+    const href =
+      'https://mulebuy.com/zh/shops/?shop_type=taobao&num=1&sort=default&shop_id=192365862';
+    expect(isAgentLink(href)).toBe(true);
+  });
 });

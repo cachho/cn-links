@@ -42,7 +42,11 @@ export function isAgentLink(href: string | URL): boolean {
   if (agent === 'kameymall' && !link.pathname.includes('/item')) {
     return false;
   }
-  if (agent === 'cnfans' && !link.pathname.startsWith('/product')) {
+  if (
+    agent === 'cnfans' &&
+    !link.pathname.startsWith('/product') &&
+    !link.pathname.slice(3).startsWith('/product')
+  ) {
     return false;
   }
   if (agent === 'hoobuy' && !link.pathname.includes('/product')) {
@@ -63,13 +67,25 @@ export function isAgentLink(href: string | URL): boolean {
   if (agent === 'basetao' && !link.pathname.includes('/products')) {
     return false;
   }
-  if (agent === 'mulebuy' && !link.pathname.startsWith('/product')) {
+  if (
+    agent === 'mulebuy' &&
+    !link.pathname.startsWith('/product') &&
+    !link.pathname.slice(3).startsWith('/product')
+  ) {
     return false;
   }
-  if (agent === 'joyabuy' && !link.pathname.includes('/product')) {
+  if (
+    agent === 'joyabuy' &&
+    !link.pathname.includes('/product') &&
+    !link.pathname.slice(3).startsWith('/product')
+  ) {
     return false;
   }
-  if (agent === 'orientdig' && !link.pathname.includes('/product')) {
+  if (
+    agent === 'orientdig' &&
+    !link.pathname.includes('/product') &&
+    !link.pathname.slice(3).startsWith('/product')
+  ) {
     return false;
   }
 

@@ -257,6 +257,24 @@ describe('extractRawLink', () => {
     );
   });
 
+  it('should work for other languages in cnfans', () => {
+    const href =
+      'https://cnfans.com/fr/product/?shop_type=taobao&id=726145768645';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://item.taobao.com/item.htm?id=726145768645'
+    );
+  });
+
+  it('should work for other languages in mulebuy', () => {
+    const href =
+      'https://mulebuy.com/zh/product/?shop_type=taobao&id=726526607194';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://item.taobao.com/item.htm?id=726526607194'
+    );
+  });
+
   test('should work for all agents and marketplaces', () => {
     const testId = '6481396504';
     marketplaces.forEach((marketplace) => {

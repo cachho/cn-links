@@ -130,6 +130,13 @@ describe('extractRawLink', () => {
     expect(rawLink.href).toEqual('https://shop277184856.taobao.com/');
   });
 
+  it('should work for other languages of mulebuy (for the day when it comes)', () => {
+    const href =
+      'https://mulebuy.com/zh/shops/?shop_type=taobao&num=1&sort=default&shop_id=192365862';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual('https://shop192365862.taobao.com/');
+  });
+
   it('should work both ways, if a link can be generated for an agent, it should also be able to decode it', () => {
     const agentsThatSupportGeneration = agents.filter((agent) => {
       try {

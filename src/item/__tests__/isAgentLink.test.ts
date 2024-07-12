@@ -9,6 +9,7 @@ describe('isAgentLink', () => {
       'https://www.pandabuy.com/product?url=PJ9wmDFVd3v76X3rgKYsRxKKLjYDS%2BBFVp0GdAKYXCRMkx7gg84zB7SNapNjLwy7N2YcLYSO2fBXzdS67b9HMqOarCMoQC0MUE4E8w%3D%3D',
       'https://eastmallbuy.com/index/item/index.html?searchlang=en&url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D781807828904',
       'https://cnfans.com/fr/product/?shop_type=taobao&id=726145768645',
+      'https://mulebuy.com/zh/product/?shop_type=taobao&id=726526607194',
     ];
 
     agentLinks.forEach((link) => {

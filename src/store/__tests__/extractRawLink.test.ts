@@ -123,6 +123,13 @@ describe('extractRawLink', () => {
     expect(rawLink.href).toEqual('https://weidian.com/?userid=1866344120');
   });
 
+  it('should work for other languages of cnfans', () => {
+    const href =
+      'https://cnfans.com/de/shops/?shop_type=taobao&num=1&sort=default&shop_id=277184856';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual('https://shop277184856.taobao.com/');
+  });
+
   it('should work both ways, if a link can be generated for an agent, it should also be able to decode it', () => {
     const agentsThatSupportGeneration = agents.filter((agent) => {
       try {

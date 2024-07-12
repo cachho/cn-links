@@ -56,7 +56,10 @@ export function isAgentLink(href: string | URL): boolean {
       return false;
     }
   } else if (agent === 'cnfans') {
-    if (!link.pathname.startsWith('/shops')) {
+    if (
+      !link.pathname.startsWith('/shops') &&
+      !link.pathname.slice(3).startsWith('/shops')
+    ) {
       return false;
     }
   } else if (agent === 'mulebuy') {

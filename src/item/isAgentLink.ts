@@ -42,7 +42,11 @@ export function isAgentLink(href: string | URL): boolean {
   if (agent === 'kameymall' && !link.pathname.includes('/item')) {
     return false;
   }
-  if (agent === 'cnfans' && !link.pathname.startsWith('/product')) {
+  if (
+    agent === 'cnfans' &&
+    !link.pathname.startsWith('/product') &&
+    !link.pathname.slice(3).startsWith('/product')
+  ) {
     return false;
   }
   if (agent === 'hoobuy' && !link.pathname.includes('/product')) {

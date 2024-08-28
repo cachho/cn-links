@@ -275,6 +275,23 @@ describe('extractRawLink', () => {
     );
   });
 
+  it('should work for oopbuy (weidian)', () => {
+    const href =
+      'https://www.oopbuy.com/product/weidian/7231813762?inviteCode=test';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://weidian.com/item.html?itemID=7231813762'
+    );
+  });
+
+  it('should work for oopbuy (taobao)', () => {
+    const href = 'https://www.oopbuy.com/product/1/7231813762?inviteCode=test';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://item.taobao.com/item.htm?id=7231813762'
+    );
+  });
+
   test('should work for all agents and marketplaces', () => {
     const testId = '6481396504';
     marketplaces.forEach((marketplace) => {

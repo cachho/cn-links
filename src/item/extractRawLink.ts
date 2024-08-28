@@ -8,6 +8,7 @@ import { decodeHoobuy } from './decode/decodeHoobuy';
 import { decodeHubbuyCn } from './decode/decodeHubbuyCn';
 import { decodeJoyabuy } from './decode/decodeJoyabuy';
 import { decodeMulebuy } from './decode/decodeMulebuy';
+import { decodeOopbuy } from './decode/decodeOopbuy';
 import { decodeOrientdig } from './decode/decodeOrientdig';
 
 /**
@@ -100,11 +101,17 @@ export function extractRawLink(href: AgentURL): RawURL {
     }
   }
 
+  if (agent === 'oopbuy') {
+    return decodeOopbuy(link);
+  }
+
   let innerParam: string | null = null;
 
   if (agent === 'ezbuycn') {
     innerParam = link.searchParams.get('key');
   }
+
+  // General fallback starts here
 
   if (!innerParam) {
     innerParam = link.searchParams.get('url');
@@ -114,6 +121,8 @@ export function extractRawLink(href: AgentURL): RawURL {
       `Error extracting inner link, 'url' query param not found: ${link.href}`
     );
   }
+
+  // Special case for pandabuy decryption
 
   if (agent === 'pandabuy' && innerParam.startsWith('PJ')) {
     const extracted = decryptPandabuy(innerParam);

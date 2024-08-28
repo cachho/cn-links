@@ -156,6 +156,16 @@ describe('generateAgentLink', () => {
     expect(result.href).not.toContain(referral); // Affiliate links are not supported
   });
 
+  it('should generate oopbuy links', () => {
+    const agent = 'oopbuy';
+    const expected = new URL(
+      `https://www.oopbuy.com/product/weidian/7231813762?inviteCode=${referral}`
+    );
+
+    const result = generateAgentLink(agent, 'weidian', '7231813762', referral);
+    expect(result.href).toEqual(expected.href);
+  });
+
   test('generates basetao tmall link as taobao link', () => {
     const agent = 'basetao';
     const expected = new URL(

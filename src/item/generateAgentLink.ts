@@ -1,4 +1,5 @@
 import type { AgentURL, AgentWithRaw, Id, Marketplace } from '../models';
+import { oopbuyMarketplaceStrings } from '../store/data/oopbuy';
 import { generateRawLink } from './generateRawLink';
 
 /**
@@ -269,6 +270,19 @@ export function generateAgentLink(
     url.searchParams.set('id', id);
     if (referral) {
       url.searchParams.set('ref', referral);
+    }
+    return url;
+  }
+
+  if (agent === 'oopbuy') {
+    // https://www.oopbuy.com/product/weidian/7231813764?inviteCode=ABC
+    const url = new URL(
+      `https://www.oopbuy.com/product/${oopbuyMarketplaceStrings.get(
+        marketplace
+      )}/${id}`
+    );
+    if (referral) {
+      url.searchParams.set('inviteCode', referral);
     }
     return url;
   }

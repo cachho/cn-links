@@ -93,5 +93,8 @@ export function detectAgent(href: URL | string): Agent | undefined {
   ) {
     return 'orientdig';
   }
+  if (link.hostname === 'www.oopbuy.com' || link.hostname === 'oopbuy.com') {
+    return 'oopbuy';
+  }
   return undefined;
 }

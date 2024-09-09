@@ -88,6 +88,14 @@ export function isAgentLink(href: string | URL): boolean {
   ) {
     return false;
   }
+  if (
+    agent === 'lovegobuy' &&
+    (!link.hash ||
+      !link.hash.includes('/goods') ||
+      !link.hash.includes('/detail'))
+  ) {
+    return false;
+  }
 
   try {
     const rawLink = extractRawLink(link);

@@ -166,6 +166,17 @@ describe('generateAgentLink', () => {
     expect(result.href).toEqual(expected.href);
   });
 
+  it('should generate lovegobuy links correctly', () => {
+    const agent = 'lovegobuy';
+    const expected = new URL(
+      `https://www.lovegobuy.com/pc/#/goods/detail?platform=${marketplace}&goodsId=${id}&invite_code=${referral}`
+    );
+
+    const result = generateAgentLink(agent, marketplace, id, referral);
+
+    expect(result).toEqual(expected);
+  });
+
   test('generates basetao tmall link as taobao link', () => {
     const agent = 'basetao';
     const expected = new URL(

@@ -287,6 +287,19 @@ export function generateAgentLink(
     return url;
   }
 
+  if (agent === 'lovegobuy') {
+    // https://www.lovegobuy.com/pc/#/goods/detail?platform=taobao&goodsId=675330231499&invite_code=aff
+    const searchParams = new URLSearchParams();
+    searchParams.set('platform', marketplace);
+    searchParams.set('goodsId', id);
+    if (referral) {
+      searchParams.set('invite_code', referral);
+    }
+    return new URL(
+      `https://www.lovegobuy.com/pc/#/goods/detail?${searchParams.toString()}`
+    );
+  }
+
   // Raw Links
   if (agent === 'raw') {
     // https://detail.1688.com/offer/679865234523.html

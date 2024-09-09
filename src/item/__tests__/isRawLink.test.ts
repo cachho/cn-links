@@ -45,6 +45,13 @@ describe('isMarketplace', () => {
     expect(result).toBe(false);
   });
 
+  it('should return false for an agent with a hash link', () => {
+    const href =
+      'https://www.lovegobuy.com/pc/#/goods/detail?platform=weidian&goodsId=4480454093';
+    const result = isRawLink(href);
+    expect(result).toBe(false);
+  });
+
   it('should return false for an agent link with a supported marketplace URL', () => {
     const href =
       'https://www.wegobuy.com/en/page/buy?from=search-input&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemId%3D3053526244';

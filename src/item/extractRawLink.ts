@@ -7,6 +7,7 @@ import { decodeCssbuy } from './decode/decodeCssbuy';
 import { decodeHoobuy } from './decode/decodeHoobuy';
 import { decodeHubbuyCn } from './decode/decodeHubbuyCn';
 import { decodeJoyabuy } from './decode/decodeJoyabuy';
+import { decodeLovegobuy } from './decode/decodeLoveGoBuy';
 import { decodeMulebuy } from './decode/decodeMulebuy';
 import { decodeOopbuy } from './decode/decodeOopbuy';
 import { decodeOrientdig } from './decode/decodeOrientdig';
@@ -103,6 +104,10 @@ export function extractRawLink(href: AgentURL): RawURL {
 
   if (agent === 'oopbuy') {
     return decodeOopbuy(link);
+  }
+
+  if (agent === 'lovegobuy') {
+    return decodeLovegobuy(link);
   }
 
   let innerParam: string | null = null;

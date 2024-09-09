@@ -96,5 +96,11 @@ export function detectAgent(href: URL | string): Agent | undefined {
   if (link.hostname === 'www.oopbuy.com' || link.hostname === 'oopbuy.com') {
     return 'oopbuy';
   }
+  if (
+    link.hostname === 'www.lovegobuy.com' ||
+    link.hostname === 'lovegobuy.com'
+  ) {
+    return 'lovegobuy';
+  }
   return undefined;
 }

@@ -11,10 +11,15 @@ describe('isAgentLink', () => {
       'https://cnfans.com/fr/product/?shop_type=taobao&id=726145768645',
       'https://mulebuy.com/zh/product/?shop_type=taobao&id=726526607194',
       'https://joyabuy.com/es/product/?shop_type=taobao&id=726526607194',
+      'https://www.lovegobuy.com/pc/#/goods/detail?platform=weidian&goodsId=4480454092',
     ];
 
     agentLinks.forEach((link) => {
-      expect(isAgentLink(link)).toBe(true);
+      const isAgent = isAgentLink(link);
+      if (!isAgent) {
+        console.error(`Failed for link: ${link}`);
+      }
+      expect(isAgent).toBe(true);
     });
   });
 
@@ -24,6 +29,7 @@ describe('isAgentLink', () => {
       'https://item.taobao.com/item.htm?id=674029285425',
       'https://detail.1688.com/offer/610494659403.html',
       'https://weidian.com/item.html?itemID=5789470155',
+      'https://www.lovegobuy.com/detail?platform=weidian&goodsId=4480454092',
     ];
 
     nonAgentLinks.forEach((link) => {

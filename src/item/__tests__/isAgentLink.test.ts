@@ -17,7 +17,7 @@ describe('isAgentLink', () => {
     agentLinks.forEach((link) => {
       const isAgent = isAgentLink(link);
       if (!isAgent) {
-        console.error(`Failed for link: ${link}`);
+        throw new Error(`Failed for link: ${link}`);
       }
       expect(isAgent).toBe(true);
     });

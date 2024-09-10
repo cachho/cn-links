@@ -288,16 +288,14 @@ export function generateAgentLink(
   }
 
   if (agent === 'lovegobuy') {
-    // https://www.lovegobuy.com/pc/#/goods/detail?platform=taobao&goodsId=675330231499&invite_code=aff
-    const searchParams = new URLSearchParams();
-    searchParams.set('platform', marketplace);
-    searchParams.set('goodsId', id);
+    // https://www.lovegobuy.com/product?platform=weidian&goodsId=4480454012&id=4480454012&shop_type=weidian&invite_code=aff
+    const url = new URL('https://www.lovegobuy.com/product');
+    url.searchParams.set('platform', marketplace);
+    url.searchParams.set('id', id);
     if (referral) {
-      searchParams.set('invite_code', referral);
+      url.searchParams.set('invite_code', referral);
     }
-    return new URL(
-      `https://www.lovegobuy.com/pc/#/goods/detail?${searchParams.toString()}`
-    );
+    return url;
   }
 
   // Raw Links

@@ -12,12 +12,15 @@ describe('isAgentLink', () => {
       'https://mulebuy.com/zh/product/?shop_type=taobao&id=726526607194',
       'https://joyabuy.com/es/product/?shop_type=taobao&id=726526607194',
       'https://www.lovegobuy.com/pc/#/goods/detail?platform=weidian&goodsId=4480454092',
+      'https://www.lovegobuy.com/product?platform=weidian&goodsId=4480454092',
     ];
 
     agentLinks.forEach((link) => {
       const isAgent = isAgentLink(link);
       if (!isAgent) {
-        throw new Error(`Failed for link: ${link}`);
+        throw new Error(
+          `Link should be detected as agent link, but it was not: ${link}`
+        );
       }
       expect(isAgent).toBe(true);
     });

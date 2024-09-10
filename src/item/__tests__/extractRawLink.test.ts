@@ -292,7 +292,16 @@ describe('extractRawLink', () => {
     );
   });
 
-  it('should work for lovegobuy', () => {
+  it('should work for lovegobuy (new)', () => {
+    const href =
+      'https://www.lovegobuy.com/product?platform=weidian&goodsId=4480454093';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://weidian.com/item.html?itemID=4480454093'
+    );
+  });
+
+  it('should work for lovegobuy (legacy)', () => {
     const href =
       'https://www.lovegobuy.com/pc/#/goods/detail?platform=weidian&goodsId=4480454092';
     const rawLink = extractRawLink(new URL(href));

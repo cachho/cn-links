@@ -169,12 +169,12 @@ describe('generateAgentLink', () => {
   it('should generate lovegobuy links correctly', () => {
     const agent = 'lovegobuy';
     const expected = new URL(
-      `https://www.lovegobuy.com/pc/#/goods/detail?platform=${marketplace}&goodsId=${id}&invite_code=${referral}`
+      `https://www.lovegobuy.com/product?platform=${marketplace}&id=${id}&invite_code=${referral}`
     );
 
     const result = generateAgentLink(agent, marketplace, id, referral);
 
-    expect(result).toEqual(expected);
+    expect(result.href).toEqual(expected.href);
   });
 
   test('generates basetao tmall link as taobao link', () => {

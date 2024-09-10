@@ -90,6 +90,7 @@ export function isAgentLink(href: string | URL): boolean {
   }
   if (
     agent === 'lovegobuy' &&
+    !link.pathname.includes('/product') &&
     (!link.hash ||
       !link.hash.includes('/goods') ||
       !link.hash.includes('/detail'))

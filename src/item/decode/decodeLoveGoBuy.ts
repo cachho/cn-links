@@ -9,6 +9,29 @@ import { generateRawLink } from '../generateRawLink';
  * @returns {RawURL} The decoded proper link as a URL object, or undefined if decryption failed.
  */
 export function decodeLovegobuy(link: URL) {
+  // Lovegobuy changed their link structure to not use a hash anymore.
+  // We keep this function for backwards compatibility.
+
+  // New lovegobuy link structure
+  if (
+    link.searchParams.has('platform') &&
+    (link.searchParams.has('goodsId') || link.searchParams.has('id')) // support for both params
+  ) {
+    const marketplace = link.searchParams.get('platform');
+    if (!marketplace || !marketplaces.includes(marketplace as Marketplace)) {
+      throw new Error(
+        `This type of lovegobuy link is not a compatible product link (no marketplace): ${link.href}`
+      );
+    }
+    const id = link.searchParams.get('id') || link.searchParams.get('goodsId');
+    if (id === null) {
+      throw new Error(
+        `This type of lovegobuy link is not a compatible product link (no id): ${link.href}`
+      );
+    }
+    return generateRawLink(marketplace as Marketplace, id);
+  }
+
   // We assume that lovegobuy is using a hash to store the search params
   // Throw error if hash is empty
   if (!link.hash) {

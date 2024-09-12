@@ -298,6 +298,17 @@ export function generateAgentLink(
     return url;
   }
 
+  // Blikbuy
+  if (agent === 'blikbuy') {
+    // https://blikbuy.com/?go=item&url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D675330231419
+    urlParams.set('go', 'item');
+    urlParams.set('url', generateRawLink(marketplace, id).href);
+    if (referral) {
+      urlParams.set('icode', referral);
+    }
+    return new URL(`https://www.blikbuy.com/?${urlParams.toString()}`);
+  }
+
   // Raw Links
   if (agent === 'raw') {
     // https://detail.1688.com/offer/679865234523.html

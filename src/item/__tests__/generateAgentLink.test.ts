@@ -177,6 +177,19 @@ describe('generateAgentLink', () => {
     expect(result.href).toEqual(expected.href);
   });
 
+  it('should generate blikbuy links correctly', () => {
+    const agent = 'blikbuy';
+    const expected = new URL(
+      `https://www.blikbuy.com/?go=item&url=${encodeURIComponent(
+        innerLink
+      )}&icode=${referral}`
+    );
+
+    const result = generateAgentLink(agent, marketplace, id, referral);
+
+    expect(result.href).toEqual(expected.href);
+  });
+
   test('generates basetao tmall link as taobao link', () => {
     const agent = 'basetao';
     const expected = new URL(

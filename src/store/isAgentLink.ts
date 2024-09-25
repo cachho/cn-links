@@ -76,6 +76,10 @@ export function isAgentLink(href: string | URL): boolean {
     if (!link.pathname.startsWith('/item/store')) {
       return false;
     }
+  } else if (agent === 'hegobuy') {
+    if (!link.pathname.startsWith('/item/store')) {
+      return false;
+    }
   } else if (agent === 'cssbuy') {
     if (link.pathname.startsWith('/item')) {
       return false;

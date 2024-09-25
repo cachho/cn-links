@@ -39,6 +39,9 @@ export function isAgentLink(href: string | URL): boolean {
   if (agent === 'hagobuy' && link.pathname.startsWith('/item/store')) {
     return false;
   }
+  if (agent === 'hegobuy' && link.pathname.startsWith('/item/store')) {
+    return false;
+  }
   if (agent === 'kameymall' && !link.pathname.includes('/item')) {
     return false;
   }

@@ -109,6 +109,18 @@ export function generateAgentLink(
     );
   }
 
+  // Hegobuy
+  if (agent === 'hegobuy') {
+    // https://www.hegobuy.com/item/details?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D535661183265
+    urlParams.set('url', generateRawLink(marketplace, id).href);
+    if (referral) {
+      urlParams.set('affcode', referral);
+    }
+    return new URL(
+      `https://www.hegobuy.com/item/details?${urlParams.toString()}`
+    );
+  }
+
   // Kameymall
   if (agent === 'kameymall') {
     urlParams.set('url', generateRawLink(marketplace, id).href);

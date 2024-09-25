@@ -25,7 +25,7 @@ export function decodeOopbuy(link: URL) {
   }
   const id = link.pathname.split('/')[3];
   if (!id) {
-    throw new Error('No id provided in MuleBuy link.');
+    throw new Error('No id provided in Oopbuy link.');
   }
   return generateRawLink(marketplace, id);
 }

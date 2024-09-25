@@ -60,7 +60,7 @@ export function extractRawLink(href: AgentURL): RawURL {
     return generateRawLink(marketplace, id);
   }
 
-  if (agent === 'hagobuy') {
+  if (agent === 'hagobuy' || agent === 'hegobuy') {
     const { marketplace, id } = decodeHagobuy(link);
     return generateRawLink(marketplace, id);
   }

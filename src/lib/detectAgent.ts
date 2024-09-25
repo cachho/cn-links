@@ -107,5 +107,8 @@ export function detectAgent(href: URL | string): Agent | undefined {
   if (link.hostname === 'www.blikbuy.com' || link.hostname === 'blikbuy.com') {
     return 'blikbuy';
   }
+  if (link.hostname === 'www.ponybuy.com' || link.hostname === 'ponybuy.com') {
+    return 'ponybuy';
+  }
   return undefined;
 }

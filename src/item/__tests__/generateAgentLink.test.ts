@@ -190,6 +190,17 @@ describe('generateAgentLink', () => {
     expect(result.href).toEqual(expected.href);
   });
 
+  it('should generate ponybuy links correctly', () => {
+    const agent = 'ponybuy';
+    const expected = new URL(
+      `https://www.ponybuy.com/en-gb/goods?tracking=${referral}&product_id=${id}&platform=${marketplace}`
+    );
+
+    const result = generateAgentLink(agent, marketplace, id, referral);
+
+    expect(result.href).toEqual(expected.href);
+  });
+
   test('generates basetao tmall link as taobao link', () => {
     const agent = 'basetao';
     const expected = new URL(

@@ -100,6 +100,9 @@ export function isAgentLink(href: string | URL): boolean {
   ) {
     return false;
   }
+  if (agent === 'ponybuy' && !link.pathname.includes('/goods')) {
+    return false;
+  }
 
   try {
     const rawLink = extractRawLink(link);

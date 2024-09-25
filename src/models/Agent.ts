@@ -21,6 +21,7 @@ export const agents = [
   'blikbuy',
   'hegobuy',
   'ponybuy',
+  'panglobalbuy',
 ] as const;
 
 export type Agent = (typeof agents)[number];

@@ -110,5 +110,11 @@ export function detectAgent(href: URL | string): Agent | undefined {
   if (link.hostname === 'www.ponybuy.com' || link.hostname === 'ponybuy.com') {
     return 'ponybuy';
   }
+  if (
+    link.hostname === 'www.panglobalbuy.com' ||
+    link.hostname === 'panglobalbuy.com'
+  ) {
+    return 'panglobalbuy';
+  }
   return undefined;
 }

@@ -310,6 +310,15 @@ describe('extractRawLink', () => {
     );
   });
 
+  it('should work for panglobalbuy', () => {
+    const href =
+      'https://panglobalbuy.com/#/details?type=1&offerId=676700645111&share_id=6552';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://item.taobao.com/item.htm?id=676700645111'
+    );
+  });
+
   test('should work for all agents and marketplaces', () => {
     const testId = '6481396504';
     marketplaces.forEach((marketplace) => {

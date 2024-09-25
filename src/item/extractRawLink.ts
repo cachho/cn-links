@@ -11,6 +11,7 @@ import { decodeLovegobuy } from './decode/decodeLoveGoBuy';
 import { decodeMulebuy } from './decode/decodeMulebuy';
 import { decodeOopbuy } from './decode/decodeOopbuy';
 import { decodeOrientdig } from './decode/decodeOrientdig';
+import { decodePanglobalbuy } from './decode/decodePanglobalbuy';
 import { decodePonybuy } from './decode/decodePonybuy';
 
 /**
@@ -113,6 +114,10 @@ export function extractRawLink(href: AgentURL): RawURL {
 
   if (agent === 'ponybuy') {
     return decodePonybuy(link);
+  }
+
+  if (agent === 'panglobalbuy') {
+    return decodePanglobalbuy(link);
   }
 
   let innerParam: string | null = null;

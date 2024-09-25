@@ -187,4 +187,15 @@ describe('CnLink', () => {
       `CnLink object could not be initialized. Neither agent nor raw link could be detected from: ${href}`
     );
   });
+
+  it('should work with a weird mobile hash link', () => {
+    const href =
+      'https://m.allchinabuy.com/home/#/goodsDetail?nTag=Home-search&from=search-input&_search=url&url=https://weidian.com/item.html?itemID=7232818673';
+    const link = CnLink.safeInstantiate(href);
+    if (!link.success) {
+      throw new Error(link.error);
+    }
+    expect(link.success).toBe(true);
+    expect(link.data).toBeInstanceOf(CnLink);
+  });
 });

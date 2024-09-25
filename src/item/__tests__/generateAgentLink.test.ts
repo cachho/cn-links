@@ -201,6 +201,17 @@ describe('generateAgentLink', () => {
     expect(result.href).toEqual(expected.href);
   });
 
+  it('should generate panglobalbuy links correctly', () => {
+    const agent = 'panglobalbuy';
+    const expected = new URL(
+      `https://panglobalbuy.com/#/details?type=3&offerId=${id}&share_id=${referral}`
+    );
+
+    const result = generateAgentLink(agent, marketplace, id, referral);
+
+    expect(result.href).toEqual(expected.href);
+  });
+
   test('generates basetao tmall link as taobao link', () => {
     const agent = 'basetao';
     const expected = new URL(

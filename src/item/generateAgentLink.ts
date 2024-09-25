@@ -1,5 +1,6 @@
 import type { AgentURL, AgentWithRaw, Id, Marketplace } from '../models';
 import { oopbuyMarketplaceStrings } from '../store/data/oopbuy';
+import { panglobalbuyMarketplaceStrings } from '../store/data/panglobalbuy';
 import { generateRawLink } from './generateRawLink';
 
 /**
@@ -333,6 +334,22 @@ export function generateAgentLink(
       marketplace !== 'tmall' ? marketplace : 'taobao'
     );
     return url;
+  }
+
+  if (agent === 'panglobalbuy') {
+    // https://panglobalbuy.com/#/details?type=1&offerId=676700645111&share_id=6552
+    const marketplaceString = panglobalbuyMarketplaceStrings.get(marketplace);
+    if (marketplaceString === undefined) {
+      throw new Error('Unsupported marketplace for PanGlobalBuy');
+    }
+    urlParams.set('type', marketplaceString);
+    urlParams.set('offerId', id);
+    if (referral) {
+      urlParams.set('share_id', referral);
+    }
+    return new URL(
+      `https://panglobalbuy.com/#/details?${urlParams.toString()}`
+    );
   }
 
   // Raw Links

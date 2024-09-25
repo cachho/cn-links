@@ -319,6 +319,15 @@ describe('extractRawLink', () => {
     );
   });
 
+  it('should work for allchinabuy mobile links', () => {
+    const href =
+      'https://m.allchinabuy.com/home/#/goodsDetail?nTag=Home-search&from=search-input&_search=url&url=https://weidian.com/item.html?itemID=7232818672';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://weidian.com/item.html?itemID=7232818672'
+    );
+  });
+
   test('should work for all agents and marketplaces', () => {
     const testId = '6481396504';
     marketplaces.forEach((marketplace) => {

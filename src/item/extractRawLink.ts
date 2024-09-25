@@ -131,6 +131,14 @@ export function extractRawLink(href: AgentURL): RawURL {
   if (!innerParam) {
     innerParam = link.searchParams.get('url');
   }
+
+  // Try to get it from the hash
+  if (!innerParam && link.pathname && link.hash.startsWith('#/')) {
+    const url = new URL(link.href.replace('/#/', '/'));
+    innerParam = url.searchParams.get('url');
+  }
+
+  // Finally Throw error
   if (!innerParam) {
     throw new Error(
       `Error extracting inner link, 'url' query param not found: ${link.href}`

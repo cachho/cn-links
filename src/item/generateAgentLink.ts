@@ -321,6 +321,20 @@ export function generateAgentLink(
     return new URL(`https://www.blikbuy.com/?${urlParams.toString()}`);
   }
 
+  if (agent === 'ponybuy') {
+    // https://www.ponybuy.com/en-gb/goods?tracking=bc47789afb&product_id=675330231421&platform=taobao
+    const url = new URL('https://www.ponybuy.com/en-gb/goods');
+    if (referral) {
+      url.searchParams.set('tracking', referral);
+    }
+    url.searchParams.set('product_id', id);
+    url.searchParams.set(
+      'platform',
+      marketplace !== 'tmall' ? marketplace : 'taobao'
+    );
+    return url;
+  }
+
   // Raw Links
   if (agent === 'raw') {
     // https://detail.1688.com/offer/679865234523.html

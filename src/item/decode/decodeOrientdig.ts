@@ -18,17 +18,17 @@ const getMarketplace = (link: URL): Marketplace | null => {
  * @internal
  * Decrypts the Orientdig link by extracting the marketplace and id.
  *
- * @param {AgentURL} href - The CnFans link to decode. Not necessarily strongly typed.
+ * @param {AgentURL} href - The Orientdig link to decode. Not necessarily strongly typed.
  * @returns {RawURL} The decoded proper link as a URL object, or undefined if decryption failed.
  */
 export function decodeOrientdig(link: URL) {
   const marketplace = getMarketplace(link);
   if (!marketplace) {
-    throw new Error('CnFans shop type not supported.');
+    throw new Error('Orientdig shop type not supported.');
   }
   const id = link.searchParams.get('id');
   if (!id) {
-    throw new Error('No id provided in CnFans link.');
+    throw new Error('No id provided in Orientdig link.');
   }
   return generateRawLink(marketplace, id);
 }

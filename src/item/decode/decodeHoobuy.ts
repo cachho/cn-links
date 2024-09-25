@@ -6,7 +6,7 @@ import { generateRawLink } from '../generateRawLink';
  * Decrypts the Hoobuy link and returns the corresponding proper link.
  * This is an exception, as it does not infer strong input typing.
  *
- * @param {AgentLink |  string | URL} href - The CSSBUY link to decrypt. Not necessarily strongly typed.
+ * @param {AgentLink |  string | URL} href - The Hoobuy link to decrypt. Not necessarily strongly typed.
  * @returns {RawURL} The decrypted proper link as a URL object, or undefined if decryption failed.
  */
 export function decodeHoobuy(

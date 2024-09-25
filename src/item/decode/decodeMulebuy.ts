@@ -16,9 +16,9 @@ const getMarketplace = (link: URL): Marketplace | null => {
 
 /**
  * @internal
- * Decrypts the CnFans link by extracting the marketplace and id.
+ * Decrypts the MuleBuy link by extracting the marketplace and id.
  *
- * @param {AgentURL} href - The CnFans link to decode. Not necessarily strongly typed.
+ * @param {AgentURL} href - The MuleBuy link to decode. Not necessarily strongly typed.
  * @returns {RawURL} The decoded proper link as a URL object, or undefined if decryption failed.
  */
 export function decodeMulebuy(link: URL) {

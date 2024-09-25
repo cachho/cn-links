@@ -11,14 +11,14 @@ const getMarketplace = (segments: string[]): Marketplace | null => {
  * @internal
  * Decrypts the Basetao link by extracting the marketplace and id.
  *
- * @param {AgentURL} href - The CnFans link to decode. Not necessarily strongly typed.
+ * @param {AgentURL} href - The Basetao link to decode. Not necessarily strongly typed.
  * @returns {RawURL} The decoded proper link as a URL object, or undefined if decryption failed.
  */
 export function decodeBasetao(link: URL) {
   const segments = link.pathname.split('/');
   if (!segments.includes('products')) {
     throw new Error(
-      `This type of basetao link is not a compatible product link: ${link.href}`
+      `This type of Basetao link is not a compatible product link: ${link.href}`
     );
   }
 

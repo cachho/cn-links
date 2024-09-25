@@ -5,7 +5,7 @@ import { generateRawLink } from '../generateRawLink';
  * @internal
  * Decrypts the lovegobuy link by extracting the marketplace and id.
  *
- * @param {AgentURL} href - The CnFans link to decode. Not necessarily strongly typed.
+ * @param {AgentURL} href - The lovegobuy link to decode. Not necessarily strongly typed.
  * @returns {RawURL} The decoded proper link as a URL object, or undefined if decryption failed.
  */
 export function decodeLovegobuy(link: URL) {

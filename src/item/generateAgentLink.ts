@@ -303,9 +303,13 @@ export function generateAgentLink(
 
   if (agent === 'lovegobuy') {
     // https://www.lovegobuy.com/product?platform=weidian&goodsId=4480454012&id=4480454012&shop_type=weidian&invite_code=aff
+    // https://www.lovegobuy.com/product?id=675330231400&shop_type=taobao&invite_code=aff
     const url = new URL('https://www.lovegobuy.com/product');
-    url.searchParams.set('platform', marketplace);
     url.searchParams.set('id', id);
+    url.searchParams.set(
+      'shop_type',
+      marketplace !== 'tmall' ? marketplace : 'taobao'
+    );
     if (referral) {
       url.searchParams.set('invite_code', referral);
     }

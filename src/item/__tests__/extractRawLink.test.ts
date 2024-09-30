@@ -345,6 +345,24 @@ describe('extractRawLink', () => {
     expect(rawLink.href).toEqual(generateRawLink('weidian', '5416187188').href);
   });
 
+  it('should work with old lovegobuy links', () => {
+    const href =
+      'https://www.lovegobuy.com/product?platform=weidian&goodsId=4480454012&id=4480454012&shop_type=weidian&invite_code=aff';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://weidian.com/item.html?itemID=4480454012'
+    );
+  });
+
+  it('should work with new lovegobuy links', () => {
+    const href =
+      'https://www.lovegobuy.com/product?id=4480454092&shop_type=weidian&invite_code=abc';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://weidian.com/item.html?itemID=4480454092'
+    );
+  });
+
   test('should work for all agents and marketplaces', () => {
     const testId = '6481396504';
     marketplaces.forEach((marketplace) => {

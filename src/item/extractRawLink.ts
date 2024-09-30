@@ -13,6 +13,7 @@ import { decodeOopbuy } from './decode/decodeOopbuy';
 import { decodeOrientdig } from './decode/decodeOrientdig';
 import { decodePanglobalbuy } from './decode/decodePanglobalbuy';
 import { decodePonybuy } from './decode/decodePonybuy';
+import { decodeSifubuy } from './decode/decodeSifubuy';
 
 /**
  * @Internal
@@ -126,6 +127,9 @@ export function extractRawLink(href: AgentURL): RawURL {
     innerParam = link.searchParams.get('key');
   }
 
+  if (agent === 'sifubuy') {
+    return decodeSifubuy(link);
+  }
   // General fallback starts here
 
   if (!innerParam) {

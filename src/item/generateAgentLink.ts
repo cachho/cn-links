@@ -1,6 +1,7 @@
 import type { AgentURL, AgentWithRaw, Id, Marketplace } from '../models';
 import { oopbuyMarketplaceStrings } from '../store/data/oopbuy';
 import { panglobalbuyMarketplaceStrings } from '../store/data/panglobalbuy';
+import { sifubuyMarketplaceStrings } from '../store/data/sifubuy';
 import { generateRawLink } from './generateRawLink';
 
 /**
@@ -350,6 +351,21 @@ export function generateAgentLink(
     return new URL(
       `https://panglobalbuy.com/#/details?${urlParams.toString()}`
     );
+  }
+
+  if (agent === 'sifubuy') {
+    // https://www.sifubuy.com/detail?productUrl=https%253A%252F%252Fitem.taobao.com%252Fitem.htm%253Fid%253D675330231421&type=2
+    const url = new URL('https://www.sifubuy.com/detail');
+    if (referral) {
+      url.searchParams.set('invite_code', referral);
+    }
+    url.searchParams.set('id', id);
+    const mp = sifubuyMarketplaceStrings.get(marketplace);
+    if (!mp) {
+      throw new Error('Unsupported marketplace for SifuBuy');
+    }
+    url.searchParams.set('type', mp);
+    return url;
   }
 
   // Raw Links

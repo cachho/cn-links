@@ -224,6 +224,17 @@ describe('generateAgentLink', () => {
     expect(result.href).not.toContain(referral); // Affiliate links are not supported
   });
 
+  it('should generate a correct sifubuy link', () => {
+    const agent = 'sifubuy';
+    const expected = new URL(
+      `https://www.sifubuy.com/detail?invite_code=${referral}&id=${id}&type=4`
+    );
+
+    const result = generateAgentLink(agent, marketplace, id, referral);
+
+    expect(result.href).toEqual(expected.href);
+  });
+
   it('should not include unsanitized parts', () => {
     const agent = 'hagobuy';
 

@@ -120,6 +120,13 @@ describe('generateAgentLink', () => {
     expect(result.href).toEqual(expected);
   });
 
+  it('should work for sifubuy links', () => {
+    const agent: Agent = 'sifubuy';
+    const expected = `https://www.sifubuy.com/store?shopId=${id}&platformType=2`;
+    const result = generateAgentLink(agent, 'taobao', id);
+    expect(result.href).toEqual(expected);
+  });
+
   it('should work both ways, if a link can be decoded for an agent, it should also be able to be generated it', () => {
     const agentsThatSupportExtraction = agents.filter((agent) => {
       try {

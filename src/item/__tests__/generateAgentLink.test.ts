@@ -177,6 +177,17 @@ describe('generateAgentLink', () => {
     expect(result.href).toEqual(expected.href);
   });
 
+  it('should generate lovegobuy tmall links as taobao links', () => {
+    const agent = 'lovegobuy';
+    const expected = new URL(
+      `https://www.lovegobuy.com/product?id=${id}&shop_type=taobao&invite_code=${referral}`
+    );
+
+    const result = generateAgentLink(agent, 'tmall', id, referral);
+
+    expect(result.href).toEqual(expected.href);
+  });
+
   it('should generate blikbuy links correctly', () => {
     const agent = 'blikbuy';
     const expected = new URL(

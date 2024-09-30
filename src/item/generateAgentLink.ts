@@ -306,7 +306,10 @@ export function generateAgentLink(
     // https://www.lovegobuy.com/product?id=675330231400&shop_type=taobao&invite_code=aff
     const url = new URL('https://www.lovegobuy.com/product');
     url.searchParams.set('id', id);
-    url.searchParams.set('shop_type', marketplace);
+    url.searchParams.set(
+      'shop_type',
+      marketplace !== 'tmall' ? marketplace : 'taobao'
+    );
     if (referral) {
       url.searchParams.set('invite_code', referral);
     }

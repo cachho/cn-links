@@ -4,6 +4,7 @@ import { cssbuyMarketplaceStrings } from './data/cssbuy';
 import { hoobuyMarketplaceStrings } from './data/hoobuy';
 import { kameymallMarketplaceStrings } from './data/kameymall';
 import { pandabuyMarketplaceStrings } from './data/pandabuy';
+import { sifubuyMarketplaceStrings } from './data/sifubuy';
 import { generateRawLink } from './generateRawLink';
 
 /**
@@ -166,6 +167,20 @@ export function generateAgentLink(
     url.searchParams.set('shop_id', id);
     if (referral) {
       url.searchParams.set('ref', referral);
+    }
+    return url;
+  }
+
+  if (agent === 'sifubuy') {
+    const url = new URL('https://www.sifubuy.com/store');
+    url.searchParams.set('shopId', id);
+    const mp = sifubuyMarketplaceStrings.get(marketplace);
+    if (!mp) {
+      throw new Error('Unsupported marketplace for sifubuy');
+    }
+    url.searchParams.set('platformType', mp);
+    if (referral) {
+      url.searchParams.set('invite_code', referral);
     }
     return url;
   }

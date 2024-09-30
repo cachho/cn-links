@@ -328,6 +328,23 @@ describe('extractRawLink', () => {
     );
   });
 
+  it("should work for sifubuy's product url links", () => {
+    const href =
+      'https://www.sifubuy.com/detail?productUrl=https%253A%252F%252Fweidian.com%252Fitem.html%253FitemID%253D54161871828&type=2';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://weidian.com/item.html?itemID=54161871828'
+    );
+  });
+
+  it('should work for sifubuys object links', () => {
+    const url = new URL(
+      'https://www.sifubuy.com/detail?invite_code=abc&id=5416187188&type=4'
+    );
+    const rawLink = extractRawLink(url);
+    expect(rawLink.href).toEqual(generateRawLink('weidian', '5416187188').href);
+  });
+
   test('should work for all agents and marketplaces', () => {
     const testId = '6481396504';
     marketplaces.forEach((marketplace) => {

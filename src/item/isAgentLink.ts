@@ -103,6 +103,9 @@ export function isAgentLink(href: string | URL): boolean {
   if (agent === 'ponybuy' && !link.pathname.includes('/goods')) {
     return false;
   }
+  if (agent === 'sifubuy' && !link.pathname.startsWith('/detail')) {
+    return false;
+  }
 
   try {
     const rawLink = extractRawLink(link);

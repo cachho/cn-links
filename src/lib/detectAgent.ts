@@ -117,5 +117,8 @@ export function detectAgent(href: URL | string): Agent | undefined {
   ) {
     return 'panglobalbuy';
   }
+  if (link.hostname === 'www.sifubuy.com' || link.hostname === 'sifubuy.com') {
+    return 'sifubuy';
+  }
   return undefined;
 }

@@ -71,11 +71,23 @@ describe('isAgentLink', () => {
     expect(isAgentLink(link)).toBe(false);
   });
 
+  it('should return true for sifubuy agent links', () => {
+    const href =
+      'https://www.sifubuy.com/detail?productUrl=https%253A%252F%252Fweidian.com%252Fitem.html%253FitemID%253D5416187181&type=4';
+    expect(isAgentLink(href)).toBe(true);
+  });
+
   it('should return true for all generated agent links', () => {
     agents.forEach((agent) => {
       marketplaces.forEach((marketplace) => {
         const link = generateAgentLink(agent, marketplace, '123456');
-        expect(isAgentLink(link)).toBe(true);
+        const isAgent = isAgentLink(link);
+        if (!isAgent) {
+          throw new Error(
+            `Link should be detected as agent link (${agent}), but it was not: ${link}`
+          );
+        }
+        expect(isAgent).toBe(true);
       });
     });
   });

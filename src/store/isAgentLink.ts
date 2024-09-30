@@ -100,6 +100,10 @@ export function isAgentLink(href: string | URL): boolean {
     ) {
       return false;
     }
+  } else if (agent === 'sifubuy') {
+    if (!link.pathname.startsWith('/store')) {
+      return false;
+    }
   }
 
   try {

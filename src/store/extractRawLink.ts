@@ -10,6 +10,7 @@ import { decodeKameymall } from './decode/decodeKameymall';
 import { decodeMulebuy } from './decode/decodeMulebuy';
 import { decodeOrientdig } from './decode/decodeOrientdig';
 import { decodePandabuy } from './decode/decodePandabuy';
+import { decodeSifubuy } from './decode/decodeSifubuy';
 import { decodeSuperbuy } from './decode/decodeSuperbuy';
 import { generateRawLink } from './generateRawLink';
 
@@ -92,6 +93,11 @@ export function extractRawLink(href: AgentURL): RawURL {
 
   if (agent === 'orientdig') {
     const { marketplace, id } = decodeOrientdig(link);
+    return generateRawLink(marketplace, id);
+  }
+
+  if (agent === 'sifubuy') {
+    const { marketplace, id } = decodeSifubuy(link);
     return generateRawLink(marketplace, id);
   }
 

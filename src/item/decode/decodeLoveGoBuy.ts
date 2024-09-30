@@ -14,10 +14,11 @@ export function decodeLovegobuy(link: URL) {
 
   // New lovegobuy link structure
   if (
-    link.searchParams.has('platform') &&
+    (link.searchParams.has('platform') || link.searchParams.has('shop_type')) &&
     (link.searchParams.has('goodsId') || link.searchParams.has('id')) // support for both params
   ) {
-    const marketplace = link.searchParams.get('platform');
+    const marketplace =
+      link.searchParams.get('shop_type') || link.searchParams.get('platform');
     if (!marketplace || !marketplaces.includes(marketplace as Marketplace)) {
       throw new Error(
         `This type of lovegobuy link is not a compatible product link (no marketplace): ${link.href}`

@@ -169,7 +169,7 @@ describe('generateAgentLink', () => {
   it('should generate lovegobuy links correctly', () => {
     const agent = 'lovegobuy';
     const expected = new URL(
-      `https://www.lovegobuy.com/product?platform=${marketplace}&id=${id}&invite_code=${referral}`
+      `https://www.lovegobuy.com/product?id=${id}&shop_type=${marketplace}&invite_code=${referral}`
     );
 
     const result = generateAgentLink(agent, marketplace, id, referral);

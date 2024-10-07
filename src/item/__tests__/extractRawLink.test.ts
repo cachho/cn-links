@@ -363,6 +363,32 @@ describe('extractRawLink', () => {
     );
   });
 
+  it('should work for oopbuy mobile links', () => {
+    const href =
+      'https://m.oopbuy.com/pages/goods/details?id=780065669125&channel=1688';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://detail.1688.com/offer/780065669125.html'
+    );
+  });
+
+  it('should work for oopbuy desktop links (alt format)', () => {
+    const href =
+      'https://oopbuy.com/goods/details?id=5416187188&channel=weidian';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://weidian.com/item.html?itemID=5416187188'
+    );
+  });
+
+  it('should work for decoded oopbuy links', () => {
+    const href = 'https://oopbuy.com/product/weidian/5416187188?';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://weidian.com/item.html?itemID=5416187188'
+    );
+  });
+
   test('should work for all agents and marketplaces', () => {
     const testId = '6481396504';
     marketplaces.forEach((marketplace) => {

@@ -19,6 +19,17 @@ const getMarketplace = (link: URL): Marketplace | null => {
  * @returns {RawURL} The decoded proper link as a URL object, or undefined if decryption failed.
  */
 export function decodeOopbuy(link: URL) {
+  if (link.searchParams.has('id') && link.searchParams.has('channel')) {
+    const id = link.searchParams.get('id');
+    if (!id) {
+      throw new Error('No id provided in Oopbuy link.');
+    }
+    const marketplace = link.searchParams.get('channel');
+    if (!marketplace) {
+      throw new Error('No marketplace provided in Oopbuy link.');
+    }
+    return generateRawLink(marketplace as Marketplace, id);
+  }
   const marketplace = getMarketplace(link);
   if (!marketplace) {
     throw new Error('Oopbuy shop type not supported.');

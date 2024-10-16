@@ -39,6 +39,7 @@ export function isAgentLink(href: string | URL): boolean {
   if (agent === 'blikbuy') return false;
   if (agent === 'ponybuy') return false;
   if (agent === 'panglobalbuy') return false;
+  if (agent === 'loongbuy') return false;
 
   if (agent === 'pandabuy') {
     if (!link.pathname.startsWith('/shopdetail')) {

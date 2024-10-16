@@ -124,5 +124,11 @@ export function detectAgent(href: URL | string): Agent | undefined {
   if (link.hostname === 'www.sifubuy.com' || link.hostname === 'sifubuy.com') {
     return 'sifubuy';
   }
+  if (
+    link.hostname === 'www.loongbuy.com' ||
+    link.hostname === 'loongbuy.com'
+  ) {
+    return 'loongbuy';
+  }
   return undefined;
 }

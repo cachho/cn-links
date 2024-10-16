@@ -372,6 +372,17 @@ export function generateAgentLink(
     return url;
   }
 
+  if (agent === 'loongbuy') {
+    const url = new URL('https://www.loongbuy.com/product-details');
+    url.searchParams.set('url', generateRawLink(marketplace, id).href);
+
+    if (referral) {
+      url.searchParams.set('invitecode', referral);
+    }
+
+    return url;
+  }
+
   // Raw Links
   if (agent === 'raw') {
     // https://detail.1688.com/offer/679865234523.html

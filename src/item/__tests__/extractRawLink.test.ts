@@ -389,6 +389,15 @@ describe('extractRawLink', () => {
     );
   });
 
+  it('should work with wrongly encoded loongbuy links', () => {
+    const href =
+      'https://www.loongbuy.com/product-details?url=https://item.taobao.com/item.htm?id=675330231400';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://item.taobao.com/item.htm?id=675330231400'
+    );
+  });
+
   test('should work for all agents and marketplaces', () => {
     const testId = '6481396504';
     marketplaces.forEach((marketplace) => {

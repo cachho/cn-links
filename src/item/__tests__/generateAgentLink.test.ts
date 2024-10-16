@@ -246,6 +246,17 @@ describe('generateAgentLink', () => {
     expect(result.href).toEqual(expected.href);
   });
 
+  it('should generate a correct loongbuy link', () => {
+    const agent = 'loongbuy';
+    const expected = new URL(
+      'https://www.loongbuy.com/product-details?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D675330231412'
+    );
+
+    const result = generateAgentLink(agent, 'taobao', '675330231412');
+
+    expect(result.href).toEqual(expected.href);
+  });
+
   it('should not include unsanitized parts', () => {
     const agent = 'hagobuy';
 

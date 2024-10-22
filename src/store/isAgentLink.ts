@@ -35,7 +35,6 @@ export function isAgentLink(href: string | URL): boolean {
   if (agent === 'eastmallbuy') return false;
   if (agent === 'hubbuycn') return false;
   if (agent === 'oopbuy') return false;
-  if (agent === 'lovegobuy') return false;
   if (agent === 'blikbuy') return false;
   if (agent === 'ponybuy') return false;
   if (agent === 'panglobalbuy') return false;
@@ -103,6 +102,10 @@ export function isAgentLink(href: string | URL): boolean {
     }
   } else if (agent === 'sifubuy') {
     if (!link.pathname.startsWith('/store')) {
+      return false;
+    }
+  } else if (agent === 'lovegobuy') {
+    if (!link.pathname.startsWith('/store/list')) {
       return false;
     }
   }

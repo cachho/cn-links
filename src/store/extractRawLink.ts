@@ -7,6 +7,7 @@ import { decodeHagobuy } from './decode/decodeHagobuy';
 import { decodeHoobuy } from './decode/decodeHoobuy';
 import { decodeJoyabuy } from './decode/decodeJoyabuy';
 import { decodeKameymall } from './decode/decodeKameymall';
+import { decodeLovegobuy } from './decode/decodeLovegobuy';
 import { decodeMulebuy } from './decode/decodeMulebuy';
 import { decodeOrientdig } from './decode/decodeOrientdig';
 import { decodePandabuy } from './decode/decodePandabuy';
@@ -98,6 +99,10 @@ export function extractRawLink(href: AgentURL): RawURL {
 
   if (agent === 'sifubuy') {
     const { marketplace, id } = decodeSifubuy(link);
+    return generateRawLink(marketplace, id);
+  }
+  if (agent === 'lovegobuy') {
+    const { marketplace, id } = decodeLovegobuy(link);
     return generateRawLink(marketplace, id);
   }
 

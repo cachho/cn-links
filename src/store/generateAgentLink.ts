@@ -185,6 +185,19 @@ export function generateAgentLink(
     return url;
   }
 
+  if (agent === 'lovegobuy') {
+    const url = new URL('https://www.lovegobuy.com/store/list');
+    url.searchParams.set(
+      'shopType',
+      marketplace !== 'tmall' ? marketplace : 'taobao'
+    );
+    url.searchParams.set('shopId', id);
+    if (referral) {
+      url.searchParams.set('invite_code', referral);
+    }
+    return url;
+  }
+
   // Raw Links
   if (agent === 'raw') {
     return generateRawLink(marketplace, id);

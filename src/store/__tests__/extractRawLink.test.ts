@@ -137,6 +137,13 @@ describe('extractRawLink', () => {
     expect(rawLink.href).toEqual('https://shop192365862.taobao.com/');
   });
 
+  it('should work for lovegobuy', () => {
+    const href =
+      'https://www.lovegobuy.com/store/list?shopType=taobao&shopId=512766491&sellerId=3046765323&store_name=in[3046765321]&logo_url=';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual('https://shop512766491.taobao.com/');
+  });
+
   it('should work both ways, if a link can be generated for an agent, it should also be able to decode it', () => {
     const agentsThatSupportGeneration = agents.filter((agent) => {
       try {

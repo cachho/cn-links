@@ -257,6 +257,17 @@ describe('generateAgentLink', () => {
     expect(result.href).toEqual(expected.href);
   });
 
+  it('should correctly generate a lovegobuy 1688 link', () => {
+    const agent = 'lovegobuy';
+    const expected = new URL(
+      `https://www.lovegobuy.com/product?id=${id}&shop_type=ali_1688&invite_code=${referral}`
+    );
+
+    const result = generateAgentLink(agent, '1688', id, referral);
+
+    expect(result.href).toEqual(expected.href);
+  });
+
   it('should not include unsanitized parts', () => {
     const agent = 'hagobuy';
 

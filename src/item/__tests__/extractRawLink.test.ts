@@ -414,6 +414,15 @@ describe('extractRawLink', () => {
     );
   });
 
+  it('should work for lovegobuy', () => {
+    const href =
+      'https://www.lovegobuy.com/product?id=745930604736&shop_type=ali_1688&invite_code=KTIRZ0';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://detail.1688.com/offer/745930604736.html'
+    );
+  });
+
   test('should work for all agents and marketplaces', () => {
     const testId = '6481396504';
     marketplaces.forEach((marketplace) => {

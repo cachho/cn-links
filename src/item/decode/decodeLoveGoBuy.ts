@@ -1,5 +1,19 @@
-import { type Marketplace, marketplaces } from '../../models';
+import { lovegobuyStringsMarketplaces } from '../../data/lovegobuy';
+import { type Marketplace } from '../../models';
 import { generateRawLink } from '../generateRawLink';
+
+const getMarketplace = (link: URL): Marketplace | null => {
+  // 1688 is ali_1688 in the URL, otherwise we could just use the raw param value
+  const shopParam = link.searchParams.get('shop_type');
+  if (shopParam && lovegobuyStringsMarketplaces.get(shopParam)) {
+    return lovegobuyStringsMarketplaces.get(shopParam)!;
+  }
+  const platformParam = link.searchParams.get('platform');
+  if (platformParam && lovegobuyStringsMarketplaces.get(platformParam)) {
+    return lovegobuyStringsMarketplaces.get(platformParam)!;
+  }
+  return null;
+};
 
 /**
  * @internal
@@ -17,9 +31,8 @@ export function decodeLovegobuy(link: URL) {
     (link.searchParams.has('platform') || link.searchParams.has('shop_type')) &&
     (link.searchParams.has('goodsId') || link.searchParams.has('id')) // support for both params
   ) {
-    const marketplace =
-      link.searchParams.get('shop_type') || link.searchParams.get('platform');
-    if (!marketplace || !marketplaces.includes(marketplace as Marketplace)) {
+    const marketplace = getMarketplace(link);
+    if (!marketplace) {
       throw new Error(
         `This type of lovegobuy link is not a compatible product link (no marketplace): ${link.href}`
       );
@@ -49,8 +62,10 @@ export function decodeLovegobuy(link: URL) {
   }
   const searchParams = new URLSearchParams(searchParamsInHash);
 
-  const marketplace = searchParams.get('platform');
-  if (!marketplace || !marketplaces.includes(marketplace as Marketplace)) {
+  const marketplace = getMarketplace(
+    new URL(`https://lovegobuy.com/?${searchParams}`)
+  );
+  if (!marketplace) {
     throw new Error(
       `This type of lovegobuy link is not a compatible product link (no marketplace): ${link.href}`
     );

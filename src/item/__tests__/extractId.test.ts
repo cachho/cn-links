@@ -88,4 +88,11 @@ describe('extractId', () => {
     const id = extractId(href, 'weidian');
     expect(id).toBe('5418645465');
   });
+
+  test('should work with taobao asset links', () => {
+    const href =
+      'https://assets-tmw.taobao.com/app/tmall-ovs-rax/share_page/home?targetType=ITEM&targetId=689584596676&sign=d3b29289dc15136727f8f9ac70a594ae&site=SG&language=en_US&targetUrl=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fut_sk%3D1.Zupb7jk%2BfvYDAAYpxXO%2BqQ7b_21380790_1728424955112.Copy.1_SG%26id%3D689584596676%26sourceType%3Ditem%26price%3D188%26suid%3DE7471A87-DB9A-4667-AC10-8BB123830235%26un%3D0905237fa8713a7535fb4832ebf8423e%26share_crt_v%3D1%26un_site%3D0%26spm%3Da2159r.13376460.0.0%26tbSocialPopKey%3DshareItem%26sp_tk%3DbTY2TjNrY3Y2UVU%3D';
+    const id = extractId(href, 'taobao');
+    expect(id).toBe('689584596676');
+  });
 });

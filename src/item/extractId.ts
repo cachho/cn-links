@@ -46,6 +46,20 @@ export function extractId(href: RawLink, marketplace?: Marketplace): Id {
         return lastSegment.split('.')[0];
       }
     }
+    if (link.hostname === 'assets-tmw.taobao.com') {
+      const id = link.searchParams.get('targetId');
+      if (id) {
+        return id;
+      }
+      // Target URL as a fallback
+      const targetUrl = link.searchParams.get('targetUrl');
+      if (targetUrl) {
+        const nested = extractId(targetUrl, 'taobao');
+        if (nested) {
+          return nested;
+        }
+      }
+    }
     if (urlParams.get('id')) {
       return urlParams.get('id')!;
     }

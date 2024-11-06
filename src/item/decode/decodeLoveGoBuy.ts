@@ -1,6 +1,29 @@
 import { type Marketplace, marketplaces } from '../../models';
 import { generateRawLink } from '../generateRawLink';
 
+const getMarketplace = (link: URL): Marketplace | null => {
+  // 1688 is ali_1688 in the URL, otherwise we could just use the raw param value
+  const shopParam = link.searchParams.get('shop_type');
+  if (shopParam) {
+    if (shopParam === 'ali_1688') {
+      return '1688';
+    }
+    if (marketplaces.includes(shopParam as Marketplace)) {
+      return shopParam as Marketplace;
+    }
+  }
+  const platformParam = link.searchParams.get('platform');
+  if (platformParam) {
+    if (platformParam === 'ali_1688') {
+      return '1688';
+    }
+    if (marketplaces.includes(platformParam as Marketplace)) {
+      return platformParam as Marketplace;
+    }
+  }
+  return null;
+};
+
 /**
  * @internal
  * Decrypts the lovegobuy link by extracting the marketplace and id.
@@ -17,9 +40,8 @@ export function decodeLovegobuy(link: URL) {
     (link.searchParams.has('platform') || link.searchParams.has('shop_type')) &&
     (link.searchParams.has('goodsId') || link.searchParams.has('id')) // support for both params
   ) {
-    const marketplace =
-      link.searchParams.get('shop_type') || link.searchParams.get('platform');
-    if (!marketplace || !marketplaces.includes(marketplace as Marketplace)) {
+    const marketplace = getMarketplace(link);
+    if (!marketplace) {
       throw new Error(
         `This type of lovegobuy link is not a compatible product link (no marketplace): ${link.href}`
       );

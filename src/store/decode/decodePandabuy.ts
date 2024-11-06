@@ -1,5 +1,5 @@
+import { pandabuyStringsMarketplaces } from '../../data/pandabuy';
 import type { Marketplace } from '../../models';
-import { pandabuyStringsMarketplaces } from '../data/pandabuy';
 import { extractId } from '../extractId';
 
 function getMarketplace(link: URL): Marketplace {

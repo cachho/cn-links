@@ -1,5 +1,5 @@
+import { sifubuyStringsMarketplaces } from '../../data/sifubuy';
 import type { Marketplace } from '../../models';
-import { sifubuyStringsMarketplaces } from '../data/sifubuy';
 
 function getMarketplace(link: URL): Marketplace {
   const marketplaceParam = link.searchParams.get('platformType');

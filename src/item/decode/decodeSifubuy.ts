@@ -1,5 +1,5 @@
+import { sifubuyStringsMarketplaces } from '../../data/sifubuy';
 import type { Marketplace } from '../../models';
-import { sifubuyStringsMarketplaces } from '../../store/data/sifubuy';
 import { generateRawLink } from '../generateRawLink';
 
 const getMarketplace = (link: URL): Marketplace | null => {

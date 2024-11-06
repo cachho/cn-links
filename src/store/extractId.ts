@@ -85,5 +85,11 @@ export function extractId(href: RawLink, marketplace?: Marketplace): Id {
       return urlParams.get('id')!;
     }
   }
+
+  // ERROR RECOVERIES
+  // Replace '%3D' with '='
+  if (link.href.includes('%3D')) {
+    return extractId(link.href.replace('%3D', '='), mp);
+  }
   throw new Error(`Id could not be extracted from string: ${link.href}`);
 }

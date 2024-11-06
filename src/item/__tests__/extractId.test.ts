@@ -95,4 +95,18 @@ describe('extractId', () => {
     const id = extractId(href, 'taobao');
     expect(id).toBe('689584596676');
   });
+
+  it('should work with weidian item.html links', () => {
+    const href =
+      'https://weidian.com/item.html?itemID=7240382968&sa=D&source=editors&ust=1730201953662241&usg=AOvVaw1SDREQEPD_-pc9VCz57GDg';
+    const id = extractId(href, 'weidian');
+    expect(id).toBe('7240382968');
+  });
+
+  it('should work with broken links', () => {
+    const href =
+      'https://weidian.com/item.html?itemID%3D7240382968&sa=D&source=editors&ust=1730201953662241&usg=AOvVaw1SDREQEPD_-pc9VCz57GDg';
+    const id = extractId(href, 'weidian');
+    expect(id).toBe('7240382968');
+  });
 });

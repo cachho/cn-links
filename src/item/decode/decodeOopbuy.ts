@@ -32,7 +32,7 @@ export function decodeOopbuy(link: URL) {
   }
   const marketplace = getMarketplace(link);
   if (!marketplace) {
-    throw new Error('Oopbuy shop type not supported.');
+    throw new Error('Oopbuy item type not supported.');
   }
   const id = link.pathname.split('/')[3];
   if (!id) {

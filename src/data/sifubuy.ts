@@ -1,4 +1,4 @@
-import type { Marketplace } from '../../models';
+import type { Marketplace } from '../models';
 
 export const sifubuyMarketplaceStrings = new Map<Marketplace, string>([
   ['tmall', '2'],

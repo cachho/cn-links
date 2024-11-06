@@ -1,5 +1,5 @@
+import { panglobalbuyStringsMarketplaces } from '../../data/panglobalbuy';
 import type { Marketplace } from '../../models';
-import { panglobalbuyStringsMarketplaces } from '../../store/data/panglobalbuy';
 import { generateRawLink } from '../generateRawLink';
 
 const getMarketplace = (searchParams: URLSearchParams): Marketplace | null => {

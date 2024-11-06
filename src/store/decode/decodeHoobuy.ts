@@ -1,6 +1,6 @@
+import { hoobuyStringsMarketplaces } from '../../data/hoobuy';
 import type { Marketplace } from '../../models';
 import { marketplaces } from '../../models';
-import { hoobuyStringsMarketplaces } from '../data/hoobuy';
 
 export function decodeHoobuy(link: URL): {
   marketplace: Marketplace;

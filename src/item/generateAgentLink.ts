@@ -1,7 +1,7 @@
+import { oopbuyMarketplaceStrings } from '../data/oopbuy';
+import { panglobalbuyMarketplaceStrings } from '../data/panglobalbuy';
+import { sifubuyMarketplaceStrings } from '../data/sifubuy';
 import type { AgentURL, AgentWithRaw, Id, Marketplace } from '../models';
-import { oopbuyMarketplaceStrings } from '../store/data/oopbuy';
-import { panglobalbuyMarketplaceStrings } from '../store/data/panglobalbuy';
-import { sifubuyMarketplaceStrings } from '../store/data/sifubuy';
 import { generateRawLink } from './generateRawLink';
 
 /**

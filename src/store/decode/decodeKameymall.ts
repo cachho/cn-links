@@ -1,5 +1,5 @@
+import { kameymallStringsMarketplaces } from '../../data/kameymall';
 import type { Marketplace } from '../../models';
-import { kameymallStringsMarketplaces } from '../data/kameymall';
 
 export function decodeKameymall(link: URL): {
   marketplace: Marketplace;

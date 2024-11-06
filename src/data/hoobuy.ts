@@ -1,4 +1,4 @@
-import type { Marketplace } from '../../models';
+import type { Marketplace } from '../models';
 
 export const hoobuyMarketplaceStrings = new Map<Marketplace, string>([
   ['tmall', '1'],

@@ -1,6 +1,6 @@
+import { allchinabuyStringsMarketplaces } from '../../data/allchinabuy';
 import type { Marketplace } from '../../models';
 import { marketplaces } from '../../models';
-import { allchinabuyStringsMarketplaces } from '../data/allchinabuy';
 
 export function decodeAllChinaBuy(link: URL): {
   marketplace: Marketplace;

@@ -1,6 +1,6 @@
+import { superbuyStringsMarketplaces } from '../../data/superbuy';
 import type { Marketplace } from '../../models';
 import { marketplaces } from '../../models';
-import { superbuyStringsMarketplaces } from '../data/superbuy';
 
 export function decodeSuperbuy(link: URL): {
   marketplace: Marketplace;

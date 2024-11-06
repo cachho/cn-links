@@ -13,7 +13,3 @@ export const oopbuyMarketplaceStrings = new Map<Marketplace, string>(array);
 export const oopbuyStringsMarketplaces = new Map<string, Marketplace>(
   array.map(([key, value]) => [value, key])
 );
-
-// Now you can access all Marketplaces associated with a particular key
-console.log(oopbuyStringsMarketplaces);
-// Map(3) { '1' => ['tmall', 'taobao'], '0' => ['1688'], '2' => ['weidian'], 'weidian' => ['weidian'] }

@@ -398,6 +398,22 @@ describe('extractRawLink', () => {
     );
   });
 
+  it('should work with oopbuy weidian (non-alternative) links', () => {
+    const href = 'https://oopbuy.com/product/weidian/7280131479?inviteCode=X';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://weidian.com/item.html?itemID=7280131479'
+    );
+  });
+
+  it('should work with oopbuy weidian alternative links', () => {
+    const href = 'https://oopbuy.com/product/2/7280131479?inviteCode=X';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://weidian.com/item.html?itemID=7280131479'
+    );
+  });
+
   test('should work for all agents and marketplaces', () => {
     const testId = '6481396504';
     marketplaces.forEach((marketplace) => {

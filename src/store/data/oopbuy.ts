@@ -1,13 +1,19 @@
 import type { Marketplace } from '../../models';
 
-export const oopbuyMarketplaceStrings = new Map<Marketplace, string>([
+const array: Array<[Marketplace, string]> = [
   ['tmall', '1'],
-  ['weidian', 'weidian'],
   ['taobao', '1'],
   ['1688', '0'],
-]);
+  ['weidian', '2'],
+  ['weidian', 'weidian'],
+];
+
+export const oopbuyMarketplaceStrings = new Map<Marketplace, string>(array);
 
 export const oopbuyStringsMarketplaces = new Map<string, Marketplace>(
-  Array.from(oopbuyMarketplaceStrings).map(([key, value]) => [value, key])
+  array.map(([key, value]) => [value, key])
 );
-// For duplicate stringsm, This will get the latest marketplace of the original map.
+
+// Now you can access all Marketplaces associated with a particular key
+console.log(oopbuyStringsMarketplaces);
+// Map(3) { '1' => ['tmall', 'taobao'], '0' => ['1688'], '2' => ['weidian'], 'weidian' => ['weidian'] }

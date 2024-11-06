@@ -1,5 +1,5 @@
+import { cssbuyStringsMarketplaces } from '../../data/cssbuy';
 import type { Marketplace } from '../../models';
-import { cssbuyStringsMarketplaces } from '../data/cssbuy';
 
 export function decodeCssbuy(link: URL): {
   marketplace: Marketplace;

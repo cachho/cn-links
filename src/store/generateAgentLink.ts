@@ -1,10 +1,10 @@
+import { allchinabuyMarketplaceStrings } from '../data/allchinabuy';
+import { cssbuyMarketplaceStrings } from '../data/cssbuy';
+import { hoobuyMarketplaceStrings } from '../data/hoobuy';
+import { kameymallMarketplaceStrings } from '../data/kameymall';
+import { pandabuyMarketplaceStrings } from '../data/pandabuy';
+import { sifubuyMarketplaceStrings } from '../data/sifubuy';
 import type { AgentURL, AgentWithRaw, Id, Marketplace } from '../models';
-import { allchinabuyMarketplaceStrings } from './data/allchinabuy';
-import { cssbuyMarketplaceStrings } from './data/cssbuy';
-import { hoobuyMarketplaceStrings } from './data/hoobuy';
-import { kameymallMarketplaceStrings } from './data/kameymall';
-import { pandabuyMarketplaceStrings } from './data/pandabuy';
-import { sifubuyMarketplaceStrings } from './data/sifubuy';
 import { generateRawLink } from './generateRawLink';
 
 /**

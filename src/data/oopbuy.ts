@@ -1,4 +1,4 @@
-import type { Marketplace } from '../../models';
+import type { Marketplace } from '../models';
 
 const array: Array<[Marketplace, string]> = [
   ['tmall', '1'],

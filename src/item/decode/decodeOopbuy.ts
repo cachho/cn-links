@@ -1,5 +1,5 @@
+import { oopbuyStringsMarketplaces } from '../../data/oopbuy';
 import type { Marketplace } from '../../models';
-import { oopbuyStringsMarketplaces } from '../../store/data/oopbuy';
 import { generateRawLink } from '../generateRawLink';
 
 const getMarketplace = (link: URL): Marketplace | null => {

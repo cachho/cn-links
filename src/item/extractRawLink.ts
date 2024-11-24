@@ -1,5 +1,6 @@
 import { decryptPandabuy } from '../lib/decryptPandabuy';
 import { detectAgent } from '../lib/detectAgent';
+import { extractInnerParam } from '../lib/extractInnerParam';
 import type { AgentURL, RawURL } from '../models/LinkTypes';
 import { decodeBasetao } from './decode/decodeBasetao';
 import { decodeCnFans } from './decode/decodeCnFans';
@@ -131,15 +132,8 @@ export function extractRawLink(href: AgentURL): RawURL {
     return decodeSifubuy(link);
   }
   // General fallback starts here
-
   if (!innerParam) {
-    innerParam = link.searchParams.get('url');
-  }
-
-  // Try to get it from the hash
-  if (!innerParam && link.pathname && link.hash.startsWith('#/')) {
-    const url = new URL(link.href.replace('/#/', '/'));
-    innerParam = url.searchParams.get('url');
+    innerParam = extractInnerParam(link);
   }
 
   // Finally Throw error

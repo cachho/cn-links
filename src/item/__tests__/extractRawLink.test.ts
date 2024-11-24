@@ -62,11 +62,11 @@ describe('extractRawLink', () => {
     );
   });
 
-  it('should return undefined for a link without the inner URL parameter', () => {
+  it('should throw an error for a link without the inner URL parameter', () => {
     const href = 'https://www.example.com/';
     const rawLink = new URL(href);
     expect(() => extractRawLink(rawLink)).toThrowError(
-      "Error extracting inner link, 'url' query param not found: https://www.example.com/"
+      'Error extracting inner link. Fallback unsuccessful. Error: (Agent not detected.) - https://www.example.com/'
     );
   });
 
@@ -411,6 +411,15 @@ describe('extractRawLink', () => {
     const rawLink = extractRawLink(new URL(href));
     expect(rawLink.href).toEqual(
       'https://weidian.com/item.html?itemID=7280131479'
+    );
+  });
+
+  it('should work for oopbuy web view links', () => {
+    const href =
+      'https://m.oopbuy.com/pages/web-view/index?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7280200545';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://weidian.com/item.html?itemID=7280200545'
     );
   });
 

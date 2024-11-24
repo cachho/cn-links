@@ -9,9 +9,7 @@ import { generateRawLink } from '../generateRawLink';
  * @param {AgentLink |  string | URL} href - The Hoobuy link to decrypt. Not necessarily strongly typed.
  * @returns {RawURL} The decrypted proper link as a URL object, or undefined if decryption failed.
  */
-export function decodeHoobuy(
-  href: AgentLink | string | URL
-): RawURL | undefined {
+export function decodeHoobuy(href: AgentLink | string | URL): RawURL {
   const url = typeof href === 'string' ? new URL(href) : href;
 
   let prefix = '/product/';
@@ -19,7 +17,7 @@ export function decodeHoobuy(
   if (isMobile) {
     prefix = '/m/product/';
   } else if (!url.pathname.startsWith(prefix)) {
-    return undefined;
+    throw new Error(`Hoobuy prefix error.`);
   }
 
   const slashIndex = isMobile ? 4 : 3;
@@ -42,5 +40,7 @@ export function decodeHoobuy(
       return generateRawLink('weidian', id);
     }
   }
-  return undefined;
+  throw new Error(
+    `Error extracting inner link, hoobuy link could not be decrypted: ${url.href}`
+  );
 }

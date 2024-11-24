@@ -9,7 +9,7 @@ import { generateRawLink } from '../generateRawLink';
  * @param {AgentLink |  string | URL} href - The HubbuyCn link to decrypt. Not necessarily strongly typed.
  * @returns {RawURL} The decrypted proper link as a URL object, or undefined if decryption failed.
  */
-export function decodeHubbuyCn(url: URL): RawURL | undefined {
+export function decodeHubbuyCn(url: URL): RawURL {
   if (url.searchParams.get('url')) {
     return new URL(url.searchParams.get('url')!);
   }
@@ -18,5 +18,7 @@ export function decodeHubbuyCn(url: URL): RawURL | undefined {
     const taobaoId = url.pathname.split('taobaoID=')[1].split('&')[0];
     return new URL(generateRawLink('taobao', taobaoId));
   }
-  return undefined;
+  throw new Error(
+    `Error extracting inner link, hubbuycn link could not be decrypted: ${url.href}`
+  );
 }

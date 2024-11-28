@@ -127,6 +127,13 @@ describe('generateAgentLink', () => {
     expect(result.href).toEqual(expected);
   });
 
+  it('should work for kakobuy links', () => {
+    const agent: Agent = 'kakobuy';
+    const expected = `https://www.kakobuy.com/item/store?url=https%3A%2F%2Fshop512766498.taobao.com%2F`;
+    const result = generateAgentLink(agent, 'taobao', '512766498');
+    expect(result.href).toEqual(expected);
+  });
+
   it('should work both ways, if a link can be decoded for an agent, it should also be able to be generated it', () => {
     const agentsThatSupportExtraction = agents.filter((agent) => {
       try {

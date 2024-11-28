@@ -144,6 +144,13 @@ describe('extractRawLink', () => {
     expect(rawLink.href).toEqual('https://shop512766491.taobao.com/');
   });
 
+  it('should work for kakobuy', () => {
+    const href =
+      'https://www.kakobuy.com/item/store?url=https%3A%2F%2Fshop512766498.taobao.com%2F';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual('https://shop512766498.taobao.com/');
+  });
+
   it('should work both ways, if a link can be generated for an agent, it should also be able to decode it', () => {
     const agentsThatSupportGeneration = agents.filter((agent) => {
       try {

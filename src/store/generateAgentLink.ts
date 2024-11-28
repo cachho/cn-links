@@ -77,6 +77,15 @@ export function generateAgentLink(
     return url;
   }
 
+  if (agent === 'kakobuy') {
+    const url = new URL('https://www.kakobuy.com/item/store');
+    url.searchParams.set('url', generateRawLink(marketplace, id).href);
+    if (referral) {
+      url.searchParams.set('affcode', referral);
+    }
+    return url;
+  }
+
   if (agent === 'cnfans') {
     // https://cnfans.com/shops/?shop_type=weidian&shop_id=1866344120&num=1&sort=default
     const url = new URL('https://cnfans.com/shops/');

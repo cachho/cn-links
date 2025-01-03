@@ -134,6 +134,14 @@ describe('generateAgentLink', () => {
     expect(result.href).toEqual(expected);
   });
 
+  it('should work for acbuy links', () => {
+    const agent: Agent = 'acbuy';
+    const expected =
+      'https://www.acbuy.com/shop-detail?source=TB&sellerId=512766498';
+    const result = generateAgentLink(agent, 'taobao', '512766498');
+    expect(result.href).toEqual(expected);
+  });
+
   it('should work both ways, if a link can be decoded for an agent, it should also be able to be generated it', () => {
     const agentsThatSupportExtraction = agents.filter((agent) => {
       try {

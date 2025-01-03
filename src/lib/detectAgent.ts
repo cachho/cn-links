@@ -21,9 +21,5 @@ export function detectAgent(href: URL | string): Agent | undefined {
     return agent;
   }
 
-  if (link.hostname === 'www.acbuy.com' || link.hostname === 'acbuy.com') {
-    return 'allchinabuy';
-  }
-
   return undefined;
 }

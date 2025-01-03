@@ -1,3 +1,4 @@
+import { acbuyMarketplaceStrings } from '../data/acbuy';
 import { allchinabuyMarketplaceStrings } from '../data/allchinabuy';
 import { cssbuyMarketplaceStrings } from '../data/cssbuy';
 import { hoobuyMarketplaceStrings } from '../data/hoobuy';
@@ -203,6 +204,20 @@ export function generateAgentLink(
     url.searchParams.set('shopId', id);
     if (referral) {
       url.searchParams.set('invite_code', referral);
+    }
+    return url;
+  }
+
+  if (agent === 'acbuy') {
+    const url = new URL('https://www.acbuy.com/shop-detail');
+    const mp = acbuyMarketplaceStrings.get(marketplace);
+    if (!mp) {
+      throw new Error('Unsupported marketplace for acbuy');
+    }
+    url.searchParams.set('source', mp);
+    url.searchParams.set('sellerId', id);
+    if (referral) {
+      url.searchParams.set('u', referral);
     }
     return url;
   }

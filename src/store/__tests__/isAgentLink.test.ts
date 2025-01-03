@@ -1,3 +1,5 @@
+import { agents } from '../../models';
+import { generateAgentLink } from '../generateAgentLink';
 import { isAgentLink } from '../isAgentLink';
 
 describe('isAgentLink', () => {
@@ -82,5 +84,25 @@ describe('isAgentLink', () => {
     const href =
       'https://mulebuy.com/zh/shops/?shop_type=taobao&num=1&sort=default&shop_id=192365862';
     expect(isAgentLink(href)).toBe(true);
+  });
+
+  it('should detect true if the agent has a link generator function', () => {
+    agents.forEach((agent) => {
+      try {
+        const storeLink = generateAgentLink(agent, 'weidian', '123456');
+        expect(isAgentLink(storeLink)).toBe(true);
+      } catch (e) {
+        if (
+          e instanceof Error &&
+          e.message.includes('does not support store pages')
+        ) {
+          // This is expected, as not all agents support store pages
+          return;
+        }
+        throw new Error(
+          `${agent} supports store link generation, but the link is not detected as an agent link. Failed with error: ${e}`
+        );
+      }
+    });
   });
 });

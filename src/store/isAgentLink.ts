@@ -112,6 +112,13 @@ export function isAgentLink(href: string | URL): boolean {
     if (!link.pathname.startsWith('/store/list')) {
       return false;
     }
+  } else if (agent === 'acbuy') {
+    if (
+      !link.pathname.startsWith('/shop-detail') &&
+      !link.pathname.includes('/shop/shop')
+    ) {
+      return false;
+    }
   }
 
   try {

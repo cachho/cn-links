@@ -106,9 +106,8 @@ describe('detectAgent', () => {
     expect(detectAgent(url)).toBe('cnfans');
   });
 
-  it('should detect allchinabuy from shortened domain', () => {
-    const url =
-      'https://www.acbuy.com/en/page/buy/?nTag=Home-search&from=search-input&_search=url&position=&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D5726306637';
-    expect(detectAgent(url)).toBe('allchinabuy');
+  it('should detect acbuy from acbuy domain (not allchinabuy)', () => {
+    const url = 'https://www.acbuy.com/product?id=675330231400&source=TB&u=a21';
+    expect(detectAgent(url)).toBe('acbuy');
   });
 });

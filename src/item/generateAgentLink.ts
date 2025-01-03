@@ -1,3 +1,4 @@
+import { acbuyMarketplaceStrings } from '../data/acbuy';
 import { lovegobuyMarketplaceStrings } from '../data/lovegobuy';
 import { oopbuyMarketplaceStrings } from '../data/oopbuy';
 import { panglobalbuyMarketplaceStrings } from '../data/panglobalbuy';
@@ -392,6 +393,22 @@ export function generateAgentLink(
 
     if (referral) {
       url.searchParams.set('invitecode', referral);
+    }
+
+    return url;
+  }
+
+  if (agent === 'acbuy') {
+    const url = new URL('https://www.acbuy.com/product/');
+    url.searchParams.set('id', id);
+    const mp = acbuyMarketplaceStrings.get(marketplace);
+    if (!mp) {
+      throw new Error('Unsupported marketplace for AcBuy');
+    }
+    url.searchParams.set('source', mp);
+
+    if (referral) {
+      url.searchParams.set('u', referral);
     }
 
     return url;

@@ -432,6 +432,23 @@ describe('extractRawLink', () => {
     );
   });
 
+  it('should work for acbuy', () => {
+    const href = 'https://www.acbuy.com/product?id=676700645113&source=TB';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://item.taobao.com/item.htm?id=676700645113'
+    );
+  });
+
+  it('should work for acbuy legacy links', () => {
+    const href =
+      'https://www.acbuy.com/en/page/buy/?nTag=Home-search&from=search-input&_search=url&position=&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D5726306637';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://weidian.com/item.html?itemID=5726306637'
+    );
+  });
+
   test('should work for all agents and marketplaces', () => {
     const testId = '6481396504';
     marketplaces.forEach((marketplace) => {

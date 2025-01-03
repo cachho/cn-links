@@ -116,7 +116,7 @@ describe('extractRawLink', () => {
     expect(rawLink.href).toEqual('https://weidian.com/?userid=123456');
   });
 
-  it('should work for shortened allchinabuy domain', () => {
+  it('should work for acbuy legacy links', () => {
     const href =
       'https://www.acbuy.com/en/page/shop/shop/?shopid=1866344120&platform=WD';
     const rawLink = extractRawLink(new URL(href));
@@ -149,6 +149,12 @@ describe('extractRawLink', () => {
       'https://www.kakobuy.com/item/store?url=https%3A%2F%2Fshop512766498.taobao.com%2F';
     const rawLink = extractRawLink(new URL(href));
     expect(rawLink.href).toEqual('https://shop512766498.taobao.com/');
+  });
+
+  it('should work for acbuy', () => {
+    const href = 'https://www.acbuy.com/shop-detail?source=WD&sellerId=123456';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual('https://weidian.com/?userid=123456');
   });
 
   it('should work both ways, if a link can be generated for an agent, it should also be able to decode it', () => {

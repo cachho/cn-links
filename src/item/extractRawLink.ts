@@ -2,6 +2,7 @@ import { decryptPandabuy } from '../lib/decryptPandabuy';
 import { detectAgent } from '../lib/detectAgent';
 import { extractInnerParam } from '../lib/extractInnerParam';
 import type { AgentURL, RawURL } from '../models/LinkTypes';
+import { decodeAcbuy } from './decode/decodeAcbuy';
 import { decodeBasetao } from './decode/decodeBasetao';
 import { decodeCnFans } from './decode/decodeCnFans';
 import { decodeCssbuy } from './decode/decodeCssbuy';
@@ -103,6 +104,10 @@ export function extractRawLink(href: AgentURL): RawURL {
 
     if (agent === 'sifubuy') {
       return decodeSifubuy(link);
+    }
+
+    if (agent === 'acbuy') {
+      return decodeAcbuy(link);
     }
     throw new Error('Agent does not have a decoder. This may be expected.');
   } catch (error) {

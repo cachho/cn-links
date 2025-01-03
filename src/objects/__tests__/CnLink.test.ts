@@ -31,8 +31,8 @@ describe('Test All', () => {
     marketplaces.forEach((marketplace) => {
       agentsWithRaw.forEach((agent) => {
         if (agentSupportsStore(agent)) {
-          const rawItemLink = generateStoreAgentLink(agent, marketplace, id);
-          const response = CnLink.safeInstantiate(rawItemLink);
+          const rawStoreLink = generateStoreAgentLink(agent, marketplace, id);
+          const response = CnLink.safeInstantiate(rawStoreLink);
           if (!response.success) {
             throw new Error(response.error);
           }

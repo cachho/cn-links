@@ -8,8 +8,8 @@ describe('extractRawLink', () => {
     const href =
       'https://www.wegobuy.com/en/page/buy?from=search-input&url=https%3A%2F%2Fitem.taobao.com%2Fitem.html%3Fid%3D675330231400&partnercode=6t86Xk';
     const rawLink = extractRawLink(new URL(href));
-    expect(rawLink).toEqual(
-      new URL('https://item.taobao.com/item.html?id=675330231400')
+    expect(rawLink.href).toEqual(
+      new URL('https://item.taobao.com/item.html?id=675330231400').href
     );
   });
 
@@ -17,8 +17,8 @@ describe('extractRawLink', () => {
     const href =
       'https://sugargoo.com/index/item/index.html?tp=taobao&searchlang=en&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D5789470155';
     const rawLink = extractRawLink(new URL(href));
-    expect(rawLink).toEqual(
-      new URL('https://weidian.com/item.html?itemID=5789470155')
+    expect(rawLink.href).toEqual(
+      new URL('https://weidian.com/item.html?itemID=5789470155').href
     );
   });
 
@@ -57,8 +57,8 @@ describe('extractRawLink', () => {
     const href =
       'https://m.superbuy.com/en/goodsdetail/?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D705339617846';
     const rawLink = extractRawLink(new URL(href));
-    expect(rawLink).toEqual(
-      new URL('https://item.taobao.com/item.htm?id=705339617846')
+    expect(rawLink.href).toEqual(
+      new URL('https://item.taobao.com/item.htm?id=705339617846').href
     );
   });
 
@@ -74,8 +74,8 @@ describe('extractRawLink', () => {
     const href =
       'https://www.wegobuy.com/en/page/buy?from=search-input&url=https%3A%2F%2Fitem.taobao.com%2Fitem.html%3Fid%3D675330231400&partnercode=6t86Xk';
     const rawLink = extractRawLink(new URL(href));
-    expect(rawLink).toEqual(
-      new URL('https://item.taobao.com/item.html?id=675330231400')
+    expect(rawLink.href).toEqual(
+      new URL('https://item.taobao.com/item.html?id=675330231400').href
     );
   });
 
@@ -118,8 +118,8 @@ describe('extractRawLink', () => {
     const href =
       'https://m.pandabuy.com/product?url=https%3A%2F%2Fdetail.tmall.com%2Fitem.htm%3Fid%3D625144747417&inviteCode=84QGEFBNY';
     const rawLink = extractRawLink(new URL(href));
-    expect(rawLink).toEqual(
-      new URL('https://detail.tmall.com/item.htm?id=625144747417')
+    expect(rawLink.href).toEqual(
+      new URL('https://detail.tmall.com/item.htm?id=625144747417').href
     );
   });
 
@@ -145,8 +145,8 @@ describe('extractRawLink', () => {
     const href =
       'https://www.allchinabuy.com/en/page/buy/?nTag=Home-search&from=search-input&_search=url&position=&url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D675330231300&partnercode=abc';
     const rawLink = extractRawLink(new URL(href));
-    expect(rawLink).toEqual(
-      new URL('https://item.taobao.com/item.htm?id=675330231300')
+    expect(rawLink.href).toEqual(
+      new URL('https://item.taobao.com/item.htm?id=675330231300').href
     );
   });
 
@@ -154,8 +154,8 @@ describe('extractRawLink', () => {
     const href =
       'https://www.allchinabuy.com/en/page/buy/?from=search-input&url=https%253A%252F%252Fweidian.com%252Fitem.html%253FitemID%253D7260605276&partnercode=wrf7xD';
     const rawLink = extractRawLink(new URL(href));
-    expect(rawLink).toEqual(
-      new URL('https://weidian.com/item.html?itemID=7260605276')
+    expect(rawLink.href).toEqual(
+      new URL('https://weidian.com/item.html?itemID=7260605276').href
     );
   });
 
@@ -199,8 +199,8 @@ describe('extractRawLink', () => {
     const href =
       'https://www.kameymall.com/purchases/search/item?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D732843623706';
     const rawLink = extractRawLink(new URL(href));
-    expect(rawLink).toEqual(
-      new URL('https://item.taobao.com/item.htm?id=732843623706')
+    expect(rawLink.href).toEqual(
+      new URL('https://item.taobao.com/item.htm?id=732843623706').href
     );
   });
 
@@ -217,8 +217,8 @@ describe('extractRawLink', () => {
     const href =
       'https://eastmallbuy.com/index/item/index.html?searchlang=en&url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D781807828903';
     const rawLink = extractRawLink(new URL(href));
-    expect(rawLink).toEqual(
-      new URL('https://item.taobao.com/item.htm?id=781807828903')
+    expect(rawLink.href).toEqual(
+      new URL('https://item.taobao.com/item.htm?id=781807828903').href
     );
   });
 
@@ -261,8 +261,8 @@ describe('extractRawLink', () => {
     const href =
       'https://www.acbuy.com/en/page/buy/?nTag=Home-search&from=search-input&_search=url&position=&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D5726306637';
     const rawLink = extractRawLink(new URL(href));
-    expect(rawLink).toEqual(
-      new URL('https://weidian.com/item.html?itemID=5726306637')
+    expect(rawLink.href).toEqual(
+      new URL('https://weidian.com/item.html?itemID=5726306637').href
     );
   });
 
@@ -455,6 +455,24 @@ describe('extractRawLink', () => {
     const rawLink = extractRawLink(new URL(href));
     expect(rawLink.href).toEqual(
       'https://weidian.com/item.html?itemID=5726306637'
+    );
+  });
+
+  it('should work for mobile superbuy links', () => {
+    const href =
+      'https://m.superbuy.com/home/#/goodsDetail/?userId=2424498&url=https%3A%2F%2Fe.tb.cn%2Fh.T8dxmP68pyc4u8t%3Ftk%3Dx8EDe1bZmZu';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://e.tb.cn/h.T8dxmP68pyc4u8t?tk=x8EDe1bZmZu'
+    );
+  });
+
+  it('should work for tripple encoded allchinabuy links', () => {
+    const href =
+      'https://www.allchinabuy.com/en/page/buy/?nTag=Home-search&from=search-input&_search=url&position=&url=https%3A%2F%2Fwww.allchinabuy.com%2Fen%2Fpage%2Fbuy%3Ffrom%3Dsearch-input%26url%3Dhttps%253A%252F%252Fweidian.com%252Fitem.html%253FitemID%253D7313359726';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://weidian.com/item.html?itemID=7313359726'
     );
   });
 

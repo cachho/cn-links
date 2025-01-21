@@ -20,6 +20,7 @@ import { decodePonybuy } from './decode/decodePonybuy';
 import { decodeSifubuy } from './decode/decodeSifubuy';
 import { decodeSugargoo } from './decode/decodeSugargoo';
 import { decodeSuperbuy } from './decode/decodeSuperbuy';
+import { isRawLink } from './isRawLink';
 
 /**
  * @Internal
@@ -133,11 +134,18 @@ export function extractRawLink(href: AgentURL): RawURL {
       return new URL(extracted);
     }
 
+    let innerUrl: URL;
+
     try {
-      return new URL(innerParam);
+      innerUrl = new URL(innerParam);
     } catch {
       const decoded = decodeURIComponent(innerParam);
-      return new URL(decoded);
+      innerUrl = new URL(decoded);
     }
+
+    if (!isRawLink(innerUrl)) {
+      return extractRawLink(innerUrl);
+    }
+    return innerUrl;
   }
 }

@@ -150,6 +150,15 @@ describe('extractRawLink', () => {
     );
   });
 
+  it('should be able to handle more allchinabuy links', () => {
+    const href =
+      'https://www.allchinabuy.com/en/page/buy/?from=search-input&url=https%253A%252F%252Fweidian.com%252Fitem.html%253FitemID%253D7260605276&partnercode=wrf7xD';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink).toEqual(
+      new URL('https://weidian.com/item.html?itemID=7260605276')
+    );
+  });
+
   it('should be able to handle superbuy mobile links', () => {
     const href =
       'https://m.superbuy.com/home/#/goodsDetail?nTag=Home-search&from=search-input&_search=url&url=https://detail.tmall.com/item.htm?id=66608981238';

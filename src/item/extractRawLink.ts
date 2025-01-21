@@ -133,6 +133,11 @@ export function extractRawLink(href: AgentURL): RawURL {
       return new URL(extracted);
     }
 
-    return new URL(innerParam); // Forced because it's assumed that agentUrl is valid.
+    try {
+      return new URL(innerParam);
+    } catch {
+      const decoded = decodeURIComponent(innerParam);
+      return new URL(decoded);
+    }
   }
 }

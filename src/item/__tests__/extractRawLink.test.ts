@@ -150,7 +150,7 @@ describe('extractRawLink', () => {
     );
   });
 
-  it('should be able to handle more allchinabuy links', () => {
+  it('should be able to handle double encoded allchinabuy links', () => {
     const href =
       'https://www.allchinabuy.com/en/page/buy/?from=search-input&url=https%253A%252F%252Fweidian.com%252Fitem.html%253FitemID%253D7260605276&partnercode=wrf7xD';
     const rawLink = extractRawLink(new URL(href));

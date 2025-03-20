@@ -476,6 +476,15 @@ describe('extractRawLink', () => {
     );
   });
 
+  it('should work for new cnfans links', () => {
+    const href =
+      'https://m.cnfans.com/pages/product/product?id=7262488758&shoptype=weidian&ref=49564';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://weidian.com/item.html?itemID=7262488758'
+    );
+  });
+
   test('should work for all agents and marketplaces', () => {
     const testId = '6481396504';
     marketplaces.forEach((marketplace) => {

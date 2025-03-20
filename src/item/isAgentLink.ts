@@ -51,7 +51,8 @@ export function isAgentLink(href: string | URL): boolean {
   if (
     agent === 'cnfans' &&
     !link.pathname.startsWith('/product') &&
-    !link.pathname.slice(3).startsWith('/product')
+    !link.pathname.slice(3).startsWith('/product') &&
+    !link.pathname.startsWith('/pages/product/product')
   ) {
     return false;
   }

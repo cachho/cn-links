@@ -110,4 +110,10 @@ describe('detectAgent', () => {
     const url = 'https://www.acbuy.com/product?id=675330231400&source=TB&u=a21';
     expect(detectAgent(url)).toBe('acbuy');
   });
+
+  it('should work for new cnfans mobile links', () => {
+    const url =
+      'https://m.cnfans.com/pages/product/product?id=7262488758&shoptype=weidian&ref=49564';
+    expect(detectAgent(url)).toBe('cnfans');
+  });
 });

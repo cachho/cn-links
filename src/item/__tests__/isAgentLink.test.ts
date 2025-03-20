@@ -78,6 +78,12 @@ describe('isAgentLink', () => {
     expect(isAgentLink(href)).toBe(true);
   });
 
+  it('should return true for new cnfans links', () => {
+    const href =
+      'https://m.cnfans.com/pages/product/product?id=7262488758&shoptype=weidian&ref=49564';
+    expect(isAgentLink(href)).toBe(true);
+  });
+
   it('should return true for all generated agent links', () => {
     agents.forEach((agent) => {
       marketplaces.forEach((marketplace) => {

@@ -14,6 +14,19 @@ const getMarketplace = (link: URL): Marketplace | null => {
   return null;
 };
 
+const getMarketplaceMobile = (link: URL): Marketplace | null => {
+  if (link.searchParams.get('shoptype') === 'weidian') {
+    return 'weidian';
+  }
+  if (link.searchParams.get('shoptype') === 'taobao') {
+    return 'taobao';
+  }
+  if (link.searchParams.get('shoptype') === 'ali_1688') {
+    return '1688';
+  }
+  return null;
+};
+
 /**
  * @internal
  * Decrypts the CnFans link by extracting the marketplace and id.
@@ -22,13 +35,24 @@ const getMarketplace = (link: URL): Marketplace | null => {
  * @returns {RawURL} The decoded proper link as a URL object, or undefined if decryption failed.
  */
 export function decodeCnFans(link: URL) {
-  const marketplace = getMarketplace(link);
+  if (!link.hostname.startsWith('m.')) {
+    const marketplace = getMarketplace(link);
+    if (!marketplace) {
+      throw new Error('CnFans shop type not supported.');
+    }
+    const id = link.searchParams.get('id');
+    if (!id) {
+      throw new Error('No id provided in CnFans link.');
+    }
+    return generateRawLink(marketplace, id);
+  }
+  const marketplace = getMarketplaceMobile(link);
   if (!marketplace) {
-    throw new Error('CnFans shop type not supported.');
+    throw new Error('CnFans shop type not supported (mobile).');
   }
   const id = link.searchParams.get('id');
   if (!id) {
-    throw new Error('No id provided in CnFans link.');
+    throw new Error('No id provided in CnFans link (mobile).');
   }
   return generateRawLink(marketplace, id);
 }

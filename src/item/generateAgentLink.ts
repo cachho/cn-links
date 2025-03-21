@@ -151,27 +151,24 @@ export function generateAgentLink(
 
   // CnFans
   if (agent === 'cnfans') {
-    // https://cnfans.com/product/?shop_type=weidian&id=6481396504
-    // https://cnfans.com/product/?shop_type=ali_1688&id=669590387983
-    // https://cnfans.com/product/?shop_type=taobao&id=616770606113
+    // https://cnfans.com/product?id=676700645113&platform=TAOBAO
+    const url = new URL('https://cnfans.com/product');
+    url.searchParams.set('id', id);
     if (marketplace === 'taobao' || marketplace === 'tmall') {
-      urlParams.set('shop_type', 'taobao');
+      url.searchParams.set('platform', 'TAOBAO');
     } else if (marketplace === 'weidian') {
-      urlParams.set('shop_type', 'weidian');
+      url.searchParams.set('platform', 'WEIDIAN');
     } else if (marketplace === '1688') {
-      urlParams.set('shop_type', 'ali_1688');
+      url.searchParams.set('platform', 'ALI_1688');
     } else {
       throw new Error('Marketplace could not be detected for CnFans');
     }
-    urlParams.set('id', id);
 
     if (referral) {
-      urlParams.set('ref', referral);
+      url.searchParams.set('ref', referral);
     }
 
-    const url = 'https://cnfans.com/product/';
-    const paramString = urlParams.toString();
-    return new URL(paramString ? `${url}?${paramString}` : url);
+    return url;
   }
 
   // CnFans

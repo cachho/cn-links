@@ -125,12 +125,12 @@ describe('generateAgentLink', () => {
   test('generates cnfans link correctly', () => {
     const agent = 'cnfans';
     const expected = new URL(
-      `https://cnfans.com/product/?shop_type=weidian&id=${id}&ref=${referral}`
+      `https://cnfans.com/product?id=7262488758&platform=WEIDIAN&ref=0`
     );
 
-    const result = generateAgentLink(agent, marketplace, id, referral);
+    const result = generateAgentLink(agent, 'weidian', '7262488758', '0');
 
-    expect(result).toEqual(expected);
+    expect(result.href).toEqual(expected.href);
   });
 
   test('generates mulebuy link correctly', () => {

@@ -27,6 +27,19 @@ const getMarketplaceMobile = (link: URL): Marketplace | null => {
   return null;
 };
 
+const getMarketplaceParams = (link: URL): Marketplace | null => {
+  if (link.searchParams.get('platform')?.toLowerCase() === 'taobao') {
+    return 'taobao';
+  }
+  if (link.searchParams.get('platform')?.toLowerCase() === 'weidian') {
+    return 'weidian';
+  }
+  if (link.searchParams.get('platform')?.toLowerCase() === 'ali_1688') {
+    return '1688';
+  }
+  return null;
+};
+
 /**
  * @internal
  * Decrypts the CnFans link by extracting the marketplace and id.
@@ -35,6 +48,17 @@ const getMarketplaceMobile = (link: URL): Marketplace | null => {
  * @returns {RawURL} The decoded proper link as a URL object, or undefined if decryption failed.
  */
 export function decodeCnFans(link: URL) {
+  if (link.searchParams.has('id') && link.searchParams.has('platform')) {
+    const marketplace = getMarketplaceParams(link);
+    if (!marketplace) {
+      throw new Error('CnFans shop type not supported.');
+    }
+    const id = link.searchParams.get('id');
+    if (!id) {
+      throw new Error('No id provided in CnFans link.');
+    }
+    return generateRawLink(marketplace, id);
+  }
   if (!link.hostname.startsWith('m.')) {
     const marketplace = getMarketplace(link);
     if (!marketplace) {

@@ -476,12 +476,21 @@ describe('extractRawLink', () => {
     );
   });
 
-  it('should work for new cnfans links', () => {
+  it('should work for new cnfans (mobile) links', () => {
     const href =
       'https://m.cnfans.com/pages/product/product?id=7262488758&shoptype=weidian&ref=49564';
     const rawLink = extractRawLink(new URL(href));
     expect(rawLink.href).toEqual(
       'https://weidian.com/item.html?itemID=7262488758'
+    );
+  });
+
+  it('should work for new cnfans links', () => {
+    const href =
+      'https://cnfans.com/product?id=7080777715&platform=WEIDIAN&ref=73572';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://weidian.com/item.html?itemID=7080777715'
     );
   });
 

@@ -15,13 +15,15 @@ const getMarketplace = (link: URL): Marketplace | null => {
 };
 
 const getMarketplaceMobile = (link: URL): Marketplace | null => {
-  if (link.searchParams.get('shoptype') === 'weidian') {
+  const shopType =
+    link.searchParams.get('shoptype') || link.searchParams.get('shop_type');
+  if (shopType === 'weidian') {
     return 'weidian';
   }
-  if (link.searchParams.get('shoptype') === 'taobao') {
+  if (shopType === 'taobao') {
     return 'taobao';
   }
-  if (link.searchParams.get('shoptype') === 'ali_1688') {
+  if (shopType === 'ali_1688') {
     return '1688';
   }
   return null;

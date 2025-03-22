@@ -485,6 +485,15 @@ describe('extractRawLink', () => {
     );
   });
 
+  it('should work for new cnfans (mobile) links (alt format)', () => {
+    const href =
+      'https://m.cnfans.com/product/?shop_type=taobao&id=791556004474&ref=239874';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://item.taobao.com/item.htm?id=791556004474'
+    );
+  });
+
   it('should work for new cnfans links', () => {
     const href =
       'https://cnfans.com/product?id=7080777715&platform=WEIDIAN&ref=73572';

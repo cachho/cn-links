@@ -281,6 +281,24 @@ export function generateAgentLink(
     return url;
   }
 
+  if (agent === 'joyagoo') {
+    const url = new URL('https://joyagoo.com/product/');
+    if (marketplace === 'taobao' || marketplace === 'tmall') {
+      url.searchParams.set('shop_type', 'taobao');
+    } else if (marketplace === 'weidian') {
+      url.searchParams.set('shop_type', 'weidian');
+    } else if (marketplace === '1688') {
+      url.searchParams.set('shop_type', 'ali_1688');
+    } else {
+      throw new Error('Marketplace could not be detected for CnFans');
+    }
+    url.searchParams.set('id', id);
+    if (referral) {
+      url.searchParams.set('ref', referral);
+    }
+    return url;
+  }
+
   if (agent === 'orientdig') {
     const url = new URL('https://orientdig.com/product/');
     if (marketplace === 'taobao' || marketplace === 'tmall') {

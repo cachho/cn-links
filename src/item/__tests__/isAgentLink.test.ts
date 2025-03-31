@@ -13,6 +13,7 @@ describe('isAgentLink', () => {
       'https://cnfans.com/fr/product/?shop_type=taobao&id=726145768645',
       'https://mulebuy.com/zh/product/?shop_type=taobao&id=726526607194',
       'https://joyabuy.com/es/product/?shop_type=taobao&id=726526607194',
+      'https://joyagoo.com/product/?shop_type=taobao&id=675330231400',
       'https://www.lovegobuy.com/pc/#/goods/detail?platform=weidian&goodsId=4480454092',
       'https://www.lovegobuy.com/product?platform=weidian&goodsId=4480454092',
       'https://m.lovegobuy.com/product?id=7247608954&shop_type=weidian&invite_code=123456',

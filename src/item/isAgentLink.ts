@@ -82,7 +82,7 @@ export function isAgentLink(href: string | URL): boolean {
     return false;
   }
   if (
-    agent === 'joyabuy' &&
+    (agent === 'joyabuy' || agent === 'joyagoo') &&
     !link.pathname.includes('/product') &&
     !link.pathname.slice(3).startsWith('/product')
   ) {

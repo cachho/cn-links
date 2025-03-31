@@ -63,6 +63,10 @@ export function extractRawLink(href: AgentURL): RawURL {
       return decodeJoyabuy(link);
     }
 
+    if (agent === 'joyagoo') {
+      return decodeJoyabuy(link);
+    }
+
     if (agent === 'orientdig') {
       return decodeOrientdig(link);
     }

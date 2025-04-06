@@ -503,6 +503,31 @@ describe('extractRawLink', () => {
     );
   });
 
+  it('should work for alt oopbuy links (1688)', () => {
+    const href =
+      'https://oopbuy.com/product/1688/690957212150?inviteCode=1MG3S03GP';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://detail.1688.com/offer/690957212150.html'
+    );
+  });
+
+  it('should work for alt oopbuy links (weidian)', () => {
+    const href = 'https://oopbuy.com/product/weidian/5416187188';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://weidian.com/item.html?itemID=5416187188'
+    );
+  });
+
+  it('should work for alt oopbuy links (taobao)', () => {
+    const href = 'https://oopbuy.com/product/taobao/5416187188';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://item.taobao.com/item.htm?id=5416187188'
+    );
+  });
+
   test('should work for all agents and marketplaces', () => {
     const testId = '6481396504';
     marketplaces.forEach((marketplace) => {

@@ -1,5 +1,5 @@
 import { oopbuyStringsMarketplaces } from '../../data/oopbuy';
-import type { Marketplace } from '../../models';
+import { type Marketplace, marketplaces } from '../../models';
 import { generateRawLink } from '../generateRawLink';
 
 const getMarketplace = (link: URL): Marketplace | null => {
@@ -8,7 +8,15 @@ const getMarketplace = (link: URL): Marketplace | null => {
   if (!marketplaceSegment) {
     return null;
   }
-  return oopbuyStringsMarketplaces.get(marketplaceSegment) ?? null;
+  const numberBasedMarketplace =
+    oopbuyStringsMarketplaces.get(marketplaceSegment);
+  if (numberBasedMarketplace) {
+    return numberBasedMarketplace;
+  }
+  if (marketplaces.includes(marketplaceSegment as Marketplace)) {
+    return marketplaceSegment as Marketplace;
+  }
+  return null;
 };
 
 /**

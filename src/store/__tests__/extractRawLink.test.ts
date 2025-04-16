@@ -157,6 +157,13 @@ describe('extractRawLink', () => {
     expect(rawLink.href).toEqual('https://weidian.com/?userid=123456');
   });
 
+  it('should work for itaobuy.com', () => {
+    const href =
+      'https://www.itaobuy.com/shop-detail?url=https%3A%2F%2Fshop512766123.taobao.com%2F';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual('https://shop512766123.taobao.com/');
+  });
+
   it('should work both ways, if a link can be generated for an agent, it should also be able to decode it', () => {
     const agentsThatSupportGeneration = agents.filter((agent) => {
       try {

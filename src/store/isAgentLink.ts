@@ -126,6 +126,10 @@ export function isAgentLink(href: string | URL): boolean {
     ) {
       return false;
     }
+  } else if (agent === 'itaobuy') {
+    if (!link.pathname.startsWith('/shop-detail')) {
+      return false;
+    }
   }
 
   try {

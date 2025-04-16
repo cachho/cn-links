@@ -142,6 +142,13 @@ describe('generateAgentLink', () => {
     expect(result.href).toEqual(expected);
   });
 
+  it('should work for itaobuy links', () => {
+    const agent: Agent = 'itaobuy';
+    const expected = `https://www.itaobuy.com/shop-detail?url=https%3A%2F%2Fshop512766312.taobao.com%2F&inviteCode=${referral}`;
+    const result = generateAgentLink(agent, 'taobao', '512766312', referral);
+    expect(result.href).toEqual(expected);
+  });
+
   it('should work both ways, if a link can be decoded for an agent, it should also be able to be generated it', () => {
     const agentsThatSupportExtraction = agents.filter((agent) => {
       try {

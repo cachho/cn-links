@@ -222,6 +222,15 @@ export function generateAgentLink(
     return url;
   }
 
+  if (agent === 'itaobuy') {
+    const url = new URL('https://www.itaobuy.com/shop-detail');
+    url.searchParams.set('url', generateRawLink(marketplace, id).href);
+    if (referral) {
+      url.searchParams.set('inviteCode', referral);
+    }
+    return url;
+  }
+
   // Raw Links
   if (agent === 'raw') {
     return generateRawLink(marketplace, id);

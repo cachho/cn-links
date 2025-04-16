@@ -1,4 +1,5 @@
 import { detectAgent } from '../lib/detectAgent';
+import { extractInnerParam } from '../lib/extractInnerParam';
 import type { AgentURL, RawURL } from '../models/LinkTypes';
 import { decodeAcbuy } from './decode/decodeAcbuy';
 import { decodeAllChinaBuy } from './decode/decodeAllChinaBuy';
@@ -109,6 +110,16 @@ export function extractRawLink(href: AgentURL): RawURL {
   if (agent === 'acbuy') {
     const { marketplace, id } = decodeAcbuy(link);
     return generateRawLink(marketplace, id);
+  }
+
+  // Try to decode a url
+  try {
+    const innerParam = extractInnerParam(link);
+    if (innerParam) {
+      return new URL(innerParam);
+    }
+  } catch (e) {
+    // Ignore error
   }
 
   throw new Error(

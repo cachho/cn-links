@@ -268,6 +268,18 @@ describe('generateAgentLink', () => {
     expect(result.href).toEqual(expected.href);
   });
 
+  it('should generate itaobuy links correctly', () => {
+    const agent = 'itaobuy';
+    // https://www.itaobuy.com/product-detail?url=https://detail.tmall.com/item.htm?id=675330231401&inviteCode=UN8A4YUS
+    const expected = new URL(
+      `https://www.itaobuy.com/product-detail?url=${encodeURIComponent(
+        innerLink
+      )}&inviteCode=${referral}`
+    );
+    const result = generateAgentLink(agent, marketplace, id, referral);
+    expect(result.href).toEqual(expected.href);
+  });
+
   it('should not include unsanitized parts', () => {
     const agent = 'hagobuy';
 

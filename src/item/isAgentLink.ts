@@ -114,6 +114,9 @@ export function isAgentLink(href: string | URL): boolean {
   if (agent === 'acbuy' && !link.pathname.startsWith('/product')) {
     return false;
   }
+  if (agent === 'itaobuy' && !link.pathname.startsWith('/product-detail')) {
+    return false;
+  }
 
   try {
     const rawLink = extractRawLink(link);

@@ -429,6 +429,15 @@ export function generateAgentLink(
     return url;
   }
 
+  if (agent === 'itaobuy') {
+    const url = new URL('https://www.itaobuy.com/product-detail');
+    url.searchParams.set('url', generateRawLink(marketplace, id).href);
+    if (referral) {
+      url.searchParams.set('inviteCode', referral);
+    }
+    return url;
+  }
+
   // Raw Links
   if (agent === 'raw') {
     // https://detail.1688.com/offer/679865234523.html

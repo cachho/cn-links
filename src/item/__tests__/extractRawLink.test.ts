@@ -528,6 +528,15 @@ describe('extractRawLink', () => {
     );
   });
 
+  it('should work for itaobuy', () => {
+    const href =
+      'https://www.itaobuy.com/product-detail?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D675330231401';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://item.taobao.com/item.htm?id=675330231401'
+    );
+  });
+
   test('should work for all agents and marketplaces', () => {
     const testId = '6481396504';
     marketplaces.forEach((marketplace) => {

@@ -15,8 +15,9 @@ const getMarketplace = (link: URL): Marketplace | null => {
 };
 
 const getMarketplaceMobile = (link: URL): Marketplace | null => {
-  const shopType =
-    link.searchParams.get('shoptype') || link.searchParams.get('shop_type');
+  const shopType = (
+    link.searchParams.get('shoptype') || link.searchParams.get('shop_type')
+  )?.toLowerCase();
   if (shopType === 'weidian') {
     return 'weidian';
   }

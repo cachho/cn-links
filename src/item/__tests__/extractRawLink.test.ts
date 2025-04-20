@@ -494,6 +494,15 @@ describe('extractRawLink', () => {
     );
   });
 
+  it('should work for new cnfans (mobile) links (alt alt format)', () => {
+    const href =
+      'https://m.cnfans.com/pages/product/product?id=791556004474&shoptype=WEIDIAN&ref=239874';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://weidian.com/item.html?itemID=791556004474'
+    );
+  });
+
   it('should work for new cnfans links', () => {
     const href =
       'https://cnfans.com/product?id=7080777715&platform=WEIDIAN&ref=73572';

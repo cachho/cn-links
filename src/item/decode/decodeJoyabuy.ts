@@ -2,16 +2,18 @@ import type { Marketplace } from '../../models';
 import { generateRawLink } from '../generateRawLink';
 
 const getMarketplace = (link: URL): Marketplace | null => {
-  if (link.searchParams.get('shop_type') === 'weidian') {
-    return 'weidian';
+  const shopType =
+    link.searchParams.get('shop_type') || link.searchParams.get('shoptype');
+  switch (shopType) {
+    case 'weidian':
+      return 'weidian';
+    case 'taobao':
+      return 'taobao';
+    case 'ali_1688':
+      return '1688';
+    default:
+      return null;
   }
-  if (link.searchParams.get('shop_type') === 'taobao') {
-    return 'taobao';
-  }
-  if (link.searchParams.get('shop_type') === 'ali_1688') {
-    return '1688';
-  }
-  return null;
 };
 
 /**

@@ -1,46 +1,34 @@
 import type { Marketplace } from '../../models';
 import { generateRawLink } from '../generateRawLink';
 
-const getMarketplace = (link: URL): Marketplace | null => {
-  if (link.searchParams.get('shop_type') === 'weidian') {
-    return 'weidian';
-  }
-  if (link.searchParams.get('shop_type') === 'taobao') {
-    return 'taobao';
-  }
-  if (link.searchParams.get('shop_type') === 'ali_1688') {
-    return '1688';
-  }
-  return null;
-};
-
-const getMarketplaceMobile = (link: URL): Marketplace | null => {
+const getMarketplaceShopType = (link: URL): Marketplace | null => {
   const shopType = (
     link.searchParams.get('shoptype') || link.searchParams.get('shop_type')
   )?.toLowerCase();
-  if (shopType === 'weidian') {
-    return 'weidian';
+  switch (shopType) {
+    case 'weidian':
+      return 'weidian';
+    case 'taobao':
+      return 'taobao';
+    case 'ali_1688':
+      return '1688';
+    default:
+      return null;
   }
-  if (shopType === 'taobao') {
-    return 'taobao';
-  }
-  if (shopType === 'ali_1688') {
-    return '1688';
-  }
-  return null;
 };
 
-const getMarketplaceParams = (link: URL): Marketplace | null => {
-  if (link.searchParams.get('platform')?.toLowerCase() === 'taobao') {
-    return 'taobao';
+const getMarketplacePlatform = (link: URL): Marketplace | null => {
+  const platform = link.searchParams.get('platform')?.toLowerCase();
+  switch (platform) {
+    case 'weidian':
+      return 'weidian';
+    case 'taobao':
+      return 'taobao';
+    case 'ali_1688':
+      return '1688';
+    default:
+      return null;
   }
-  if (link.searchParams.get('platform')?.toLowerCase() === 'weidian') {
-    return 'weidian';
-  }
-  if (link.searchParams.get('platform')?.toLowerCase() === 'ali_1688') {
-    return '1688';
-  }
-  return null;
 };
 
 /**
@@ -52,7 +40,7 @@ const getMarketplaceParams = (link: URL): Marketplace | null => {
  */
 export function decodeCnFans(link: URL) {
   if (link.searchParams.has('id') && link.searchParams.has('platform')) {
-    const marketplace = getMarketplaceParams(link);
+    const marketplace = getMarketplacePlatform(link);
     if (!marketplace) {
       throw new Error('CnFans shop type not supported.');
     }
@@ -63,7 +51,7 @@ export function decodeCnFans(link: URL) {
     return generateRawLink(marketplace, id);
   }
   if (!link.hostname.startsWith('m.')) {
-    const marketplace = getMarketplace(link);
+    const marketplace = getMarketplaceShopType(link);
     if (!marketplace) {
       throw new Error('CnFans shop type not supported.');
     }
@@ -73,7 +61,7 @@ export function decodeCnFans(link: URL) {
     }
     return generateRawLink(marketplace, id);
   }
-  const marketplace = getMarketplaceMobile(link);
+  const marketplace = getMarketplaceShopType(link);
   if (!marketplace) {
     throw new Error('CnFans shop type not supported (mobile).');
   }

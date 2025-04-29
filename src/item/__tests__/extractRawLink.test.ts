@@ -555,6 +555,15 @@ describe('extractRawLink', () => {
     );
   });
 
+  it('should work for joyagoo (mobile)', () => {
+    const href =
+      'https://m.joyagoo.com/pages/product/product?id=7271730891&shoptype=weidian&ref=300000173';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://weidian.com/item.html?itemID=7271730891'
+    );
+  });
+
   test('should work for all agents and marketplaces', () => {
     const testId = '6481396504';
     marketplaces.forEach((marketplace) => {

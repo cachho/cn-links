@@ -537,6 +537,15 @@ describe('extractRawLink', () => {
     );
   });
 
+  it('should work for oopbuy links (mobile)', () => {
+    const href =
+      'https://m.oopbuy.com/pages/goods/details?id=7230178590&channel=WEIDIAN&inviteCode=N6YPEDH5F';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://weidian.com/item.html?itemID=7230178590'
+    );
+  });
+
   it('should work for itaobuy', () => {
     const href =
       'https://www.itaobuy.com/product-detail?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D675330231401';

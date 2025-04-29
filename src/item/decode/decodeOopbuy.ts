@@ -4,7 +4,7 @@ import { generateRawLink } from '../generateRawLink';
 
 const getMarketplace = (link: URL): Marketplace | null => {
   // https://www.oopbuy.com/product/weidian/7231813761?inviteCode=XIH3FJ85Q
-  const marketplaceSegment = link.pathname.split('/')[2];
+  const marketplaceSegment = link.pathname.split('/')[2]?.toLowerCase();
   if (!marketplaceSegment) {
     return null;
   }
@@ -32,8 +32,8 @@ export function decodeOopbuy(link: URL) {
     if (!id) {
       throw new Error('No id provided in Oopbuy link.');
     }
-    const marketplace = link.searchParams.get('channel');
-    if (!marketplace) {
+    const marketplace = link.searchParams.get('channel')?.toLowerCase();
+    if (!marketplace || !marketplaces.includes(marketplace as Marketplace)) {
       throw new Error('No marketplace provided in Oopbuy link.');
     }
     return generateRawLink(marketplace as Marketplace, id);

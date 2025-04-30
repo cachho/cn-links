@@ -3,7 +3,9 @@ import { generateRawLink } from '../generateRawLink';
 
 const getMarketplace = (link: URL): Marketplace | null => {
   const shopType = (
-    link.searchParams.get('shop_type') || link.searchParams.get('shoptype')
+    link.searchParams.get('platform') ||
+    link.searchParams.get('shop_type') ||
+    link.searchParams.get('shoptype')
   )?.toLowerCase();
   switch (shopType) {
     case 'weidian':

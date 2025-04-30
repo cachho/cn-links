@@ -573,6 +573,14 @@ describe('extractRawLink', () => {
     );
   });
 
+  it('should work for joyagoo (alt format)', () => {
+    const href = 'https://joyagoo.com/product?id=916300125915&platform=TAOBAO';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://item.taobao.com/item.htm?id=916300125915'
+    );
+  });
+
   test('should work for all agents and marketplaces', () => {
     const testId = '6481396504';
     marketplaces.forEach((marketplace) => {

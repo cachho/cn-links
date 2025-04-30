@@ -3,7 +3,9 @@ import { generateRawLink } from '../generateRawLink';
 
 const getMarketplace = (link: URL): Marketplace | null => {
   const shopType = (
-    link.searchParams.get('shop_type') || link.searchParams.get('shoptype')
+    link.searchParams.get('platform') ||
+    link.searchParams.get('shop_type') ||
+    link.searchParams.get('shoptype')
   )?.toLowerCase();
   switch (shopType) {
     case 'weidian':
@@ -21,17 +23,17 @@ const getMarketplace = (link: URL): Marketplace | null => {
  * @internal
  * Decodes the Joyabuy or Joyagoo link by extracting the marketplace and id.
  *
- * @param {AgentURL} href - The Joyabuy link to decode. Not necessarily strongly typed.
+ * @param {AgentURL} href - The Joyagoo/Joyabuy link to decode. Not necessarily strongly typed.
  * @returns {RawURL} The decoded proper link as a URL object, or undefined if decryption failed.
  */
-export function decodeJoyabuy(link: URL) {
+export function decodeJoyagoo(link: URL) {
   const marketplace = getMarketplace(link);
   if (!marketplace) {
-    throw new Error('Joyabuy shop type not supported.');
+    throw new Error('Joyagoo/Joyabuy shop type not supported.');
   }
   const id = link.searchParams.get('id');
   if (!id) {
-    throw new Error('No id provided in Joyabuy link.');
+    throw new Error('No id provided in Joyagoo/Joyabuy link.');
   }
   return generateRawLink(marketplace, id);
 }

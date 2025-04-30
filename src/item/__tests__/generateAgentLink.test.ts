@@ -280,6 +280,15 @@ describe('generateAgentLink', () => {
     expect(result.href).toEqual(expected.href);
   });
 
+  it('should generate the new joyagoo format', () => {
+    const agent = 'joyagoo';
+    const expected = new URL(
+      `https://joyagoo.com/product?id=916300281215&platform=TAOBAO`
+    );
+    const result = generateAgentLink(agent, 'taobao', '916300281215');
+    expect(result.href).toEqual(expected.href);
+  });
+
   it('should not include unsanitized parts', () => {
     const agent = 'hagobuy';
 

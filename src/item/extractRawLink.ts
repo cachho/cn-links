@@ -9,7 +9,7 @@ import { decodeCssbuy } from './decode/decodeCssbuy';
 import { decodeEzbuyCn } from './decode/decodeEzbuyCn';
 import { decodeHoobuy } from './decode/decodeHoobuy';
 import { decodeHubbuyCn } from './decode/decodeHubbuyCn';
-import { decodeJoyabuy } from './decode/decodeJoyabuy';
+import { decodeJoyagoo } from './decode/decodeJoyagoo';
 import { decodeKameymall } from './decode/decodeKameymall';
 import { decodeLovegobuy } from './decode/decodeLoveGoBuy';
 import { decodeMulebuy } from './decode/decodeMulebuy';
@@ -60,11 +60,11 @@ export function extractRawLink(href: AgentURL): RawURL {
     }
 
     if (agent === 'joyabuy') {
-      return decodeJoyabuy(link);
+      return decodeJoyagoo(link);
     }
 
     if (agent === 'joyagoo') {
-      return decodeJoyabuy(link);
+      return decodeJoyagoo(link);
     }
 
     if (agent === 'orientdig') {

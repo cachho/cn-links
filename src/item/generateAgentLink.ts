@@ -282,17 +282,17 @@ export function generateAgentLink(
   }
 
   if (agent === 'joyagoo') {
-    const url = new URL('https://joyagoo.com/product/');
-    if (marketplace === 'taobao' || marketplace === 'tmall') {
-      url.searchParams.set('shop_type', 'taobao');
-    } else if (marketplace === 'weidian') {
-      url.searchParams.set('shop_type', 'weidian');
-    } else if (marketplace === '1688') {
-      url.searchParams.set('shop_type', 'ali_1688');
-    } else {
-      throw new Error('Marketplace could not be detected for CnFans');
-    }
+    const url = new URL('https://joyagoo.com/product');
     url.searchParams.set('id', id);
+    if (marketplace === 'taobao' || marketplace === 'tmall') {
+      url.searchParams.set('platform', 'TAOBAO');
+    } else if (marketplace === 'weidian') {
+      url.searchParams.set('platform', 'WEIDIAN');
+    } else if (marketplace === '1688') {
+      url.searchParams.set('platform', 'ALI_1688');
+    } else {
+      throw new Error('Marketplace could not be detected for Joyagoo');
+    }
     if (referral) {
       url.searchParams.set('ref', referral);
     }

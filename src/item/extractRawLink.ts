@@ -9,7 +9,7 @@ import { decodeCssbuy } from './decode/decodeCssbuy';
 import { decodeEzbuyCn } from './decode/decodeEzbuyCn';
 import { decodeHoobuy } from './decode/decodeHoobuy';
 import { decodeHubbuyCn } from './decode/decodeHubbuyCn';
-import { decodeJoyagoo } from './decode/decodeJoyabuy';
+import { decodeJoyagoo } from './decode/decodeJoyagoo';
 import { decodeKameymall } from './decode/decodeKameymall';
 import { decodeLovegobuy } from './decode/decodeLoveGoBuy';
 import { decodeMulebuy } from './decode/decodeMulebuy';

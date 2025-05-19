@@ -597,6 +597,15 @@ describe('extractRawLink', () => {
     );
   });
 
+  it('should work for oopbuy (alt mobile format)', () => {
+    const href =
+      'https://m.oopbuy.com/pages/goods/details?spuNo=7279249763&channel=weidian&inviteCode=LIIV478KA&sid_for_share=99125_3';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://weidian.com/item.html?itemID=7279249763'
+    );
+  });
+
   test('should work for all agents and marketplaces', () => {
     const testId = '6481396504';
     marketplaces.forEach((marketplace) => {

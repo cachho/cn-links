@@ -136,7 +136,7 @@ describe('generateAgentLink', () => {
   test('generates mulebuy link correctly', () => {
     const agent = 'mulebuy';
     const expected = new URL(
-      `https://mulebuy.com/product/?shop_type=${marketplace}&id=${id}&ref=${referral}`
+      `https://mulebuy.com/product?id=${id}&platform=${marketplace.toUpperCase()}&ref=${referral}`
     );
 
     const result = generateAgentLink(agent, marketplace, id, referral);

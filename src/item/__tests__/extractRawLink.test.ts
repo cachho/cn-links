@@ -581,6 +581,22 @@ describe('extractRawLink', () => {
     );
   });
 
+  it('should work for mulebuy (new format)', () => {
+    const href = 'https://mulebuy.com/product?id=834377196891&platform=TAOBAO';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://item.taobao.com/item.htm?id=834377196891'
+    );
+  });
+
+  it('should work for mulebuy (new format, lower caps)', () => {
+    const href = 'https://mulebuy.com/product?id=834377196891&platform=taobao';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://item.taobao.com/item.htm?id=834377196891'
+    );
+  });
+
   test('should work for all agents and marketplaces', () => {
     const testId = '6481396504';
     marketplaces.forEach((marketplace) => {

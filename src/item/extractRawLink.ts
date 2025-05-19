@@ -12,7 +12,6 @@ import { decodeHubbuyCn } from './decode/decodeHubbuyCn';
 import { decodeJoyagoo } from './decode/decodeJoyagoo';
 import { decodeKameymall } from './decode/decodeKameymall';
 import { decodeLovegobuy } from './decode/decodeLoveGoBuy';
-import { decodeMulebuy } from './decode/decodeMulebuy';
 import { decodeOopbuy } from './decode/decodeOopbuy';
 import { decodeOrientdig } from './decode/decodeOrientdig';
 import { decodePanglobalbuy } from './decode/decodePanglobalbuy';
@@ -51,12 +50,8 @@ export function extractRawLink(href: AgentURL): RawURL {
       return decodeSuperbuy(link);
     }
 
-    if (agent === 'cnfans') {
+    if (agent === 'cnfans' || agent === 'mulebuy') {
       return decodeCnFans(link);
-    }
-
-    if (agent === 'mulebuy') {
-      return decodeMulebuy(link);
     }
 
     if (agent === 'joyabuy') {

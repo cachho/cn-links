@@ -173,22 +173,23 @@ export function generateAgentLink(
 
   // CnFans
   if (agent === 'mulebuy') {
-    // https://mulebuy.com/product/?shop_type=taobao&id=781807828902
-    const url = new URL('https://mulebuy.com/product/');
+    // https://mulebuy.com/product?id=6834305685837&platform=TAOBAO&ref=0
+    const url = new URL('https://mulebuy.com/product');
+    url.searchParams.set('id', id);
     if (marketplace === 'taobao' || marketplace === 'tmall') {
-      url.searchParams.set('shop_type', 'taobao');
+      url.searchParams.set('platform', 'TAOBAO');
     } else if (marketplace === 'weidian') {
-      url.searchParams.set('shop_type', 'weidian');
+      url.searchParams.set('platform', 'WEIDIAN');
     } else if (marketplace === '1688') {
-      url.searchParams.set('shop_type', 'ali_1688');
+      url.searchParams.set('platform', 'ALI_1688');
     } else {
       throw new Error('Marketplace could not be detected for CnFans');
     }
-    url.searchParams.set('id', id);
 
     if (referral) {
       url.searchParams.set('ref', referral);
     }
+
     return url;
   }
 

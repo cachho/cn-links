@@ -34,6 +34,7 @@ const getMarketplacePlatform = (link: URL): Marketplace | null => {
 /**
  * @internal
  * Decrypts the CnFans link by extracting the marketplace and id.
+ * Mulebuy also uses the CnFans link format, so this function is used for both.
  *
  * @param {AgentURL} href - The CnFans link to decode. Not necessarily strongly typed.
  * @returns {RawURL} The decoded proper link as a URL object, or undefined if decryption failed.

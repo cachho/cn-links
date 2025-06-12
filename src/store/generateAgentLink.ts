@@ -5,6 +5,7 @@ import { hoobuyMarketplaceStrings } from '../data/hoobuy';
 import { kameymallMarketplaceStrings } from '../data/kameymall';
 import { pandabuyMarketplaceStrings } from '../data/pandabuy';
 import { sifubuyMarketplaceStrings } from '../data/sifubuy';
+import { usfansMarketplaceStrings } from '../data/usfans';
 import type { AgentURL, AgentWithRaw, Id, Marketplace } from '../models';
 import { generateRawLink } from './generateRawLink';
 
@@ -225,6 +226,21 @@ export function generateAgentLink(
   if (agent === 'itaobuy') {
     const url = new URL('https://www.itaobuy.com/shop-detail');
     url.searchParams.set('url', generateRawLink(marketplace, id).href);
+    if (referral) {
+      url.searchParams.set('inviteCode', referral);
+    }
+    return url;
+  }
+
+  if (agent === 'usfans') {
+    // https://www.usfans.com/search?channel=2&shopId=${id}
+    const url = new URL('https://www.usfans.com/search');
+    const mp = usfansMarketplaceStrings.get(marketplace);
+    if (!mp) {
+      throw new Error('Unsupported marketplace for usfans');
+    }
+    url.searchParams.set('channel', mp); // 2 is for Taobao
+    url.searchParams.set('shopId', id);
     if (referral) {
       url.searchParams.set('inviteCode', referral);
     }

@@ -164,6 +164,12 @@ describe('extractRawLink', () => {
     expect(rawLink.href).toEqual('https://shop512766123.taobao.com/');
   });
 
+  it('should work for usfans', () => {
+    const href = 'https://www.usfans.com/search?channel=2&shopId=265827741';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual('https://shop265827741.taobao.com/');
+  });
+
   it('should work both ways, if a link can be generated for an agent, it should also be able to decode it', () => {
     const agentsThatSupportGeneration = agents.filter((agent) => {
       try {

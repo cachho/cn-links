@@ -19,6 +19,7 @@ import { decodePonybuy } from './decode/decodePonybuy';
 import { decodeSifubuy } from './decode/decodeSifubuy';
 import { decodeSugargoo } from './decode/decodeSugargoo';
 import { decodeSuperbuy } from './decode/decodeSuperbuy';
+import { decodeUsfans } from './decode/decodeUsfans';
 import { isRawLink } from './isRawLink';
 
 /**
@@ -108,6 +109,10 @@ export function extractRawLink(href: AgentURL): RawURL {
 
     if (agent === 'acbuy') {
       return decodeAcbuy(link);
+    }
+
+    if (agent === 'usfans') {
+      return decodeUsfans(link);
     }
     throw new Error('Agent does not have a decoder. This may be expected.');
   } catch (error) {

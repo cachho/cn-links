@@ -149,6 +149,13 @@ describe('generateAgentLink', () => {
     expect(result.href).toEqual(expected);
   });
 
+  it('should work for usfans links', () => {
+    const agent: Agent = 'usfans';
+    const expected = `https://www.usfans.com/search?channel=2&shopId=${id}`;
+    const result = generateAgentLink(agent, 'taobao', id);
+    expect(result.href).toEqual(expected);
+  });
+
   it('should work both ways, if a link can be decoded for an agent, it should also be able to be generated it', () => {
     const agentsThatSupportExtraction = agents.filter((agent) => {
       try {

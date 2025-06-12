@@ -4,6 +4,7 @@ import { lovegobuyMarketplaceStrings } from '../data/lovegobuy';
 import { oopbuyMarketplaceStrings } from '../data/oopbuy';
 import { panglobalbuyMarketplaceStrings } from '../data/panglobalbuy';
 import { sifubuyMarketplaceStrings } from '../data/sifubuy';
+import { usfansMarketplaceStrings } from '../data/usfans';
 import type { AgentURL, AgentWithRaw, Id, Marketplace } from '../models';
 import { generateRawLink } from './generateRawLink';
 
@@ -207,6 +208,21 @@ export function generateAgentLink(
     // https://hoobuy.com/product/1/692787834585?utm_source=share&utm_medium=product_details&inviteCode=2X6A1vRD
     const url = new URL(
       `https://www.hoobuy.com/product/${hoobuyMarketplaceStrings.get(
+        marketplace
+      )}/${id}`
+    );
+    if (referral) {
+      url.searchParams.set('inviteCode', referral);
+    }
+    const paramString = urlParams.toString();
+    return new URL(paramString ? `${url}?${paramString}` : url);
+  }
+
+  // UsFans
+  if (agent === 'usfans') {
+    // https://www.usfans.com/product/2/6767006113?ref=KaaDHE
+    const url = new URL(
+      `https://www.usfans.com/product/${usfansMarketplaceStrings.get(
         marketplace
       )}/${id}`
     );

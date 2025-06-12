@@ -130,6 +130,10 @@ export function isAgentLink(href: string | URL): boolean {
     if (!link.pathname.startsWith('/shop-detail')) {
       return false;
     }
+  } else if (agent === 'usfans') {
+    if (link.pathname.includes('/product/')) {
+      return false;
+    }
   }
 
   try {

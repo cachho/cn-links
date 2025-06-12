@@ -15,6 +15,7 @@ import { decodeOrientdig } from './decode/decodeOrientdig';
 import { decodePandabuy } from './decode/decodePandabuy';
 import { decodeSifubuy } from './decode/decodeSifubuy';
 import { decodeSuperbuy } from './decode/decodeSuperbuy';
+import { decodeUsfans } from './decode/decodeUsfans';
 import { generateRawLink } from './generateRawLink';
 
 /**
@@ -109,6 +110,10 @@ export function extractRawLink(href: AgentURL): RawURL {
   }
   if (agent === 'acbuy') {
     const { marketplace, id } = decodeAcbuy(link);
+    return generateRawLink(marketplace, id);
+  }
+  if (agent === 'usfans') {
+    const { marketplace, id } = decodeUsfans(link);
     return generateRawLink(marketplace, id);
   }
 

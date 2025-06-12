@@ -85,6 +85,11 @@ describe('detectAgent', () => {
     expect(detectAgent(url)).toBe('hoobuy');
   });
 
+  it('detects usfans', () => {
+    const url = 'https://www.usfans.com/product/2/6753302314123';
+    expect(detectAgent(url)).toBe('usfans');
+  });
+
   test('should work for all agents and marketplaces', () => {
     marketplaces.forEach((marketplace) => {
       agents.forEach((agent) => {

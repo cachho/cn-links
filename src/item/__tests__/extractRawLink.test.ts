@@ -606,6 +606,14 @@ describe('extractRawLink', () => {
     );
   });
 
+  it('should work for usfans', () => {
+    const href = 'https://www.usfans.com/product/2/676700645112';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://item.taobao.com/item.htm?id=676700645112'
+    );
+  });
+
   test('should work for all agents and marketplaces', () => {
     const testId = '6481396504';
     marketplaces.forEach((marketplace) => {

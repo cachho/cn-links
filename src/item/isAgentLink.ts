@@ -59,6 +59,9 @@ export function isAgentLink(href: string | URL): boolean {
   if (agent === 'hoobuy' && !link.pathname.includes('/product')) {
     return false;
   }
+  if (agent === 'usfans' && !link.pathname.includes('/product')) {
+    return false;
+  }
   if (agent === 'allchinabuy' && link.pathname.includes('/shop')) {
     return false;
   }

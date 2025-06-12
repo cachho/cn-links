@@ -1,4 +1,5 @@
 import { acbuyMarketplaceStrings } from '../data/acbuy';
+import { hoobuyMarketplaceStrings } from '../data/hoobuy';
 import { lovegobuyMarketplaceStrings } from '../data/lovegobuy';
 import { oopbuyMarketplaceStrings } from '../data/oopbuy';
 import { panglobalbuyMarketplaceStrings } from '../data/panglobalbuy';
@@ -201,26 +202,19 @@ export function generateAgentLink(
     );
   }
 
+  // Hoobuy
   if (agent === 'hoobuy') {
     // https://hoobuy.com/product/1/692787834585?utm_source=share&utm_medium=product_details&inviteCode=2X6A1vRD
+    const url = new URL(
+      `https://www.hoobuy.com/product/${hoobuyMarketplaceStrings.get(
+        marketplace
+      )}/${id}`
+    );
     if (referral) {
-      urlParams.set('inviteCode', referral);
+      url.searchParams.set('inviteCode', referral);
     }
-    if (marketplace === '1688') {
-      const url = `https://www.hoobuy.com/product/0/${id}`;
-      const paramString = urlParams.toString();
-      return new URL(paramString ? `${url}?${paramString}` : url);
-    }
-    if (marketplace === 'taobao' || marketplace === 'tmall') {
-      const url = `https://www.hoobuy.com/product/1/${id}`;
-      const paramString = urlParams.toString();
-      return new URL(paramString ? `${url}?${paramString}` : url);
-    }
-    if (marketplace === 'weidian') {
-      const url = `https://www.hoobuy.com/product/2/${id}`;
-      const paramString = urlParams.toString();
-      return new URL(paramString ? `${url}?${paramString}` : url);
-    }
+    const paramString = urlParams.toString();
+    return new URL(paramString ? `${url}?${paramString}` : url);
   }
 
   // AllChinaBuy

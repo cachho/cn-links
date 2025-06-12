@@ -1,3 +1,4 @@
+import { hoobuyStringsMarketplaces } from '../../data/hoobuy';
 import type { AgentLink, RawURL } from '../../models';
 import { generateRawLink } from '../generateRawLink';
 
@@ -22,25 +23,21 @@ export function decodeHoobuy(href: AgentLink | string | URL): RawURL {
 
   const slashIndex = isMobile ? 4 : 3;
 
-  if (url.pathname.startsWith(`${prefix}1/`)) {
-    const id = url.pathname.split('/')[slashIndex];
-    if (id) {
-      return generateRawLink('taobao', id);
-    }
+  const slashSplits = url.pathname.split('/');
+
+  const agentSpecificMarketplaceId = slashSplits[slashIndex - 1];
+
+  const marketplace = hoobuyStringsMarketplaces.get(agentSpecificMarketplaceId);
+
+  if (!marketplace) {
+    throw new Error(`No valid Hoobuy marketplace id found in : ${url.href}`);
   }
-  if (url.pathname.startsWith(`${prefix}0/`)) {
-    const id = url.pathname.split('/')[slashIndex];
-    if (id) {
-      return generateRawLink('1688', id);
-    }
+
+  const id = slashSplits[slashIndex];
+
+  if (id === undefined || id === '') {
+    throw new Error(`No valid Hoobuy item id found in : ${url.href}`);
   }
-  if (url.pathname.startsWith(`${prefix}2/`)) {
-    const id = url.pathname.split('/')[slashIndex];
-    if (id) {
-      return generateRawLink('weidian', id);
-    }
-  }
-  throw new Error(
-    `Error extracting inner link, hoobuy link could not be decrypted: ${url.href}`
-  );
+
+  return generateRawLink(marketplace, id);
 }

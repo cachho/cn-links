@@ -227,7 +227,7 @@ export function generateAgentLink(
       )}/${id}`
     );
     if (referral) {
-      url.searchParams.set('inviteCode', referral);
+      url.searchParams.set('ref', referral);
     }
     const paramString = urlParams.toString();
     return new URL(paramString ? `${url}?${paramString}` : url);

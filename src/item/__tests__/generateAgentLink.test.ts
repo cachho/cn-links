@@ -289,6 +289,16 @@ describe('generateAgentLink', () => {
     expect(result.href).toEqual(expected.href);
   });
 
+  it('should generate usfans links correctly', () => {
+    // https://www.usfans.com/product/3/676700562213?ref=AFF
+    const agent = 'usfans';
+    const expected = new URL(
+      `https://www.usfans.com/product/3/${id}?ref=${referral}`
+    );
+    const result = generateAgentLink(agent, marketplace, id, referral);
+    expect(result.href).toEqual(expected.href);
+  });
+
   it('should not include unsanitized parts', () => {
     const agent = 'hagobuy';
 

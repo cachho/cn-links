@@ -242,7 +242,7 @@ export function generateAgentLink(
     url.searchParams.set('channel', mp); // 2 is for Taobao
     url.searchParams.set('shopId', id);
     if (referral) {
-      url.searchParams.set('inviteCode', referral);
+      url.searchParams.set('ref', referral);
     }
     return url;
   }

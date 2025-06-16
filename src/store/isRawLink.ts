@@ -54,9 +54,24 @@ export function isRawLink(href: string | URL): boolean {
     }
     return hostSegments[0].startsWith('shop');
   }
-
   if (marketplace === 'tmall') {
     throw new Error('Tmall links are not supported yet.');
+  }
+  if (marketplace === 'xianyu') {
+    // Check for user store links like https://www.goofish.com/user/{id}
+    const segments = link.pathname.split('/').filter((s) => s);
+    if (segments.length >= 2 && segments[0] === 'user') {
+      return true;
+    }
+    // Reject item links - they have /item path
+    if (segments.length >= 1 && segments[0] === 'item') {
+      return false;
+    }
+    // Check for user store query parameters (not item parameters)
+    if (link.searchParams.get('userId')) {
+      return true;
+    }
+    return false;
   }
 
   return false;

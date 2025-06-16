@@ -5,6 +5,7 @@ export const hoobuyMarketplaceStrings = new Map<Marketplace, string>([
   ['weidian', '2'],
   ['taobao', '1'],
   ['1688', '0'],
+  ['xianyu', '4'],
 ]);
 
 export const hoobuyStringsMarketplaces = new Map<string, Marketplace>(

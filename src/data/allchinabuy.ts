@@ -5,6 +5,7 @@ export const allchinabuyMarketplaceStrings = new Map<Marketplace, string>([
   ['weidian', 'WD'],
   ['taobao', 'TB'],
   ['1688', 'ALIBABA'],
+  ['xianyu', 'XY'],
 ]);
 
 export const allchinabuyStringsMarketplaces = new Map<string, Marketplace>(

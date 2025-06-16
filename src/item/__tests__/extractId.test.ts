@@ -109,4 +109,28 @@ describe('extractId', () => {
     const id = extractId(href, 'weidian');
     expect(id).toBe('7240382968');
   });
+
+  test('should extract the correct ID for Xianyu PC link (2.taobao.com)', () => {
+    const href = 'https://2.taobao.com/item-detail?itemId=913955170552';
+    const id = extractId(href, 'xianyu');
+    expect(id).toBe('913955170552');
+  });
+
+  test('should extract the correct ID for Xianyu PC link (goofish.com)', () => {
+    const href = 'https://www.goofish.com/item?id=931096858778';
+    const id = extractId(href, 'xianyu');
+    expect(id).toBe('931096858778');
+  });
+  test('should throw for mobile short links', () => {
+    const mobileLinks = [
+      'https://m.tb.cn/h.hZH53PB?tk=SBeXVJMVxap', // Xianyu mobile
+      'https://e.tb.cn/h.hZH5WmfaS8hKKDC?tk=H0QDVJMVmMe', // Taobao mobile
+      'https://qr.1688.com/s/Oe9AAOMO', // 1688 mobile
+      'https://k.youshop10.com/f8DjKGQd?a=b&p=iphone&wfr=BuyercopyURL&share_relation=5c1997b193f3dfa6_1554610308_1', // Weidian mobile
+    ];
+
+    mobileLinks.forEach((href) => {
+      expect(() => extractId(href)).toThrow();
+    });
+  });
 });

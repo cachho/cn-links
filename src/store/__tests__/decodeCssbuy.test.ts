@@ -20,4 +20,14 @@ describe('Decode Cssbuy', () => {
       marketplace: '1688',
     });
   });
+
+  it('should work with xianyu links', () => {
+    const href =
+      'https://www.cssbuy.com/productlist?t=xianyu&shop=913955170552';
+    const result = decodeCssbuy(new URL(href));
+    expect(result).toEqual({
+      id: '913955170552',
+      marketplace: 'xianyu',
+    });
+  });
 });

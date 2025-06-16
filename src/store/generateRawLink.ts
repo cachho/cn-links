@@ -29,6 +29,11 @@ export function generateRawLink(marketplace: Marketplace, id: Id): RawURL {
     // NOTE: We'll be using desktop links as the default for now. See readme.
     return new URL(`https://shop${id}.1688.com/`);
   }
+  if (marketplace === 'xianyu') {
+    // For store links, Xianyu doesn't have a standard format, so we'll use a placeholder
+    // This might need to be updated based on actual Xianyu store link structure
+    return new URL(`https://www.goofish.com/user/${id}`);
+  }
 
   throw new Error(`Unsupported marketplace: ${marketplace}`);
 }

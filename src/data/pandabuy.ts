@@ -5,6 +5,7 @@ export const pandabuyMarketplaceStrings = new Map<Marketplace, string>([
   ['weidian', 'wd'],
   ['taobao', 'taobao'],
   ['1688', 'alibaba'],
+  ['xianyu', 'xianyu'],
 ]);
 
 export const pandabuyStringsMarketplaces = new Map<string, Marketplace>(

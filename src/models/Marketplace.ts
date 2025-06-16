@@ -1,9 +1,16 @@
-export const marketplaces = ['weidian', 'taobao', '1688', 'tmall'] as const;
+export const marketplaces = [
+  'weidian',
+  'taobao',
+  '1688',
+  'tmall',
+  'xianyu',
+] as const;
 export const marketplacesWithTld = [
   'weidian.com',
   'taobao.com',
   '1688.com',
   'tmall.com',
+  'goofish.com',
 ] as const;
 
 export type Marketplace = (typeof marketplaces)[number];

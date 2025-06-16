@@ -5,6 +5,7 @@ export const panglobalbuyMarketplaceStrings = new Map<Marketplace, string>([
   ['weidian', '3'],
   ['taobao', '1'],
   ['1688', '2'],
+  ['xianyu', '4'],
 ]);
 
 export const panglobalbuyStringsMarketplaces = new Map<string, Marketplace>(

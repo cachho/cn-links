@@ -5,6 +5,7 @@ export const kameymallMarketplaceStrings = new Map<Marketplace, string>([
   ['weidian', '7'],
   ['taobao', '1'],
   ['1688', '4'],
+  ['xianyu', '8'],
 ]);
 
 export const kameymallStringsMarketplaces = new Map<string, Marketplace>(

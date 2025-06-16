@@ -5,6 +5,7 @@ export const lovegobuyMarketplaceStrings = new Map<Marketplace, string>([
   ['weidian', 'weidian'],
   ['taobao', 'taobao'],
   ['1688', 'ali_1688'],
+  ['xianyu', 'xianyu'],
 ]);
 
 export const lovegobuyStringsMarketplaces = new Map<string, Marketplace>(

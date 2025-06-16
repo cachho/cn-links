@@ -8,6 +8,7 @@ import { isRawLink } from './item/isRawLink';
 import { detectAgent } from './lib/detectAgent';
 import { detectMarketplace } from './lib/detectMarketplace';
 import { detectNonLinkMarketplace } from './lib/detectNonLinkMarketplace';
+import { getMobileMarketplace, isMobileLink } from './lib/isMobileLink';
 import { CnItemLink, CnLink, CnStoreLink } from './objects';
 import { agentSupportsStore } from './store/agentSupportsStore';
 import { generateAgentLink as generateAgentStoreLink } from './store/generateAgentLink';
@@ -29,7 +30,9 @@ export {
   generateAgentStoreLink,
   generateRawLink,
   generateRawStoreLink,
+  getMobileMarketplace,
   isAgentLink,
+  isMobileLink,
   isNonLinkMarketplace,
   isRawLink,
 };

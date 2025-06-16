@@ -6,6 +6,7 @@ const array: Array<[Marketplace, string]> = [
   ['1688', '0'],
   ['weidian', '2'],
   ['weidian', 'weidian'],
+  ['xianyu', '3'],
 ];
 
 export const oopbuyMarketplaceStrings = new Map<Marketplace, string>(array);

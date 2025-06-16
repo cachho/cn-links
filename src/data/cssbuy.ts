@@ -5,6 +5,7 @@ export const cssbuyMarketplaceStrings = new Map<Marketplace, string>([
   ['weidian', 'micro'],
   ['taobao', 'taobao'],
   ['1688', '1688'],
+  ['xianyu', 'xianyu'],
 ]);
 
 export const cssbuyStringsMarketplaces = new Map<string, Marketplace>(

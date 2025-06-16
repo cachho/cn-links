@@ -5,6 +5,7 @@ export const usfansMarketplaceStrings = new Map<Marketplace, string>([
   ['weidian', '3'],
   ['taobao', '2'],
   ['1688', '1'],
+  ['xianyu', '4'],
 ]);
 
 export const usfansStringsMarketplaces = new Map<string, Marketplace>(

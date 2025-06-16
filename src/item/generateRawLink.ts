@@ -29,6 +29,11 @@ export function generateRawLink(marketplace: Marketplace, id: Id): RawURL {
       `https://detail.tmall.com/item_o.htm?${urlParams.toString()}`
     );
   }
+  if (marketplace === 'xianyu') {
+    const urlParams = new URLSearchParams();
+    urlParams.set('id', id);
+    return new URL(`https://www.goofish.com/item?${urlParams.toString()}`);
+  }
 
   throw new Error(`Unsupported marketplace: ${marketplace}`);
 }

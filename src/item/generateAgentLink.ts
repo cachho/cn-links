@@ -156,7 +156,11 @@ export function generateAgentLink(
     // https://cnfans.com/product?id=676700645113&platform=TAOBAO
     const url = new URL('https://cnfans.com/product');
     url.searchParams.set('id', id);
-    if (marketplace === 'taobao' || marketplace === 'tmall') {
+    if (
+      marketplace === 'taobao' ||
+      marketplace === 'tmall' ||
+      marketplace === 'xianyu'
+    ) {
       url.searchParams.set('platform', 'TAOBAO');
     } else if (marketplace === 'weidian') {
       url.searchParams.set('platform', 'WEIDIAN');
@@ -173,19 +177,23 @@ export function generateAgentLink(
     return url;
   }
 
-  // CnFans
+  // Mulebuy
   if (agent === 'mulebuy') {
     // https://mulebuy.com/product?id=6834305685837&platform=TAOBAO&ref=0
     const url = new URL('https://mulebuy.com/product');
     url.searchParams.set('id', id);
-    if (marketplace === 'taobao' || marketplace === 'tmall') {
+    if (
+      marketplace === 'taobao' ||
+      marketplace === 'tmall' ||
+      marketplace === 'xianyu'
+    ) {
       url.searchParams.set('platform', 'TAOBAO');
     } else if (marketplace === 'weidian') {
       url.searchParams.set('platform', 'WEIDIAN');
     } else if (marketplace === '1688') {
       url.searchParams.set('platform', 'ALI_1688');
     } else {
-      throw new Error('Marketplace could not be detected for CnFans');
+      throw new Error('Marketplace could not be detected for Mulebuy');
     }
 
     if (referral) {
@@ -273,7 +281,6 @@ export function generateAgentLink(
     }
     return url;
   }
-
   if (agent === 'joyabuy') {
     const url = new URL('https://joyabuy.com/product/');
     if (marketplace === 'taobao' || marketplace === 'tmall') {
@@ -282,8 +289,10 @@ export function generateAgentLink(
       url.searchParams.set('shop_type', 'weidian');
     } else if (marketplace === '1688') {
       url.searchParams.set('shop_type', 'ali_1688');
+    } else if (marketplace === 'xianyu') {
+      url.searchParams.set('shop_type', 'taobao'); // Joyabuy treats xianyu as taobao
     } else {
-      throw new Error('Marketplace could not be detected for CnFans');
+      throw new Error('Marketplace could not be detected for Joyabuy');
     }
     url.searchParams.set('id', id);
     if (referral) {
@@ -291,7 +300,6 @@ export function generateAgentLink(
     }
     return url;
   }
-
   if (agent === 'joyagoo') {
     const url = new URL('https://joyagoo.com/product');
     url.searchParams.set('id', id);
@@ -301,6 +309,8 @@ export function generateAgentLink(
       url.searchParams.set('platform', 'WEIDIAN');
     } else if (marketplace === '1688') {
       url.searchParams.set('platform', 'ALI_1688');
+    } else if (marketplace === 'xianyu') {
+      url.searchParams.set('platform', 'TAOBAO');
     } else {
       throw new Error('Marketplace could not be detected for Joyagoo');
     }
@@ -309,7 +319,6 @@ export function generateAgentLink(
     }
     return url;
   }
-
   if (agent === 'orientdig') {
     const url = new URL('https://orientdig.com/product/');
     if (marketplace === 'taobao' || marketplace === 'tmall') {
@@ -318,8 +327,10 @@ export function generateAgentLink(
       url.searchParams.set('shop_type', 'weidian');
     } else if (marketplace === '1688') {
       url.searchParams.set('shop_type', 'ali_1688');
+    } else if (marketplace === 'xianyu') {
+      url.searchParams.set('shop_type', 'taobao'); // Orientdig treats xianyu as taobao
     } else {
-      throw new Error('Marketplace could not be detected for CnFans');
+      throw new Error('Marketplace could not be detected for Orientdig');
     }
     url.searchParams.set('id', id);
     if (referral) {

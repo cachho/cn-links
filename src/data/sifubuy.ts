@@ -5,6 +5,7 @@ export const sifubuyMarketplaceStrings = new Map<Marketplace, string>([
   ['weidian', '4'],
   ['taobao', '2'],
   ['1688', '1'],
+  ['xianyu', '5'],
 ]);
 
 export const sifubuyStringsMarketplaces = new Map<string, Marketplace>(

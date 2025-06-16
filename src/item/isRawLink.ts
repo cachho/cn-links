@@ -20,12 +20,19 @@ export function isRawLink(href: string | URL): boolean {
   if (!marketplace) return false;
 
   if (marketplace === 'weidian') {
+    // Mobile short links are not directly supported as raw links
+    if (link.hostname === 'k.youshop10.com') return false;
+
     return !!(
       link.searchParams.get('itemID') || link.searchParams.get('itemId')
     );
   }
 
   if (marketplace === 'taobao') {
+    // Mobile short links are not directly supported as raw links
+    if (link.hostname === 'e.tb.cn' || link.hostname === 'm.tb.cn')
+      return false;
+
     if (link.hostname.includes('world.taobao.com')) {
       const id = link.href.split('item/')[1].split('.')[0];
       return !Number.isNaN(Number(id));
@@ -34,8 +41,8 @@ export function isRawLink(href: string | URL): boolean {
   }
 
   if (marketplace === '1688') {
-    // Shortened links are not just encoded. They have to be encrypted first.
-    if (link.hostname.includes('qr.1688.com')) return false;
+    // Mobile short links are not directly supported as raw links
+    if (link.hostname === 'qr.1688.com') return false;
 
     if (link.href.indexOf('offer')) {
       const id =
@@ -49,6 +56,22 @@ export function isRawLink(href: string | URL): boolean {
 
   if (marketplace === 'tmall') {
     return !!link.searchParams.get('id');
+  }
+
+  if (marketplace === 'xianyu') {
+    // Mobile short links are not directly supported as raw links
+    if (link.hostname === 'm.tb.cn') return false;
+
+    // Support both formats: 2.taobao.com and goofish.com
+    if (link.hostname === '2.taobao.com') {
+      return !!link.searchParams.get('itemId');
+    }
+    if (link.hostname === 'www.goofish.com') {
+      return !!link.searchParams.get('id');
+    }
+
+    // Fallback check
+    return !!(link.searchParams.get('itemId') || link.searchParams.get('id'));
   }
 
   return false;

@@ -5,6 +5,7 @@ export const acbuyMarketplaceStrings = new Map<Marketplace, string>([
   ['weidian', 'WD'],
   ['taobao', 'TB'],
   ['1688', 'AL'],
+  ['xianyu', 'XY'],
 ]);
 
 export const acbuyStringsMarketplaces = new Map<string, Marketplace>(

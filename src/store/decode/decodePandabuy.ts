@@ -48,5 +48,8 @@ export function decodePandabuy(link: URL): {
 
     return { marketplace: '1688', id: extractId(innerLink, '1688') };
   }
+  if (marketplace === 'xianyu') {
+    return { marketplace: 'xianyu', id };
+  }
   throw new Error('Unsupported marketplace');
 }

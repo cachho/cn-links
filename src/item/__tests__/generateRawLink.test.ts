@@ -26,6 +26,13 @@ describe('generateProperLink', () => {
     );
   });
 
+  it('should generate a proper Xianyu link', () => {
+    const link = generateRawLink('xianyu', '931096858778');
+    expect(link).toEqual(
+      new URL('https://www.goofish.com/item?id=931096858778')
+    );
+  });
+
   it('should throw error for an unknown marketplace', () => {
     expect(() => {
       generateRawLink('unknown' as Marketplace, '567890');

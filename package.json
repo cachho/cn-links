@@ -12,7 +12,7 @@
   ],
   "scripts": {
     "build": "tsc -p tsconfig.build.json --listFiles",
-    "prepare": "husky install",
+    "prepare": "npm run build && husky install",
     "check-types": "tsc --noEmit --pretty",
     "test": "jest"
   },

@@ -63,6 +63,29 @@ describe('detectMarketplace', () => {
     expect(detectMarketplace(url)).toBe('1688');
   });
 
+  it('detects xianyu from PC links', () => {
+    const url1 = 'https://2.taobao.com/item-detail?itemId=913955170552';
+    expect(detectMarketplace(url1)).toBe('xianyu');
+
+    const url2 = 'https://www.goofish.com/item?id=931096858778';
+    expect(detectMarketplace(url2)).toBe('xianyu');
+  });
+  it('should handle mobile links properly', () => {
+    // Mobile short links should return the correct marketplace based on domain
+    expect(detectMarketplace('https://m.tb.cn/h.hZH53PB?tk=SBeXVJMVxap')).toBe(
+      'xianyu'
+    ); // Xianyu mobile
+    expect(
+      detectMarketplace('https://e.tb.cn/h.hZH5WmfaS8hKKDC?tk=H0QDVJMVmMe')
+    ).toBe('taobao'); // Taobao mobile
+    expect(detectMarketplace('https://qr.1688.com/s/Oe9AAOMO')).toBe('1688'); // 1688 mobile
+    expect(
+      detectMarketplace(
+        'https://k.youshop10.com/f8DjKGQd?a=b&p=iphone&wfr=BuyercopyURL&share_relation=5c1997b193f3dfa6_1554610308_1'
+      )
+    ).toBe('weidian'); // Weidian mobile
+  });
+
   test('should work for all marketplaces', () => {
     marketplaces.forEach((marketplace) => {
       const marketplaceLink = generateMarketplaceLink(marketplace, '0');

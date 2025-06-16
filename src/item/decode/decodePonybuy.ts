@@ -8,6 +8,9 @@ const getMarketplace = (link: URL): Marketplace | null => {
   if (link.searchParams.get('platform') === 'taobao') {
     return 'taobao';
   }
+  if (link.searchParams.get('platform') === 'xianyu') {
+    return 'xianyu';
+  }
   if (link.searchParams.get('platform') === '1688') {
     return '1688';
   }

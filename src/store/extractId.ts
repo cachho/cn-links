@@ -84,6 +84,19 @@ export function extractId(href: RawLink, marketplace?: Marketplace): Id {
     if (urlParams.get('id')) {
       return urlParams.get('id')!;
     }
+  } else if (mp === 'xianyu') {
+    // For Xianyu store links, extract user ID from URL path
+    const segments = link.pathname.split('/').filter((s) => s);
+    if (segments.length >= 2 && segments[0] === 'user') {
+      return segments[1];
+    }
+    // Fallback to generic ID extraction
+    if (urlParams.get('userId')) {
+      return urlParams.get('userId')!;
+    }
+    if (urlParams.get('id')) {
+      return urlParams.get('id')!;
+    }
   }
 
   // ERROR RECOVERIES

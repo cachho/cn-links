@@ -613,7 +613,6 @@ describe('extractRawLink', () => {
       'https://item.taobao.com/item.htm?id=676700645112'
     );
   });
-
   test('should work for all agents and marketplaces', () => {
     const testId = '6481396504';
     marketplaces.forEach((marketplace) => {
@@ -621,6 +620,13 @@ describe('extractRawLink', () => {
         const agentLink = generateAgentLink(agent, marketplace, testId);
         if (marketplace === 'tmall') {
           // Sometimes, tmall can't be reversed and it's a taobao link.
+          expect([
+            generateRawLink(marketplace, testId).href,
+            generateMarketplaceLink('taobao', testId).href,
+          ]).toContain(extractRawLink(agentLink).href);
+        } else if (marketplace === 'xianyu') {
+          // Some agents (cnfans, mulebuy) treat xianyu as taobao internally
+          // and can't differentiate when decoding back
           expect([
             generateRawLink(marketplace, testId).href,
             generateMarketplaceLink('taobao', testId).href,

@@ -614,6 +614,15 @@ describe('extractRawLink', () => {
     );
   });
 
+  it('should work for cnshopper', () => {
+    const href =
+      'https://cnshopper.com/goods/detail?keyword=5416187188&platform=weidian&invite_id=1424233';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://weidian.com/item.html?itemID=5416187188'
+    );
+  });
+
   test('should work for all agents and marketplaces', () => {
     const testId = '6481396504';
     marketplaces.forEach((marketplace) => {

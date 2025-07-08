@@ -449,6 +449,17 @@ export function generateAgentLink(
     return url;
   }
 
+  if (agent === 'cnshopper') {
+    // https://cnshopper.com/goods/detail?keyword=892588860718&platform=1688&invite_id=1424233
+    const url = new URL('https://cnshopper.com/goods/detail');
+    url.searchParams.set('keyword', id);
+    url.searchParams.set('platform', marketplace);
+    if (referral) {
+      url.searchParams.set('invite_id', referral);
+    }
+    return url;
+  }
+
   // Raw Links
   if (agent === 'raw') {
     // https://detail.1688.com/offer/679865234523.html

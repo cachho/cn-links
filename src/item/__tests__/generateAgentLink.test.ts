@@ -299,6 +299,16 @@ describe('generateAgentLink', () => {
     expect(result.href).toEqual(expected.href);
   });
 
+  it('should generate cnshopper links correctly, specifically 1688', () => {
+    // CnShopper uses the same marketplace strings we do, but this might change in the future
+    const agent = 'cnshopper';
+    const expected = new URL(
+      `https://cnshopper.com/goods/detail?keyword=${id}&platform=1688&invite_id=${referral}`
+    );
+    const result = generateAgentLink(agent, '1688', id, referral);
+    expect(result.href).toEqual(expected.href);
+  });
+
   it('should not include unsanitized parts', () => {
     const agent = 'hagobuy';
 

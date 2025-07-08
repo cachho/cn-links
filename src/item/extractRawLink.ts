@@ -5,6 +5,7 @@ import type { AgentURL, RawURL } from '../models/LinkTypes';
 import { decodeAcbuy } from './decode/decodeAcbuy';
 import { decodeBasetao } from './decode/decodeBasetao';
 import { decodeCnFans } from './decode/decodeCnFans';
+import { decodeCnshopper } from './decode/decodeCnshopper';
 import { decodeCssbuy } from './decode/decodeCssbuy';
 import { decodeEzbuyCn } from './decode/decodeEzbuyCn';
 import { decodeHoobuy } from './decode/decodeHoobuy';
@@ -113,6 +114,10 @@ export function extractRawLink(href: AgentURL): RawURL {
 
     if (agent === 'usfans') {
       return decodeUsfans(link);
+    }
+
+    if (agent === 'cnshopper') {
+      return decodeCnshopper(link);
     }
     throw new Error('Agent does not have a decoder. This may be expected.');
   } catch (error) {

@@ -30,6 +30,11 @@ export function isRawLink(href: string | URL): boolean {
       const id = link.href.split('item/')[1].split('.')[0];
       return !Number.isNaN(Number(id));
     }
+    // Support for taobao list items (e.g. https://www.taobao.com/list/item/758067992163.htm)
+    if (link.pathname.startsWith('/list/item/')) {
+      const id = link.pathname.split('/list/item/')[1].split('.')[0];
+      return !Number.isNaN(Number(id));
+    }
     return !!link.searchParams.get('id');
   }
 

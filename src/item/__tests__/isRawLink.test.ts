@@ -66,6 +66,12 @@ describe('isMarketplace', () => {
     expect(result).toBe(false);
   });
 
+  it('should return true for a taobao list', () => {
+    const href = 'https://www.taobao.com/list/item/758067992163.htm';
+    const result = isRawLink(href);
+    expect(result).toBe(true);
+  });
+
   it('should return false for a non-URL input', () => {
     const href = 'not-a-url';
     const result = isRawLink(href);

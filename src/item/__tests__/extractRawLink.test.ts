@@ -632,6 +632,15 @@ describe('extractRawLink', () => {
     );
   });
 
+  it('should work for alt hubbuy format', () => {
+    const href =
+      'https://www.hubbuycn.com/index/item/index.html?tp=taobao&tid=699927843620&searchlang=en&url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fabbucket%3D15%26amp%3Bid%3D699927843620%26amp%3Bns%3D1%26amp%3BpriceTId%3D2100c88917372680623511030e0bf5%26amp%3BskuId%3D5639579586544%26amp%3Bspm%3Da21n57.imgsearch.item.2.6f803b6epaHc6J%26amp%3Butparam%3D%7B%22aplus_abtest%22%3A%22013091ff3964985d10b541108ada87b5%22%7D%26amp%3Bxxc%3DtaobaoSearch&inviter=vitorcv';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://item.taobao.com/item.htm?id=699927843620'
+    );
+  });
+
   test('should work for all agents and marketplaces', () => {
     const testId = '6481396504';
     marketplaces.forEach((marketplace) => {

@@ -309,6 +309,24 @@ describe('generateAgentLink', () => {
     expect(result.href).toEqual(expected.href);
   });
 
+  it('should generate hubbuycn links in the newest format (1688)', () => {
+    const agent = 'hubbuycn';
+    const expected = new URL(
+      `https://www.hubbuycn.com/index/item/index.html?tp=1688&tid=${id}&inviter=${referral}`
+    );
+    const result = generateAgentLink(agent, '1688', id, referral);
+    expect(result.href).toEqual(expected.href);
+  });
+
+  it('should generate hubbuycn links in the newest format (1688)', () => {
+    const agent = 'hubbuycn';
+    const expected = new URL(
+      `https://www.hubbuycn.com/index/item/index.html?tp=micro&tid=${id}&inviter=${referral}`
+    );
+    const result = generateAgentLink(agent, 'weidian', id, referral);
+    expect(result.href).toEqual(expected.href);
+  });
+
   it('should not include unsanitized parts', () => {
     const agent = 'hagobuy';
 

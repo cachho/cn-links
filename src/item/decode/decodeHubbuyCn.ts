@@ -1,3 +1,4 @@
+import { hubbuycnStringsMarketplaces } from '../../data/hubbuycn';
 import type { RawURL } from '../../models';
 import { generateRawLink } from '../generateRawLink';
 
@@ -10,8 +11,25 @@ import { generateRawLink } from '../generateRawLink';
  * @returns {RawURL} The decrypted proper link as a URL object, or undefined if decryption failed.
  */
 export function decodeHubbuyCn(url: URL): RawURL {
-  if (url.searchParams.get('url')) {
-    return new URL(url.searchParams.get('url')!);
+  if (url.searchParams.has('tp') && url.searchParams.has('tid')) {
+    const id = url.searchParams.get('tid');
+    if (id === null) {
+      throw new Error('No id provided in HubbuyCn link.');
+    }
+    const marketplace = hubbuycnStringsMarketplaces.get(
+      url.searchParams.get('tp')?.toLowerCase() || ''
+    );
+    if (!marketplace) {
+      throw new Error(`No marketplace provided in HubbuyCn link: ${url.href}`);
+    }
+    return generateRawLink(marketplace, id);
+  }
+  if (url.searchParams.has('url')) {
+    const innerUrl = url.searchParams.get('url');
+    if (!innerUrl) {
+      throw new Error('No url provided in HubbuyCn link.');
+    }
+    return new URL(innerUrl);
   }
   if (url.pathname.toLowerCase().includes('taobaoid')) {
     // https://www.hubbuycn.com/taobaoID=726526607194&inviter=johnerik123

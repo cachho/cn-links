@@ -28,7 +28,8 @@ const getMarketplace = (link: URL): Marketplace | null => {
  */
 export function decodeOopbuy(link: URL) {
   if (
-    (link.searchParams.has('channel') && link.searchParams.has('id')) ||
+    ((link.searchParams.has('channel') || link.searchParams.has('channelId')) &&
+      link.searchParams.has('id')) ||
     link.searchParams.has('spuno') ||
     link.searchParams.has('spuNo')
   ) {
@@ -39,7 +40,9 @@ export function decodeOopbuy(link: URL) {
     if (!id) {
       throw new Error('No id provided in Oopbuy link.');
     }
-    const marketplace = link.searchParams.get('channel')?.toLowerCase();
+    const marketplace = (
+      link.searchParams.get('channel') ?? link.searchParams.get('channelId')
+    )?.toLowerCase();
     if (!marketplace || !marketplaces.includes(marketplace as Marketplace)) {
       throw new Error('No marketplace provided in Oopbuy link.');
     }

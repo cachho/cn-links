@@ -641,6 +641,15 @@ describe('extractRawLink', () => {
     );
   });
 
+  it('should work for mulebuy mobile links', () => {
+    const href =
+      'https://m.mulebuy.com/pages/product/product?id=7261761313&shoptype=WEIDIAN&ref=200000069';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://weidian.com/item.html?itemID=7261761313'
+    );
+  });
+
   test('should work for all agents and marketplaces', () => {
     const testId = '6481396504';
     marketplaces.forEach((marketplace) => {

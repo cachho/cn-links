@@ -49,7 +49,7 @@ export function isAgentLink(href: string | URL): boolean {
     return false;
   }
   if (
-    agent === 'cnfans' &&
+    (agent === 'cnfans' || agent === 'mulebuy') &&
     !link.pathname.startsWith('/product') &&
     !link.pathname.slice(3).startsWith('/product') &&
     !link.pathname.startsWith('/pages/product/product')
@@ -75,13 +75,6 @@ export function isAgentLink(href: string | URL): boolean {
     return false;
   }
   if (agent === 'basetao' && !link.pathname.includes('/products')) {
-    return false;
-  }
-  if (
-    agent === 'mulebuy' &&
-    !link.pathname.startsWith('/product') &&
-    !link.pathname.slice(3).startsWith('/product')
-  ) {
     return false;
   }
   if (

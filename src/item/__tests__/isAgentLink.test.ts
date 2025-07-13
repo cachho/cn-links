@@ -17,6 +17,7 @@ describe('isAgentLink', () => {
       'https://www.lovegobuy.com/pc/#/goods/detail?platform=weidian&goodsId=4480454092',
       'https://www.lovegobuy.com/product?platform=weidian&goodsId=4480454092',
       'https://m.lovegobuy.com/product?id=7247608954&shop_type=weidian&invite_code=123456',
+      'https://m.mulebuy.com/pages/product/product?id=7262843680&shoptype=WEIDIAN&ref=200000069',
     ];
 
     agentLinks.forEach((link) => {

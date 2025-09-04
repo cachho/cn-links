@@ -201,17 +201,6 @@ describe('generateAgentLink', () => {
     expect(result.href).toEqual(expected.href);
   });
 
-  it('should generate ponybuy links correctly', () => {
-    const agent = 'ponybuy';
-    const expected = new URL(
-      `https://www.ponybuy.com/en-gb/goods?tracking=${referral}&product_id=${id}&platform=${marketplace}`
-    );
-
-    const result = generateAgentLink(agent, marketplace, id, referral);
-
-    expect(result.href).toEqual(expected.href);
-  });
-
   it('should generate panglobalbuy links correctly', () => {
     const agent = 'panglobalbuy';
     const expected = new URL(
@@ -324,6 +313,15 @@ describe('generateAgentLink', () => {
       `https://www.hubbuycn.com/index/item/index.html?tp=micro&tid=${id}&inviter=${referral}`
     );
     const result = generateAgentLink(agent, 'weidian', id, referral);
+    expect(result.href).toEqual(expected.href);
+  });
+
+  it("should generate new ponybuy links with the agent's marketplace param", () => {
+    const agent = 'ponybuy';
+    const expected = new URL(
+      `https://www.ponybuy.com/products/1/${id}?inviteCode=${referral}`
+    );
+    const result = generateAgentLink(agent, 'taobao', id, referral);
     expect(result.href).toEqual(expected.href);
   });
 

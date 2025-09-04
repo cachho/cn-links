@@ -4,6 +4,7 @@ import { hubbuycnMarketplaceStrings } from '../data/hubbuycn';
 import { lovegobuyMarketplaceStrings } from '../data/lovegobuy';
 import { oopbuyMarketplaceStrings } from '../data/oopbuy';
 import { panglobalbuyMarketplaceStrings } from '../data/panglobalbuy';
+import { ponybuyMarketplaceStrings } from '../data/ponybuy';
 import { sifubuyMarketplaceStrings } from '../data/sifubuy';
 import { usfansMarketplaceStrings } from '../data/usfans';
 import type { AgentURL, AgentWithRaw, Id, Marketplace } from '../models';
@@ -374,16 +375,15 @@ export function generateAgentLink(
   }
 
   if (agent === 'ponybuy') {
-    // https://www.ponybuy.com/en-gb/goods?tracking=bc47789afb&product_id=675330231421&platform=taobao
-    const url = new URL('https://www.ponybuy.com/en-gb/goods');
-    if (referral) {
-      url.searchParams.set('tracking', referral);
-    }
-    url.searchParams.set('product_id', id);
-    url.searchParams.set(
-      'platform',
-      marketplace !== 'tmall' ? marketplace : 'taobao'
+    // https://www.ponybuy.com/products/1/676700645113?inviteCode=ebe0050e31
+    const url = new URL(
+      `https://www.ponybuy.com/products/${ponybuyMarketplaceStrings.get(
+        marketplace
+      )}/${id}`
     );
+    if (referral) {
+      url.searchParams.set('inviteCode', referral);
+    }
     return url;
   }
 

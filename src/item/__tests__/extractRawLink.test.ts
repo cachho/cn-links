@@ -650,6 +650,23 @@ describe('extractRawLink', () => {
     );
   });
 
+  it('should have legacy support for old ponybuy links', () => {
+    const href =
+      'https://www.ponybuy.com/en-gb/goods?&product_id=7317124549&platform=weidian';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://weidian.com/item.html?itemID=7317124549'
+    );
+  });
+
+  it('should work for ponybuys new format', () => {
+    const href = 'https://www.ponybuy.com/products/1/675330231400';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://item.taobao.com/item.htm?id=675330231400'
+    );
+  });
+
   test('should work for all agents and marketplaces', () => {
     const testId = '6481396504';
     marketplaces.forEach((marketplace) => {

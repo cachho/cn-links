@@ -101,7 +101,7 @@ export function isAgentLink(href: string | URL): boolean {
   ) {
     return false;
   }
-  if (agent === 'ponybuy' && !link.pathname.includes('/goods')) {
+  if (agent === 'ponybuy' && !link.pathname.includes('/products/')) {
     return false;
   }
   if (agent === 'sifubuy' && !link.pathname.startsWith('/detail')) {

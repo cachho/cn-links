@@ -1,6 +1,5 @@
 import { acbuyMarketplaceStrings } from '../data/acbuy';
 import { hoobuyMarketplaceStrings } from '../data/hoobuy';
-import { hubbuycnMarketplaceStrings } from '../data/hubbuycn';
 import { lovegobuyMarketplaceStrings } from '../data/lovegobuy';
 import { oopbuyMarketplaceStrings } from '../data/oopbuy';
 import { panglobalbuyMarketplaceStrings } from '../data/panglobalbuy';
@@ -267,15 +266,10 @@ export function generateAgentLink(
   }
 
   if (agent === 'hubbuycn') {
-    const url = new URL('https://www.hubbuycn.com/index/item/index.html');
-    const mp = hubbuycnMarketplaceStrings.get(marketplace);
-    if (!mp) {
-      throw new Error(`Unsupported marketplace for HubbuyCn: ${marketplace}`);
-    }
-    url.searchParams.set('tp', mp);
-    url.searchParams.set('tid', id);
+    const url = new URL('https://www.hubbuycn.com/product/item');
+    url.searchParams.set('url', generateRawLink(marketplace, id).href);
     if (referral) {
-      url.searchParams.set('inviter', referral);
+      url.searchParams.set('invitation_code', referral);
     }
     return url;
   }

@@ -676,6 +676,14 @@ describe('extractRawLink', () => {
     );
   });
 
+  it('should work for hipobuy', () => {
+    const href = 'https://hipobuy.com/product/1/675330231421';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://item.taobao.com/item.htm?id=675330231421'
+    );
+  });
+
   test('should work for all agents and marketplaces', () => {
     const testId = '6481396504';
     marketplaces.forEach((marketplace) => {

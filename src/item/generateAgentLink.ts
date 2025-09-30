@@ -215,8 +215,7 @@ export function generateAgentLink(
     if (referral) {
       url.searchParams.set('inviteCode', referral);
     }
-    const paramString = urlParams.toString();
-    return new URL(paramString ? `${url}?${paramString}` : url);
+    return url;
   }
 
   // UsFans

@@ -318,6 +318,15 @@ describe('generateAgentLink', () => {
     expect(result.href).toEqual(expected.href);
   });
 
+  it('should generate hipobuy links', () => {
+    const agent = 'hipobuy';
+    const expected = new URL(
+      `https://hipobuy.com/product/1/${id}?inviteCode=${referral}`
+    );
+    const result = generateAgentLink(agent, 'taobao', id, referral);
+    expect(result.href).toEqual(expected.href);
+  });
+
   it('should not include unsanitized parts', () => {
     const agent = 'hagobuy';
 

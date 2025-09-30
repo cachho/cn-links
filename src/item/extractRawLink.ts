@@ -8,6 +8,7 @@ import { decodeCnFans } from './decode/decodeCnFans';
 import { decodeCnshopper } from './decode/decodeCnshopper';
 import { decodeCssbuy } from './decode/decodeCssbuy';
 import { decodeEzbuyCn } from './decode/decodeEzbuyCn';
+import { decodeHipobuy } from './decode/decodeHipobuy';
 import { decodeHoobuy } from './decode/decodeHoobuy';
 import { decodeHubbuyCn } from './decode/decodeHubbuyCn';
 import { decodeJoyagoo } from './decode/decodeJoyagoo';
@@ -118,6 +119,10 @@ export function extractRawLink(href: AgentURL): RawURL {
 
     if (agent === 'cnshopper') {
       return decodeCnshopper(link);
+    }
+
+    if (agent === 'hipobuy') {
+      return decodeHipobuy(link);
     }
     throw new Error('Agent does not have a decoder. This may be expected.');
   } catch (error) {

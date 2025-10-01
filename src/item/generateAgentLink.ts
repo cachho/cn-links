@@ -1,5 +1,4 @@
 import { acbuyMarketplaceStrings } from '../data/acbuy';
-import { hipobuyMarketplaceStrings } from '../data/hipobuy';
 import { hoobuyMarketplaceStrings } from '../data/hoobuy';
 import { lovegobuyMarketplaceStrings } from '../data/lovegobuy';
 import { oopbuyMarketplaceStrings } from '../data/oopbuy';
@@ -461,12 +460,9 @@ export function generateAgentLink(
 
   // Hipobuy
   if (agent === 'hipobuy') {
-    // https://hipobuy.com/product/1/675330231400?inviteCode=8PW091LJH
-    const url = new URL(
-      `https://hipobuy.com/product/${hipobuyMarketplaceStrings.get(
-        marketplace
-      )}/${id}`
-    );
+    // https://hipobuy.com/product/taobao/675330231400?inviteCode=8PW091LJH
+    const mp = marketplace !== 'tmall' ? marketplace : 'taobao';
+    const url = new URL(`https://hipobuy.com/product/${mp}/${id}`);
     if (referral) {
       url.searchParams.set('inviteCode', referral);
     }

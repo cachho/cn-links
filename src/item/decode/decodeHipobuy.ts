@@ -1,5 +1,6 @@
 import { hipobuyStringsMarketplaces } from '../../data/hipobuy';
-import type { AgentLink, RawURL } from '../../models';
+import type { AgentLink, Marketplace, RawURL } from '../../models';
+import { marketplaces } from '../../models';
 import { generateRawLink } from '../generateRawLink';
 
 /**
@@ -25,20 +26,25 @@ export function decodeHipobuy(href: AgentLink | string | URL): RawURL {
 
   const slashSplits = url.pathname.split('/');
 
-  const agentSpecificMarketplaceId = slashSplits[slashIndex - 1];
-
-  const marketplace = hipobuyStringsMarketplaces.get(
-    agentSpecificMarketplaceId
-  );
-
-  if (!marketplace) {
-    throw new Error(`No valid Hipobuy marketplace id found in : ${url.href}`);
-  }
+  const agentSpecificMarketplaceSegment =
+    slashSplits[slashIndex - 1].toLowerCase();
 
   const id = slashSplits[slashIndex];
 
   if (id === undefined || id === '') {
     throw new Error(`No valid Hoobuy item id found in : ${url.href}`);
+  }
+
+  if (marketplaces.includes(agentSpecificMarketplaceSegment as Marketplace)) {
+    return generateRawLink(agentSpecificMarketplaceSegment as Marketplace, id);
+  }
+
+  const marketplace = hipobuyStringsMarketplaces.get(
+    agentSpecificMarketplaceSegment
+  );
+
+  if (!marketplace) {
+    throw new Error(`No valid Hipobuy marketplace id found in : ${url.href}`);
   }
 
   return generateRawLink(marketplace, id);

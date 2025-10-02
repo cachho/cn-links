@@ -684,6 +684,22 @@ describe('extractRawLink', () => {
     );
   });
 
+  it('should work for hipobuy with written out format', () => {
+    const href = 'https://hipobuy.com/product/taobao/675330231421';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://item.taobao.com/item.htm?id=675330231421'
+    );
+  });
+
+  it('should work for hipobuy with written out format (case insensitive)', () => {
+    const href = 'https://hipobuy.com/product/TaoBaO/675330231421';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://item.taobao.com/item.htm?id=675330231421'
+    );
+  });
+
   it("should work for hubbuycn's other alt format", () => {
     const href = 'https://www.hubbuycn.com/product/item/1688/923921667840';
     const rawLink = extractRawLink(new URL(href));

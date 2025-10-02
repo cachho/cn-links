@@ -1,5 +1,6 @@
 import { hubbuycnStringsMarketplaces } from '../../data/hubbuycn';
-import type { RawURL } from '../../models';
+import type { Marketplace, RawURL } from '../../models';
+import { marketplaces } from '../../models';
 import { generateRawLink } from '../generateRawLink';
 
 /**
@@ -35,6 +36,18 @@ export function decodeHubbuyCn(url: URL): RawURL {
     // https://www.hubbuycn.com/taobaoID=726526607194&inviter=johnerik123
     const taobaoId = url.pathname.split('taobaoID=')[1].split('&')[0];
     return new URL(generateRawLink('taobao', taobaoId));
+  }
+  if (url.pathname.toLowerCase().includes('/product/item/')) {
+    // https://www.hubbuycn.com/product/item/1688/923921667840
+    const segments = url.pathname.split('/');
+    const id = segments.pop();
+    if (id === undefined) {
+      throw new Error('No id provided in HubbuyCn link.');
+    }
+    const marketplace = segments.pop();
+    if (marketplaces.includes(marketplace as Marketplace)) {
+      return new URL(generateRawLink(marketplace as Marketplace, id));
+    }
   }
   throw new Error(
     `Error extracting inner link, hubbuycn link could not be decrypted: ${url.href}`

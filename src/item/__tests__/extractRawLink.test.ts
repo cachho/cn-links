@@ -684,6 +684,14 @@ describe('extractRawLink', () => {
     );
   });
 
+  it("should work for hubbuycn's other alt format", () => {
+    const href = 'https://www.hubbuycn.com/product/item/1688/923921667840';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://detail.1688.com/offer/923921667840.html'
+    );
+  });
+
   test('should work for all agents and marketplaces', () => {
     const testId = '6481396504';
     marketplaces.forEach((marketplace) => {

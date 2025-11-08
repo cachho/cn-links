@@ -19,7 +19,7 @@ export function decodeHipobuy(href: AgentLink | string | URL): RawURL {
   if (isMobile) {
     prefix = '/m/product/';
   } else if (!url.pathname.startsWith(prefix)) {
-    throw new Error(`Hoobuy prefix error.`);
+    throw new Error(`Hipobuy prefix error.`);
   }
 
   const slashIndex = isMobile ? 4 : 3;
@@ -32,7 +32,7 @@ export function decodeHipobuy(href: AgentLink | string | URL): RawURL {
   const id = slashSplits[slashIndex];
 
   if (id === undefined || id === '') {
-    throw new Error(`No valid Hoobuy item id found in : ${url.href}`);
+    throw new Error(`No valid Hipobuy item id found in : ${url.href}`);
   }
 
   if (marketplaces.includes(agentSpecificMarketplaceSegment as Marketplace)) {

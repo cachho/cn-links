@@ -31,6 +31,7 @@ export const agents = [
   'usfans',
   'cnshopper',
   'hipobuy',
+  'gtbuy',
 ] as const;
 
 export type Agent = (typeof agents)[number];

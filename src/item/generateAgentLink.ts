@@ -1,4 +1,5 @@
 import { acbuyMarketplaceStrings } from '../data/acbuy';
+import { gtbuyMarketplaceStrings } from '../data/gtbuy';
 import { hoobuyMarketplaceStrings } from '../data/hoobuy';
 import { lovegobuyMarketplaceStrings } from '../data/lovegobuy';
 import { oopbuyMarketplaceStrings } from '../data/oopbuy';
@@ -463,6 +464,20 @@ export function generateAgentLink(
     // https://hipobuy.com/product/taobao/675330231400?inviteCode=8PW091LJH
     const mp = marketplace !== 'tmall' ? marketplace : 'taobao';
     const url = new URL(`https://hipobuy.com/product/${mp}/${id}`);
+    if (referral) {
+      url.searchParams.set('inviteCode', referral);
+    }
+    return url;
+  }
+
+  // GTbuy
+  if (agent === 'gtbuy') {
+    // https://gtbuy.com/product/1/675330231400?inviteCode=57DSXCOQQ
+    const mp = gtbuyMarketplaceStrings.get(marketplace);
+    if (!mp) {
+      throw new Error('Unsupported marketplace for GTBuy');
+    }
+    const url = new URL(`https://gtbuy.com/product/${mp}/${id}`);
     if (referral) {
       url.searchParams.set('inviteCode', referral);
     }

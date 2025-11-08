@@ -327,6 +327,15 @@ describe('generateAgentLink', () => {
     expect(result.href).toEqual(expected.href);
   });
 
+  it('should generate gtbuy links correctly', () => {
+    const agent = 'gtbuy';
+    const expected = new URL(
+      `https://gtbuy.com/product/1/${id}?inviteCode=${referral}`
+    );
+    const result = generateAgentLink(agent, 'taobao', id, referral);
+    expect(result.href).toEqual(expected.href);
+  });
+
   it('should not include unsanitized parts', () => {
     const agent = 'hagobuy';
 

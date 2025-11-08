@@ -5,6 +5,7 @@ import { decodeAcbuy } from './decode/decodeAcbuy';
 import { decodeAllChinaBuy } from './decode/decodeAllChinaBuy';
 import { decodeCnFans } from './decode/decodeCnfans';
 import { decodeCssbuy } from './decode/decodeCssbuy';
+import { decodeGtbuy } from './decode/decodeGtbuy';
 import { decodeHagobuy } from './decode/decodeHagobuy';
 import { decodeHoobuy } from './decode/decodeHoobuy';
 import { decodeJoyabuy } from './decode/decodeJoyabuy';
@@ -114,6 +115,11 @@ export function extractRawLink(href: AgentURL): RawURL {
   }
   if (agent === 'usfans') {
     const { marketplace, id } = decodeUsfans(link);
+    return generateRawLink(marketplace, id);
+  }
+
+  if (agent === 'gtbuy') {
+    const { marketplace, id } = decodeGtbuy(link);
     return generateRawLink(marketplace, id);
   }
 

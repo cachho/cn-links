@@ -708,6 +708,39 @@ describe('extractRawLink', () => {
     );
   });
 
+  it('should work for gtbuy', () => {
+    const href = 'https://gtbuy.com/product/1/675330231412?inviteCode=ref';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://item.taobao.com/item.htm?id=675330231412'
+    );
+  });
+
+  it('should work for gtbuy (weidian)', () => {
+    const href = 'https://gtbuy.com/product/2/675330231412?inviteCode=ref';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://weidian.com/item.html?itemID=675330231412'
+    );
+  });
+
+  it('should work for gtbuy extended format', () => {
+    const href = 'https://gtbuy.com/product/taobao/675330231413?inviteCode=ref';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://item.taobao.com/item.htm?id=675330231413'
+    );
+  });
+
+  it('should work for gtbuy extended format (weidian)', () => {
+    const href =
+      'https://gtbuy.com/product/weidian/675330231413?inviteCode=ref';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://weidian.com/item.html?itemID=675330231413'
+    );
+  });
+
   test('should work for all agents and marketplaces', () => {
     const testId = '6481396504';
     marketplaces.forEach((marketplace) => {

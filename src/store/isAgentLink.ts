@@ -136,6 +136,10 @@ export function isAgentLink(href: string | URL): boolean {
     if (link.pathname.includes('/product/')) {
       return false;
     }
+  } else if (agent === 'gtbuy') {
+    if (!link.pathname.startsWith('/store')) {
+      return false;
+    }
   }
 
   try {

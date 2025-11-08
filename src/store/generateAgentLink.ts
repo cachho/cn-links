@@ -247,6 +247,17 @@ export function generateAgentLink(
     return url;
   }
 
+  if (agent === 'gtbuy') {
+    // https://gtbuy.com/store?shopId=1850717273&channel=WEIDIAN
+    const url = new URL('https://gtbuy.com/store');
+    url.searchParams.set('shopId', id);
+    url.searchParams.set('channel', marketplace.toUpperCase());
+    if (referral) {
+      url.searchParams.set('inviteCode', referral);
+    }
+    return url;
+  }
+
   // Raw Links
   if (agent === 'raw') {
     return generateRawLink(marketplace, id);

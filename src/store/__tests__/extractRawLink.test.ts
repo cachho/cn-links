@@ -170,6 +170,12 @@ describe('extractRawLink', () => {
     expect(rawLink.href).toEqual('https://shop265827741.taobao.com/');
   });
 
+  it('should work for gtbuy', () => {
+    const href = 'https://gtbuy.com/store?shopId=6481396504&channel=TAOBAO';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual('https://shop6481396504.taobao.com/');
+  });
+
   it('should work both ways, if a link can be generated for an agent, it should also be able to decode it', () => {
     const agentsThatSupportGeneration = agents.filter((agent) => {
       try {

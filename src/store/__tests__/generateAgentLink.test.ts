@@ -156,6 +156,13 @@ describe('generateAgentLink', () => {
     expect(result.href).toEqual(expected);
   });
 
+  it('should work for gtbuy links', () => {
+    const agent: Agent = 'gtbuy';
+    const expected = `https://gtbuy.com/store?shopId=${id}&channel=TAOBAO`;
+    const result = generateAgentLink(agent, 'taobao', id);
+    expect(result.href).toEqual(expected);
+  });
+
   it('should work both ways, if a link can be decoded for an agent, it should also be able to be generated it', () => {
     const agentsThatSupportExtraction = agents.filter((agent) => {
       try {

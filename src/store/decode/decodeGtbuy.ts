@@ -10,7 +10,6 @@ export function decodeGtbuy(link: URL): {
     throw new Error('Missing marketplace parameter');
   }
   const marketplace = marketplaceParam.toLowerCase();
-  console.log('🚀 ~ decodeGtbuy ~ marketplace:', marketplace);
   if (!marketplaces.includes(marketplace as Marketplace)) {
     throw new Error('Unsupported marketplace for GTBuy');
   }

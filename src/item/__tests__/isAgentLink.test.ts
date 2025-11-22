@@ -86,6 +86,12 @@ describe('isAgentLink', () => {
     expect(isAgentLink(href)).toBe(true);
   });
 
+  it('should return true for fishgoo agent links', () => {
+    const href =
+      'https://www.fishgoo.com/#/product?productLink=https%253A%252F%252Fitem.taobao.com%252Fitem.htm%253Fid%253D675330231401&memberId=ref';
+    expect(isAgentLink(href)).toBe(true);
+  });
+
   it('should return true for all generated agent links', () => {
     agents.forEach((agent) => {
       marketplaces.forEach((marketplace) => {

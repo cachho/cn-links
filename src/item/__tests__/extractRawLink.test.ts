@@ -741,6 +741,15 @@ describe('extractRawLink', () => {
     );
   });
 
+  it('should work for fishgoo', () => {
+    const href =
+      'https://www.fishgoo.com/#/product?productLink=https%253A%252F%252Fitem.taobao.com%252Fitem.htm%253Fid%253D675330231401&memberId=ref';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://item.taobao.com/item.htm?id=675330231401'
+    );
+  });
+
   test('should work for all agents and marketplaces', () => {
     const testId = '6481396504';
     marketplaces.forEach((marketplace) => {

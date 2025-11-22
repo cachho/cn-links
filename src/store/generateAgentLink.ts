@@ -258,6 +258,20 @@ export function generateAgentLink(
     return url;
   }
 
+  if (agent === 'fishgoo') {
+    // https://www.fishgoo.com/#/home/shopProducts?source=taobao&shopId=512766498&sellerId=512766498&memberId=ref
+    const searchParams = new URLSearchParams();
+    searchParams.set('source', marketplace);
+    searchParams.set('shopId', id);
+    searchParams.set('sellerId', id);
+    if (referral) {
+      searchParams.set('memberId', referral);
+    }
+    return new URL(
+      `https://www.fishgoo.com/#/home/shopProducts?${searchParams.toString()}`
+    );
+  }
+
   // Raw Links
   if (agent === 'raw') {
     return generateRawLink(marketplace, id);

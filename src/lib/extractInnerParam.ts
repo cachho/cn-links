@@ -11,6 +11,9 @@ export function extractInnerParam(link: AgentURL) {
     if (url.searchParams.get('url')) {
       return url.searchParams.get('url');
     }
+    if (url.searchParams.get('productLink')) {
+      return url.searchParams.get('productLink');
+    }
   }
 
   return null;

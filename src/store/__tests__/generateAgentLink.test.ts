@@ -163,6 +163,13 @@ describe('generateAgentLink', () => {
     expect(result.href).toEqual(expected);
   });
 
+  it('should work for fishgoo links', () => {
+    const agent: Agent = 'fishgoo';
+    const expected = `https://www.fishgoo.com/#/home/shopProducts?source=taobao&shopId=512766498&sellerId=512766498&memberId=ref`;
+    const result = generateAgentLink(agent, 'taobao', '512766498', 'ref');
+    expect(result.href).toEqual(expected);
+  });
+
   it('should work both ways, if a link can be decoded for an agent, it should also be able to be generated it', () => {
     const agentsThatSupportExtraction = agents.filter((agent) => {
       try {

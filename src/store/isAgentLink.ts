@@ -140,6 +140,10 @@ export function isAgentLink(href: string | URL): boolean {
     if (!link.pathname.startsWith('/store')) {
       return false;
     }
+  } else if (agent === 'fishgoo') {
+    if (!link.href.includes('/#/home/shopProducts')) {
+      return false;
+    }
   }
 
   try {

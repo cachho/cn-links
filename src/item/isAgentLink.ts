@@ -118,6 +118,11 @@ export function isAgentLink(href: string | URL): boolean {
       return false;
     }
   }
+  if (agent === 'fishgoo') {
+    if (!link.href.includes('/#/product?')) {
+      return false;
+    }
+  }
 
   try {
     const rawLink = extractRawLink(link);

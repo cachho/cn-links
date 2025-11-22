@@ -5,6 +5,7 @@ import { decodeAcbuy } from './decode/decodeAcbuy';
 import { decodeAllChinaBuy } from './decode/decodeAllChinaBuy';
 import { decodeCnFans } from './decode/decodeCnfans';
 import { decodeCssbuy } from './decode/decodeCssbuy';
+import { decodeFishgoo } from './decode/decodeFishgoo';
 import { decodeGtbuy } from './decode/decodeGtbuy';
 import { decodeHagobuy } from './decode/decodeHagobuy';
 import { decodeHoobuy } from './decode/decodeHoobuy';
@@ -120,6 +121,11 @@ export function extractRawLink(href: AgentURL): RawURL {
 
   if (agent === 'gtbuy') {
     const { marketplace, id } = decodeGtbuy(link);
+    return generateRawLink(marketplace, id);
+  }
+
+  if (agent === 'fishgoo') {
+    const { marketplace, id } = decodeFishgoo(link);
     return generateRawLink(marketplace, id);
   }
 

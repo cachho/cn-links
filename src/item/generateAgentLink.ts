@@ -484,6 +484,19 @@ export function generateAgentLink(
     return url;
   }
 
+  // Fishgoo
+  if (agent === 'fishgoo') {
+    // https://www.fishgoo.com/#/product?productLink=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D675330231401&memberId=ref
+    urlParams.set(
+      'productLink',
+      encodeURIComponent(generateRawLink(marketplace, id).href) // Fishgoo likes double encodings
+    );
+    if (referral) {
+      urlParams.set('memberId', referral);
+    }
+    return new URL(`https://www.fishgoo.com/#/product?${urlParams.toString()}`);
+  }
+
   // Raw Links
   if (agent === 'raw') {
     // https://detail.1688.com/offer/679865234523.html

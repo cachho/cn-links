@@ -86,6 +86,12 @@ describe('isAgentLink', () => {
     expect(isAgentLink(href)).toBe(true);
   });
 
+  it('should return true for fishgoo agent links', () => {
+    const href =
+      'https://www.fishgoo.com/#/home/shopProducts?source=taobao&shopId=512766498&sellerId=512766498&memberId=ref';
+    expect(isAgentLink(href)).toBe(true);
+  });
+
   it('should detect true if the agent has a link generator function', () => {
     agents.forEach((agent) => {
       try {

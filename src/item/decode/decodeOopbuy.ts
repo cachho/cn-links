@@ -27,6 +27,7 @@ const getMarketplace = (link: URL): Marketplace | null => {
  * @returns {RawURL} The decoded proper link as a URL object, or undefined if decryption failed.
  */
 export function decodeOopbuy(link: URL) {
+  console.log('🚀 ~ decodeOopbuy ~ link:', link.href);
   if (
     ((link.searchParams.has('channel') || link.searchParams.has('channelId')) &&
       link.searchParams.has('id')) ||
@@ -40,13 +41,31 @@ export function decodeOopbuy(link: URL) {
     if (!id) {
       throw new Error('No id provided in Oopbuy link.');
     }
+
     const marketplace = (
       link.searchParams.get('channel') ?? link.searchParams.get('channelId')
     )?.toLowerCase();
-    if (!marketplace || !marketplaces.includes(marketplace as Marketplace)) {
-      throw new Error('No marketplace provided in Oopbuy link.');
+
+    if (!marketplace) {
+      throw new Error('No marketplace param provided in Oopbuy link.');
     }
-    return generateRawLink(marketplace as Marketplace, id);
+
+    const hasLiteralMarketplace = marketplaces.includes(
+      marketplace as Marketplace
+    );
+    if (hasLiteralMarketplace) {
+      return generateRawLink(marketplace as Marketplace, id);
+    }
+
+    const hasNumberBasedMarketplace =
+      oopbuyStringsMarketplaces.has(marketplace);
+    if (hasNumberBasedMarketplace) {
+      const mappedMarketplace = oopbuyStringsMarketplaces.get(marketplace);
+      if (mappedMarketplace) {
+        return generateRawLink(mappedMarketplace, id);
+      }
+    }
+    throw new Error('No marketplace provided in Oopbuy link.');
   }
   const marketplace = getMarketplace(link);
   if (!marketplace) {

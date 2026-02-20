@@ -750,6 +750,15 @@ describe('extractRawLink', () => {
     );
   });
 
+  it('should work for oopbuy links (mobile) (2)', () => {
+    const href =
+      'https://m.oopbuy.com/pages/goods/details?channelId=1&inviteCode=ref&spuNo=767414345938';
+    const rawLink = extractRawLink(new URL(href));
+    expect(rawLink.href).toEqual(
+      'https://item.taobao.com/item.htm?id=767414345938'
+    );
+  });
+
   test('should work for all agents and marketplaces', () => {
     const testId = '6481396504';
     marketplaces.forEach((marketplace) => {

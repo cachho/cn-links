@@ -27,7 +27,6 @@ const getMarketplace = (link: URL): Marketplace | null => {
  * @returns {RawURL} The decoded proper link as a URL object, or undefined if decryption failed.
  */
 export function decodeOopbuy(link: URL) {
-  console.log('🚀 ~ decodeOopbuy ~ link:', link.href);
   if (
     ((link.searchParams.has('channel') || link.searchParams.has('channelId')) &&
       link.searchParams.has('id')) ||
